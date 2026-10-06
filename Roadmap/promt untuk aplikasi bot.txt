@@ -1,0 +1,49 @@
+saya seorang vibe coder disini saya ingin membuat sebuah bot menggunakan python dan nnti bisa berbentuk aplikasi .exe,yang dimana ai ini membantu pekerjaan saya dalam mengatur pembuatan sebuah musik dengan AI google flow music jadi saya ingin bot ini alurnya pertama ada button upload file yang pertama file txt untuk isi promt yang dibuat untuk pembuatan lagu,intinya jadi bot ini tuh jalan sendiri kaya macro recorder cuma si cursor yang berjalan itu diatur sesuai dengan perintah yang saya buat nnti di botnya gitu misal bot pertama buka chrome lalu ketik flowmusic.app dan nnti masuk lalu login menggunakan google dan disitu nnti tuh mulai persalinan promt copy paste dimana promt untuk generate music ditempel dan juga ketika sudah kadang itu google flownya juga ada kadang ketika promt di tempel itu teh kadang disuruh milih kadang yang keluar musicnya satu,nahh jadi intinya saya ingin membuat bot yang berjalan sesuai dengan promt yang saya perintahkan kepada bot tersebut dan nntinya dia jalan seperti macro recorder yang menggunakan cursor gitu kkiranya,bisa gasih kita bikin bot seperti ini coba anda jawab dulu paham atau bisa engganya kita buat
+
+
+Roadmap
+
+Tahap 1.1: Rapikan fondasi (1 browser, tanpa input manual)
+
+Pecah kode jadi beberapa file: config, prompts, browser, flow_actions, main. Tujuannya supaya nanti UI dan multi-browser tinggal memanggil fungsi yang sama.
+Hapus semua input() dan ganti dengan retry otomatis, log, dan skip bila gagal.
+Perbaiki pembaca prompt. Ini penting: file txt-mu berisi prompt panjang yang dipisah baris kosong, sedangkan kode sekarang membaca per baris. Kita ubah supaya 1 prompt = 1 blok paragraf.
+
+Tahap 1.2: Satu siklus penuh di 1 browser
+
+Generate, lalu tunggu selesai secara andal.
+Hitung jumlah lagu yang jadi (1, 2, atau 3).
+Download semua lagu itu dengan nama rapi.
+Kalau 0 lagu, bot mengetik "buatkan lagunya sekarang", lalu menunggu lagi.
+Ini tahap tersulit karena bergantung pada selector situsnya. Kalau satu browser sudah mulus, sisanya jauh lebih mudah.
+
+Tahap 1.3: Integrasi ixBrowser
+
+Bot membuka profil lewat Local API ixBrowser. Responsnya memberi alamat debugging, lalu kita sambung pakai connect_over_cdp seperti sekarang.
+Cek dokumentasi API ixBrowser untuk endpoint dan port-nya. Saya tidak mau menebak detailnya.
+Tes dulu dengan 1 profil, lalu 2.
+
+Tahap 1.4: 5 browser paralel
+
+Satu antrean prompt bersama, dibagi ke 5 worker. Pengambilan prompt dikunci supaya tidak ada dua browser yang mengambil prompt yang sama.
+Pakai asyncio dengan async_playwright. Mode sync yang sekarang tidak cocok untuk banyak browser sekaligus.
+Alur per ronde: semua generate, tunggu semua selesai, semua download.
+
+Tahap 1.5: Tahan banting
+
+Prompt baru dihapus dari txt setelah berhasil diproses. Prompt yang gagal masuk failed.txt, yang sukses masuk done.txt. Kalau bot mati di tengah, bisa dilanjutkan tanpa kehilangan prompt.
+Tangani kredit habis di salah satu akun (akun FREE punya batas). Browser itu di-skip, bukan menghentikan semuanya.
+Log per browser dan notifikasi akhir "semua lagu selesai digenerate".
+
+Tahap 2.0: UI
+
+Pakai customtkinter (paling mudah untuk vibecoding). Isinya: pilih file txt, pilih folder output, tombol Start/Stop, tabel status per browser, dan log langsung.
+Logika bot dipanggil dari UI, jadi tahap 1.1 yang rapi akan sangat membantu di sini.
+
+Tahap 2.1: Jadi .exe
+
+Pakai PyInstaller. Browser Playwright tidak perlu ikut dibundel karena kita menyambung ke ixBrowser, jadi ukurannya kecil.
+PyInstaller tidak bisa lintas OS. Untuk .exe Windows, build-nya harus dilakukan di Windows. Kamu sekarang di Ubuntu, jadi nanti perlu mesin atau VM Windows. Kalau ixBrowser-mu versi Windows, ini sekalian menyelesaikan masalah itu.
+Hal yang perlu dipertimbangkan sejak awal
+Risiko akun: menjalankan 5 akun otomatis dengan antidetect browser bisa melanggar aturan Flow Music dan berisiko diblokir. Sebaiknya beri jeda acak antar aksi dan jangan terlalu agresif.
+Selector situs bisa berubah kapan saja. Karena itu semua selector kita kumpulkan di satu file, supaya perbaikannya cepat.

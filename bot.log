@@ -321,3 +321,284 @@ future: <Future finished exception=TargetClosedError('Target page, context or br
 playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
 2026-10-04 22:52:18,696 - ERROR - Task was destroyed but it is pending!
 task: <Task cancelling name='Task-2079' coro=<Page.wait_for_timeout() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:1143> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-06 20:58:34,756 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt
+2026-10-06 20:58:34,757 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-06 20:58:35,957 - INFO - Berhasil terhubung ke browser.
+2026-10-06 20:58:35,957 - INFO - ⏳ Mengecek status login...
+2026-10-06 20:58:43,049 - INFO - Prompt diambil: Create a completely original road-crew-night-pavin...
+2026-10-06 20:58:43,050 - INFO - 
+======================================================================
+2026-10-06 20:58:43,050 - INFO - 📊 [LOOP 1/10]
+2026-10-06 20:58:43,051 - INFO - 📝 Prompt: Create a completely original road-crew-night-paving pop song, total duration app...
+2026-10-06 20:58:43,051 - INFO - ======================================================================
+
+2026-10-06 20:58:43,057 - INFO - Mengisi prompt...
+2026-10-06 20:58:58,321 - INFO - Prompt berhasil diisi.
+2026-10-06 20:59:03,787 - INFO - 📸 Baseline lagu sebelum generate: 0
+2026-10-06 20:59:03,787 - INFO - Menekan Enter untuk generate...
+2026-10-06 20:59:05,878 - INFO - ⏳ Menunggu lagu baru (dianggap selesai jika stabil 15s)...
+2026-10-06 20:59:06,056 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-06 20:59:09,180 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-06 20:59:12,304 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-06 20:59:15,435 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-06 20:59:18,599 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-10-06 20:59:21,740 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 15s | idle
+2026-10-06 20:59:24,869 - INFO -    ⏳ [18s] Lagu baru: 0 | Stabil: 18s | idle
+2026-10-06 20:59:28,013 - INFO -    ⏳ [21s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-06 20:59:31,153 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-06 20:59:34,298 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | idle
+2026-10-06 20:59:37,436 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | idle
+2026-10-06 20:59:40,582 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | idle
+2026-10-06 20:59:43,721 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 37s | idle
+2026-10-06 20:59:46,870 - INFO -    ⏳ [40s] Lagu baru: 0 | Stabil: 40s | idle
+2026-10-06 20:59:50,002 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 44s | idle
+2026-10-06 20:59:53,144 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | idle
+2026-10-06 20:59:56,288 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 50s | idle
+2026-10-06 20:59:59,437 - INFO -    ⏳ [53s] Lagu baru: 0 | Stabil: 53s | idle
+2026-10-06 21:00:02,667 - INFO -    ⏳ [56s] Lagu baru: 0 | Stabil: 56s | idle
+2026-10-06 21:00:05,816 - INFO -    ⏳ [59s] Lagu baru: 0 | Stabil: 59s | idle
+2026-10-06 21:00:09,026 - INFO -    ⏳ [62s] Lagu baru: 0 | Stabil: 63s | idle
+2026-10-06 21:00:12,156 - INFO -    ⏳ [66s] Lagu baru: 0 | Stabil: 66s | idle
+2026-10-06 21:00:15,272 - INFO -    ⏳ [69s] Lagu baru: 0 | Stabil: 69s | loading
+2026-10-06 21:00:18,402 - INFO -    ⏳ [72s] Lagu baru: 0 | Stabil: 72s | loading
+2026-10-06 21:00:21,527 - INFO -    ⏳ [75s] Lagu baru: 0 | Stabil: 75s | loading
+2026-10-06 21:00:24,638 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 78s | loading
+2026-10-06 21:00:27,758 - INFO -    ⏳ [81s] Lagu baru: 0 | Stabil: 81s | loading
+2026-10-06 21:00:30,883 - INFO -    ⏳ [84s] Lagu baru: 0 | Stabil: 85s | loading
+2026-10-06 21:00:34,011 - INFO -    ⏳ [88s] Lagu baru: 0 | Stabil: 88s | loading
+2026-10-06 21:00:37,122 - INFO -    ⏳ [91s] Lagu baru: 0 | Stabil: 91s | loading
+2026-10-06 21:00:40,251 - INFO -    ⏳ [94s] Lagu baru: 0 | Stabil: 94s | loading
+2026-10-06 21:00:43,382 - INFO -    ⏳ [97s] Lagu baru: 0 | Stabil: 97s | loading
+2026-10-06 21:00:46,541 - INFO -    ⏳ [100s] Lagu baru: 0 | Stabil: 100s | loading
+2026-10-06 21:00:49,734 - INFO -    ⏳ [103s] Lagu baru: 0 | Stabil: 103s | idle
+2026-10-06 21:00:52,958 - INFO -    ⏳ [106s] Lagu baru: 0 | Stabil: 107s | idle
+2026-10-06 21:00:56,348 - INFO -    ⏳ [110s] Lagu baru: 0 | Stabil: 110s | idle
+2026-10-06 21:00:59,590 - INFO -    🔄 [113s] Jumlah lagu berubah: 0 → 2 (baru: 2)
+2026-10-06 21:01:02,847 - INFO -    🔄 [116s] Jumlah lagu berubah: 2 → 3 (baru: 3)
+2026-10-06 21:01:06,081 - INFO -    🔄 [119s] Jumlah lagu berubah: 3 → 2 (baru: 2)
+2026-10-06 21:01:09,325 - INFO -    ⏳ [123s] Lagu baru: 2 | Stabil: 3s | idle
+2026-10-06 21:01:12,573 - INFO -    ⏳ [126s] Lagu baru: 2 | Stabil: 6s | idle
+2026-10-06 21:01:15,820 - INFO -    ⏳ [129s] Lagu baru: 2 | Stabil: 9s | idle
+2026-10-06 21:01:19,071 - INFO -    ⏳ [132s] Lagu baru: 2 | Stabil: 12s | idle
+2026-10-06 21:01:22,335 - INFO -    ⏳ [136s] Lagu baru: 2 | Stabil: 16s | idle
+2026-10-06 21:01:22,335 - INFO - 🎵 Selesai! Total 2 lagu baru terdeteksi (stabil 16s).
+2026-10-06 21:01:23,840 - INFO - 🎼 Total lagu baru dari prompt ini: 2
+2026-10-06 21:01:23,840 - INFO - 
+--- Download (lagu 1/2) ---
+2026-10-06 21:01:23,841 - INFO - 🎯 Download lagu index 0 (lagu 1/2)...
+2026-10-06 21:01:23,852 - INFO - Mencari tombol titik 3 untuk lagu #1...
+2026-10-06 21:01:24,967 - INFO - Berhasil klik titik 3 lagu #1.
+2026-10-06 21:01:25,967 - INFO - Membuka menu 'Download'...
+2026-10-06 21:01:27,440 - INFO - Submenu Download terbuka.
+2026-10-06 21:01:27,441 - INFO - Mengklik format 'WAV'...
+2026-10-06 21:01:29,501 - INFO - Berhasil klik WAV.
+2026-10-06 21:01:29,502 - INFO - Menunggu file download...
+2026-10-06 21:01:38,804 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Holds the Morning.wav
+2026-10-06 21:01:42,823 - INFO - 
+--- Download (lagu 2/2) ---
+2026-10-06 21:01:42,824 - INFO - 🎯 Download lagu index 1 (lagu 2/2)...
+2026-10-06 21:01:42,835 - INFO - Mencari tombol titik 3 untuk lagu #2...
+2026-10-06 21:01:43,897 - INFO - Berhasil klik titik 3 lagu #2.
+2026-10-06 21:01:44,897 - INFO - Membuka menu 'Download'...
+2026-10-06 21:01:46,337 - INFO - Submenu Download terbuka.
+2026-10-06 21:01:46,338 - INFO - Mengklik format 'WAV'...
+2026-10-06 21:01:48,401 - INFO - Berhasil klik WAV.
+2026-10-06 21:01:48,402 - INFO - Menunggu file download...
+2026-10-06 21:01:54,693 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Holds the Morning_1.wav
+2026-10-06 21:01:58,710 - INFO - ✅ Loop 1 selesai: 2/2 lagu terdownload.
+
+2026-10-06 21:02:00,711 - INFO - Tidak ada prompt tersisa.
+2026-10-06 21:02:00,731 - INFO - ✅ Tidak ada prompt tersisa. Proses selesai!
+2026-10-06 21:02:00,731 - INFO - 
+======================================================================
+2026-10-06 21:02:00,744 - INFO - 🏁 BOT SELESAI - Semua prompt telah diproses!
+2026-10-06 21:02:00,744 - INFO - ======================================================================
+2026-10-06 21:02:00,793 - INFO - Koneksi Playwright ditutup.
+2026-10-06 21:11:45,747 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt (Title-Based)
+2026-10-06 21:11:45,747 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-06 21:11:46,893 - INFO - Berhasil terhubung ke browser.
+2026-10-06 21:11:46,894 - INFO - ⏳ Mengecek status login...
+2026-10-06 21:11:53,848 - INFO - Koneksi Playwright ditutup.
+2026-10-06 21:12:04,392 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt (Title-Based)
+2026-10-06 21:12:04,392 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-06 21:12:05,315 - INFO - Berhasil terhubung ke browser.
+2026-10-06 21:12:05,315 - INFO - ⏳ Mengecek status login...
+2026-10-06 21:12:12,381 - INFO - Prompt diambil: Create a completely original road-crew-night-pavin...
+2026-10-06 21:12:12,381 - INFO - 
+======================================================================
+2026-10-06 21:12:12,381 - INFO - 📊 [LOOP 1/10]
+2026-10-06 21:12:12,381 - INFO - 📝 Prompt: Create a completely original road-crew-night-paving pop song, total duration app...
+2026-10-06 21:12:12,382 - INFO - ======================================================================
+
+2026-10-06 21:12:12,386 - INFO - Mengisi prompt...
+2026-10-06 21:12:22,542 - INFO - Prompt berhasil diisi.
+2026-10-06 21:12:23,487 - INFO - 📸 Snapshot judul sebelum generate: 0 lagu
+2026-10-06 21:12:23,487 - INFO - Menekan Enter untuk generate...
+2026-10-06 21:12:25,610 - INFO - ⏳ Menunggu lagu baru (stabil 15s untuk dianggap selesai)...
+2026-10-06 21:12:25,788 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-06 21:12:28,978 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-06 21:12:32,161 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-06 21:12:35,319 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-06 21:12:38,525 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-10-06 21:12:41,693 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-06 21:12:44,901 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-06 21:12:48,066 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-06 21:12:51,240 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-06 21:12:54,395 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | idle
+2026-10-06 21:12:57,562 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | idle
+2026-10-06 21:13:00,727 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 35s | idle
+2026-10-06 21:13:03,901 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | idle
+2026-10-06 21:13:07,084 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | idle
+2026-10-06 21:13:10,248 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | idle
+2026-10-06 21:13:13,420 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | idle
+2026-10-06 21:13:16,583 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 50s | idle
+2026-10-06 21:13:19,739 - INFO -    ⏳ [53s] Lagu baru: 0 | Stabil: 54s | idle
+2026-10-06 21:13:23,027 - INFO -    ⏳ [57s] Lagu baru: 0 | Stabil: 57s | idle
+2026-10-06 21:13:26,271 - INFO -    ⏳ [60s] Lagu baru: 0 | Stabil: 60s | idle
+2026-10-06 21:13:29,654 - INFO -    ⏳ [63s] Lagu baru: 0 | Stabil: 64s | idle
+2026-10-06 21:13:29,772 - INFO - Koneksi Playwright ditutup.
+2026-10-06 21:13:29,898 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-06 21:13:29,900 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-271' coro=<Page.wait_for_timeout() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:1143> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-06 21:14:00,568 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt (Title-Based)
+2026-10-06 21:14:00,568 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-06 21:14:01,473 - INFO - Berhasil terhubung ke browser.
+2026-10-06 21:14:01,474 - INFO - ⏳ Mengecek status login...
+2026-10-06 21:14:08,512 - INFO - Prompt diambil: Create a completely original road-crew-night-pavin...
+2026-10-06 21:14:08,513 - INFO - 
+======================================================================
+2026-10-06 21:14:08,513 - INFO - 📊 [LOOP 1/10]
+2026-10-06 21:14:08,514 - INFO - 📝 Prompt: Create a completely original road-crew-night-paving pop song, total duration app...
+2026-10-06 21:14:08,514 - INFO - ======================================================================
+
+2026-10-06 21:14:08,520 - INFO - Mengisi prompt...
+2026-10-06 21:14:18,635 - INFO - Prompt berhasil diisi.
+2026-10-06 21:14:19,564 - INFO - 📸 Snapshot judul sebelum generate: 0 lagu
+2026-10-06 21:14:19,565 - INFO - Menekan Enter untuk generate...
+2026-10-06 21:14:21,654 - INFO - ⏳ Menunggu lagu baru (stabil 15s untuk dianggap selesai)...
+2026-10-06 21:14:21,835 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-06 21:14:24,986 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-06 21:14:28,154 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-06 21:14:31,319 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-06 21:14:34,480 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-10-06 21:14:37,642 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 15s | idle
+2026-10-06 21:14:40,824 - INFO -    ⏳ [18s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-06 21:14:44,073 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-06 21:14:47,338 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-06 21:14:50,502 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | idle
+2026-10-06 21:14:53,787 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 32s | idle
+2026-10-06 21:14:56,954 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | idle
+2026-10-06 21:15:00,105 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | idle
+2026-10-06 21:15:03,252 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | idle
+2026-10-06 21:15:06,417 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | idle
+2026-10-06 21:15:09,573 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | idle
+2026-10-06 21:15:12,766 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 51s | idle
+2026-10-06 21:15:15,921 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 54s | loading
+2026-10-06 21:15:19,086 - INFO -    ⏳ [57s] Lagu baru: 0 | Stabil: 57s | loading
+2026-10-06 21:15:22,232 - INFO -    ⏳ [60s] Lagu baru: 0 | Stabil: 60s | loading
+2026-10-06 21:15:25,433 - INFO -    ⏳ [63s] Lagu baru: 0 | Stabil: 63s | loading
+2026-10-06 21:15:28,726 - INFO -    ⏳ [66s] Lagu baru: 0 | Stabil: 67s | loading
+2026-10-06 21:15:31,910 - INFO -    ⏳ [70s] Lagu baru: 0 | Stabil: 70s | loading
+2026-10-06 21:15:35,418 - INFO -    ⏳ [73s] Lagu baru: 0 | Stabil: 73s | loading
+2026-10-06 21:15:38,640 - INFO -    ⏳ [76s] Lagu baru: 0 | Stabil: 76s | loading
+2026-10-06 21:15:41,817 - INFO -    ⏳ [79s] Lagu baru: 0 | Stabil: 80s | loading
+2026-10-06 21:15:45,160 - INFO -    ⏳ [83s] Lagu baru: 0 | Stabil: 83s | loading
+2026-10-06 21:15:48,584 - INFO -    🔄 [86s] Lagu baru: 1 (['Paper Cup'])
+2026-10-06 21:15:51,909 - INFO -    ⏳ [89s] Lagu baru: 1 | Stabil: 3s | loading
+2026-10-06 21:15:55,171 - INFO -    ⏳ [93s] Lagu baru: 1 | Stabil: 6s | loading
+2026-10-06 21:15:58,524 - INFO -    ⏳ [96s] Lagu baru: 1 | Stabil: 9s | loading
+2026-10-06 21:16:01,819 - INFO -    ⏳ [99s] Lagu baru: 1 | Stabil: 13s | loading
+2026-10-06 21:16:05,710 - INFO -    ⏳ [103s] Lagu baru: 1 | Stabil: 17s | idle
+2026-10-06 21:16:05,712 - INFO - 🎵 Selesai! Total 1 lagu baru terdeteksi.
+2026-10-06 21:16:07,215 - INFO - 🎼 Total lagu baru dari prompt ini: 1
+2026-10-06 21:16:07,216 - INFO -    [1] Paper Cup
+2026-10-06 21:16:07,217 - INFO - 
+--- Download (lagu 1/1): Paper Cup ---
+2026-10-06 21:16:07,218 - INFO - 🎯 Download lagu 'Paper Cup' (lagu 1/1)...
+2026-10-06 21:16:07,262 - INFO - Mencari tombol titik 3 untuk lagu target...
+2026-10-06 21:16:09,468 - INFO - Berhasil klik titik 3 untuk 'Paper Cup'.
+2026-10-06 21:16:10,471 - INFO - Membuka menu 'Download'...
+2026-10-06 21:16:11,967 - INFO - Hover belum cukup, pakai keyboard (panah kanan)...
+2026-10-06 21:16:12,987 - INFO - Submenu Download terbuka.
+2026-10-06 21:16:12,988 - INFO - Mengklik format 'WAV'...
+2026-10-06 21:16:15,140 - INFO - Berhasil klik WAV.
+2026-10-06 21:16:15,140 - INFO - Menunggu file download...
+2026-10-06 21:16:21,279 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Paper Cup_1.wav
+2026-10-06 21:16:25,299 - INFO - ✅ Loop 1 selesai: 1/1 lagu terdownload.
+
+2026-10-06 21:16:27,305 - INFO - Prompt diambil: Create a completely original asphalt-and-streetlig...
+2026-10-06 21:16:27,307 - INFO - 
+======================================================================
+2026-10-06 21:16:27,309 - INFO - 📊 [LOOP 2/10]
+2026-10-06 21:16:27,313 - INFO - 📝 Prompt: Create a completely original asphalt-and-streetlight ballad song, total duration...
+2026-10-06 21:16:27,314 - INFO - ======================================================================
+
+2026-10-06 21:16:27,323 - INFO - Mengisi prompt...
+2026-10-06 21:16:37,412 - INFO - Prompt berhasil diisi.
+2026-10-06 21:16:38,688 - INFO - 📸 Snapshot judul sebelum generate: 1 lagu
+2026-10-06 21:16:38,689 - INFO -    - Paper Cup
+2026-10-06 21:16:38,689 - INFO - Menekan Enter untuk generate...
+2026-10-06 21:16:40,758 - INFO - ⏳ Menunggu lagu baru (stabil 15s untuk dianggap selesai)...
+2026-10-06 21:16:41,286 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-06 21:16:44,613 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-06 21:16:48,113 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-10-06 21:16:51,450 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-06 21:16:54,963 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 14s | idle
+2026-10-06 21:16:58,722 - INFO -    ⏳ [17s] Lagu baru: 0 | Stabil: 17s | idle
+2026-10-06 21:17:02,091 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 21s | idle
+2026-10-06 21:17:06,007 - INFO -    ⏳ [24s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-06 21:17:09,685 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | idle
+2026-10-06 21:17:13,145 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 32s | idle
+2026-10-06 21:17:16,659 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | idle
+2026-10-06 21:17:20,797 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 40s | idle
+2026-10-06 21:17:24,771 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 44s | idle
+2026-10-06 21:17:28,420 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | loading
+2026-10-06 21:17:32,364 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-06 21:17:35,820 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 55s | loading
+2026-10-06 21:17:39,287 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 58s | loading
+2026-10-06 21:17:42,914 - INFO -    ⏳ [61s] Lagu baru: 0 | Stabil: 62s | loading
+2026-10-06 21:17:46,264 - INFO -    ⏳ [65s] Lagu baru: 0 | Stabil: 65s | loading
+2026-10-06 21:17:49,553 - INFO -    ⏳ [68s] Lagu baru: 0 | Stabil: 68s | loading
+2026-10-06 21:17:52,901 - INFO -    ⏳ [71s] Lagu baru: 0 | Stabil: 72s | loading
+2026-10-06 21:17:56,383 - INFO -    ⏳ [75s] Lagu baru: 0 | Stabil: 75s | loading
+2026-10-06 21:17:59,712 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 78s | loading
+2026-10-06 21:18:03,185 - INFO -    ⏳ [81s] Lagu baru: 0 | Stabil: 82s | loading
+2026-10-06 21:18:06,848 - INFO -    ⏳ [85s] Lagu baru: 0 | Stabil: 86s | idle
+2026-10-06 21:18:10,752 - INFO -    ⏳ [89s] Lagu baru: 0 | Stabil: 89s | idle
+2026-10-06 21:18:15,058 - INFO -    🔄 [92s] Lagu baru: 1 (['Producer is AI and can make mistakes.'])
+2026-10-06 21:18:19,798 - INFO -    ⏳ [97s] Lagu baru: 1 | Stabil: 4s | idle
+2026-10-06 21:18:23,533 - INFO -    🔄 [102s] Lagu baru: 2 (['Carved in Stone', 'Producer is AI and can make mistakes.'])
+2026-10-06 21:18:27,544 - INFO -    ⏳ [105s] Lagu baru: 2 | Stabil: 4s | idle
+2026-10-06 21:18:31,121 - INFO -    ⏳ [109s] Lagu baru: 2 | Stabil: 7s | idle
+2026-10-06 21:18:34,638 - INFO -    ⏳ [113s] Lagu baru: 2 | Stabil: 11s | idle
+2026-10-06 21:18:38,178 - INFO -    ⏳ [116s] Lagu baru: 2 | Stabil: 14s | idle
+2026-10-06 21:18:41,695 - INFO -    ⏳ [120s] Lagu baru: 2 | Stabil: 18s | idle
+2026-10-06 21:18:41,696 - INFO - 🎵 Selesai! Total 2 lagu baru terdeteksi.
+2026-10-06 21:18:43,198 - INFO - 🎼 Total lagu baru dari prompt ini: 2
+2026-10-06 21:18:43,199 - INFO -    [1] Carved in Stone
+2026-10-06 21:18:43,199 - INFO -    [2] Producer is AI and can make mistakes.
+2026-10-06 21:18:43,200 - INFO - 
+--- Download (lagu 1/2): Carved in Stone ---
+2026-10-06 21:18:43,200 - INFO - 🎯 Download lagu 'Carved in Stone' (lagu 1/2)...
+2026-10-06 21:18:43,213 - INFO - Mencari tombol titik 3 untuk lagu target...
+2026-10-06 21:18:44,875 - INFO - Berhasil klik titik 3 untuk 'Carved in Stone'.
+2026-10-06 21:18:45,876 - INFO - Membuka menu 'Download'...
+2026-10-06 21:18:47,375 - INFO - Submenu Download terbuka.
+2026-10-06 21:18:47,376 - INFO - Mengklik format 'WAV'...
+2026-10-06 21:18:49,479 - INFO - Berhasil klik WAV.
+2026-10-06 21:18:49,479 - INFO - Menunggu file download...
+2026-10-06 21:18:56,444 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Carved in Stone.wav
+2026-10-06 21:19:00,462 - INFO - 
+--- Download (lagu 2/2): Producer is AI and can make mistakes. ---
+2026-10-06 21:19:00,463 - INFO - 🎯 Download lagu 'Producer is AI and can make mistakes.' (lagu 2/2)...
+2026-10-06 21:19:00,480 - INFO - Mencari tombol titik 3 untuk lagu target...
+2026-10-06 21:19:01,793 - INFO - Berhasil klik titik 3 untuk 'Producer is AI and can make mistakes.'.
+2026-10-06 21:19:02,794 - INFO - Membuka menu 'Download'...
+2026-10-06 21:19:06,028 - INFO - Koneksi Playwright ditutup.
+2026-10-06 21:19:06,380 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-06 21:19:06,382 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-1245' coro=<Locator.wait_for() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_locator.py:747> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>

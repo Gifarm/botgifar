@@ -11,7 +11,7 @@ from browser import BrowserManager
 from flow_actions import (
     input_prompt,
     generate_and_wait_all_songs,
-    download_song_at_index,
+    download_song_by_title,
     close_menus,
     show_alert,
 )
@@ -34,14 +34,13 @@ logger = logging.getLogger(__name__)
 # MAIN AUTOMATION
 # ==============================================================================
 def run_automation():
-    logger.info("🚀 Memulai Bot - Mode Multi-Song per Prompt")
+    logger.info("🚀 Memulai Bot - Mode Multi-Song per Prompt (Title-Based)")
 
     browser_manager = BrowserManager(DEBUGGING_PORT, WEBSITE_URL)
 
     try:
         page = browser_manager.connect()
 
-        # Cek Login (info saja, tanpa pause panjang)
         logger.info("⏳ Mengecek status login...")
         time.sleep(2)
         show_alert(page, "👋 Pastikan sudah login. Bot mulai dalam 5 detik...")
@@ -71,23 +70,25 @@ def run_automation():
                     continue
 
                 # === 2. GENERATE & TUNGGU SEMUA LAGU BARU ===
-                num_songs = generate_and_wait_all_songs(page, max_wait_seconds=300)
-                if num_songs == 0:
+                new_songs = generate_and_wait_all_songs(page, max_wait_seconds=300)
+                if not new_songs:
                     logger.error(f"Tidak ada lagu yang muncul di loop {i+1}. Skip.")
                     show_alert(page, f"⚠️ Loop {i+1}: Tidak ada lagu muncul.")
                     close_menus(page)
                     continue
 
-                logger.info(f"🎼 Total lagu baru dari prompt ini: {num_songs}")
+                logger.info(f"🎼 Total lagu baru dari prompt ini: {len(new_songs)}")
+                for idx, song in enumerate(new_songs):
+                    logger.info(f"   [{idx+1}] {song['title'][:70]}")
 
-                # === 3. DOWNLOAD SEMUA LAGU BARU ===
-                # Lagu terbaru diasumsikan di ATAS (index 0 = terbaru)
+                # === 3. DOWNLOAD SEMUA LAGU BARU (BERDASARKAN TITLE) ===
                 success_count = 0
-                for song_idx in range(num_songs):
-                    label = f"(lagu {song_idx + 1}/{num_songs})"
-                    logger.info(f"\n--- Download {label} ---")
+                for idx, song in enumerate(new_songs):
+                    title = song["title"]
+                    label = f"(lagu {idx + 1}/{len(new_songs)})"
+                    logger.info(f"\n--- Download {label}: {title[:60]} ---")
 
-                    if download_song_at_index(page, song_idx, DOWNLOAD_DIR, downloads, label):
+                    if download_song_by_title(page, title, DOWNLOAD_DIR, downloads, label):
                         success_count += 1
                         time.sleep(2)
                         close_menus(page)
@@ -97,7 +98,7 @@ def run_automation():
                         close_menus(page)
                         time.sleep(1)
 
-                logger.info(f"✅ Loop {i+1} selesai: {success_count}/{num_songs} lagu terdownload.\n")
+                logger.info(f"✅ Loop {i+1} selesai: {success_count}/{len(new_songs)} lagu terdownload.\n")
                 time.sleep(2)
 
             except Exception as e:
