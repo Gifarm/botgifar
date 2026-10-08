@@ -13,25 +13,32 @@ MORE_BTN_SELECTOR = "button[aria-label*='more' i], button[title*='more' i], butt
 STABLE_THRESHOLD_SECONDS = 15
 POLL_INTERVAL_SECONDS = 3
 
+# Tombol saran AI (tanda AI selesai generate & bertanya)
+SUGGESTION_BTN_SELECTOR = (
+    "button:has-text('Take 1'), button:has-text('Take 2'), button:has-text('Take 3'), "
+    "button:has-text('sounds warmer'), button:has-text('hear Take'), "
+    "button:has-text('Make it more'), button:has-text('Tweak the'), "
+    "button:has-text('Try a')"
+)
+
 
 # ==============================================================================
-# HELPER: DETEKSI LAGU (BERDASARKAN JUDUL)
+# HELPER: DETEKSI LAGU (UID UNIK PER BARIS)
 # ==============================================================================
 def _get_song_rows(page) -> list:
     """
-    Mengembalikan list of dict untuk setiap baris lagu yang terdeteksi.
+    Return list of dict per baris lagu.
 
     Setiap item: {
-        "title": str,        # judul lagu (unik)
-        "y": float,          # posisi Y untuk sorting
-        "button": Locator,   # tombol titik 3 di baris itu
-        "row": Locator,      # container baris lagu (untuk hover)
+        "uid": str,        # identifier unik (title + subtitle + Y)
+        "title": str,      # judul lagu
+        "subtitle": str,   # deskripsi singkat
+        "y": float,        # posisi Y (untuk sorting)
+        "button": Locator, # tombol titik 3
     }
 
-    Strategi:
-    - Cari semua tombol titik 3 (more options).
-    - Untuk tiap tombol, cari judul lagu terdekat di kiri/atasnya.
-    - Filter agar hanya tombol di area utama (bukan sidebar).
+    PENTING: UID unik pakai kombinasi title + subtitle + Y-bucket,
+    supaya lagu dengan judul sama tetap terdeteksi sebagai baris berbeda.
     """
     results = []
     try:
@@ -45,24 +52,25 @@ def _get_song_rows(page) -> list:
                 box = btn.bounding_box()
                 if not box:
                     continue
-                # Abaikan sidebar kiri
-                if box["x"] < win["w"] * 0.4:
+                if box["x"] < win["w"] * 0.4:  # skip sidebar
                     continue
-                # Abaikan di luar viewport
                 if box["y"] < 0 or box["y"] > win["h"]:
                     continue
                 if not (btn.is_visible() and btn.is_enabled()):
                     continue
 
-                # Cari judul lagu di sekitar tombol ini
-                # Strategi: cari ancestor container, lalu cari teks judul di dalamnya
-                title = _find_song_title_near_button(page, btn, box)
-                if not title:
-                    # Fallback: pakai koordinat Y sebagai "judul" sementara
-                    title = f"__unknown_y_{int(box['y'])}"
+                info = _find_song_info_near_button(page, btn)
+                title = info.get("title") or f"__unknown_{int(box['y'])}"
+                subtitle = info.get("subtitle") or ""
+
+                # UID: gabungan title + subtitle + Y-bucket (10px granularity)
+                y_bucket = int(box["y"] / 10)
+                uid = f"{title}||{subtitle[:60]}||y{y_bucket}"
 
                 results.append({
+                    "uid": uid,
                     "title": title,
+                    "subtitle": subtitle,
                     "y": box["y"],
                     "button": btn,
                 })
@@ -73,13 +81,13 @@ def _get_song_rows(page) -> list:
         # Sort dari atas ke bawah
         results.sort(key=lambda r: r["y"])
 
-        # Deduplikasi berdasarkan title (kalau ada judul sama persis, ambil yang paling atas)
-        seen_titles = set()
+        # Dedup berdasarkan UID (yang benar-benar unik)
+        seen = set()
         deduped = []
         for r in results:
-            if r["title"] in seen_titles:
+            if r["uid"] in seen:
                 continue
-            seen_titles.add(r["title"])
+            seen.add(r["uid"])
             deduped.append(r)
 
         return deduped
@@ -88,52 +96,60 @@ def _get_song_rows(page) -> list:
         return []
 
 
-def _find_song_title_near_button(page, btn, box) -> str | None:
+def _find_song_info_near_button(page, btn) -> dict:
     """
-    Mencari judul lagu terdekat dari tombol 'titik 3'.
-    Strategi:
-    1. Naik ke ancestor container (div yang membungkus baris lagu).
-    2. Cari elemen dengan text yang cocok pola judul lagu (bukan angka, bukan ikon).
+    Cari judul + subtitle dari container tombol titik 3.
+    Return: {"title": str, "subtitle": str}
     """
     try:
-        # Coba pakai JS untuk cari ancestor yang membungkus tombol + judul
-        title = page.evaluate("""
+        info = page.evaluate("""
         (btn) => {
-            // Naik max 6 level untuk cari container baris lagu
             let node = btn;
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 8; i++) {
                 if (!node.parentElement) break;
                 node = node.parentElement;
-                // Container yang bagus biasanya punya minimal 3 child
                 if (node.children.length >= 2) {
-                    // Cari elemen teks yang mirip judul
-                    // Judul biasanya di sibling kiri dari tombol, atau di dalam container
                     const texts = node.querySelectorAll('span, div, h3, h4, p, a');
+                    const candidates = [];
                     for (const t of texts) {
                         const txt = (t.innerText || '').trim();
-                        // Skip teks kosong, terlalu pendek, atau angka
-                        if (txt.length < 3 || txt.length > 120) continue;
+                        if (txt.length < 2 || txt.length > 200) continue;
                         if (/^\\d+$/.test(txt)) continue;
-                        // Skip teks yang jelas-jelas bukan judul (tombol, dll)
                         if (/^(play|pause|download|share|like|dislike|more|options|wav|mp3)$/i.test(txt)) continue;
-                        // Skip kalau mengandung newline (kemungkinan deskripsi panjang)
-                        if (txt.includes('\\n')) continue;
-                        return txt;
+                        candidates.push({txt, y: t.getBoundingClientRect().top});
+                    }
+                    if (candidates.length === 0) continue;
+                    candidates.sort((a, b) => a.y - b.y);
+                    const title = candidates[0] ? candidates[0].txt : null;
+                    const subtitle = candidates[1] ? candidates[1].txt : '';
+                    if (title && title.length >= 2) {
+                        return {title, subtitle};
                     }
                 }
             }
-            return null;
+            return {title: null, subtitle: ''};
         }
         """, btn.element_handle())
-        return title
+        return info or {"title": None, "subtitle": ""}
     except Exception as e:
-        logger.debug(f"Gagal cari judul: {e}")
-        return None
+        logger.debug(f"Gagal cari info lagu: {e}")
+        return {"title": None, "subtitle": ""}
 
 
-def _get_song_titles(page) -> list:
-    """Mengembalikan list judul lagu yang terdeteksi (urutan atas→bawah)."""
-    return [r["title"] for r in _get_song_rows(page)]
+def _has_suggestion_buttons(page) -> bool:
+    """Cek apakah Flow Music menampilkan tombol saran (AI bertanya)."""
+    try:
+        btns = page.locator(SUGGESTION_BTN_SELECTOR)
+        count = btns.count()
+        for i in range(min(count, 5)):
+            try:
+                if btns.nth(i).is_visible(timeout=300):
+                    return True
+            except:
+                continue
+        return False
+    except:
+        return False
 
 
 # ==============================================================================
@@ -170,44 +186,38 @@ def input_prompt(page, prompt: str) -> bool:
 
 
 # ==============================================================================
-# GENERATE & TUNGGU SEMUA LAGU BARU (BERBASIS JUDUL)
+# GENERATE & TUNGGU SEMUA LAGU BARU
 # ==============================================================================
 def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
     """
-    Menekan Enter, lalu menunggu SEMUA lagu baru muncul.
+    Tekan Enter, tunggu SEMUA lagu baru muncul (berdasarkan UID unik).
 
-    Strategi berbasis JUDUL (bukan count):
-    1. Snapshot daftar judul SEBELUM Enter.
+    Strategi:
+    1. Snapshot UID lagu SEBELUM Enter.
     2. Tekan Enter.
-    3. Polling: cari judul yang BELUM ADA di snapshot = lagu baru.
-    4. Tunggu sampai daftar lagu baru STABIL selama STABLE_THRESHOLD_SECONDS.
-    5. Return list dict lagu baru (dengan title, y, button).
-
-    Return: list of dict (kosong jika gagal).
+    3. Polling: cari UID baru.
+    4. Kalau muncul tombol saran AI → anggap selesai.
+    5. Tunggu sampai stabil → return list lagu baru.
     """
-    # Scroll ke atas dulu
     try:
         page.evaluate("window.scrollTo({top: 0, behavior: 'smooth'})")
         page.wait_for_timeout(800)
     except:
         pass
 
-    # === SNAPSHOT JUDUL SEBELUM ENTER ===
     baseline_rows = _get_song_rows(page)
-    baseline_titles = set(r["title"] for r in baseline_rows)
-    logger.info(f"📸 Snapshot judul sebelum generate: {len(baseline_titles)} lagu")
-    for t in baseline_titles:
-        logger.info(f"   - {t[:60]}")
+    baseline_uids = set(r["uid"] for r in baseline_rows)
+    logger.info(f"📸 Snapshot lagu sebelum generate: {len(baseline_uids)} lagu")
 
-    # === TEKAN ENTER ===
     logger.info("Menekan Enter untuk generate...")
     page.keyboard.press("Enter")
     page.wait_for_timeout(2000)
 
     start_time = time.time()
     last_change_time = time.time()
-    last_new_titles = set()
+    last_new_uids = set()
     attempt = 0
+    suggestion_seen = False
 
     loading_selectors = [
         "text=/generating/i",
@@ -217,7 +227,7 @@ def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
         "svg[class*='animate-spin']",
     ]
 
-    logger.info(f"⏳ Menunggu lagu baru (stabil {STABLE_THRESHOLD_SECONDS}s untuk dianggap selesai)...")
+    logger.info(f"⏳ Menunggu lagu baru (stabil {STABLE_THRESHOLD_SECONDS}s)...")
 
     while True:
         elapsed = time.time() - start_time
@@ -237,48 +247,48 @@ def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
             except:
                 continue
 
-        # Ambil semua judul sekarang
-        current_rows = _get_song_rows(page)
-        current_titles = set(r["title"] for r in current_rows)
+        # Cek suggestion buttons
+        if _has_suggestion_buttons(page):
+            if not suggestion_seen:
+                logger.info(f"   💬 Tombol saran AI terdeteksi — AI selesai generate.")
+            suggestion_seen = True
 
-        # Lagu baru = judul yang TIDAK ADA di baseline
-        new_titles = current_titles - baseline_titles
-        # Filter judul fallback "__unknown_y_..." biar tidak salah deteksi
-        new_titles_real = set(t for t in new_titles if not t.startswith("__unknown_y_"))
+        # Ambil UID lagu sekarang
+        current_rows = _get_song_rows(page)
+        current_uids = set(r["uid"] for r in current_rows)
+        new_uids = current_uids - baseline_uids
 
         # Deteksi perubahan
-        if new_titles_real != last_new_titles:
-            logger.info(f"   🔄 [{int(elapsed)}s] Lagu baru: {len(new_titles_real)} ({sorted(new_titles_real)})")
+        if new_uids != last_new_uids:
+            logger.info(f"   🔄 [{int(elapsed)}s] Lagu baru: {len(new_uids)}")
+            for uid in list(new_uids)[:5]:
+                logger.info(f"      • {uid[:80]}")
             last_change_time = time.time()
-            last_new_titles = new_titles_real
+            last_new_uids = new_uids
         else:
             stable_duration = time.time() - last_change_time
-            status = "loading" if still_loading else "idle"
-            logger.info(f"   ⏳ [{int(elapsed)}s] Lagu baru: {len(new_titles_real)} | Stabil: {int(stable_duration)}s | {status}")
+            status = "loading" if still_loading else ("suggestion" if suggestion_seen else "idle")
+            logger.info(f"   ⏳ [{int(elapsed)}s] Lagu baru: {len(new_uids)} | Stabil: {int(stable_duration)}s | {status}")
 
         # === KONDISI SELESAI ===
         stable_duration = time.time() - last_change_time
-        if len(new_titles_real) >= 1 and not still_loading and stable_duration >= STABLE_THRESHOLD_SECONDS:
-            logger.info(f"🎵 Selesai! Total {len(new_titles_real)} lagu baru terdeteksi.")
-            page.wait_for_timeout(1500)
-
-            # Return hanya lagu baru, dalam urutan atas→bawah
-            result = [r for r in current_rows if r["title"] in new_titles_real]
-            # Sort dari atas ke bawah (lagu terbaru biasanya di atas)
-            result.sort(key=lambda r: r["y"])
-            return result
+        if len(new_uids) >= 1 and not still_loading:
+            if suggestion_seen or stable_duration >= STABLE_THRESHOLD_SECONDS:
+                logger.info(f"🎵 Selesai! {len(new_uids)} lagu baru terdeteksi.")
+                page.wait_for_timeout(1500)
+                result = [r for r in current_rows if r["uid"] in new_uids]
+                result.sort(key=lambda r: r["y"])
+                return result
 
         page.wait_for_timeout(POLL_INTERVAL_SECONDS * 1000)
 
-    # Timeout — ambil apa pun yang ada
+    # Timeout fallback
     final_rows = _get_song_rows(page)
-    final_titles = set(r["title"] for r in final_rows)
-    new_titles = final_titles - baseline_titles
-    new_titles_real = set(t for t in new_titles if not t.startswith("__unknown_y_"))
-
-    if new_titles_real:
-        logger.warning(f"⚠️ Timeout tapi dapat {len(new_titles_real)} lagu. Lanjut download.")
-        result = [r for r in final_rows if r["title"] in new_titles_real]
+    final_uids = set(r["uid"] for r in final_rows)
+    new_uids = final_uids - baseline_uids
+    if new_uids:
+        logger.warning(f"⚠️ Timeout tapi dapat {len(new_uids)} lagu. Lanjut download.")
+        result = [r for r in final_rows if r["uid"] in new_uids]
         result.sort(key=lambda r: r["y"])
         return result
 
@@ -287,14 +297,14 @@ def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
 
 
 # ==============================================================================
-# DOWNLOAD BERDASARKAN TITLE
+# DOWNLOAD BERDASARKAN UID
 # ==============================================================================
-def download_song_by_title(page, target_title: str, download_dir: str, downloads_list: list, label: str = "") -> bool:
+def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_list: list, label: str = "") -> bool:
     """
-    Download lagu berdasarkan JUDUL-nya (bukan index).
-    Ini menghindari bug "download lagu yang sama 2x".
+    Download lagu berdasarkan UID unik (title + subtitle + Y-bucket).
+    Ini memastikan lagu dengan judul sama tetap ter-download semua.
     """
-    logger.info(f"🎯 Download lagu '{target_title[:50]}' {label}...")
+    logger.info(f"🎯 Download lagu UID '{target_uid[:70]}' {label}...")
 
     # Handle popup AI
     try:
@@ -303,24 +313,24 @@ def download_song_by_title(page, target_title: str, download_dir: str, downloads
             "button:has-text('Accept'), button:has-text('Yes'), button:has-text('Lanjutkan')"
         )
         if ai_buttons.count() > 0:
-            logger.info("Rekomendasi AI terdeteksi. Menutup...")
+            logger.info("Popup AI terdeteksi. Menutup...")
             ai_buttons.first.click()
             time.sleep(1.5)
     except:
         pass
 
-    # === A. Cari tombol titik 3 berdasarkan title ===
-    logger.info("Mencari tombol titik 3 untuk lagu target...")
+    # === A. Cari tombol titik 3 berdasarkan UID ===
+    logger.info("Mencari tombol titik 3 target...")
     try:
         rows = _get_song_rows(page)
         target_row = None
         for r in rows:
-            if r["title"] == target_title:
+            if r["uid"] == target_uid:
                 target_row = r
                 break
 
         if target_row is None:
-            logger.error(f"Lagu '{target_title[:50]}' tidak ditemukan di halaman.")
+            logger.error(f"Lagu UID '{target_uid[:70]}' tidak ditemukan.")
             return False
 
         target = target_row["button"]
@@ -328,7 +338,7 @@ def download_song_by_title(page, target_title: str, download_dir: str, downloads
         target.hover(timeout=5000)
         time.sleep(0.5)
         target.click(timeout=5000)
-        logger.info(f"Berhasil klik titik 3 untuk '{target_title[:50]}'.")
+        logger.info(f"Berhasil klik titik 3.")
     except Exception as e:
         logger.error(f"Gagal klik titik 3: {e}")
         return False
@@ -352,7 +362,7 @@ def download_song_by_title(page, target_title: str, download_dir: str, downloads
         time.sleep(0.9)
 
         if not wav_item.is_visible():
-            logger.info("Hover belum cukup, pakai keyboard (panah kanan)...")
+            logger.info("Hover kurang, pakai keyboard (ArrowRight)...")
             dl_item.focus()
             page.keyboard.press("ArrowRight")
             time.sleep(0.9)
@@ -385,7 +395,7 @@ def download_song_by_title(page, target_title: str, download_dir: str, downloads
         time.sleep(1)
 
         if wav_item.is_visible():
-            logger.info("Klik belum kena, pakai fokus langsung + Enter...")
+            logger.info("Klik belum kena, fokus + Enter...")
             wav_item.focus()
             page.keyboard.press("Enter")
             time.sleep(1)
@@ -398,7 +408,7 @@ def download_song_by_title(page, target_title: str, download_dir: str, downloads
         logger.error(f"Gagal klik WAV: {e}")
         return False
 
-    # === D. Tunggu dan Simpan Download ===
+    # === D. Tunggu & Simpan ===
     logger.info("Menunggu file download...")
     waited = 0
     while not downloads_list and waited < 60000:
@@ -407,11 +417,18 @@ def download_song_by_title(page, target_title: str, download_dir: str, downloads
 
     if downloads_list:
         dl = downloads_list.pop(0)
-        # Pakai judul lagu sebagai nama file (biar tidak bentrok)
-        safe_title = re.sub(r'[<>:"/\\|?*]', '_', target_title)[:100]
-        name = dl.suggested_filename or f"{safe_title}.wav"
-        if not os.path.splitext(name)[1]:
-            name += ".wav"
+
+        # Nama file: prioritas suggested_filename dari server,
+        # fallback: title + subtitle + Y-bucket biar unik
+        suggested = dl.suggested_filename
+        if suggested and os.path.splitext(suggested)[1]:
+            name = suggested
+        else:
+            parts = target_uid.split("||")
+            title = re.sub(r'[<>:"/\\|?*]', '_', parts[0])[:70]
+            sub = re.sub(r'[<>:"/\\|?*]', '_', parts[1])[:40] if len(parts) > 1 else ""
+            ybucket = parts[2] if len(parts) > 2 else ""
+            name = f"{title}_{sub}_{ybucket}.wav" if sub else f"{title}_{ybucket}.wav"
 
         base, ext = os.path.splitext(name)
         target_path = os.path.join(download_dir, name)

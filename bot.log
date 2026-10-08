@@ -602,3 +602,652 @@ future: <Future finished exception=TargetClosedError('Target page, context or br
 playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
 2026-10-06 21:19:06,382 - ERROR - Task was destroyed but it is pending!
 task: <Task cancelling name='Task-1245' coro=<Locator.wait_for() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_locator.py:747> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 17:03:00,805 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt (UID-Based)
+2026-10-08 17:03:00,806 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-08 17:03:02,031 - INFO - Berhasil terhubung ke browser.
+2026-10-08 17:03:02,031 - INFO - ⏳ Mengecek status login...
+2026-10-08 17:03:09,122 - INFO - Prompt diambil: Create a completely original traffic-engineer's-si...
+2026-10-08 17:03:09,123 - INFO - 
+======================================================================
+2026-10-08 17:03:09,124 - INFO - 📊 [LOOP 1/10]
+2026-10-08 17:03:09,124 - INFO - 📝 Prompt: Create a completely original traffic-engineer's-signal-timing pop song, total du...
+2026-10-08 17:03:09,125 - INFO - ======================================================================
+
+2026-10-08 17:03:09,132 - INFO - Mengisi prompt...
+2026-10-08 17:03:24,399 - INFO - Prompt berhasil diisi.
+2026-10-08 17:03:29,903 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-08 17:03:29,903 - INFO - Menekan Enter untuk generate...
+2026-10-08 17:03:32,030 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 17:03:32,194 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-08 17:03:35,353 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-08 17:03:38,518 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-08 17:03:41,691 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-08 17:03:44,864 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-10-08 17:03:48,033 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-08 17:03:51,214 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-08 17:03:54,370 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-08 17:03:57,527 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-08 17:04:00,702 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | idle
+2026-10-08 17:04:03,851 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | loading
+2026-10-08 17:04:07,000 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | loading
+2026-10-08 17:04:10,146 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 38s | loading
+2026-10-08 17:04:13,296 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | loading
+2026-10-08 17:04:16,445 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-10-08 17:04:19,598 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | loading
+2026-10-08 17:04:22,793 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 50s | loading
+2026-10-08 17:04:26,013 - INFO -    ⏳ [53s] Lagu baru: 0 | Stabil: 53s | idle
+2026-10-08 17:04:29,089 - INFO -    💬 Suggestion buttons terdeteksi — AI selesai generate, sedang bertanya.
+2026-10-08 17:04:29,333 - INFO -    ⏳ [56s] Lagu baru: 0 | Stabil: 57s | suggestion
+2026-10-08 17:04:32,607 - INFO -    ⏳ [60s] Lagu baru: 0 | Stabil: 60s | suggestion
+2026-10-08 17:04:35,863 - INFO -    ⏳ [63s] Lagu baru: 0 | Stabil: 63s | suggestion
+2026-10-08 17:04:39,161 - INFO -    ⏳ [66s] Lagu baru: 0 | Stabil: 67s | suggestion
+2026-10-08 17:04:42,452 - INFO -    ⏳ [70s] Lagu baru: 0 | Stabil: 70s | suggestion
+2026-10-08 17:04:45,716 - INFO -    ⏳ [73s] Lagu baru: 0 | Stabil: 73s | suggestion
+2026-10-08 17:04:49,009 - INFO -    ⏳ [76s] Lagu baru: 0 | Stabil: 76s | suggestion
+2026-10-08 17:04:52,287 - INFO -    ⏳ [79s] Lagu baru: 0 | Stabil: 80s | suggestion
+2026-10-08 17:04:55,599 - INFO -    ⏳ [83s] Lagu baru: 0 | Stabil: 83s | suggestion
+2026-10-08 17:04:58,920 - INFO -    🔄 [86s] Lagu baru: 1
+2026-10-08 17:04:58,920 - INFO -       • Chalk Lines||Chalk Lines
+2026-10-08 17:04:58,921 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-08 17:05:00,423 - INFO - 🎼 Total lagu baru dari prompt ini: 1
+2026-10-08 17:05:00,424 - INFO -    [1] Title: Chalk Lines
+2026-10-08 17:05:00,424 - INFO -        Sub  : Chalk Lines
+2026-10-08 17:05:00,424 - INFO - 
+--- Download (lagu 1/1): Chalk Lines ---
+2026-10-08 17:05:00,425 - INFO - 🎯 Download lagu UID 'Chalk Lines||Chalk Lines' (lagu 1/1)...
+2026-10-08 17:05:00,436 - INFO - Mencari tombol titik 3 untuk lagu target...
+2026-10-08 17:05:06,453 - ERROR - Gagal klik titik 3: Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("button[aria-label*='more' i], button[title*='more' i], button[aria-haspopup='menu']").first
+    - locator resolved to <button data-state="closed" aria-haspopup="menu" aria-expanded="false" aria-label="Remix Chalk Lines" class="text-fg-1 hover:text-fg-2 flex aspect-square items-center justify-center transition-colors w-8">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    9 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
+
+2026-10-08 17:05:06,453 - WARNING - Gagal download (lagu 1/1)
+2026-10-08 17:05:08,472 - INFO - ✅ Loop 1 selesai: 0/1 lagu terdownload.
+
+2026-10-08 17:05:10,475 - INFO - Prompt diambil: Create a completely original surveyor's-tripod-at-...
+2026-10-08 17:05:10,475 - INFO - 
+======================================================================
+2026-10-08 17:05:10,476 - INFO - 📊 [LOOP 2/10]
+2026-10-08 17:05:10,476 - INFO - 📝 Prompt: Create a completely original surveyor's-tripod-at-sunrise folk song, total durat...
+2026-10-08 17:05:10,476 - INFO - ======================================================================
+
+2026-10-08 17:05:10,481 - INFO - Mengisi prompt...
+2026-10-08 17:05:20,559 - INFO - Prompt berhasil diisi.
+2026-10-08 17:05:21,581 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-08 17:05:21,581 - INFO - Menekan Enter untuk generate...
+2026-10-08 17:05:23,639 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 17:05:23,875 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-08 17:05:27,133 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-08 17:05:30,387 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-08 17:05:33,640 - INFO - Koneksi Playwright ditutup.
+2026-10-08 17:05:33,747 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 17:05:33,748 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-536' coro=<Locator.bounding_box() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_locator.py:132> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 17:12:03,775 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt (UID-Based)
+2026-10-08 17:12:03,775 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-08 17:12:04,312 - INFO - Berhasil terhubung ke browser.
+2026-10-08 17:12:04,313 - INFO - ⏳ Mengecek status login...
+2026-10-08 17:12:11,370 - INFO - Koneksi Playwright ditutup.
+2026-10-08 17:12:42,276 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt (UID-Based)
+2026-10-08 17:12:42,276 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-08 17:12:42,861 - INFO - Berhasil terhubung ke browser.
+2026-10-08 17:12:42,862 - INFO - ⏳ Mengecek status login...
+2026-10-08 17:12:45,413 - INFO - Koneksi Playwright ditutup.
+2026-10-08 17:12:53,103 - INFO - 🚀 Memulai Bot - Mode Multi-Song per Prompt (UID-Based)
+2026-10-08 17:12:53,104 - INFO - Menghubungkan ke browser di port 9228...
+2026-10-08 17:12:53,595 - INFO - Berhasil terhubung ke browser.
+2026-10-08 17:12:53,596 - INFO - ⏳ Mengecek status login...
+2026-10-08 17:13:00,628 - INFO - Prompt diambil: Create a completely original city-planner's-map-on...
+2026-10-08 17:13:00,628 - INFO - 
+======================================================================
+2026-10-08 17:13:00,629 - INFO - 📊 [LOOP 1/10]
+2026-10-08 17:13:00,629 - INFO - 📝 Prompt: Create a completely original city-planner's-map-on-the-wall ballad song, total d...
+2026-10-08 17:13:00,630 - INFO - ======================================================================
+
+2026-10-08 17:13:00,634 - INFO - Mengisi prompt...
+2026-10-08 17:13:10,760 - INFO - Prompt berhasil diisi.
+2026-10-08 17:13:11,663 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-08 17:13:11,664 - INFO - Menekan Enter untuk generate...
+2026-10-08 17:13:13,737 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 17:13:13,851 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-08 17:13:16,974 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-08 17:13:20,115 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-08 17:13:23,258 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-08 17:13:26,397 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-10-08 17:13:29,533 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 15s | idle
+2026-10-08 17:13:32,669 - INFO -    ⏳ [18s] Lagu baru: 0 | Stabil: 18s | idle
+2026-10-08 17:13:35,898 - INFO -    ⏳ [21s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-08 17:13:38,996 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | loading
+2026-10-08 17:13:42,096 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | loading
+2026-10-08 17:13:45,204 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | loading
+2026-10-08 17:13:48,305 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | loading
+2026-10-08 17:13:51,409 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 37s | loading
+2026-10-08 17:13:54,531 - INFO -    ⏳ [40s] Lagu baru: 0 | Stabil: 40s | loading
+2026-10-08 17:13:57,637 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 43s | loading
+2026-10-08 17:14:00,747 - INFO -    ⏳ [46s] Lagu baru: 0 | Stabil: 47s | loading
+2026-10-08 17:14:03,854 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 50s | loading
+2026-10-08 17:14:06,996 - INFO -    🔄 [53s] Lagu baru: 1
+2026-10-08 17:14:06,996 - INFO -       • The Whole Pattern||The Whole Pattern||y53
+2026-10-08 17:14:10,171 - INFO -    ⏳ [56s] Lagu baru: 1 | Stabil: 3s | idle
+2026-10-08 17:14:13,383 - INFO -    ⏳ [59s] Lagu baru: 1 | Stabil: 6s | idle
+2026-10-08 17:14:16,564 - INFO -    ⏳ [62s] Lagu baru: 1 | Stabil: 9s | idle
+2026-10-08 17:14:19,748 - INFO -    ⏳ [65s] Lagu baru: 1 | Stabil: 12s | idle
+2026-10-08 17:14:22,944 - INFO -    ⏳ [69s] Lagu baru: 1 | Stabil: 15s | idle
+2026-10-08 17:14:22,944 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-08 17:14:24,447 - INFO - 🎼 Total lagu baru dari prompt ini: 1
+2026-10-08 17:14:24,448 - INFO -    [1] Title: The Whole Pattern
+2026-10-08 17:14:24,448 - INFO -        Sub  : The Whole Pattern
+2026-10-08 17:14:24,449 - INFO -        UID  : The Whole Pattern||The Whole Pattern||y53
+2026-10-08 17:14:24,449 - INFO - 
+--- Download (lagu 1/1): The Whole Pattern ---
+2026-10-08 17:14:24,449 - INFO - 🎯 Download lagu UID 'The Whole Pattern||The Whole Pattern||y53' (lagu 1/1)...
+2026-10-08 17:14:24,460 - INFO - Mencari tombol titik 3 target...
+2026-10-08 17:14:25,443 - INFO - Berhasil klik titik 3.
+2026-10-08 17:14:26,443 - INFO - Membuka menu 'Download'...
+2026-10-08 17:14:27,903 - INFO - Submenu Download terbuka.
+2026-10-08 17:14:27,903 - INFO - Mengklik format 'WAV'...
+2026-10-08 17:14:29,956 - INFO - Berhasil klik WAV.
+2026-10-08 17:14:29,957 - INFO - Menunggu file download...
+2026-10-08 17:14:35,910 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/The Whole Pattern.wav
+2026-10-08 17:14:39,927 - INFO - ✅ Loop 1 selesai: 1/1 lagu terdownload.
+
+2026-10-08 17:14:41,928 - INFO - Prompt diambil: Create a completely original building-inspector's-...
+2026-10-08 17:14:41,929 - INFO - 
+======================================================================
+2026-10-08 17:14:41,929 - INFO - 📊 [LOOP 2/10]
+2026-10-08 17:14:41,929 - INFO - 📝 Prompt: Create a completely original building-inspector's-clipboard folk song, total dur...
+2026-10-08 17:14:41,929 - INFO - ======================================================================
+
+2026-10-08 17:14:41,933 - INFO - Mengisi prompt...
+2026-10-08 17:14:52,001 - INFO - Prompt berhasil diisi.
+2026-10-08 17:14:52,978 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-08 17:14:52,979 - INFO - Menekan Enter untuk generate...
+2026-10-08 17:14:55,025 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 17:14:55,192 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-08 17:14:58,401 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-08 17:15:01,596 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-08 17:15:04,797 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-08 17:15:07,978 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-10-08 17:15:11,153 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-08 17:15:14,345 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-08 17:15:17,515 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-08 17:15:20,708 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-08 17:15:23,861 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | loading
+2026-10-08 17:15:27,006 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | loading
+2026-10-08 17:15:30,166 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 35s | loading
+2026-10-08 17:15:33,316 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | loading
+2026-10-08 17:15:36,485 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | loading
+2026-10-08 17:15:39,632 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-10-08 17:15:42,794 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | loading
+2026-10-08 17:15:45,969 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 50s | loading
+2026-10-08 17:15:49,260 - INFO -    🔄 [53s] Lagu baru: 1
+2026-10-08 17:15:49,261 - INFO -       • Curling Edges||Curling Edges||y60
+2026-10-08 17:15:52,325 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-08 17:15:52,641 - INFO -    🔄 [57s] Lagu baru: 1
+2026-10-08 17:15:52,641 - INFO -       • Curling Edges||Curling Edges||y53
+2026-10-08 17:15:52,642 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-08 17:15:54,144 - INFO - 🎼 Total lagu baru dari prompt ini: 1
+2026-10-08 17:15:54,145 - INFO -    [1] Title: Curling Edges
+2026-10-08 17:15:54,145 - INFO -        Sub  : Curling Edges
+2026-10-08 17:15:54,146 - INFO -        UID  : Curling Edges||Curling Edges||y53
+2026-10-08 17:15:54,146 - INFO - 
+--- Download (lagu 1/1): Curling Edges ---
+2026-10-08 17:15:54,147 - INFO - 🎯 Download lagu UID 'Curling Edges||Curling Edges||y53' (lagu 1/1)...
+2026-10-08 17:15:54,159 - INFO - Mencari tombol titik 3 target...
+2026-10-08 17:15:55,174 - INFO - Berhasil klik titik 3.
+2026-10-08 17:15:56,175 - INFO - Membuka menu 'Download'...
+2026-10-08 17:15:57,614 - INFO - Submenu Download terbuka.
+2026-10-08 17:15:57,614 - INFO - Mengklik format 'WAV'...
+2026-10-08 17:15:59,648 - INFO - Berhasil klik WAV.
+2026-10-08 17:15:59,648 - INFO - Menunggu file download...
+2026-10-08 17:16:04,405 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Curling Edges.wav
+2026-10-08 17:16:08,419 - INFO - ✅ Loop 2 selesai: 1/1 lagu terdownload.
+
+2026-10-08 17:16:10,421 - INFO - Prompt diambil: Create a completely original elevator-mechanic's-s...
+2026-10-08 17:16:10,421 - INFO - 
+======================================================================
+2026-10-08 17:16:10,422 - INFO - 📊 [LOOP 3/10]
+2026-10-08 17:16:10,422 - INFO - 📝 Prompt: Create a completely original elevator-mechanic's-shaft ballad song, total durati...
+2026-10-08 17:16:10,422 - INFO - ======================================================================
+
+2026-10-08 17:16:10,426 - INFO - Mengisi prompt...
+2026-10-08 17:16:20,493 - INFO - Prompt berhasil diisi.
+2026-10-08 17:16:21,541 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-08 17:16:21,542 - INFO - Menekan Enter untuk generate...
+2026-10-08 17:16:23,582 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 17:16:23,791 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-08 17:16:27,034 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-08 17:16:30,265 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-08 17:16:33,508 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-08 17:16:36,705 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-08 17:16:39,972 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-08 17:16:43,213 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-08 17:16:46,442 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-08 17:16:49,679 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 26s | idle
+2026-10-08 17:16:52,920 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 29s | idle
+2026-10-08 17:16:56,153 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 32s | loading
+2026-10-08 17:16:59,360 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | loading
+2026-10-08 17:17:02,604 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 39s | loading
+2026-10-08 17:17:05,798 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 42s | loading
+2026-10-08 17:17:09,005 - INFO -    ⏳ [45s] Lagu baru: 0 | Stabil: 45s | loading
+2026-10-08 17:17:12,205 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 48s | loading
+2026-10-08 17:17:15,395 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-08 17:17:18,618 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 55s | loading
+2026-10-08 17:17:21,915 - INFO -    🔄 [58s] Lagu baru: 1
+2026-10-08 17:17:21,915 - INFO -       • Before the World Moves||Before the World Moves||y53
+2026-10-08 17:17:25,373 - INFO -    🔄 [61s] Lagu baru: 2
+2026-10-08 17:17:25,374 - INFO -       • Before the World Moves||Before the World Moves||y58
+2026-10-08 17:17:25,374 - INFO -       • Before the World Moves||Before the World Moves||y52
+2026-10-08 17:17:28,741 - INFO -    ⏳ [64s] Lagu baru: 2 | Stabil: 3s | idle
+2026-10-08 17:17:32,107 - INFO -    ⏳ [68s] Lagu baru: 2 | Stabil: 6s | idle
+2026-10-08 17:17:35,457 - INFO -    ⏳ [71s] Lagu baru: 2 | Stabil: 10s | idle
+2026-10-08 17:17:38,844 - INFO -    ⏳ [74s] Lagu baru: 2 | Stabil: 13s | idle
+2026-10-08 17:17:42,203 - INFO -    ⏳ [78s] Lagu baru: 2 | Stabil: 16s | idle
+2026-10-08 17:17:42,203 - INFO - 🎵 Selesai! 2 lagu baru terdeteksi.
+2026-10-08 17:17:43,707 - INFO - 🎼 Total lagu baru dari prompt ini: 2
+2026-10-08 17:17:43,711 - INFO -    [1] Title: Before the World Moves
+2026-10-08 17:17:43,712 - INFO -        Sub  : Before the World Moves
+2026-10-08 17:17:43,712 - INFO -        UID  : Before the World Moves||Before the World Moves||y52
+2026-10-08 17:17:43,712 - INFO -    [2] Title: Before the World Moves
+2026-10-08 17:17:43,713 - INFO -        Sub  : Before the World Moves
+2026-10-08 17:17:43,713 - INFO -        UID  : Before the World Moves||Before the World Moves||y58
+2026-10-08 17:17:43,713 - INFO - 
+--- Download (lagu 1/2): Before the World Moves ---
+2026-10-08 17:17:43,714 - INFO - 🎯 Download lagu UID 'Before the World Moves||Before the World Moves||y52' (lagu 1/2)...
+2026-10-08 17:17:43,722 - INFO - Mencari tombol titik 3 target...
+2026-10-08 17:17:44,841 - INFO - Berhasil klik titik 3.
+2026-10-08 17:17:45,842 - INFO - Membuka menu 'Download'...
+2026-10-08 17:17:47,301 - INFO - Submenu Download terbuka.
+2026-10-08 17:17:47,301 - INFO - Mengklik format 'WAV'...
+2026-10-08 17:17:49,344 - INFO - Berhasil klik WAV.
+2026-10-08 17:17:49,344 - INFO - Menunggu file download...
+2026-10-08 17:17:54,860 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Before the World Moves.wav
+2026-10-08 17:17:58,874 - INFO - 
+--- Download (lagu 2/2): Before the World Moves ---
+2026-10-08 17:17:58,874 - INFO - 🎯 Download lagu UID 'Before the World Moves||Before the World Moves||y58' (lagu 2/2)...
+2026-10-08 17:17:58,888 - INFO - Mencari tombol titik 3 target...
+2026-10-08 17:18:00,041 - INFO - Berhasil klik titik 3.
+2026-10-08 17:18:01,042 - INFO - Membuka menu 'Download'...
+2026-10-08 17:18:02,510 - INFO - Submenu Download terbuka.
+2026-10-08 17:18:02,510 - INFO - Mengklik format 'WAV'...
+2026-10-08 17:18:04,546 - INFO - Berhasil klik WAV.
+2026-10-08 17:18:04,546 - INFO - Menunggu file download...
+2026-10-08 17:18:11,333 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Before the World Moves_1.wav
+2026-10-08 17:18:15,350 - INFO - ✅ Loop 3 selesai: 2/2 lagu terdownload.
+
+2026-10-08 17:18:17,351 - INFO - Prompt diambil: Create a completely original elevator-operator's-o...
+2026-10-08 17:18:17,352 - INFO - 
+======================================================================
+2026-10-08 17:18:17,352 - INFO - 📊 [LOOP 4/10]
+2026-10-08 17:18:17,353 - INFO - 📝 Prompt: Create a completely original elevator-operator's-old-lobby ballad song, total du...
+2026-10-08 17:18:17,353 - INFO - ======================================================================
+
+2026-10-08 17:18:17,356 - INFO - Mengisi prompt...
+2026-10-08 17:18:27,426 - INFO - Prompt berhasil diisi.
+2026-10-08 17:18:28,587 - INFO - 📸 Snapshot lagu sebelum generate: 2 lagu
+2026-10-08 17:18:28,587 - INFO - Menekan Enter untuk generate...
+2026-10-08 17:18:30,637 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 17:18:30,948 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-08 17:18:34,290 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-08 17:18:37,616 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-08 17:18:40,964 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-08 17:18:44,276 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-08 17:18:47,585 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-08 17:18:50,907 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 20s | idle
+2026-10-08 17:18:54,274 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | idle
+2026-10-08 17:18:57,597 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | idle
+2026-10-08 17:19:01,003 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 30s | idle
+2026-10-08 17:19:04,300 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-08 17:19:07,595 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 36s | loading
+2026-10-08 17:19:10,892 - INFO -    ⏳ [39s] Lagu baru: 0 | Stabil: 40s | loading
+2026-10-08 17:19:14,244 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 43s | loading
+2026-10-08 17:19:17,546 - INFO -    ⏳ [46s] Lagu baru: 0 | Stabil: 46s | loading
+2026-10-08 17:19:20,835 - INFO -    ⏳ [49s] Lagu baru: 0 | Stabil: 50s | loading
+2026-10-08 17:19:24,132 - INFO -    ⏳ [53s] Lagu baru: 0 | Stabil: 53s | loading
+2026-10-08 17:19:27,410 - INFO -    ⏳ [56s] Lagu baru: 0 | Stabil: 56s | loading
+2026-10-08 17:19:30,770 - INFO -    🔄 [59s] Lagu baru: 1
+2026-10-08 17:19:30,770 - INFO -       • To Shape the Stone||To Shape the Stone||y60
+2026-10-08 17:19:33,841 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-08 17:19:34,390 - INFO -    🔄 [63s] Lagu baru: 2
+2026-10-08 17:19:34,391 - INFO -       • To Shape the Stone||To Shape the Stone||y58
+2026-10-08 17:19:34,391 - INFO -       • To Shape the Stone||To Shape the Stone||y52
+2026-10-08 17:19:34,391 - INFO - 🎵 Selesai! 2 lagu baru terdeteksi.
+2026-10-08 17:19:35,893 - INFO - 🎼 Total lagu baru dari prompt ini: 2
+2026-10-08 17:19:35,894 - INFO -    [1] Title: To Shape the Stone
+2026-10-08 17:19:35,894 - INFO -        Sub  : To Shape the Stone
+2026-10-08 17:19:35,894 - INFO -        UID  : To Shape the Stone||To Shape the Stone||y52
+2026-10-08 17:19:35,895 - INFO -    [2] Title: To Shape the Stone
+2026-10-08 17:19:35,895 - INFO -        Sub  : To Shape the Stone
+2026-10-08 17:19:35,895 - INFO -        UID  : To Shape the Stone||To Shape the Stone||y58
+2026-10-08 17:19:35,896 - INFO - 
+--- Download (lagu 1/2): To Shape the Stone ---
+2026-10-08 17:19:35,896 - INFO - 🎯 Download lagu UID 'To Shape the Stone||To Shape the Stone||y52' (lagu 1/2)...
+2026-10-08 17:19:35,905 - INFO - Mencari tombol titik 3 target...
+2026-10-08 17:19:37,169 - INFO - Berhasil klik titik 3.
+2026-10-08 17:19:38,170 - INFO - Membuka menu 'Download'...
+2026-10-08 17:19:39,622 - INFO - Hover kurang, pakai keyboard (ArrowRight)...
+2026-10-08 17:19:40,587 - INFO - Submenu Download terbuka.
+2026-10-08 17:19:40,587 - INFO - Mengklik format 'WAV'...
+2026-10-08 17:19:42,633 - INFO - Berhasil klik WAV.
+2026-10-08 17:19:42,633 - INFO - Menunggu file download...
+2026-10-08 17:19:49,466 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/To Shape the Stone.wav
+2026-10-08 17:19:53,482 - INFO - 
+--- Download (lagu 2/2): To Shape the Stone ---
+2026-10-08 17:19:53,483 - INFO - 🎯 Download lagu UID 'To Shape the Stone||To Shape the Stone||y58' (lagu 2/2)...
+2026-10-08 17:19:53,496 - INFO - Mencari tombol titik 3 target...
+2026-10-08 17:19:54,706 - INFO - Berhasil klik titik 3.
+2026-10-08 17:19:55,707 - INFO - Membuka menu 'Download'...
+2026-10-08 17:19:57,161 - INFO - Submenu Download terbuka.
+2026-10-08 17:19:57,162 - INFO - Mengklik format 'WAV'...
+2026-10-08 17:19:59,182 - INFO - Berhasil klik WAV.
+2026-10-08 17:19:59,182 - INFO - Menunggu file download...
+2026-10-08 17:20:05,032 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/To Shape the Stone_1.wav
+2026-10-08 17:20:09,049 - INFO - ✅ Loop 4 selesai: 2/2 lagu terdownload.
+
+2026-10-08 17:20:11,058 - INFO - Prompt diambil: Create a completely original window-washer-on-the-...
+2026-10-08 17:20:11,058 - INFO - 
+======================================================================
+2026-10-08 17:20:11,059 - INFO - 📊 [LOOP 5/10]
+2026-10-08 17:20:11,059 - INFO - 📝 Prompt: Create a completely original window-washer-on-the-fortieth-floor folk song, tota...
+2026-10-08 17:20:11,060 - INFO - ======================================================================
+
+2026-10-08 17:20:11,063 - INFO - Mengisi prompt...
+2026-10-08 17:20:21,115 - INFO - Prompt berhasil diisi.
+2026-10-08 17:20:22,460 - INFO - 📸 Snapshot lagu sebelum generate: 2 lagu
+2026-10-08 17:20:22,461 - INFO - Menekan Enter untuk generate...
+2026-10-08 17:20:22,581 - INFO - Koneksi Playwright ditutup.
+2026-10-08 17:20:22,714 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 17:20:22,715 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-2045' coro=<Page.wait_for_timeout() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:1143> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 18:46:36,238 - INFO - 🚀 Memulai Bot - Multi-Profile Sequential Mode
+2026-10-08 18:46:36,240 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-08 18:46:38,500 - INFO -    ✅ Port 9222 terhubung.
+2026-10-08 18:46:38,643 - INFO -    ✅ Port 9223 terhubung.
+2026-10-08 18:46:38,750 - INFO -    ✅ Port 9224 terhubung.
+2026-10-08 18:46:38,847 - INFO -    ✅ Port 9225 terhubung.
+2026-10-08 18:46:38,989 - INFO -    ✅ Port 9226 terhubung.
+2026-10-08 18:46:38,991 - INFO - 📊 Total terhubung: 5/5 profile
+2026-10-08 18:46:38,992 - INFO - 🎯 5 profile siap: [9222, 9223, 9224, 9225, 9226]
+2026-10-08 18:46:38,995 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-08 18:46:38,997 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-08 18:46:44,011 - INFO - Prompt diambil: Create a completely original city-planner's-map-on...
+2026-10-08 18:46:44,012 - INFO - 
+======================================================================
+2026-10-08 18:46:44,013 - INFO - 📊 [PROMPT #1] di PROFILE port 9222
+2026-10-08 18:46:44,016 - INFO - 📝 Prompt: Create a completely original city-planner's-map-on-the-wall ballad song, total d...
+2026-10-08 18:46:44,016 - INFO - ======================================================================
+
+2026-10-08 18:46:44,088 - INFO - Mengisi prompt...
+2026-10-08 18:46:59,452 - INFO - Prompt berhasil diisi.
+2026-10-08 18:47:07,835 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-08 18:47:07,836 - INFO - Menekan Enter untuk generate...
+2026-10-08 18:47:10,005 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 18:47:10,578 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-08 18:47:13,894 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-08 18:47:17,084 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-10-08 18:47:20,673 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-08 18:47:23,964 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-08 18:47:27,172 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 17s | idle
+2026-10-08 18:47:30,472 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 20s | idle
+2026-10-08 18:47:33,760 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | idle
+2026-10-08 18:47:37,247 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 27s | idle
+2026-10-08 18:47:40,584 - INFO -    ⏳ [30s] Lagu baru: 0 | Stabil: 30s | loading
+2026-10-08 18:47:43,774 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-08 18:47:47,505 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 37s | loading
+2026-10-08 18:47:50,816 - INFO -    ⏳ [40s] Lagu baru: 0 | Stabil: 40s | loading
+2026-10-08 18:47:54,180 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 44s | loading
+2026-10-08 18:47:55,634 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-08 18:47:55,753 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 18:47:55,757 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-213' coro=<Page.wait_for_timeout() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:1143> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 18:56:54,631 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-08 18:56:54,632 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-08 18:56:56,655 - INFO -    ✅ Port 9222 terhubung.
+2026-10-08 18:56:56,802 - INFO -    ✅ Port 9223 terhubung.
+2026-10-08 18:56:56,934 - INFO -    ✅ Port 9224 terhubung.
+2026-10-08 18:56:57,056 - INFO -    ✅ Port 9225 terhubung.
+2026-10-08 18:56:57,266 - INFO -    ✅ Port 9226 terhubung.
+2026-10-08 18:56:57,268 - INFO - 📊 Total terhubung: 5/5 profile
+2026-10-08 18:56:57,271 - INFO - 🎯 5 profile siap: [9222, 9223, 9224, 9225, 9226]
+2026-10-08 18:56:57,273 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-08 18:56:57,278 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-08 18:57:02,282 - INFO - Prompt diambil: Create a completely original building-inspector's-...
+2026-10-08 18:57:02,284 - INFO - Prompt diambil: Create a completely original elevator-mechanic's-s...
+2026-10-08 18:57:02,286 - INFO - Prompt diambil: Create a completely original elevator-operator's-o...
+2026-10-08 18:57:02,287 - INFO - Prompt diambil: Create a completely original window-washer-on-the-...
+2026-10-08 18:57:02,288 - INFO - Tidak ada prompt tersisa.
+2026-10-08 18:57:02,288 - INFO - 
+######################################################################
+2026-10-08 18:57:02,289 - INFO - 📦 BATCH #1: 4 prompt
+2026-10-08 18:57:02,289 - INFO - ######################################################################
+2026-10-08 18:57:02,289 - INFO - 
+▶️  FASE 1: Paste prompt ke 4 browser...
+2026-10-08 18:57:02,290 - INFO - 
+  [1/4] Port 9222
+2026-10-08 18:57:02,290 - INFO -     📝 Prompt: Create a completely original building-inspector's-clipboard ...
+2026-10-08 18:57:02,301 - INFO - Mengisi prompt...
+2026-10-08 18:57:12,566 - INFO - Prompt berhasil diisi.
+2026-10-08 18:57:12,568 - INFO -    ⏎ Menekan Enter...
+2026-10-08 18:57:17,891 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-08 18:57:17,892 - INFO - 
+  [2/4] Port 9223
+2026-10-08 18:57:17,893 - INFO -     📝 Prompt: Create a completely original elevator-mechanic's-shaft balla...
+2026-10-08 18:57:17,923 - INFO - Mengisi prompt...
+2026-10-08 18:57:33,361 - INFO - Prompt berhasil diisi.
+2026-10-08 18:57:33,363 - INFO -    ⏎ Menekan Enter...
+2026-10-08 18:57:38,610 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-08 18:57:38,612 - INFO - 
+  [3/4] Port 9224
+2026-10-08 18:57:38,613 - INFO -     📝 Prompt: Create a completely original elevator-operator's-old-lobby b...
+2026-10-08 18:57:38,629 - INFO - Mengisi prompt...
+2026-10-08 18:57:54,069 - INFO - Prompt berhasil diisi.
+2026-10-08 18:57:54,071 - INFO -    ⏎ Menekan Enter...
+2026-10-08 18:57:59,352 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-08 18:57:59,354 - INFO - 
+  [4/4] Port 9225
+2026-10-08 18:57:59,362 - INFO -     📝 Prompt: Create a completely original window-washer-on-the-fortieth-f...
+2026-10-08 18:57:59,398 - INFO - Mengisi prompt...
+2026-10-08 18:58:14,960 - INFO - Prompt berhasil diisi.
+2026-10-08 18:58:14,963 - INFO -    ⏎ Menekan Enter...
+2026-10-08 18:58:20,297 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-08 18:58:20,298 - INFO - 
+  📋 Port yang dapat prompt: [9222, 9223, 9224, 9225]
+2026-10-08 18:58:20,299 - INFO - 
+▶️  FASE 2: Tunggu semua generate, lalu download...
+2026-10-08 18:58:20,302 - INFO - 
+  [1/4] Port 9222
+2026-10-08 18:58:23,362 - INFO - 📸 Snapshot lagu sebelum generate: 2 lagu
+2026-10-08 18:58:23,363 - INFO - Menekan Enter untuk generate...
+2026-10-08 18:58:25,440 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 18:58:25,726 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-08 18:58:28,099 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 2s | suggestion
+2026-10-08 18:58:33,390 - INFO -    ⏳ [5s] Lagu baru: 0 | Stabil: 7s | suggestion
+2026-10-08 18:58:37,635 - INFO -    🔄 [10s] Lagu baru: 2
+2026-10-08 18:58:37,635 - INFO -       • Foam and Thread||Foam and Thread||y49
+2026-10-08 18:58:37,636 - INFO -       • Foam and Thread||Foam and Thread||y55
+2026-10-08 18:58:37,638 - INFO - 🎵 Selesai! 2 lagu baru terdeteksi.
+2026-10-08 18:58:39,142 - INFO -     🎼 Port 9222: 2 lagu baru terdeteksi.
+2026-10-08 18:58:39,146 - INFO -     --- Download (lagu 1/2): Foam and Thread ---
+2026-10-08 18:58:39,147 - INFO - 🎯 Download lagu UID 'Foam and Thread||Foam and Thread||y49' (lagu 1/2)...
+2026-10-08 18:58:39,261 - INFO - Mencari tombol titik 3 target...
+2026-10-08 18:58:43,214 - INFO - Berhasil klik titik 3.
+2026-10-08 18:58:44,216 - INFO - Membuka menu 'Download'...
+2026-10-08 18:58:46,155 - INFO - Submenu Download terbuka.
+2026-10-08 18:58:46,156 - INFO - Mengklik format 'WAV'...
+2026-10-08 18:58:48,854 - INFO - Berhasil klik WAV.
+2026-10-08 18:58:48,855 - INFO - Menunggu file download...
+2026-10-08 18:59:00,061 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Foam and Thread.wav
+2026-10-08 18:59:04,125 - INFO -     --- Download (lagu 2/2): Foam and Thread ---
+2026-10-08 18:59:04,126 - INFO - 🎯 Download lagu UID 'Foam and Thread||Foam and Thread||y55' (lagu 2/2)...
+2026-10-08 18:59:04,152 - INFO - Mencari tombol titik 3 target...
+2026-10-08 18:59:06,721 - INFO - Berhasil klik titik 3.
+2026-10-08 18:59:07,726 - INFO - Membuka menu 'Download'...
+2026-10-08 18:59:09,538 - INFO - Submenu Download terbuka.
+2026-10-08 18:59:09,539 - INFO - Mengklik format 'WAV'...
+2026-10-08 18:59:12,062 - INFO - Berhasil klik WAV.
+2026-10-08 18:59:12,065 - INFO - Menunggu file download...
+2026-10-08 18:59:21,019 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Foam and Thread_1.wav
+2026-10-08 18:59:25,050 - INFO -     ✅ Port 9222: 2/2 lagu terdownload.
+2026-10-08 18:59:25,052 - INFO - 
+  [2/4] Port 9223
+2026-10-08 18:59:26,554 - INFO - 📸 Snapshot lagu sebelum generate: 2 lagu
+2026-10-08 18:59:26,557 - INFO - Menekan Enter untuk generate...
+2026-10-08 18:59:28,724 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 18:59:28,916 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-08 18:59:29,778 - INFO -    🔄 [0s] Lagu baru: 2
+2026-10-08 18:59:29,778 - INFO -       • REMIX||||y24
+2026-10-08 18:59:29,780 - INFO -       • Bristle and Frost
+deep low male vocal ballad, hammond organ, gospel choir backin
+2026-10-08 18:59:29,780 - INFO - 🎵 Selesai! 2 lagu baru terdeteksi.
+2026-10-08 18:59:31,283 - INFO -     🎼 Port 9223: 2 lagu baru terdeteksi.
+2026-10-08 18:59:31,284 - INFO -     --- Download (lagu 1/2): REMIX ---
+2026-10-08 18:59:31,285 - INFO - 🎯 Download lagu UID 'REMIX||||y24' (lagu 1/2)...
+2026-10-08 18:59:31,299 - INFO - Mencari tombol titik 3 target...
+2026-10-08 18:59:32,804 - INFO - Berhasil klik titik 3.
+2026-10-08 18:59:33,809 - INFO - Membuka menu 'Download'...
+2026-10-08 18:59:38,829 - ERROR - Gagal buka submenu Download: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("[role='menuitem']:visible").filter(has_text=re.compile(r"^\s*Download\s*$")).first to be visible
+
+2026-10-08 18:59:38,829 - WARNING -     Gagal download (lagu 1/2)
+2026-10-08 18:59:40,968 - INFO -     --- Download (lagu 2/2): Bristle and Frost
+deep low male vocal ballad, hamm ---
+2026-10-08 18:59:40,970 - INFO - 🎯 Download lagu UID 'Bristle and Frost
+deep low male vocal ballad, hammond organ, gospel ch' (lagu 2/2)...
+2026-10-08 18:59:41,014 - INFO - Mencari tombol titik 3 target...
+2026-10-08 18:59:41,414 - ERROR - Lagu UID 'Bristle and Frost
+deep low male vocal ballad, hammond organ, gospel ch' tidak ditemukan.
+2026-10-08 18:59:41,415 - WARNING -     Gagal download (lagu 2/2)
+2026-10-08 18:59:43,436 - INFO -     ✅ Port 9223: 0/2 lagu terdownload.
+2026-10-08 18:59:43,437 - INFO - 
+  [3/4] Port 9224
+2026-10-08 18:59:44,673 - INFO - 📸 Snapshot lagu sebelum generate: 3 lagu
+2026-10-08 18:59:44,675 - INFO - Menekan Enter untuk generate...
+2026-10-08 18:59:46,774 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 18:59:46,951 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-08 18:59:47,533 - INFO -    🔄 [0s] Lagu baru: 3
+2026-10-08 18:59:47,533 - INFO -       • REMIX||||y36
+2026-10-08 18:59:47,534 - INFO -       • Curve of Stone||Curve of Stone||y69
+2026-10-08 18:59:47,534 - INFO -       • Let's hear it
+Tweak the chorus
+Add more mandolin||||y67
+2026-10-08 18:59:47,535 - INFO - 🎵 Selesai! 3 lagu baru terdeteksi.
+2026-10-08 18:59:49,041 - INFO -     🎼 Port 9224: 3 lagu baru terdeteksi.
+2026-10-08 18:59:49,043 - INFO -     --- Download (lagu 1/3): REMIX ---
+2026-10-08 18:59:49,043 - INFO - 🎯 Download lagu UID 'REMIX||||y36' (lagu 1/3)...
+2026-10-08 18:59:49,061 - INFO - Mencari tombol titik 3 target...
+2026-10-08 18:59:50,680 - INFO - Berhasil klik titik 3.
+2026-10-08 18:59:51,682 - INFO - Membuka menu 'Download'...
+2026-10-08 18:59:56,688 - ERROR - Gagal buka submenu Download: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("[role='menuitem']:visible").filter(has_text=re.compile(r"^\s*Download\s*$")).first to be visible
+
+2026-10-08 18:59:56,689 - WARNING -     Gagal download (lagu 1/3)
+2026-10-08 18:59:58,782 - INFO -     --- Download (lagu 2/3): Let's hear it
+Tweak the chorus
+Add more mandolin ---
+2026-10-08 18:59:58,783 - INFO - 🎯 Download lagu UID 'Let's hear it
+Tweak the chorus
+Add more mandolin||||y67' (lagu 2/3)...
+2026-10-08 18:59:58,791 - INFO - Mencari tombol titik 3 target...
+2026-10-08 18:59:59,145 - ERROR - Lagu UID 'Let's hear it
+Tweak the chorus
+Add more mandolin||||y67' tidak ditemukan.
+2026-10-08 18:59:59,146 - WARNING -     Gagal download (lagu 2/3)
+2026-10-08 19:00:01,163 - INFO -     --- Download (lagu 3/3): Curve of Stone ---
+2026-10-08 19:00:01,164 - INFO - 🎯 Download lagu UID 'Curve of Stone||Curve of Stone||y69' (lagu 3/3)...
+2026-10-08 19:00:01,181 - INFO - Mencari tombol titik 3 target...
+2026-10-08 19:00:01,604 - ERROR - Lagu UID 'Curve of Stone||Curve of Stone||y69' tidak ditemukan.
+2026-10-08 19:00:01,604 - WARNING -     Gagal download (lagu 3/3)
+2026-10-08 19:00:03,622 - INFO -     ✅ Port 9224: 0/3 lagu terdownload.
+2026-10-08 19:00:03,622 - INFO - 
+  [4/4] Port 9225
+2026-10-08 19:00:04,772 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-08 19:00:04,773 - INFO - Menekan Enter untuk generate...
+2026-10-08 19:00:06,788 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 19:00:07,262 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | loading
+2026-10-08 19:00:10,783 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | loading
+2026-10-08 19:00:14,017 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | loading
+2026-10-08 19:00:17,269 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | loading
+2026-10-08 19:00:20,598 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | loading
+2026-10-08 19:00:23,903 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 17s | loading
+2026-10-08 19:00:27,180 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 20s | loading
+2026-10-08 19:00:30,514 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | loading
+2026-10-08 19:00:33,916 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 27s | loading
+2026-10-08 19:00:37,255 - INFO -    ⏳ [30s] Lagu baru: 0 | Stabil: 30s | loading
+2026-10-08 19:00:40,497 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-08 19:00:43,828 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 37s | loading
+2026-10-08 19:00:47,292 - INFO -    ⏳ [40s] Lagu baru: 0 | Stabil: 40s | loading
+2026-10-08 19:00:50,657 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 43s | loading
+2026-10-08 19:00:53,946 - INFO -    ⏳ [46s] Lagu baru: 0 | Stabil: 47s | loading
+2026-10-08 19:00:57,280 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 50s | loading
+2026-10-08 19:01:00,645 - INFO -    🔄 [53s] Lagu baru: 1
+2026-10-08 19:01:00,646 - INFO -       • Chalk Lines||Chalk Lines||y67
+2026-10-08 19:01:04,084 - INFO -    ⏳ [56s] Lagu baru: 1 | Stabil: 3s | loading
+2026-10-08 19:01:07,444 - INFO -    ⏳ [60s] Lagu baru: 1 | Stabil: 6s | loading
+2026-10-08 19:01:10,890 - INFO -    ⏳ [63s] Lagu baru: 1 | Stabil: 10s | loading
+2026-10-08 19:01:14,176 - INFO -    ⏳ [67s] Lagu baru: 1 | Stabil: 13s | loading
+2026-10-08 19:01:17,454 - INFO -    ⏳ [70s] Lagu baru: 1 | Stabil: 16s | loading
+2026-10-08 19:01:20,700 - INFO -    ⏳ [73s] Lagu baru: 1 | Stabil: 20s | loading
+2026-10-08 19:01:24,061 - INFO -    ⏳ [76s] Lagu baru: 1 | Stabil: 23s | loading
+2026-10-08 19:01:27,384 - INFO -    ⏳ [80s] Lagu baru: 1 | Stabil: 26s | loading
+2026-10-08 19:01:30,770 - INFO -    🔄 [83s] Lagu baru: 2
+2026-10-08 19:01:30,771 - INFO -       • Chalk Lines||Chalk Lines||y52
+2026-10-08 19:01:30,771 - INFO -       • Chalk Lines||Chalk Lines||y58
+2026-10-08 19:01:34,452 - INFO -    ⏳ [86s] Lagu baru: 2 | Stabil: 3s | idle
+2026-10-08 19:01:37,971 - INFO -    ⏳ [90s] Lagu baru: 2 | Stabil: 7s | idle
+2026-10-08 19:01:41,462 - INFO -    ⏳ [94s] Lagu baru: 2 | Stabil: 10s | idle
+2026-10-08 19:01:44,887 - INFO -    ⏳ [97s] Lagu baru: 2 | Stabil: 14s | idle
+2026-10-08 19:01:48,229 - INFO -    ⏳ [101s] Lagu baru: 2 | Stabil: 17s | idle
+2026-10-08 19:01:48,229 - INFO - 🎵 Selesai! 2 lagu baru terdeteksi.
+2026-10-08 19:01:49,733 - INFO -     🎼 Port 9225: 2 lagu baru terdeteksi.
+2026-10-08 19:01:49,734 - INFO -     --- Download (lagu 1/2): Chalk Lines ---
+2026-10-08 19:01:49,734 - INFO - 🎯 Download lagu UID 'Chalk Lines||Chalk Lines||y52' (lagu 1/2)...
+2026-10-08 19:01:49,746 - INFO - Mencari tombol titik 3 target...
+2026-10-08 19:01:51,077 - INFO - Berhasil klik titik 3.
+2026-10-08 19:01:52,079 - INFO - Membuka menu 'Download'...
+2026-10-08 19:01:53,716 - INFO - Submenu Download terbuka.
+2026-10-08 19:01:53,718 - INFO - Mengklik format 'WAV'...
+2026-10-08 19:01:55,895 - INFO - Berhasil klik WAV.
+2026-10-08 19:01:55,896 - INFO - Menunggu file download...
+2026-10-08 19:02:02,639 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Chalk Lines.wav
+2026-10-08 19:02:06,664 - INFO -     --- Download (lagu 2/2): Chalk Lines ---
+2026-10-08 19:02:06,665 - INFO - 🎯 Download lagu UID 'Chalk Lines||Chalk Lines||y58' (lagu 2/2)...
+2026-10-08 19:02:06,689 - INFO - Mencari tombol titik 3 target...
+2026-10-08 19:02:07,985 - INFO - Berhasil klik titik 3.
+2026-10-08 19:02:08,986 - INFO - Membuka menu 'Download'...
+2026-10-08 19:02:10,529 - INFO - Submenu Download terbuka.
+2026-10-08 19:02:10,529 - INFO - Mengklik format 'WAV'...
+2026-10-08 19:02:12,644 - INFO - Berhasil klik WAV.
+2026-10-08 19:02:12,644 - INFO - Menunggu file download...
+2026-10-08 19:02:19,000 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Chalk Lines_1.wav
+2026-10-08 19:02:23,021 - INFO -     ✅ Port 9225: 2/2 lagu terdownload.
+2026-10-08 19:02:23,021 - INFO - 
+✅ BATCH #1 selesai.
+
+2026-10-08 19:02:26,023 - INFO - Tidak ada prompt tersisa.
+2026-10-08 19:02:26,024 - INFO - ✅ Tidak ada prompt tersisa. Selesai!
+2026-10-08 19:02:26,024 - INFO - 
+======================================================================
+2026-10-08 19:02:26,024 - INFO - 🏁 BOT SELESAI - 4 prompt telah diproses!
+2026-10-08 19:02:26,025 - INFO - ======================================================================
+2026-10-08 19:02:26,257 - INFO - 🔌 Semua koneksi Playwright ditutup.
