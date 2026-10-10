@@ -1,14 +1,16 @@
 import time
 import logging
 import sys
+import threading
+
+from playwright.sync_api import sync_playwright
 
 from config import (
-    PROMPT_FILE, DOWNLOAD_DIR, MAX_LOOPS,
+    PROMPT_FILE, DOWNLOAD_DIR,
     WEBSITE_URL, BROWSER_PORTS,
-    PAUSE_AFTER_PASTE_SECONDS, GENERATE_MAX_WAIT_SECONDS,
+    GENERATE_MAX_WAIT_SECONDS,
 )
-from prompts import get_next_prompt
-from browser import MultiBrowserManager
+from prompts import get_next_prompt, count_prompts
 from flow_actions import (
     input_prompt,
     generate_and_wait_all_songs,
@@ -28,163 +30,187 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def paste_prompt_to_browser(page, prompt: str) -> bool:
+# ==============================================================================
+# KONEKSI PER-THREAD
+# ==============================================================================
+def connect_to_port(port: int):
     """
-    Paste prompt ke browser + tekan Enter, tanpa tunggu generate selesai.
+    Connect ke browser di port tertentu.
+    HARUS dipanggil DI DALAM thread worker,
+    karena Playwright Sync API tidak thread-safe.
+    Return: (playwright, browser, page) atau (None, None, None) kalau gagal.
     """
     try:
-        page.bring_to_front()
-        if not input_prompt(page, prompt):
-            return False
-        # Tekan Enter untuk mulai generate
-        logger.info("   ⏎ Menekan Enter...")
-        page.keyboard.press("Enter")
-        time.sleep(PAUSE_AFTER_PASTE_SECONDS)
-        return True
-    except Exception as e:
-        logger.error(f"   ❌ Gagal paste prompt: {e}")
-        return False
+        pw = sync_playwright().start()
+        browser = pw.chromium.connect_over_cdp(f"http://localhost:{port}")
+        context = browser.contexts[0]
 
-
-def run_automation():
-    logger.info("🚀 Memulai Bot - Multi-Profile PIPELINE Mode")
-
-    manager = MultiBrowserManager(BROWSER_PORTS, WEBSITE_URL)
-
-    try:
-        workers = manager.connect_all()
-        if not workers:
-            logger.error("❌ Tidak ada profile yang terhubung. Keluar.")
-            return
-
-        ports = manager.get_ports()
-        logger.info(f"🎯 {len(ports)} profile siap: {ports}")
-
-        logger.info("👋 Pastikan semua profile sudah login ke flowmusic.app.")
-        logger.info("⏳ Bot mulai dalam 5 detik...")
-        time.sleep(5)
-
-        # Setup download listener per profile
-        download_queues = {}
-        for port in ports:
-            page = manager.get_page(port)
-            download_queues[port] = []
-            page.on("download", lambda d, p=port: download_queues[p].append(d))
-
-        # ==================================================================
-        # PIPELINE:
-        # Fase 1: Bagi prompt ke semua browser (paste + Enter, tanpa tunggu)
-        # Fase 2: Tunggu semua selesai generate, lalu download semua
-        # Fase 3: Ulangi kalau masih ada prompt sisa
-        # ==================================================================
-
-        total_prompts_processed = 0
-        batch_number = 0
-
-        while total_prompts_processed < MAX_LOOPS:
-            batch_number += 1
-
-            # Ambil sejumlah prompt sesuai jumlah profile
-            batch_prompts = []
-            for _ in range(len(ports)):
-                if total_prompts_processed + len(batch_prompts) >= MAX_LOOPS:
-                    break
-                p = get_next_prompt(PROMPT_FILE)
-                if not p:
-                    break
-                batch_prompts.append(p)
-
-            if not batch_prompts:
-                logger.info("✅ Tidak ada prompt tersisa. Selesai!")
+        # Cari tab flowmusic
+        page = None
+        for pg in context.pages:
+            if "flowmusic.app" in pg.url:
+                page = pg
                 break
 
-            logger.info(f"\n{'#'*70}")
-            logger.info(f"📦 BATCH #{batch_number}: {len(batch_prompts)} prompt")
-            logger.info(f"{'#'*70}")
+        if page is None:
+            page = context.pages[0] if context.pages else context.new_page()
+            logger.info(f"[P{port}] Membuka {WEBSITE_URL}...")
+            page.goto(WEBSITE_URL, wait_until="domcontentloaded")
+            time.sleep(3)
 
-            # ==============================================================
-            # FASE 1: PASTE PROMPT KE SEMUA BROWSER (tanpa nunggu generate)
-            # ==============================================================
-            logger.info(f"\n▶️  FASE 1: Paste prompt ke {len(batch_prompts)} browser...")
+        logger.info(f"[P{port}] ✅ Terhubung.")
+        return pw, browser, page
+    except Exception as e:
+        logger.error(f"[P{port}] ❌ Gagal connect: {e}")
+        return None, None, None
 
-            # Mapping: port -> prompt yang di-paste
-            port_to_prompt = {}
 
-            for idx, prompt in enumerate(batch_prompts):
-                port = ports[idx]
-                page = manager.get_page(port)
-                port_to_prompt[port] = prompt
+# ==============================================================================
+# WORKER: 1 thread per browser
+# ==============================================================================
+def worker(port: int, worker_id: str, stop_event: threading.Event):
+    """
+    Worker untuk 1 profile browser.
+    Setiap worker punya Playwright instance sendiri (thread-safe).
+    """
+    logger.info(f"[{worker_id}] 🟢 Worker port {port} starting...")
 
-                logger.info(f"\n  [{idx+1}/{len(batch_prompts)}] Port {port}")
-                logger.info(f"    📝 Prompt: {prompt[:60]}{'...' if len(prompt) > 60 else ''}")
+    pw = None
+    page = None
+    downloads = []
 
-                if paste_prompt_to_browser(page, prompt):
-                    logger.info(f"    ✅ Paste & Enter berhasil.")
-                else:
-                    logger.warning(f"    ⚠️ Gagal paste prompt ke port {port}.")
-                    port_to_prompt.pop(port, None)
+    try:
+        # === Connect DI DALAM thread ===
+        pw, browser, page = connect_to_port(port)
+        if page is None:
+            logger.error(f"[{worker_id}] ❌ Gagal connect. Worker berhenti.")
+            return
 
-                total_prompts_processed += 1
+        # Setup download listener
+        page.on("download", lambda d: downloads.append(d))
 
-            logger.info(f"\n  📋 Port yang dapat prompt: {list(port_to_prompt.keys())}")
+        # Tunggu 3 detik supaya semua thread siap
+        time.sleep(3)
 
-            # ==============================================================
-            # FASE 2: TUNGGU SEMUA SELESAI GENERATE, LALU DOWNLOAD SEMUA
-            # ==============================================================
-            logger.info(f"\n▶️  FASE 2: Tunggu semua generate, lalu download...")
+        # === LOOP: ambil prompt → paste → tunggu → download ===
+        while not stop_event.is_set():
+            prompt = get_next_prompt(PROMPT_FILE)
+            if not prompt:
+                logger.info(f"[{worker_id}] 🏁 File prompt habis. Worker selesai.")
+                break
 
-            for idx, (port, prompt) in enumerate(port_to_prompt.items()):
-                page = manager.get_page(port)
-                downloads = download_queues[port]
+            sisa = count_prompts(PROMPT_FILE)
+            logger.info(f"\n{'='*70}")
+            logger.info(f"[{worker_id}] 📝 Prompt: {prompt[:60]}{'...' if len(prompt) > 60 else ''}")
+            logger.info(f"[{worker_id}] 📊 Sisa prompt: {sisa}")
+            logger.info(f"{'='*70}")
 
-                logger.info(f"\n  [{idx+1}/{len(port_to_prompt)}] Port {port}")
+            try:
+                page.bring_to_front()
 
-                # Tunggu lagu baru muncul
+                # === 1. INPUT PROMPT ===
+                if not input_prompt(page, prompt):
+                    logger.error(f"[{worker_id}] ❌ Gagal input prompt.")
+                    continue
+
+                # === 2. GENERATE & TUNGGU LAGU ===
                 new_songs = generate_and_wait_all_songs(
                     page, max_wait_seconds=GENERATE_MAX_WAIT_SECONDS
                 )
 
                 if not new_songs:
-                    logger.warning(f"    ⚠️ Port {port}: Tidak ada lagu baru. Skip.")
+                    logger.warning(f"[{worker_id}] ⚠️ Tidak ada lagu baru.")
                     close_menus(page)
                     continue
 
-                logger.info(f"    🎼 Port {port}: {len(new_songs)} lagu baru terdeteksi.")
+                logger.info(f"[{worker_id}] 🎼 {len(new_songs)} lagu baru.")
 
-                # Download semua lagu baru
-                success_count = 0
-                for song_idx, song in enumerate(new_songs):
+                # === 3. DOWNLOAD SEMUA LAGU ===
+                success = 0
+                for idx, song in enumerate(new_songs):
                     uid = song["uid"]
-                    label = f"(lagu {song_idx + 1}/{len(new_songs)})"
-                    logger.info(f"    --- Download {label}: {song['title'][:50]} ---")
+                    label = f"(lagu {idx+1}/{len(new_songs)})"
+                    logger.info(f"[{worker_id}] --- Download {label}: {song['title'][:50]} ---")
 
                     if download_song_by_uid(page, uid, DOWNLOAD_DIR, downloads, label):
-                        success_count += 1
+                        success += 1
                         time.sleep(2)
                         close_menus(page)
                         time.sleep(1)
                     else:
-                        logger.warning(f"    Gagal download {label}")
+                        logger.warning(f"[{worker_id}] Gagal download {label}")
                         close_menus(page)
                         time.sleep(1)
 
-                logger.info(f"    ✅ Port {port}: {success_count}/{len(new_songs)} lagu terdownload.")
+                logger.info(f"[{worker_id}] ✅ Selesai: {success}/{len(new_songs)} lagu.\n")
+                time.sleep(2)
 
-            logger.info(f"\n✅ BATCH #{batch_number} selesai.\n")
-            time.sleep(3)
+            except Exception as e:
+                logger.error(f"[{worker_id}] ❌ Error: {e}", exc_info=True)
+                try:
+                    close_menus(page)
+                except:
+                    pass
+                continue
 
-        logger.info("\n" + "="*70)
-        logger.info(f"🏁 BOT SELESAI - {total_prompts_processed} prompt telah diproses!")
-        logger.info("="*70)
-
-        # Alert ke browser pertama
-        first_port = ports[0]
-        show_alert(manager.get_page(first_port), f"🎉 Selesai! {total_prompts_processed} prompt diproses.")
-
-    except Exception as e:
-        logger.critical(f"❌ Error fatal: {e}", exc_info=True)
     finally:
-        manager.close_all()
+        # Cleanup Playwright di thread ini
+        try:
+            if pw:
+                pw.stop()
+                logger.info(f"[{worker_id}] 🔌 Koneksi Playwright ditutup.")
+        except Exception as e:
+            logger.debug(f"[{worker_id}] Error saat stop playwright: {e}")
+
+
+# ==============================================================================
+# MAIN
+# ==============================================================================
+def run_automation():
+    logger.info("🚀 Memulai Bot - Multi-Profile PARALEL (Per-Thread Playwright)")
+
+    # Cek file prompt
+    total = count_prompts(PROMPT_FILE)
+    if total == 0:
+        logger.error("❌ FILE PROMPT KOSONG / TIDAK ADA PROMPT!")
+        logger.error(f"   Path: {PROMPT_FILE}")
+        logger.error("   Isi dulu file prompts.txt, baru jalankan bot.")
+        return
+    logger.info(f"📚 Total prompt di file: {total}")
+
+    logger.info(f"🎯 Akan connect ke {len(BROWSER_PORTS)} browser: {BROWSER_PORTS}")
+    logger.info("👋 Pastikan semua browser sudah terbuka & login ke flowmusic.app.")
+    logger.info("⏳ Bot mulai dalam 5 detik...")
+    time.sleep(5)
+
+    stop_event = threading.Event()
+
+    # Jalankan 1 thread per port
+    threads = []
+    for idx, port in enumerate(BROWSER_PORTS):
+        worker_id = f"W{idx+1}-P{port}"
+        t = threading.Thread(
+            target=worker,
+            args=(port, worker_id, stop_event),
+            daemon=False,  # non-daemon supaya main thread tunggu
+            name=worker_id,
+        )
+        t.start()
+        threads.append(t)
+        logger.info(f"🧵 Thread {worker_id} dijalankan.")
+        time.sleep(0.3)
+
+    # Tunggu semua thread selesai
+    try:
+        for t in threads:
+            t.join()
+    except KeyboardInterrupt:
+        logger.warning("\n⚠️ Dihentikan oleh user (Ctrl+C).")
+        stop_event.set()
+
+    logger.info("\n" + "="*70)
+    logger.info("🏁 BOT SELESAI - Semua prompt diproses!")
+    logger.info("="*70)
 
 
 if __name__ == "__main__":

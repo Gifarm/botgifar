@@ -1251,3 +1251,1924 @@ Add more mandolin||||y67' tidak ditemukan.
 2026-10-08 19:02:26,024 - INFO - 🏁 BOT SELESAI - 4 prompt telah diproses!
 2026-10-08 19:02:26,025 - INFO - ======================================================================
 2026-10-08 19:02:26,257 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-08 19:11:38,353 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-08 19:11:38,354 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-08 19:11:39,403 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-3' coro=<Connection.run.<locals>.init() running at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_connection.py:344> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[ProtocolCallback.__init__.<locals>.cb() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_connection.py:264]>
+2026-10-08 19:12:09,161 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-08 19:12:09,161 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-08 19:12:10,055 - INFO -    ✅ Port 9222 terhubung.
+2026-10-08 19:12:10,092 - INFO -    ✅ Port 9223 terhubung.
+2026-10-08 19:12:10,126 - INFO -    ✅ Port 9224 terhubung.
+2026-10-08 19:12:10,174 - INFO -    ✅ Port 9225 terhubung.
+2026-10-08 19:12:10,196 - ERROR -    ❌ Port 9226 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9226
+connect ECONNREFUSED 127.0.0.1:9226
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9226
+
+2026-10-08 19:12:10,197 - INFO - 📊 Total terhubung: 4/5 profile
+2026-10-08 19:12:10,198 - WARNING - ⚠️ Port gagal: [9226]
+2026-10-08 19:12:10,200 - INFO - 🎯 4 profile siap: [9222, 9223, 9224, 9225]
+2026-10-08 19:12:10,203 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-08 19:12:10,206 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-08 19:12:12,481 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-08 19:12:54,091 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-08 19:12:54,092 - INFO - 🚀 Menghubungkan ke 4 profile browser...
+2026-10-08 19:12:54,976 - INFO -    ✅ Port 9222 terhubung.
+2026-10-08 19:12:55,011 - INFO -    ✅ Port 9223 terhubung.
+2026-10-08 19:12:55,074 - INFO -    ✅ Port 9224 terhubung.
+2026-10-08 19:12:55,125 - INFO -    ✅ Port 9225 terhubung.
+2026-10-08 19:12:55,126 - INFO - 📊 Total terhubung: 4/4 profile
+2026-10-08 19:12:55,126 - INFO - 🎯 4 profile siap: [9222, 9223, 9224, 9225]
+2026-10-08 19:12:55,127 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-08 19:12:55,129 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-08 19:13:00,131 - INFO - Prompt diambil: Create a completely original building-inspector's-...
+2026-10-08 19:13:00,133 - INFO - Prompt diambil: Create a completely original elevator-mechanic's-s...
+2026-10-08 19:13:00,135 - INFO - Prompt diambil: Create a completely original elevator-operator's-o...
+2026-10-08 19:13:00,136 - INFO - Prompt diambil: Create a completely original window-washer-on-the-...
+2026-10-08 19:13:00,136 - INFO - 
+######################################################################
+2026-10-08 19:13:00,137 - INFO - 📦 BATCH #1: 4 prompt
+2026-10-08 19:13:00,138 - INFO - ######################################################################
+2026-10-08 19:13:00,139 - INFO - 
+▶️  FASE 1: Paste prompt ke 4 browser...
+2026-10-08 19:13:00,139 - INFO - 
+  [1/4] Port 9222
+2026-10-08 19:13:00,139 - INFO -     📝 Prompt: Create a completely original building-inspector's-clipboard ...
+2026-10-08 19:13:00,150 - INFO - Mengisi prompt...
+2026-10-08 19:13:06,484 - ERROR - Kolom input tidak ditemukan.
+2026-10-08 19:13:06,485 - WARNING -     ⚠️ Gagal paste prompt ke port 9222.
+2026-10-08 19:13:06,485 - INFO - 
+  [2/4] Port 9223
+2026-10-08 19:13:06,485 - INFO -     📝 Prompt: Create a completely original elevator-mechanic's-shaft balla...
+2026-10-08 19:13:06,728 - WARNING - pipe closed by peer or os.write(pipe, data) raised exception.
+2026-10-08 19:13:06,729 - WARNING - pipe closed by peer or os.write(pipe, data) raised exception.
+2026-10-08 19:13:06,729 - WARNING - pipe closed by peer or os.write(pipe, data) raised exception.
+2026-10-08 19:13:06,730 - WARNING - pipe closed by peer or os.write(pipe, data) raised exception.
+2026-10-08 19:13:06,731 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-08 19:13:06,785 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 19:13:06,787 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-13' coro=<Page.bring_to_front() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:669> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 19:13:06,788 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-11' coro=<Page.wait_for_selector() running at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:429> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 19:13:06,789 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-10' coro=<Page.wait_for_selector() running at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:429> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 19:13:06,790 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-12' coro=<Page.wait_for_selector() running at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:429> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 19:13:06,791 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-9' coro=<Page.wait_for_selector() running at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:429> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-08 19:13:06,791 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 19:13:06,792 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 19:13:06,793 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 19:13:06,794 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 19:13:27,954 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-08 19:13:27,955 - INFO - 🚀 Menghubungkan ke 4 profile browser...
+2026-10-08 19:13:28,783 - INFO -    ✅ Port 9222 terhubung.
+2026-10-08 19:13:28,823 - INFO -    ✅ Port 9223 terhubung.
+2026-10-08 19:13:28,880 - INFO -    ✅ Port 9224 terhubung.
+2026-10-08 19:13:28,944 - INFO -    ✅ Port 9225 terhubung.
+2026-10-08 19:13:28,947 - INFO - 📊 Total terhubung: 4/4 profile
+2026-10-08 19:13:28,948 - INFO - 🎯 4 profile siap: [9222, 9223, 9224, 9225]
+2026-10-08 19:13:28,949 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-08 19:13:28,950 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-08 19:13:33,954 - INFO - Prompt diambil: Create a completely original roofer's-first-light ...
+2026-10-08 19:13:33,955 - INFO - Prompt diambil: Create a completely original bricklayer's-steady-h...
+2026-10-08 19:13:33,956 - INFO - Prompt diambil: Create a completely original stonemason's-cathedra...
+2026-10-08 19:13:33,957 - INFO - Tidak ada prompt tersisa.
+2026-10-08 19:13:33,957 - INFO - 
+######################################################################
+2026-10-08 19:13:33,957 - INFO - 📦 BATCH #1: 3 prompt
+2026-10-08 19:13:33,958 - INFO - ######################################################################
+2026-10-08 19:13:33,958 - INFO - 
+▶️  FASE 1: Paste prompt ke 3 browser...
+2026-10-08 19:13:33,958 - INFO - 
+  [1/3] Port 9222
+2026-10-08 19:13:33,959 - INFO -     📝 Prompt: Create a completely original roofer's-first-light pop song, ...
+2026-10-08 19:13:33,966 - INFO - Mengisi prompt...
+2026-10-08 19:13:44,112 - INFO - Prompt berhasil diisi.
+2026-10-08 19:13:44,113 - INFO -    ⏎ Menekan Enter...
+2026-10-08 19:13:49,224 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-08 19:13:49,224 - INFO - 
+  [2/3] Port 9223
+2026-10-08 19:13:49,225 - INFO -     📝 Prompt: Create a completely original bricklayer's-steady-hand folk s...
+2026-10-08 19:13:49,229 - INFO - Mengisi prompt...
+2026-10-08 19:13:59,360 - INFO - Prompt berhasil diisi.
+2026-10-08 19:13:59,360 - INFO -    ⏎ Menekan Enter...
+2026-10-08 19:14:04,486 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-08 19:14:04,486 - INFO - 
+  [3/3] Port 9224
+2026-10-08 19:14:04,487 - INFO -     📝 Prompt: Create a completely original stonemason's-cathedral-chisel b...
+2026-10-08 19:14:04,491 - INFO - Mengisi prompt...
+2026-10-08 19:14:14,606 - INFO - Prompt berhasil diisi.
+2026-10-08 19:14:14,606 - INFO -    ⏎ Menekan Enter...
+2026-10-08 19:14:19,757 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-08 19:14:19,757 - INFO - 
+  📋 Port yang dapat prompt: [9222, 9223, 9224]
+2026-10-08 19:14:19,759 - INFO - 
+▶️  FASE 2: Tunggu semua generate, lalu download...
+2026-10-08 19:14:19,761 - INFO - 
+  [1/3] Port 9222
+2026-10-08 19:14:21,008 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-08 19:14:21,008 - INFO - Menekan Enter untuk generate...
+2026-10-08 19:14:23,022 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-08 19:14:23,246 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | loading
+2026-10-08 19:14:26,426 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | loading
+2026-10-08 19:14:29,706 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | loading
+2026-10-08 19:14:32,912 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | loading
+2026-10-08 19:14:36,101 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 13s | loading
+2026-10-08 19:14:39,297 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | loading
+2026-10-08 19:14:42,553 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | loading
+2026-10-08 19:14:45,813 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | loading
+2026-10-08 19:14:49,114 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 26s | idle
+2026-10-08 19:14:52,235 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-08 19:14:52,792 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 29s | suggestion
+2026-10-08 19:14:56,462 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 33s | suggestion
+2026-10-08 19:15:00,185 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 37s | suggestion
+2026-10-08 19:15:04,400 - INFO -    ⏳ [40s] Lagu baru: 0 | Stabil: 41s | suggestion
+2026-10-08 19:15:07,910 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | suggestion
+2026-10-08 19:15:11,408 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 48s | suggestion
+2026-10-08 19:15:14,894 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | suggestion
+2026-10-08 19:15:18,605 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 55s | suggestion
+2026-10-08 19:15:22,495 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 59s | suggestion
+2026-10-08 19:15:25,894 - INFO -    ⏳ [62s] Lagu baru: 0 | Stabil: 62s | suggestion
+2026-10-08 19:15:29,243 - INFO -    ⏳ [65s] Lagu baru: 0 | Stabil: 66s | suggestion
+2026-10-08 19:15:32,568 - INFO -    ⏳ [69s] Lagu baru: 0 | Stabil: 69s | suggestion
+2026-10-08 19:15:35,956 - INFO -    ⏳ [72s] Lagu baru: 0 | Stabil: 72s | suggestion
+2026-10-08 19:15:39,317 - INFO -    ⏳ [75s] Lagu baru: 0 | Stabil: 76s | suggestion
+2026-10-08 19:15:42,654 - INFO -    ⏳ [79s] Lagu baru: 0 | Stabil: 79s | suggestion
+2026-10-08 19:15:46,067 - INFO -    ⏳ [82s] Lagu baru: 0 | Stabil: 83s | suggestion
+2026-10-08 19:15:49,407 - INFO -    ⏳ [86s] Lagu baru: 0 | Stabil: 86s | suggestion
+2026-10-08 19:15:52,741 - INFO -    ⏳ [89s] Lagu baru: 0 | Stabil: 89s | suggestion
+2026-10-08 19:15:56,052 - INFO -    ⏳ [92s] Lagu baru: 0 | Stabil: 93s | suggestion
+2026-10-08 19:15:59,395 - INFO -    ⏳ [96s] Lagu baru: 0 | Stabil: 96s | suggestion
+2026-10-08 19:16:02,743 - INFO -    ⏳ [99s] Lagu baru: 0 | Stabil: 99s | suggestion
+2026-10-08 19:16:06,071 - INFO -    ⏳ [102s] Lagu baru: 0 | Stabil: 103s | suggestion
+2026-10-08 19:16:09,401 - INFO -    ⏳ [106s] Lagu baru: 0 | Stabil: 106s | suggestion
+2026-10-08 19:16:12,750 - INFO -    ⏳ [109s] Lagu baru: 0 | Stabil: 109s | suggestion
+2026-10-08 19:16:16,073 - INFO -    ⏳ [112s] Lagu baru: 0 | Stabil: 113s | suggestion
+2026-10-08 19:16:19,423 - INFO -    ⏳ [116s] Lagu baru: 0 | Stabil: 116s | suggestion
+2026-10-08 19:16:22,786 - INFO -    ⏳ [119s] Lagu baru: 0 | Stabil: 119s | suggestion
+2026-10-08 19:16:26,119 - INFO -    ⏳ [122s] Lagu baru: 0 | Stabil: 123s | suggestion
+2026-10-08 19:16:29,484 - INFO -    ⏳ [126s] Lagu baru: 0 | Stabil: 126s | suggestion
+2026-10-08 19:16:32,834 - INFO -    ⏳ [129s] Lagu baru: 0 | Stabil: 129s | suggestion
+2026-10-08 19:16:36,152 - INFO -    ⏳ [132s] Lagu baru: 0 | Stabil: 133s | suggestion
+2026-10-08 19:16:39,488 - INFO -    ⏳ [136s] Lagu baru: 0 | Stabil: 136s | suggestion
+2026-10-08 19:16:42,926 - INFO -    ⏳ [139s] Lagu baru: 0 | Stabil: 139s | suggestion
+2026-10-08 19:16:46,267 - INFO -    ⏳ [142s] Lagu baru: 0 | Stabil: 143s | suggestion
+2026-10-08 19:16:49,614 - INFO -    ⏳ [146s] Lagu baru: 0 | Stabil: 146s | suggestion
+2026-10-08 19:16:52,931 - INFO -    ⏳ [149s] Lagu baru: 0 | Stabil: 149s | suggestion
+2026-10-08 19:16:56,292 - INFO -    ⏳ [152s] Lagu baru: 0 | Stabil: 153s | suggestion
+2026-10-08 19:16:59,631 - INFO -    ⏳ [156s] Lagu baru: 0 | Stabil: 156s | suggestion
+2026-10-08 19:17:02,991 - INFO -    ⏳ [159s] Lagu baru: 0 | Stabil: 159s | suggestion
+2026-10-08 19:17:06,335 - INFO -    ⏳ [162s] Lagu baru: 0 | Stabil: 163s | suggestion
+2026-10-08 19:17:09,671 - INFO -    ⏳ [166s] Lagu baru: 0 | Stabil: 166s | suggestion
+2026-10-08 19:17:13,018 - INFO -    ⏳ [169s] Lagu baru: 0 | Stabil: 169s | suggestion
+2026-10-08 19:17:16,363 - INFO -    ⏳ [172s] Lagu baru: 0 | Stabil: 173s | suggestion
+2026-10-08 19:17:19,722 - INFO -    ⏳ [176s] Lagu baru: 0 | Stabil: 176s | suggestion
+2026-10-08 19:17:23,074 - INFO -    ⏳ [179s] Lagu baru: 0 | Stabil: 180s | suggestion
+2026-10-08 19:17:26,417 - INFO -    ⏳ [183s] Lagu baru: 0 | Stabil: 183s | suggestion
+2026-10-08 19:17:29,721 - INFO -    ⏳ [186s] Lagu baru: 0 | Stabil: 186s | suggestion
+2026-10-08 19:17:33,065 - INFO -    ⏳ [189s] Lagu baru: 0 | Stabil: 190s | suggestion
+2026-10-08 19:17:33,797 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-08 19:17:33,925 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-08 19:17:33,927 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-1508' coro=<Page.wait_for_timeout() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:1143> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-09 12:53:55,575 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-09 12:53:55,576 - INFO - 🚀 Menghubungkan ke 4 profile browser...
+2026-10-09 12:53:56,801 - INFO -    ✅ Port 9222 terhubung.
+2026-10-09 12:53:56,899 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 12:53:57,040 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 12:53:57,287 - INFO -    ✅ Port 9225 terhubung.
+2026-10-09 12:53:57,304 - INFO - 📊 Total terhubung: 4/4 profile
+2026-10-09 12:53:57,305 - INFO - 🎯 4 profile siap: [9222, 9223, 9224, 9225]
+2026-10-09 12:53:57,306 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 12:53:57,306 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 12:53:58,731 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-09 12:54:22,785 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-09 12:54:22,785 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-09 12:54:23,740 - INFO -    ✅ Port 9222 terhubung.
+2026-10-09 12:54:23,790 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 12:54:23,874 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 12:54:24,035 - INFO -    ✅ Port 9225 terhubung.
+2026-10-09 12:54:24,206 - INFO -    ✅ Port 9226 terhubung.
+2026-10-09 12:54:24,207 - INFO - 📊 Total terhubung: 5/5 profile
+2026-10-09 12:54:24,209 - INFO - 🎯 5 profile siap: [9222, 9223, 9224, 9225, 9226]
+2026-10-09 12:54:24,212 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 12:54:24,214 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 12:54:29,226 - INFO - Prompt diambil: Create a completely original dry-stone-wall-builde...
+2026-10-09 12:54:29,228 - INFO - Prompt diambil: Create a completely original adobe-brick-making-su...
+2026-10-09 12:54:29,230 - INFO - Prompt diambil: Create a completely original thatched-roof-maker's...
+2026-10-09 12:54:29,235 - INFO - Prompt diambil: Create a completely original log-cabin-builder's-f...
+2026-10-09 12:54:29,237 - INFO - Prompt diambil: Create a completely original tiny-house-builder's-...
+2026-10-09 12:54:29,237 - INFO - 
+######################################################################
+2026-10-09 12:54:29,238 - INFO - 📦 BATCH #1: 5 prompt
+2026-10-09 12:54:29,239 - INFO - ######################################################################
+2026-10-09 12:54:29,240 - INFO - 
+▶️  FASE 1: Paste prompt ke 5 browser...
+2026-10-09 12:54:29,240 - INFO - 
+  [1/5] Port 9222
+2026-10-09 12:54:29,241 - INFO -     📝 Prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 12:54:29,250 - INFO - Mengisi prompt...
+2026-10-09 12:54:39,412 - INFO - Prompt berhasil diisi.
+2026-10-09 12:54:39,412 - INFO -    ⏎ Menekan Enter...
+2026-10-09 12:54:44,659 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 12:54:44,659 - INFO - 
+  [2/5] Port 9223
+2026-10-09 12:54:44,660 - INFO -     📝 Prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 12:54:44,674 - INFO - Mengisi prompt...
+2026-10-09 12:54:54,817 - INFO - Prompt berhasil diisi.
+2026-10-09 12:54:54,817 - INFO -    ⏎ Menekan Enter...
+2026-10-09 12:55:00,199 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 12:55:00,203 - INFO - 
+  [3/5] Port 9224
+2026-10-09 12:55:00,204 - INFO -     📝 Prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 12:55:00,215 - INFO - Mengisi prompt...
+2026-10-09 12:55:10,375 - INFO - Prompt berhasil diisi.
+2026-10-09 12:55:10,376 - INFO -    ⏎ Menekan Enter...
+2026-10-09 12:55:15,734 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 12:55:15,735 - INFO - 
+  [4/5] Port 9225
+2026-10-09 12:55:15,736 - INFO -     📝 Prompt: Create a completely original log-cabin-builder's-first-notch...
+2026-10-09 12:55:15,745 - INFO - Mengisi prompt...
+2026-10-09 12:55:26,015 - INFO - Prompt berhasil diisi.
+2026-10-09 12:55:26,016 - INFO -    ⏎ Menekan Enter...
+2026-10-09 12:55:31,511 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 12:55:31,512 - INFO - 
+  [5/5] Port 9226
+2026-10-09 12:55:31,512 - INFO -     📝 Prompt: Create a completely original tiny-house-builder's-dream pop ...
+2026-10-09 12:55:31,526 - INFO - Mengisi prompt...
+2026-10-09 12:55:47,115 - INFO - Prompt berhasil diisi.
+2026-10-09 12:55:47,118 - INFO -    ⏎ Menekan Enter...
+2026-10-09 12:55:52,494 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 12:55:52,497 - INFO - 
+  📋 Port yang dapat prompt: [9222, 9223, 9224, 9225, 9226]
+2026-10-09 12:55:52,498 - INFO - 
+▶️  FASE 2: Tunggu semua generate, lalu download...
+2026-10-09 12:55:52,501 - INFO - 
+  [1/5] Port 9222
+2026-10-09 12:55:54,511 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 12:55:54,512 - INFO - Menekan Enter untuk generate...
+2026-10-09 12:55:56,576 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 12:55:57,430 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | loading
+2026-10-09 12:56:01,568 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 4s | loading
+2026-10-09 12:56:07,231 - INFO -    🔄 [8s] Lagu baru: 1
+2026-10-09 12:56:07,236 - INFO -       • Play it back now
+Add more strings
+Tweak the chorus||||y64
+2026-10-09 12:56:10,548 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-09 12:56:12,299 - INFO -    🔄 [13s] Lagu baru: 1
+2026-10-09 12:56:12,299 - INFO -       • Play it back now
+Add more strings
+Tweak the chorus||||y63
+2026-10-09 12:56:12,300 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-09 12:56:13,807 - INFO -     🎼 Port 9222: 1 lagu baru terdeteksi.
+2026-10-09 12:56:13,809 - INFO -     --- Download (lagu 1/1): Play it back now
+Add more strings
+Tweak the chorus ---
+2026-10-09 12:56:13,810 - INFO - 🎯 Download lagu UID 'Play it back now
+Add more strings
+Tweak the chorus||||y63' (lagu 1/1)...
+2026-10-09 12:56:13,827 - INFO - Mencari tombol titik 3 target...
+2026-10-09 12:56:14,497 - INFO - Klik tombol titik 3...
+2026-10-09 12:56:17,232 - WARNING - ⚠️ Tidak jelas dropdown atau details (attempt 1). Coba lagi...
+2026-10-09 12:56:22,061 - INFO - ✅ Dropdown terbuka (attempt 2).
+2026-10-09 12:56:22,061 - INFO - Membuka menu 'Download'...
+2026-10-09 12:56:27,071 - ERROR - Gagal buka submenu Download: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("[role='menuitem']:visible").filter(has_text=re.compile(r"^\s*Download\s*$")).first to be visible
+
+2026-10-09 12:56:27,074 - WARNING -     Gagal download (lagu 1/1)
+2026-10-09 12:56:29,536 - INFO -     ✅ Port 9222: 0/1 lagu terdownload.
+2026-10-09 12:56:29,540 - INFO - 
+  [2/5] Port 9223
+2026-10-09 12:56:32,600 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-09 12:56:32,606 - INFO - Menekan Enter untuk generate...
+2026-10-09 12:56:34,649 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 12:56:35,117 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-09 12:56:37,745 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 3s | suggestion
+2026-10-09 12:56:43,729 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 9s | suggestion
+2026-10-09 12:56:49,226 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 14s | suggestion
+2026-10-09 12:56:54,616 - INFO -    ⏳ [17s] Lagu baru: 0 | Stabil: 19s | suggestion
+2026-10-09 12:56:59,840 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 25s | suggestion
+2026-10-09 12:57:05,269 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 30s | suggestion
+2026-10-09 12:57:10,450 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 35s | suggestion
+2026-10-09 12:57:15,091 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 40s | suggestion
+2026-10-09 12:57:19,428 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 44s | suggestion
+2026-10-09 12:57:23,470 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 48s | suggestion
+2026-10-09 12:57:27,420 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 52s | suggestion
+2026-10-09 12:57:31,672 - INFO -    ⏳ [55s] Lagu baru: 0 | Stabil: 57s | suggestion
+2026-10-09 12:57:35,384 - INFO -    ⏳ [60s] Lagu baru: 0 | Stabil: 60s | suggestion
+2026-10-09 12:57:39,028 - INFO -    ⏳ [63s] Lagu baru: 0 | Stabil: 64s | suggestion
+2026-10-09 12:57:42,636 - INFO -    ⏳ [67s] Lagu baru: 0 | Stabil: 67s | suggestion
+2026-10-09 12:57:46,076 - INFO -    ⏳ [70s] Lagu baru: 0 | Stabil: 71s | suggestion
+2026-10-09 12:57:49,571 - INFO -    ⏳ [74s] Lagu baru: 0 | Stabil: 74s | suggestion
+2026-10-09 12:57:53,110 - INFO -    ⏳ [77s] Lagu baru: 0 | Stabil: 78s | suggestion
+2026-10-09 12:57:56,529 - INFO -    ⏳ [81s] Lagu baru: 0 | Stabil: 81s | suggestion
+2026-10-09 12:58:00,043 - INFO -    ⏳ [84s] Lagu baru: 0 | Stabil: 85s | suggestion
+2026-10-09 12:58:03,500 - INFO -    ⏳ [88s] Lagu baru: 0 | Stabil: 88s | suggestion
+2026-10-09 12:58:06,923 - INFO -    ⏳ [91s] Lagu baru: 0 | Stabil: 92s | suggestion
+2026-10-09 12:58:10,353 - INFO -    ⏳ [95s] Lagu baru: 0 | Stabil: 95s | suggestion
+2026-10-09 12:58:13,721 - INFO -    ⏳ [98s] Lagu baru: 0 | Stabil: 99s | suggestion
+2026-10-09 12:58:17,138 - INFO -    ⏳ [102s] Lagu baru: 0 | Stabil: 102s | suggestion
+2026-10-09 12:58:20,610 - INFO -    ⏳ [105s] Lagu baru: 0 | Stabil: 105s | suggestion
+2026-10-09 12:58:24,004 - INFO -    ⏳ [108s] Lagu baru: 0 | Stabil: 109s | suggestion
+2026-10-09 12:58:27,367 - INFO -    ⏳ [112s] Lagu baru: 0 | Stabil: 112s | suggestion
+2026-10-09 12:58:28,525 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-09 12:58:28,775 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-09 12:58:28,778 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-1023' coro=<Page.wait_for_timeout() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:1143> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-09 13:12:41,555 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode
+2026-10-09 13:12:41,557 - INFO - 📚 Total prompt di file: 2
+2026-10-09 13:12:41,557 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-09 13:12:42,902 - INFO -    ✅ Port 9222 terhubung.
+2026-10-09 13:12:42,975 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:12:43,071 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 13:12:43,182 - INFO -    ✅ Port 9225 terhubung.
+2026-10-09 13:12:43,349 - INFO -    ✅ Port 9226 terhubung.
+2026-10-09 13:12:43,354 - INFO - 📊 Total terhubung: 5/5 profile
+2026-10-09 13:12:43,359 - INFO - 🎯 5 profile siap: [9222, 9223, 9224, 9225, 9226]
+2026-10-09 13:12:43,362 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:12:43,365 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:12:48,376 - INFO - 📚 Total prompt di queue: 2
+2026-10-09 13:12:48,378 - INFO - [W1-P9222] 🟢 Worker port 9222 siap.
+2026-10-09 13:12:48,382 - INFO - 
+======================================================================
+2026-10-09 13:12:48,383 - INFO - [W1-P9222] 📝 Ambil prompt: Create a completely original houseboat-builder's-hull folk s...
+2026-10-09 13:12:48,384 - INFO - ======================================================================
+2026-10-09 13:12:48,390 - INFO - [W2-P9223] 🟢 Worker port 9223 siap.
+2026-10-09 13:12:48,393 - INFO - 
+======================================================================
+2026-10-09 13:12:48,394 - INFO - [W2-P9223] 📝 Ambil prompt: Create a completely original barn-raising-Saturday Americana...
+2026-10-09 13:12:48,395 - INFO - ======================================================================
+2026-10-09 13:12:48,396 - INFO - [W3-P9224] 🟢 Worker port 9224 siap.
+2026-10-09 13:12:48,397 - INFO - [W3-P9224] 🏁 Queue kosong. Worker selesai.
+2026-10-09 13:12:48,398 - INFO - [W4-P9225] 🟢 Worker port 9225 siap.
+2026-10-09 13:12:48,400 - INFO - [W4-P9225] 🏁 Queue kosong. Worker selesai.
+2026-10-09 13:12:48,403 - INFO - [W5-P9226] 🟢 Worker port 9226 siap.
+2026-10-09 13:12:48,403 - INFO - [W5-P9226] 🏁 Queue kosong. Worker selesai.
+2026-10-09 13:12:48,405 - INFO - Mengisi prompt...
+2026-10-09 13:12:48,422 - INFO - Mengisi prompt...
+2026-10-09 13:12:58,604 - INFO - Prompt berhasil diisi.
+2026-10-09 13:12:58,702 - INFO - Prompt berhasil diisi.
+2026-10-09 13:12:59,674 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:12:59,675 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:12:59,755 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:12:59,756 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:13:01,833 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:13:01,932 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:13:02,211 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:13:02,318 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:13:05,662 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:13:05,798 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:13:09,046 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-10-09 13:13:09,140 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-10-09 13:13:12,552 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:13:12,614 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:13:15,857 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 14s | idle
+2026-10-09 13:13:15,922 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:13:19,294 - INFO -    ⏳ [17s] Lagu baru: 0 | Stabil: 17s | idle
+2026-10-09 13:13:19,320 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 17s | idle
+2026-10-09 13:13:22,877 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 21s | idle
+2026-10-09 13:13:22,879 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 20s | idle
+2026-10-09 13:13:26,273 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 24s | idle
+2026-10-09 13:13:26,286 - INFO -    ⏳ [24s] Lagu baru: 0 | Stabil: 24s | idle
+2026-10-09 13:13:29,580 - INFO -    ⏳ [27s] Lagu baru: 0 | Stabil: 27s | idle
+2026-10-09 13:13:29,585 - INFO -    ⏳ [27s] Lagu baru: 0 | Stabil: 27s | idle
+2026-10-09 13:13:33,042 - INFO -    ⏳ [30s] Lagu baru: 0 | Stabil: 31s | idle
+2026-10-09 13:13:33,045 - INFO -    ⏳ [30s] Lagu baru: 0 | Stabil: 31s | idle
+2026-10-09 13:13:36,555 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | loading
+2026-10-09 13:13:36,586 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | idle
+2026-10-09 13:13:40,043 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 38s | loading
+2026-10-09 13:13:40,047 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 38s | idle
+2026-10-09 13:13:43,432 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | loading
+2026-10-09 13:13:43,459 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | idle
+2026-10-09 13:13:46,781 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-10-09 13:13:46,804 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-10-09 13:13:50,069 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 48s | loading
+2026-10-09 13:13:50,113 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 48s | loading
+2026-10-09 13:13:53,609 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-09 13:13:53,636 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-09 13:13:56,893 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 55s | loading
+2026-10-09 13:13:56,899 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 54s | loading
+2026-10-09 13:14:00,243 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 58s | loading
+2026-10-09 13:14:00,335 - INFO -    ⏳ [57s] Lagu baru: 0 | Stabil: 58s | idle
+2026-10-09 13:14:03,611 - INFO -    💬 Tombol saran AI terdeteksi.
+2026-10-09 13:14:03,678 - INFO -    ⏳ [61s] Lagu baru: 0 | Stabil: 61s | loading
+2026-10-09 13:14:03,950 - INFO -    ⏳ [61s] Lagu baru: 0 | Stabil: 62s | suggestion
+2026-10-09 13:14:06,897 - INFO -    ⏳ [64s] Lagu baru: 0 | Stabil: 65s | loading
+2026-10-09 13:14:07,384 - INFO -    ⏳ [65s] Lagu baru: 0 | Stabil: 65s | suggestion
+2026-10-09 13:14:10,143 - INFO -    ⏳ [68s] Lagu baru: 0 | Stabil: 68s | loading
+2026-10-09 13:14:11,000 - INFO -    ⏳ [68s] Lagu baru: 0 | Stabil: 69s | suggestion
+2026-10-09 13:14:13,474 - INFO -    ⏳ [71s] Lagu baru: 0 | Stabil: 71s | idle
+2026-10-09 13:14:15,143 - INFO -    ⏳ [72s] Lagu baru: 0 | Stabil: 73s | suggestion
+2026-10-09 13:14:16,672 - INFO -    💬 Tombol saran AI terdeteksi.
+2026-10-09 13:14:17,086 - INFO -    ⏳ [74s] Lagu baru: 0 | Stabil: 75s | suggestion
+2026-10-09 13:14:18,790 - INFO -    ⏳ [76s] Lagu baru: 0 | Stabil: 76s | suggestion
+2026-10-09 13:14:20,633 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 78s | suggestion
+2026-10-09 13:14:22,518 - INFO -    ⏳ [79s] Lagu baru: 0 | Stabil: 80s | suggestion
+2026-10-09 13:14:24,392 - INFO -    ⏳ [81s] Lagu baru: 0 | Stabil: 82s | suggestion
+2026-10-09 13:14:26,158 - INFO -    ⏳ [83s] Lagu baru: 0 | Stabil: 84s | suggestion
+2026-10-09 13:14:27,919 - INFO -    ⏳ [85s] Lagu baru: 0 | Stabil: 86s | suggestion
+2026-10-09 13:14:29,988 - INFO -    ⏳ [87s] Lagu baru: 0 | Stabil: 88s | suggestion
+2026-10-09 13:14:31,675 - INFO -    ⏳ [89s] Lagu baru: 0 | Stabil: 89s | suggestion
+2026-10-09 13:14:33,459 - INFO -    ⏳ [91s] Lagu baru: 0 | Stabil: 91s | suggestion
+2026-10-09 13:14:35,201 - INFO -    ⏳ [92s] Lagu baru: 0 | Stabil: 93s | suggestion
+2026-10-09 13:14:37,038 - INFO -    ⏳ [94s] Lagu baru: 0 | Stabil: 95s | suggestion
+2026-10-09 13:14:38,858 - INFO -    ⏳ [96s] Lagu baru: 0 | Stabil: 97s | suggestion
+2026-10-09 13:14:40,641 - INFO -    ⏳ [98s] Lagu baru: 0 | Stabil: 98s | suggestion
+2026-10-09 13:14:41,891 - INFO -    ⏳ [100s] Lagu baru: 0 | Stabil: 100s | suggestion
+2026-10-09 13:14:44,116 - INFO -    ⏳ [101s] Lagu baru: 0 | Stabil: 102s | suggestion
+2026-10-09 13:14:44,918 - INFO -    ⏳ [103s] Lagu baru: 0 | Stabil: 103s | suggestion
+2026-10-09 13:17:17,984 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode
+2026-10-09 13:17:17,984 - INFO - 📚 Total prompt di file: 3
+2026-10-09 13:17:17,985 - INFO - 🚀 Menghubungkan ke 2 profile browser...
+2026-10-09 13:17:18,847 - INFO -    ✅ Port 9222 terhubung.
+2026-10-09 13:17:18,895 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:17:18,896 - INFO - 📊 Total terhubung: 2/2 profile
+2026-10-09 13:17:18,896 - INFO - 🎯 2 profile siap: [9222, 9223]
+2026-10-09 13:17:18,897 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:17:18,897 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:17:23,903 - INFO - 📚 Total prompt di queue: 3
+2026-10-09 13:17:23,904 - INFO - [W1-P9222] 🟢 Worker port 9222 siap.
+2026-10-09 13:17:23,905 - INFO - 
+======================================================================
+2026-10-09 13:17:23,905 - INFO - [W1-P9222] 📝 Ambil prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 13:17:23,905 - INFO - ======================================================================
+2026-10-09 13:17:23,908 - INFO - [W2-P9223] 🟢 Worker port 9223 siap.
+2026-10-09 13:17:23,908 - INFO - 
+======================================================================
+2026-10-09 13:17:23,909 - INFO - [W2-P9223] 📝 Ambil prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 13:17:23,909 - INFO - ======================================================================
+2026-10-09 13:17:23,914 - INFO - Mengisi prompt...
+2026-10-09 13:17:23,919 - INFO - Mengisi prompt...
+2026-10-09 13:17:34,060 - INFO - Prompt berhasil diisi.
+2026-10-09 13:17:34,124 - INFO - Prompt berhasil diisi.
+2026-10-09 13:17:35,024 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:17:35,025 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:17:35,078 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:17:35,079 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:17:37,151 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:17:37,219 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:17:37,416 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:17:37,472 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:17:40,673 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:17:40,694 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:17:43,904 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 13:17:43,917 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 13:17:47,179 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:17:47,192 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-09 13:17:50,477 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:17:50,483 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:17:53,745 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 13:17:53,752 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 13:17:57,055 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-09 13:17:57,063 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-09 13:18:00,287 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 23s | idle
+2026-10-09 13:18:00,295 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 23s | idle
+2026-10-09 13:18:03,514 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | idle
+2026-10-09 13:18:03,582 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | idle
+2026-10-09 13:18:06,841 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 29s | idle
+2026-10-09 13:18:06,934 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 29s | loading
+2026-10-09 13:18:10,129 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 32s | idle
+2026-10-09 13:18:10,182 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-09 13:18:13,378 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 36s | idle
+2026-10-09 13:18:13,392 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 36s | loading
+2026-10-09 13:18:16,652 - INFO -    ⏳ [39s] Lagu baru: 0 | Stabil: 39s | idle
+2026-10-09 13:18:16,715 - INFO -    ⏳ [39s] Lagu baru: 0 | Stabil: 39s | loading
+2026-10-09 13:18:19,867 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 42s | idle
+2026-10-09 13:18:19,915 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 42s | loading
+2026-10-09 13:18:23,079 - INFO -    ⏳ [45s] Lagu baru: 0 | Stabil: 45s | idle
+2026-10-09 13:18:23,116 - INFO -    ⏳ [45s] Lagu baru: 0 | Stabil: 45s | loading
+2026-10-09 13:18:26,301 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 49s | loading
+2026-10-09 13:18:26,333 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 49s | loading
+2026-10-09 13:18:29,579 - INFO -    ⏳ [52s] Lagu baru: 0 | Stabil: 52s | loading
+2026-10-09 13:18:29,599 - INFO -    ⏳ [52s] Lagu baru: 0 | Stabil: 52s | loading
+2026-10-09 13:18:32,810 - INFO -    ⏳ [55s] Lagu baru: 0 | Stabil: 55s | loading
+2026-10-09 13:18:32,810 - INFO -    ⏳ [55s] Lagu baru: 0 | Stabil: 55s | loading
+2026-10-09 13:18:36,106 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 58s | loading
+2026-10-09 13:18:36,271 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 59s | idle
+2026-10-09 13:18:39,334 - INFO -    ⏳ [61s] Lagu baru: 0 | Stabil: 62s | loading
+2026-10-09 13:18:39,372 - INFO -    💬 Tombol saran AI terdeteksi.
+2026-10-09 13:18:39,876 - INFO -    ⏳ [62s] Lagu baru: 0 | Stabil: 62s | suggestion
+2026-10-09 13:18:42,539 - INFO -    ⏳ [65s] Lagu baru: 0 | Stabil: 65s | loading
+2026-10-09 13:18:43,458 - INFO -    ⏳ [65s] Lagu baru: 0 | Stabil: 66s | suggestion
+2026-10-09 13:18:45,812 - INFO -    ⏳ [68s] Lagu baru: 0 | Stabil: 68s | loading
+2026-10-09 13:18:47,099 - INFO -    ⏳ [69s] Lagu baru: 0 | Stabil: 69s | suggestion
+2026-10-09 13:18:49,090 - INFO -    ⏳ [71s] Lagu baru: 0 | Stabil: 71s | loading
+2026-10-09 13:18:50,738 - INFO -    ⏳ [72s] Lagu baru: 0 | Stabil: 73s | suggestion
+2026-10-09 13:18:52,410 - INFO -    ⏳ [74s] Lagu baru: 0 | Stabil: 75s | idle
+2026-10-09 13:18:54,261 - INFO -    ⏳ [76s] Lagu baru: 0 | Stabil: 77s | suggestion
+2026-10-09 13:18:56,130 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 78s | idle
+2026-10-09 13:18:57,963 - INFO -    ⏳ [80s] Lagu baru: 0 | Stabil: 80s | suggestion
+2026-10-09 13:18:59,836 - INFO -    ⏳ [81s] Lagu baru: 0 | Stabil: 82s | idle
+2026-10-09 13:19:01,718 - INFO -    ⏳ [83s] Lagu baru: 0 | Stabil: 84s | suggestion
+2026-10-09 13:19:03,280 - INFO -    ⏳ [85s] Lagu baru: 0 | Stabil: 86s | idle
+2026-10-09 13:19:05,211 - INFO -    ⏳ [87s] Lagu baru: 0 | Stabil: 88s | suggestion
+2026-10-09 13:19:06,746 - INFO -    ⏳ [89s] Lagu baru: 0 | Stabil: 89s | idle
+2026-10-09 13:19:08,793 - INFO -    ⏳ [91s] Lagu baru: 0 | Stabil: 91s | suggestion
+2026-10-09 13:19:10,318 - INFO -    ⏳ [92s] Lagu baru: 0 | Stabil: 93s | idle
+2026-10-09 13:19:12,202 - INFO -    ⏳ [94s] Lagu baru: 0 | Stabil: 95s | suggestion
+2026-10-09 13:19:13,942 - INFO -    ⏳ [96s] Lagu baru: 0 | Stabil: 96s | idle
+2026-10-09 13:19:15,721 - INFO -    ⏳ [98s] Lagu baru: 0 | Stabil: 98s | suggestion
+2026-10-09 13:19:17,290 - INFO -    ⏳ [99s] Lagu baru: 0 | Stabil: 100s | idle
+2026-10-09 13:19:19,056 - INFO -    ⏳ [101s] Lagu baru: 0 | Stabil: 101s | suggestion
+2026-10-09 13:19:20,628 - INFO -    ⏳ [103s] Lagu baru: 0 | Stabil: 103s | idle
+2026-10-09 13:19:22,408 - INFO -    ⏳ [104s] Lagu baru: 0 | Stabil: 105s | suggestion
+2026-10-09 13:19:23,995 - INFO -    ⏳ [106s] Lagu baru: 0 | Stabil: 106s | idle
+2026-10-09 13:19:25,741 - INFO -    ⏳ [108s] Lagu baru: 0 | Stabil: 108s | suggestion
+2026-10-09 13:19:27,355 - INFO -    ⏳ [109s] Lagu baru: 0 | Stabil: 110s | idle
+2026-10-09 13:19:29,091 - INFO -    ⏳ [111s] Lagu baru: 0 | Stabil: 111s | suggestion
+2026-10-09 13:19:30,686 - INFO -    ⏳ [113s] Lagu baru: 0 | Stabil: 113s | idle
+2026-10-09 13:19:32,450 - INFO -    ⏳ [114s] Lagu baru: 0 | Stabil: 115s | suggestion
+2026-10-09 13:19:34,069 - INFO -    ⏳ [116s] Lagu baru: 0 | Stabil: 116s | idle
+2026-10-09 13:19:35,777 - INFO -    ⏳ [118s] Lagu baru: 0 | Stabil: 118s | suggestion
+2026-10-09 13:19:37,387 - INFO -    ⏳ [119s] Lagu baru: 0 | Stabil: 120s | idle
+2026-10-09 13:19:39,156 - INFO -    ⏳ [121s] Lagu baru: 0 | Stabil: 122s | suggestion
+2026-10-09 13:19:40,720 - INFO -    ⏳ [123s] Lagu baru: 0 | Stabil: 123s | idle
+2026-10-09 13:19:42,500 - INFO -    ⏳ [125s] Lagu baru: 0 | Stabil: 125s | suggestion
+2026-10-09 13:19:44,053 - INFO -    ⏳ [126s] Lagu baru: 0 | Stabil: 126s | idle
+2026-10-09 13:19:45,870 - INFO -    ⏳ [128s] Lagu baru: 0 | Stabil: 128s | suggestion
+2026-10-09 13:19:47,404 - INFO -    ⏳ [129s] Lagu baru: 0 | Stabil: 130s | idle
+2026-10-09 13:19:49,197 - INFO -    ⏳ [131s] Lagu baru: 0 | Stabil: 132s | suggestion
+2026-10-09 13:19:50,752 - INFO -    ⏳ [133s] Lagu baru: 0 | Stabil: 133s | idle
+2026-10-09 13:19:52,535 - INFO -    ⏳ [135s] Lagu baru: 0 | Stabil: 135s | suggestion
+2026-10-09 13:19:54,130 - INFO -    ⏳ [136s] Lagu baru: 0 | Stabil: 136s | idle
+2026-10-09 13:19:55,883 - INFO -    ⏳ [138s] Lagu baru: 0 | Stabil: 138s | suggestion
+2026-10-09 13:19:57,449 - INFO -    ⏳ [139s] Lagu baru: 0 | Stabil: 140s | idle
+2026-10-09 13:19:59,252 - INFO -    ⏳ [141s] Lagu baru: 0 | Stabil: 142s | suggestion
+2026-10-09 13:20:00,794 - INFO -    ⏳ [143s] Lagu baru: 0 | Stabil: 143s | idle
+2026-10-09 13:20:02,603 - INFO -    ⏳ [145s] Lagu baru: 0 | Stabil: 145s | suggestion
+2026-10-09 13:20:04,123 - INFO -    ⏳ [146s] Lagu baru: 0 | Stabil: 146s | idle
+2026-10-09 13:20:05,988 - INFO -    ⏳ [148s] Lagu baru: 0 | Stabil: 148s | suggestion
+2026-10-09 13:20:07,462 - INFO -    ⏳ [149s] Lagu baru: 0 | Stabil: 150s | idle
+2026-10-09 13:20:09,353 - INFO -    ⏳ [151s] Lagu baru: 0 | Stabil: 152s | suggestion
+2026-10-09 13:20:10,815 - INFO -    ⏳ [153s] Lagu baru: 0 | Stabil: 153s | idle
+2026-10-09 13:20:12,683 - INFO -    ⏳ [155s] Lagu baru: 0 | Stabil: 155s | suggestion
+2026-10-09 13:20:14,116 - INFO -    ⏳ [156s] Lagu baru: 0 | Stabil: 156s | idle
+2026-10-09 13:20:16,016 - INFO -    ⏳ [158s] Lagu baru: 0 | Stabil: 158s | suggestion
+2026-10-09 13:20:17,467 - INFO -    ⏳ [159s] Lagu baru: 0 | Stabil: 160s | idle
+2026-10-09 13:20:19,378 - INFO -    ⏳ [161s] Lagu baru: 0 | Stabil: 162s | suggestion
+2026-10-09 13:20:20,816 - INFO -    ⏳ [163s] Lagu baru: 0 | Stabil: 163s | idle
+2026-10-09 13:20:22,736 - INFO -    ⏳ [165s] Lagu baru: 0 | Stabil: 165s | suggestion
+2026-10-09 13:20:24,161 - INFO -    ⏳ [166s] Lagu baru: 0 | Stabil: 166s | idle
+2026-10-09 13:20:26,085 - INFO -    ⏳ [168s] Lagu baru: 0 | Stabil: 168s | suggestion
+2026-10-09 13:20:27,521 - INFO -    ⏳ [169s] Lagu baru: 0 | Stabil: 170s | idle
+2026-10-09 13:20:29,424 - INFO -    ⏳ [171s] Lagu baru: 0 | Stabil: 172s | suggestion
+2026-10-09 13:20:30,866 - INFO -    ⏳ [173s] Lagu baru: 0 | Stabil: 173s | idle
+2026-10-09 13:20:32,770 - INFO -    ⏳ [175s] Lagu baru: 0 | Stabil: 175s | suggestion
+2026-10-09 13:20:34,215 - INFO -    ⏳ [176s] Lagu baru: 0 | Stabil: 176s | idle
+2026-10-09 13:20:36,095 - INFO -    ⏳ [178s] Lagu baru: 0 | Stabil: 178s | suggestion
+2026-10-09 13:20:37,569 - INFO -    ⏳ [179s] Lagu baru: 0 | Stabil: 180s | idle
+2026-10-09 13:20:39,434 - INFO -    ⏳ [181s] Lagu baru: 0 | Stabil: 182s | suggestion
+2026-10-09 13:20:40,904 - INFO -    ⏳ [183s] Lagu baru: 0 | Stabil: 183s | idle
+2026-10-09 13:20:42,855 - INFO -    ⏳ [185s] Lagu baru: 0 | Stabil: 185s | suggestion
+2026-10-09 13:20:44,237 - INFO -    ⏳ [186s] Lagu baru: 0 | Stabil: 187s | idle
+2026-10-09 13:20:46,188 - INFO -    ⏳ [188s] Lagu baru: 0 | Stabil: 189s | suggestion
+2026-10-09 13:20:47,576 - INFO -    ⏳ [190s] Lagu baru: 0 | Stabil: 190s | idle
+2026-10-09 13:20:49,527 - INFO -    ⏳ [192s] Lagu baru: 0 | Stabil: 192s | suggestion
+2026-10-09 13:20:50,943 - INFO -    ⏳ [193s] Lagu baru: 0 | Stabil: 193s | idle
+2026-10-09 13:20:52,887 - INFO -    ⏳ [195s] Lagu baru: 0 | Stabil: 195s | suggestion
+2026-10-09 13:20:54,259 - INFO -    ⏳ [196s] Lagu baru: 0 | Stabil: 197s | idle
+2026-10-09 13:20:56,239 - INFO -    ⏳ [198s] Lagu baru: 0 | Stabil: 199s | suggestion
+2026-10-09 13:20:57,598 - INFO -    ⏳ [200s] Lagu baru: 0 | Stabil: 200s | idle
+2026-10-09 13:20:59,620 - INFO -    ⏳ [202s] Lagu baru: 0 | Stabil: 202s | suggestion
+2026-10-09 13:21:00,895 - INFO -    ⏳ [203s] Lagu baru: 0 | Stabil: 203s | idle
+2026-10-09 13:21:02,940 - INFO -    ⏳ [205s] Lagu baru: 0 | Stabil: 205s | suggestion
+2026-10-09 13:21:04,227 - INFO -    ⏳ [206s] Lagu baru: 0 | Stabil: 207s | idle
+2026-10-09 13:21:06,288 - INFO -    ⏳ [208s] Lagu baru: 0 | Stabil: 209s | suggestion
+2026-10-09 13:21:07,551 - INFO -    ⏳ [210s] Lagu baru: 0 | Stabil: 210s | idle
+2026-10-09 13:21:09,637 - INFO -    ⏳ [212s] Lagu baru: 0 | Stabil: 212s | suggestion
+2026-10-09 13:21:10,877 - INFO -    ⏳ [213s] Lagu baru: 0 | Stabil: 213s | idle
+2026-10-09 13:21:12,973 - INFO -    ⏳ [215s] Lagu baru: 0 | Stabil: 215s | suggestion
+2026-10-09 13:21:14,221 - INFO -    ⏳ [216s] Lagu baru: 0 | Stabil: 217s | idle
+2026-10-09 13:21:16,288 - INFO -    ⏳ [218s] Lagu baru: 0 | Stabil: 219s | suggestion
+2026-10-09 13:21:17,550 - INFO -    ⏳ [220s] Lagu baru: 0 | Stabil: 220s | idle
+2026-10-09 13:21:19,666 - INFO -    ⏳ [222s] Lagu baru: 0 | Stabil: 222s | suggestion
+2026-10-09 13:21:20,894 - INFO -    ⏳ [223s] Lagu baru: 0 | Stabil: 223s | idle
+2026-10-09 13:21:23,016 - INFO -    ⏳ [225s] Lagu baru: 0 | Stabil: 225s | suggestion
+2026-10-09 13:21:24,199 - INFO -    ⏳ [226s] Lagu baru: 0 | Stabil: 226s | idle
+2026-10-09 13:21:26,350 - INFO -    ⏳ [228s] Lagu baru: 0 | Stabil: 229s | suggestion
+2026-10-09 13:21:27,588 - INFO -    ⏳ [229s] Lagu baru: 0 | Stabil: 230s | idle
+2026-10-09 13:21:29,674 - INFO -    ⏳ [232s] Lagu baru: 0 | Stabil: 232s | suggestion
+2026-10-09 13:21:30,908 - INFO -    ⏳ [233s] Lagu baru: 0 | Stabil: 233s | idle
+2026-10-09 13:21:33,017 - INFO -    ⏳ [235s] Lagu baru: 0 | Stabil: 235s | suggestion
+2026-10-09 13:21:34,261 - INFO -    ⏳ [236s] Lagu baru: 0 | Stabil: 237s | idle
+2026-10-09 13:21:36,354 - INFO -    ⏳ [238s] Lagu baru: 0 | Stabil: 239s | suggestion
+2026-10-09 13:21:37,565 - INFO -    ⏳ [240s] Lagu baru: 0 | Stabil: 240s | idle
+2026-10-09 13:21:39,732 - INFO -    ⏳ [242s] Lagu baru: 0 | Stabil: 242s | suggestion
+2026-10-09 13:21:40,953 - INFO -    ⏳ [243s] Lagu baru: 0 | Stabil: 243s | idle
+2026-10-09 13:21:43,225 - INFO -    ⏳ [245s] Lagu baru: 0 | Stabil: 246s | suggestion
+2026-10-09 13:21:44,312 - INFO -    ⏳ [246s] Lagu baru: 0 | Stabil: 247s | idle
+2026-10-09 13:21:46,589 - INFO -    ⏳ [249s] Lagu baru: 0 | Stabil: 249s | suggestion
+2026-10-09 13:21:47,733 - INFO -    ⏳ [250s] Lagu baru: 0 | Stabil: 250s | idle
+2026-10-09 13:21:49,945 - INFO -    ⏳ [252s] Lagu baru: 0 | Stabil: 252s | suggestion
+2026-10-09 13:21:51,075 - INFO -    ⏳ [253s] Lagu baru: 0 | Stabil: 253s | idle
+2026-10-09 13:21:53,326 - INFO -    ⏳ [255s] Lagu baru: 0 | Stabil: 256s | suggestion
+2026-10-09 13:21:54,411 - INFO -    ⏳ [256s] Lagu baru: 0 | Stabil: 257s | idle
+2026-10-09 13:21:56,712 - INFO -    ⏳ [259s] Lagu baru: 0 | Stabil: 259s | suggestion
+2026-10-09 13:21:57,741 - INFO -    ⏳ [260s] Lagu baru: 0 | Stabil: 260s | idle
+2026-10-09 13:22:00,055 - INFO -    ⏳ [262s] Lagu baru: 0 | Stabil: 262s | suggestion
+2026-10-09 13:22:01,084 - INFO -    ⏳ [263s] Lagu baru: 0 | Stabil: 263s | idle
+2026-10-09 13:22:03,400 - INFO -    ⏳ [265s] Lagu baru: 0 | Stabil: 266s | suggestion
+2026-10-09 13:22:04,420 - INFO -    ⏳ [266s] Lagu baru: 0 | Stabil: 267s | idle
+2026-10-09 13:22:06,737 - INFO -    ⏳ [269s] Lagu baru: 0 | Stabil: 269s | suggestion
+2026-10-09 13:22:07,717 - INFO -    ⏳ [270s] Lagu baru: 0 | Stabil: 270s | idle
+2026-10-09 13:22:10,037 - INFO -    ⏳ [272s] Lagu baru: 0 | Stabil: 272s | suggestion
+2026-10-09 13:22:11,019 - INFO -    ⏳ [273s] Lagu baru: 0 | Stabil: 273s | idle
+2026-10-09 13:22:13,617 - INFO -    ⏳ [275s] Lagu baru: 0 | Stabil: 276s | suggestion
+2026-10-09 13:22:14,429 - INFO -    ⏳ [276s] Lagu baru: 0 | Stabil: 277s | idle
+2026-10-09 13:22:17,035 - INFO -    ⏳ [279s] Lagu baru: 0 | Stabil: 279s | suggestion
+2026-10-09 13:22:17,732 - INFO -    ⏳ [280s] Lagu baru: 0 | Stabil: 280s | idle
+2026-10-09 13:22:20,430 - INFO -    ⏳ [282s] Lagu baru: 0 | Stabil: 283s | suggestion
+2026-10-09 13:22:21,069 - INFO -    ⏳ [283s] Lagu baru: 0 | Stabil: 283s | idle
+2026-10-09 13:22:23,835 - INFO -    ⏳ [286s] Lagu baru: 0 | Stabil: 286s | suggestion
+2026-10-09 13:22:24,374 - INFO -    ⏳ [286s] Lagu baru: 0 | Stabil: 287s | idle
+2026-10-09 13:22:27,193 - INFO -    ⏳ [289s] Lagu baru: 0 | Stabil: 290s | suggestion
+2026-10-09 13:22:27,713 - INFO -    ⏳ [290s] Lagu baru: 0 | Stabil: 290s | idle
+2026-10-09 13:22:30,569 - INFO -    ⏳ [293s] Lagu baru: 0 | Stabil: 293s | suggestion
+2026-10-09 13:22:31,046 - INFO -    ⏳ [293s] Lagu baru: 0 | Stabil: 293s | idle
+2026-10-09 13:22:33,894 - INFO -    ⏳ [296s] Lagu baru: 0 | Stabil: 296s | suggestion
+2026-10-09 13:22:34,365 - INFO -    ⏳ [296s] Lagu baru: 0 | Stabil: 297s | idle
+2026-10-09 13:22:37,217 - INFO -    ⏳ [299s] Lagu baru: 0 | Stabil: 300s | suggestion
+2026-10-09 13:22:37,367 - ERROR - ❌ Timeout total setelah 300s.
+2026-10-09 13:22:37,660 - WARNING - [W2-P9223] ⚠️ Tidak ada lagu baru.
+2026-10-09 13:22:38,676 - INFO - 
+======================================================================
+2026-10-09 13:22:38,676 - INFO - [W2-P9223] 📝 Ambil prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 13:22:38,676 - INFO - ======================================================================
+2026-10-09 13:22:38,679 - INFO - Mengisi prompt...
+2026-10-09 13:22:40,219 - ERROR - ❌ Timeout total setelah 300s.
+2026-10-09 13:22:40,470 - WARNING - [W1-P9222] ⚠️ Tidak ada lagu baru.
+2026-10-09 13:22:41,487 - INFO - [W1-P9222] 🏁 Queue kosong. Worker selesai.
+2026-10-09 13:22:46,912 - INFO - Prompt berhasil diisi.
+2026-10-09 13:22:48,564 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-6' coro=<worker() running at /datapentingbackup/bot/main.py:64> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at /usr/lib/python3.14/asyncio/tasks.py:810, <1 more>, ProtocolCallback.__init__.<locals>.cb() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_connection.py:264]>
+2026-10-09 13:22:48,565 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-1' coro=<run_automation() done, defined at /datapentingbackup/bot/main.py:119> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at /usr/lib/python3.14/asyncio/tasks.py:810]>
+2026-10-09 13:23:17,733 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode
+2026-10-09 13:23:17,734 - INFO - 📚 Total prompt di file: 3
+2026-10-09 13:23:17,734 - INFO - 🚀 Menghubungkan ke 2 profile browser...
+2026-10-09 13:23:18,607 - INFO -    ✅ Port 9222 terhubung.
+2026-10-09 13:23:18,655 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:23:18,656 - INFO - 📊 Total terhubung: 2/2 profile
+2026-10-09 13:23:18,657 - INFO - 🎯 2 profile siap: [9222, 9223]
+2026-10-09 13:23:18,658 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:23:18,659 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:23:23,665 - INFO - 📚 Total prompt di queue: 3
+2026-10-09 13:23:23,665 - INFO - [W1-P9222] 🟢 Worker port 9222 siap.
+2026-10-09 13:23:23,666 - INFO - 
+======================================================================
+2026-10-09 13:23:23,666 - INFO - [W1-P9222] 📝 Ambil prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 13:23:23,667 - INFO - ======================================================================
+2026-10-09 13:23:23,669 - INFO - [W2-P9223] 🟢 Worker port 9223 siap.
+2026-10-09 13:23:23,670 - INFO - 
+======================================================================
+2026-10-09 13:23:23,670 - INFO - [W2-P9223] 📝 Ambil prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 13:23:23,671 - INFO - ======================================================================
+2026-10-09 13:23:23,676 - INFO - Mengisi prompt...
+2026-10-09 13:23:23,679 - INFO - Mengisi prompt...
+2026-10-09 13:23:33,815 - INFO - Prompt berhasil diisi.
+2026-10-09 13:23:33,837 - INFO - Prompt berhasil diisi.
+2026-10-09 13:23:34,822 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:23:34,823 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:23:34,827 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:23:34,828 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:23:36,962 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:23:36,964 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:23:37,349 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:23:37,357 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:23:40,627 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:23:40,668 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:23:43,952 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 13:23:43,986 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-10-09 13:23:47,201 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:23:47,238 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:23:50,489 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:23:50,510 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:23:53,816 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 13:23:53,870 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 13:23:57,090 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 20s | idle
+2026-10-09 13:23:57,155 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 20s | idle
+2026-10-09 13:24:00,347 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | idle
+2026-10-09 13:24:00,406 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | idle
+2026-10-09 13:24:03,716 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | idle
+2026-10-09 13:24:03,867 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | loading
+2026-10-09 13:24:07,085 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 30s | loading
+2026-10-09 13:24:07,278 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 30s | loading
+2026-10-09 13:24:10,364 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-09 13:24:10,508 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-09 13:24:13,580 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 36s | loading
+2026-10-09 13:24:13,746 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 36s | loading
+2026-10-09 13:24:16,794 - INFO -    ⏳ [39s] Lagu baru: 0 | Stabil: 39s | loading
+2026-10-09 13:24:16,972 - INFO -    ⏳ [39s] Lagu baru: 0 | Stabil: 40s | loading
+2026-10-09 13:24:20,017 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 43s | loading
+2026-10-09 13:24:20,175 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 43s | loading
+2026-10-09 13:24:23,320 - INFO -    ⏳ [46s] Lagu baru: 0 | Stabil: 46s | loading
+2026-10-09 13:24:23,394 - INFO -    ⏳ [46s] Lagu baru: 0 | Stabil: 46s | loading
+2026-10-09 13:24:26,528 - INFO -    ⏳ [49s] Lagu baru: 0 | Stabil: 49s | loading
+2026-10-09 13:24:26,613 - INFO -    ⏳ [49s] Lagu baru: 0 | Stabil: 49s | loading
+2026-10-09 13:24:29,784 - INFO -    ⏳ [52s] Lagu baru: 0 | Stabil: 52s | loading
+2026-10-09 13:24:30,143 - INFO -    ⏳ [52s] Lagu baru: 0 | Stabil: 53s | loading
+2026-10-09 13:24:33,137 - INFO -    ⏳ [55s] Lagu baru: 0 | Stabil: 56s | idle
+2026-10-09 13:24:33,576 - INFO -    ⏳ [56s] Lagu baru: 0 | Stabil: 56s | loading
+2026-10-09 13:24:36,635 - INFO -    ⏳ [59s] Lagu baru: 0 | Stabil: 59s | loading
+2026-10-09 13:24:37,217 - INFO -    ⏳ [59s] Lagu baru: 0 | Stabil: 60s | loading
+2026-10-09 13:24:40,466 - INFO -    ⏳ [62s] Lagu baru: 0 | Stabil: 63s | loading
+2026-10-09 13:24:41,131 - INFO -    ⏳ [63s] Lagu baru: 0 | Stabil: 64s | loading
+2026-10-09 13:24:44,027 - INFO -    ⏳ [66s] Lagu baru: 0 | Stabil: 67s | loading
+2026-10-09 13:24:44,907 - INFO -    ⏳ [67s] Lagu baru: 0 | Stabil: 67s | loading
+2026-10-09 13:24:47,396 - INFO -    ⏳ [70s] Lagu baru: 0 | Stabil: 70s | loading
+2026-10-09 13:24:48,926 - INFO -    ⏳ [70s] Lagu baru: 0 | Stabil: 71s | loading
+2026-10-09 13:24:51,140 - INFO -    ⏳ [73s] Lagu baru: 0 | Stabil: 74s | loading
+2026-10-09 13:24:52,843 - INFO -    ⏳ [74s] Lagu baru: 0 | Stabil: 75s | loading
+2026-10-09 13:24:55,616 - INFO -    ⏳ [77s] Lagu baru: 0 | Stabil: 78s | idle
+2026-10-09 13:24:56,797 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 79s | idle
+2026-10-09 13:24:59,477 - INFO -    ⏳ [81s] Lagu baru: 0 | Stabil: 82s | idle
+2026-10-09 13:25:00,027 - INFO -    💬 Tombol saran AI terdeteksi.
+2026-10-09 13:25:00,762 - INFO -    ⏳ [82s] Lagu baru: 0 | Stabil: 83s | suggestion
+2026-10-09 13:25:03,859 - INFO -    ⏳ [85s] Lagu baru: 0 | Stabil: 86s | idle
+2026-10-09 13:25:04,690 - INFO -    ⏳ [86s] Lagu baru: 0 | Stabil: 87s | suggestion
+2026-10-09 13:25:07,360 - INFO -    ⏳ [89s] Lagu baru: 0 | Stabil: 90s | idle
+2026-10-09 13:25:08,824 - INFO -    ⏳ [90s] Lagu baru: 0 | Stabil: 91s | suggestion
+2026-10-09 13:25:11,248 - INFO -    ⏳ [93s] Lagu baru: 0 | Stabil: 94s | idle
+2026-10-09 13:25:12,410 - INFO -    ⏳ [94s] Lagu baru: 0 | Stabil: 95s | suggestion
+2026-10-09 13:25:14,912 - INFO -    ⏳ [97s] Lagu baru: 0 | Stabil: 97s | idle
+2026-10-09 13:25:16,292 - INFO -    ⏳ [98s] Lagu baru: 0 | Stabil: 99s | suggestion
+2026-10-09 13:25:18,435 - INFO -    ⏳ [100s] Lagu baru: 0 | Stabil: 101s | idle
+2026-10-09 13:25:20,350 - INFO -    ⏳ [102s] Lagu baru: 0 | Stabil: 103s | suggestion
+2026-10-09 13:25:22,029 - INFO -    ⏳ [104s] Lagu baru: 0 | Stabil: 105s | idle
+2026-10-09 13:25:24,727 - INFO -    ⏳ [106s] Lagu baru: 0 | Stabil: 107s | suggestion
+2026-10-09 13:25:26,321 - INFO -    ⏳ [108s] Lagu baru: 0 | Stabil: 109s | idle
+2026-10-09 13:32:14,114 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Cut Prompt)
+2026-10-09 13:32:14,115 - INFO - 📚 Total prompt di file: 3
+2026-10-09 13:32:14,115 - INFO - 🚀 Menghubungkan ke 2 profile browser...
+2026-10-09 13:32:15,009 - INFO -    ✅ Port 9222 terhubung.
+2026-10-09 13:32:15,042 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:32:15,043 - INFO - 📊 Total terhubung: 2/2 profile
+2026-10-09 13:32:15,043 - INFO - 🎯 2 profile siap: [9222, 9223]
+2026-10-09 13:32:15,044 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:32:15,045 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:32:20,051 - INFO - [W1-P9222] 🟢 Worker port 9222 siap.
+2026-10-09 13:32:20,053 - INFO - ✂️  Prompt diambil & dihapus dari file. Sisa: 2
+2026-10-09 13:32:20,053 - INFO - 
+======================================================================
+2026-10-09 13:32:20,053 - INFO - [W1-P9222] 📝 Ambil prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 13:32:20,054 - INFO - [W1-P9222] 📊 Sisa prompt di file: 2
+2026-10-09 13:32:20,054 - INFO - ======================================================================
+2026-10-09 13:32:20,061 - INFO - [W2-P9223] 🟢 Worker port 9223 siap.
+2026-10-09 13:32:20,062 - INFO - ✂️  Prompt diambil & dihapus dari file. Sisa: 1
+2026-10-09 13:32:20,063 - INFO - 
+======================================================================
+2026-10-09 13:32:20,064 - INFO - [W2-P9223] 📝 Ambil prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 13:32:20,065 - INFO - [W2-P9223] 📊 Sisa prompt di file: 1
+2026-10-09 13:32:20,066 - INFO - ======================================================================
+2026-10-09 13:32:20,067 - INFO - Mengisi prompt...
+2026-10-09 13:32:20,071 - INFO - Mengisi prompt...
+2026-10-09 13:32:24,368 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-6' coro=<worker() running at /datapentingbackup/bot/main.py:56> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at /usr/lib/python3.14/asyncio/tasks.py:810, <1 more>, gather.<locals>._done_callback() at /usr/lib/python3.14/asyncio/tasks.py:810]>
+2026-10-09 13:32:24,369 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-1' coro=<run_automation() done, defined at /datapentingbackup/bot/main.py:102> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at /usr/lib/python3.14/asyncio/tasks.py:810]>
+2026-10-09 13:32:24,370 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-5' coro=<worker() running at /datapentingbackup/bot/main.py:56> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at /usr/lib/python3.14/asyncio/tasks.py:810, <1 more>, gather.<locals>._done_callback() at /usr/lib/python3.14/asyncio/tasks.py:810]>
+2026-10-09 13:32:24,370 - ERROR - Kolom input tidak ditemukan.
+2026-10-09 13:32:24,371 - ERROR - Kolom input tidak ditemukan.
+2026-10-09 13:33:13,642 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Cut Prompt)
+2026-10-09 13:33:13,643 - INFO - 📚 Total prompt di file: 1
+2026-10-09 13:33:13,643 - INFO - 🚀 Menghubungkan ke 2 profile browser...
+2026-10-09 13:33:14,428 - INFO -    ✅ Port 9222 terhubung.
+2026-10-09 13:33:14,436 - ERROR -    ❌ Port 9223 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9223
+connect ECONNREFUSED 127.0.0.1:9223
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9223
+
+2026-10-09 13:33:14,437 - INFO - 📊 Total terhubung: 1/2 profile
+2026-10-09 13:33:14,438 - WARNING - ⚠️ Port gagal: [9223]
+2026-10-09 13:33:14,438 - INFO - 🎯 1 profile siap: [9222]
+2026-10-09 13:33:14,438 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:33:14,439 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:34:03,974 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Cut Prompt)
+2026-10-09 13:34:03,975 - INFO - 📚 Total prompt di file: 1
+2026-10-09 13:34:03,976 - INFO - 🚀 Menghubungkan ke 2 profile browser...
+2026-10-09 13:34:04,726 - ERROR -    ❌ Port 9222 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9222
+connect ECONNREFUSED 127.0.0.1:9222
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+
+2026-10-09 13:34:04,792 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:34:04,792 - INFO - 📊 Total terhubung: 1/2 profile
+2026-10-09 13:34:04,792 - WARNING - ⚠️ Port gagal: [9222]
+2026-10-09 13:34:04,792 - INFO - 🎯 1 profile siap: [9223]
+2026-10-09 13:34:04,793 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:34:04,793 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:34:23,915 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Cut Prompt)
+2026-10-09 13:34:23,916 - INFO - 📚 Total prompt di file: 1
+2026-10-09 13:34:23,916 - INFO - 🚀 Menghubungkan ke 2 profile browser...
+2026-10-09 13:34:24,690 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:34:24,723 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 13:34:24,723 - INFO - 📊 Total terhubung: 2/2 profile
+2026-10-09 13:34:24,724 - INFO - 🎯 2 profile siap: [9223, 9224]
+2026-10-09 13:34:24,726 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:34:24,727 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:34:29,733 - INFO - [W1-P9223] 🟢 Worker port 9223 siap.
+2026-10-09 13:34:29,734 - INFO - ✂️  Prompt diambil & dihapus dari file. Sisa: 0
+2026-10-09 13:34:29,734 - INFO - 
+======================================================================
+2026-10-09 13:34:29,735 - INFO - [W1-P9223] 📝 Ambil prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 13:34:29,735 - INFO - [W1-P9223] 📊 Sisa prompt di file: 0
+2026-10-09 13:34:29,735 - INFO - ======================================================================
+2026-10-09 13:34:29,738 - INFO - [W2-P9224] 🟢 Worker port 9224 siap.
+2026-10-09 13:34:29,738 - INFO - [W2-P9224] 🏁 File prompt habis. Worker selesai.
+2026-10-09 13:34:29,743 - INFO - Mengisi prompt...
+2026-10-09 13:34:39,894 - INFO - Prompt berhasil diisi.
+2026-10-09 13:34:40,861 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:34:40,862 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:34:42,986 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:34:43,245 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:34:46,519 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:34:49,766 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 13:34:52,997 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:34:56,224 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:34:59,473 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 13:35:02,694 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-09 13:35:05,936 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-09 13:35:09,148 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 26s | loading
+2026-10-09 13:35:12,377 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 29s | loading
+2026-10-09 13:35:15,602 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 32s | loading
+2026-10-09 13:35:18,821 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | loading
+2026-10-09 13:35:22,030 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 39s | loading
+2026-10-09 13:35:25,235 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 42s | loading
+2026-10-09 13:35:28,466 - INFO -    ⏳ [45s] Lagu baru: 0 | Stabil: 45s | loading
+2026-10-09 13:35:31,695 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 48s | loading
+2026-10-09 13:35:34,949 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-09 13:35:38,214 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 55s | loading
+2026-10-09 13:35:41,598 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 58s | idle
+2026-10-09 13:35:44,688 - INFO -    💬 Tombol saran AI terdeteksi.
+2026-10-09 13:35:44,949 - INFO -    ⏳ [61s] Lagu baru: 0 | Stabil: 61s | suggestion
+2026-10-09 13:35:48,283 - INFO -    ⏳ [64s] Lagu baru: 0 | Stabil: 65s | suggestion
+2026-10-09 13:35:51,644 - INFO -    ⏳ [68s] Lagu baru: 0 | Stabil: 68s | suggestion
+2026-10-09 13:35:54,986 - INFO -    ⏳ [71s] Lagu baru: 0 | Stabil: 72s | suggestion
+2026-10-09 13:35:58,322 - INFO -    ⏳ [75s] Lagu baru: 0 | Stabil: 75s | suggestion
+2026-10-09 13:36:01,682 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 78s | suggestion
+2026-10-09 13:36:05,315 - INFO -    ⏳ [81s] Lagu baru: 0 | Stabil: 82s | suggestion
+2026-10-09 13:36:08,660 - INFO -    ⏳ [85s] Lagu baru: 0 | Stabil: 85s | suggestion
+2026-10-09 13:38:41,545 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-09 13:38:41,545 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-09 13:38:42,291 - ERROR -    ❌ Port 9222 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9222
+connect ECONNREFUSED 127.0.0.1:9222
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+
+2026-10-09 13:38:42,361 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:38:42,401 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 13:38:42,407 - ERROR -    ❌ Port 9225 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9225
+connect ECONNREFUSED 127.0.0.1:9225
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9225
+
+2026-10-09 13:38:42,414 - ERROR -    ❌ Port 9226 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9226
+connect ECONNREFUSED 127.0.0.1:9226
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9226
+
+2026-10-09 13:38:42,415 - INFO - 📊 Total terhubung: 2/5 profile
+2026-10-09 13:38:42,415 - WARNING - ⚠️ Port gagal: [9222, 9225, 9226]
+2026-10-09 13:38:42,416 - INFO - 🎯 2 profile siap: [9223, 9224]
+2026-10-09 13:38:42,417 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:38:42,417 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:38:47,419 - INFO - Prompt diambil: Create a completely original dry-stone-wall-builde...
+2026-10-09 13:38:47,420 - INFO - Prompt diambil: Create a completely original adobe-brick-making-su...
+2026-10-09 13:38:47,421 - INFO - 
+######################################################################
+2026-10-09 13:38:47,421 - INFO - 📦 BATCH #1: 2 prompt
+2026-10-09 13:38:47,421 - INFO - ######################################################################
+2026-10-09 13:38:47,421 - INFO - 
+▶️  FASE 1: Paste prompt ke 2 browser...
+2026-10-09 13:38:47,422 - INFO - 
+  [1/2] Port 9223
+2026-10-09 13:38:47,422 - INFO -     📝 Prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 13:38:47,427 - INFO - Mengisi prompt...
+2026-10-09 13:38:57,572 - INFO - Prompt berhasil diisi.
+2026-10-09 13:38:57,573 - INFO -    ⏎ Menekan Enter...
+2026-10-09 13:39:02,652 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 13:39:02,653 - INFO - 
+  [2/2] Port 9224
+2026-10-09 13:39:02,653 - INFO -     📝 Prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 13:39:02,658 - INFO - Mengisi prompt...
+2026-10-09 13:39:12,800 - INFO - Prompt berhasil diisi.
+2026-10-09 13:39:12,801 - INFO -    ⏎ Menekan Enter...
+2026-10-09 13:39:17,952 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 13:39:17,952 - INFO - 
+  📋 Port yang dapat prompt: [9223, 9224]
+2026-10-09 13:39:17,953 - INFO - 
+▶️  FASE 2: Tunggu semua generate, lalu download...
+2026-10-09 13:39:17,953 - INFO - 
+  [1/2] Port 9223
+2026-10-09 13:39:18,939 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-10-09 13:39:18,939 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:39:20,953 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:39:21,144 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:39:24,379 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:39:27,564 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 13:39:30,742 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | loading
+2026-10-09 13:39:33,954 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 13s | loading
+2026-10-09 13:39:37,131 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | loading
+2026-10-09 13:39:40,293 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | loading
+2026-10-09 13:39:43,471 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | loading
+2026-10-09 13:39:46,713 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | loading
+2026-10-09 13:39:49,876 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | loading
+2026-10-09 13:39:53,044 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 32s | loading
+2026-10-09 13:39:56,265 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | loading
+2026-10-09 13:39:59,481 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | idle
+2026-10-09 13:40:02,793 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | idle
+2026-10-09 13:40:05,860 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-09 13:40:06,076 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 45s | suggestion
+2026-10-09 13:40:09,340 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 48s | suggestion
+2026-10-09 13:40:12,628 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | suggestion
+2026-10-09 13:40:15,912 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 54s | suggestion
+2026-10-09 13:40:19,206 - INFO -    ⏳ [57s] Lagu baru: 0 | Stabil: 58s | suggestion
+2026-10-09 13:40:22,604 - INFO -    ⏳ [61s] Lagu baru: 0 | Stabil: 61s | suggestion
+2026-10-09 13:40:25,977 - INFO -    ⏳ [64s] Lagu baru: 0 | Stabil: 65s | suggestion
+2026-10-09 13:40:29,276 - INFO -    ⏳ [68s] Lagu baru: 0 | Stabil: 68s | suggestion
+2026-10-09 13:40:32,826 - INFO -    ⏳ [71s] Lagu baru: 0 | Stabil: 71s | suggestion
+2026-10-09 13:40:36,068 - INFO -    ⏳ [74s] Lagu baru: 0 | Stabil: 75s | suggestion
+2026-10-09 13:40:39,342 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 78s | suggestion
+2026-10-09 13:40:40,070 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-09 13:40:40,135 - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-10-09 13:40:40,136 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-484' coro=<Page.wait_for_timeout() done, defined at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_page.py:1143> wait_for=<Future finished result=None> cb=[SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111]>
+2026-10-09 13:41:40,601 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-09 13:41:40,602 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-09 13:41:41,484 - ERROR -    ❌ Port 9222 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9222
+connect ECONNREFUSED 127.0.0.1:9222
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+
+2026-10-09 13:41:41,574 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:41:41,628 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 13:41:41,635 - ERROR -    ❌ Port 9225 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9225
+connect ECONNREFUSED 127.0.0.1:9225
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9225
+
+2026-10-09 13:41:41,641 - ERROR -    ❌ Port 9226 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9226
+connect ECONNREFUSED 127.0.0.1:9226
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9226
+
+2026-10-09 13:41:41,642 - INFO - 📊 Total terhubung: 2/5 profile
+2026-10-09 13:41:41,642 - WARNING - ⚠️ Port gagal: [9222, 9225, 9226]
+2026-10-09 13:41:41,643 - INFO - 🎯 2 profile siap: [9223, 9224]
+2026-10-09 13:41:41,643 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:41:41,644 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:41:44,923 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-09 13:42:02,607 - INFO - 🚀 Memulai Bot - Multi-Profile PIPELINE Mode
+2026-10-09 13:42:02,608 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-09 13:42:03,359 - ERROR -    ❌ Port 9222 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9222
+connect ECONNREFUSED 127.0.0.1:9222
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+
+2026-10-09 13:42:03,429 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:42:03,434 - ERROR -    ❌ Port 9224 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9224
+connect ECONNREFUSED 127.0.0.1:9224
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9224
+
+2026-10-09 13:42:03,440 - ERROR -    ❌ Port 9225 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9225
+connect ECONNREFUSED 127.0.0.1:9225
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9225
+
+2026-10-09 13:42:03,445 - ERROR -    ❌ Port 9226 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9226
+connect ECONNREFUSED 127.0.0.1:9226
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9226
+
+2026-10-09 13:42:03,445 - INFO - 📊 Total terhubung: 1/5 profile
+2026-10-09 13:42:03,446 - WARNING - ⚠️ Port gagal: [9222, 9224, 9225, 9226]
+2026-10-09 13:42:03,446 - INFO - 🎯 1 profile siap: [9223]
+2026-10-09 13:42:03,446 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:42:03,447 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:42:08,449 - INFO - Prompt diambil: Create a completely original dry-stone-wall-builde...
+2026-10-09 13:42:08,450 - INFO - 
+######################################################################
+2026-10-09 13:42:08,450 - INFO - 📦 BATCH #1: 1 prompt
+2026-10-09 13:42:08,450 - INFO - ######################################################################
+2026-10-09 13:42:08,451 - INFO - 
+▶️  FASE 1: Paste prompt ke 1 browser...
+2026-10-09 13:42:08,451 - INFO - 
+  [1/1] Port 9223
+2026-10-09 13:42:08,451 - INFO -     📝 Prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 13:42:08,459 - INFO - Mengisi prompt...
+2026-10-09 13:42:18,588 - INFO - Prompt berhasil diisi.
+2026-10-09 13:42:18,589 - INFO -    ⏎ Menekan Enter...
+2026-10-09 13:42:23,675 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 13:42:23,676 - INFO - 
+  📋 Port yang dapat prompt: [9223]
+2026-10-09 13:42:23,676 - INFO - 
+▶️  FASE 2: Tunggu semua generate, lalu download...
+2026-10-09 13:42:23,677 - INFO - 
+  [1/1] Port 9223
+2026-10-09 13:42:24,657 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-09 13:42:24,657 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:42:26,667 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:42:26,935 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:42:30,149 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:42:33,351 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 13:42:36,558 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-09 13:42:39,746 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:42:42,956 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 13:42:46,156 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-09 13:42:49,352 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-09 13:42:52,549 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-09 13:42:55,756 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 29s | idle
+2026-10-09 13:42:58,965 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 32s | idle
+2026-10-09 13:43:02,163 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | idle
+2026-10-09 13:43:05,357 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | idle
+2026-10-09 13:43:08,549 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | idle
+2026-10-09 13:43:11,743 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 45s | idle
+2026-10-09 13:43:14,957 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 48s | idle
+2026-10-09 13:43:18,148 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | idle
+2026-10-09 13:43:21,335 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 54s | idle
+2026-10-09 13:43:24,514 - INFO -    ⏳ [57s] Lagu baru: 0 | Stabil: 57s | idle
+2026-10-09 13:43:27,708 - INFO -    ⏳ [60s] Lagu baru: 0 | Stabil: 61s | idle
+2026-10-09 13:43:30,893 - INFO -    ⏳ [64s] Lagu baru: 0 | Stabil: 64s | idle
+2026-10-09 13:43:34,078 - INFO -    ⏳ [67s] Lagu baru: 0 | Stabil: 67s | idle
+2026-10-09 13:43:37,270 - INFO -    ⏳ [70s] Lagu baru: 0 | Stabil: 70s | idle
+2026-10-09 13:43:40,441 - INFO -    ⏳ [73s] Lagu baru: 0 | Stabil: 73s | idle
+2026-10-09 13:43:43,624 - INFO -    ⏳ [76s] Lagu baru: 0 | Stabil: 76s | idle
+2026-10-09 13:43:46,811 - INFO -    ⏳ [79s] Lagu baru: 0 | Stabil: 80s | idle
+2026-10-09 13:43:49,998 - INFO -    ⏳ [83s] Lagu baru: 0 | Stabil: 83s | idle
+2026-10-09 13:43:53,182 - INFO -    ⏳ [86s] Lagu baru: 0 | Stabil: 86s | idle
+2026-10-09 13:43:56,382 - INFO -    ⏳ [89s] Lagu baru: 0 | Stabil: 89s | idle
+2026-10-09 13:43:59,571 - INFO -    ⏳ [92s] Lagu baru: 0 | Stabil: 92s | idle
+2026-10-09 13:44:02,757 - INFO -    ⏳ [95s] Lagu baru: 0 | Stabil: 96s | idle
+2026-10-09 13:44:05,954 - INFO -    ⏳ [99s] Lagu baru: 0 | Stabil: 99s | idle
+2026-10-09 13:44:09,168 - INFO -    ⏳ [102s] Lagu baru: 0 | Stabil: 102s | idle
+2026-10-09 13:44:12,374 - INFO -    ⏳ [105s] Lagu baru: 0 | Stabil: 105s | idle
+2026-10-09 13:44:15,547 - INFO -    ⏳ [108s] Lagu baru: 0 | Stabil: 108s | loading
+2026-10-09 13:44:18,724 - INFO -    ⏳ [111s] Lagu baru: 0 | Stabil: 112s | loading
+2026-10-09 13:44:21,901 - INFO -    ⏳ [115s] Lagu baru: 0 | Stabil: 115s | loading
+2026-10-09 13:44:25,087 - INFO -    ⏳ [118s] Lagu baru: 0 | Stabil: 118s | loading
+2026-10-09 13:44:28,253 - INFO -    ⏳ [121s] Lagu baru: 0 | Stabil: 121s | loading
+2026-10-09 13:44:31,434 - INFO -    ⏳ [124s] Lagu baru: 0 | Stabil: 124s | loading
+2026-10-09 13:44:34,594 - INFO -    ⏳ [127s] Lagu baru: 0 | Stabil: 127s | loading
+2026-10-09 13:44:37,780 - INFO -    ⏳ [130s] Lagu baru: 0 | Stabil: 131s | loading
+2026-10-09 13:44:41,065 - INFO -    🔄 [134s] Lagu baru: 2
+2026-10-09 13:44:41,066 - INFO -       • Four Wooden Blades||Four Wooden Blades||y50
+2026-10-09 13:44:41,066 - INFO -       • Four Wooden Blades||Four Wooden Blades||y82
+2026-10-09 13:44:44,394 - INFO -    ⏳ [137s] Lagu baru: 2 | Stabil: 3s | idle
+2026-10-09 13:44:47,697 - INFO -    ⏳ [140s] Lagu baru: 2 | Stabil: 6s | idle
+2026-10-09 13:44:51,021 - INFO -    ⏳ [144s] Lagu baru: 2 | Stabil: 9s | idle
+2026-10-09 13:44:54,545 - INFO -    🔄 [147s] Lagu baru: 3
+2026-10-09 13:44:54,546 - INFO -       • Four Wooden Blades||Four Wooden Blades||y43
+2026-10-09 13:44:54,546 - INFO -       • Download video
+Download video||Download video
+Download video||y43
+2026-10-09 13:44:54,546 - INFO -       • Four Wooden Blades||Four Wooden Blades||y82
+2026-10-09 13:44:57,845 - INFO -    🔄 [150s] Lagu baru: 2
+2026-10-09 13:44:57,846 - INFO -       • Download video
+Download video||Download video
+Download video||y43
+2026-10-09 13:44:57,846 - INFO -       • Four Wooden Blades||Four Wooden Blades||y82
+2026-10-09 13:45:01,140 - INFO -    ⏳ [154s] Lagu baru: 2 | Stabil: 3s | idle
+2026-10-09 13:45:04,448 - INFO -    ⏳ [157s] Lagu baru: 2 | Stabil: 6s | idle
+2026-10-09 13:45:07,741 - INFO -    ⏳ [160s] Lagu baru: 2 | Stabil: 9s | idle
+2026-10-09 13:45:11,016 - INFO -    ⏳ [164s] Lagu baru: 2 | Stabil: 13s | idle
+2026-10-09 13:45:14,288 - INFO -    ⏳ [167s] Lagu baru: 2 | Stabil: 16s | idle
+2026-10-09 13:45:14,289 - INFO - 🎵 Selesai! 2 lagu baru terdeteksi.
+2026-10-09 13:45:15,792 - INFO -     🎼 Port 9223: 2 lagu baru terdeteksi.
+2026-10-09 13:45:15,793 - INFO -     --- Download (lagu 1/2): Download video
+Download video ---
+2026-10-09 13:45:15,793 - INFO - 🎯 Download lagu UID 'Download video
+Download video||Download video
+Download video||y43' (lagu 1/2)...
+2026-10-09 13:45:15,803 - INFO - Mencari tombol titik 3 target...
+2026-10-09 13:45:16,990 - INFO - Berhasil klik titik 3.
+2026-10-09 13:45:17,991 - INFO - Membuka menu 'Download'...
+2026-10-09 13:45:19,476 - INFO - Submenu Download terbuka.
+2026-10-09 13:45:19,476 - INFO - Mengklik format 'WAV'...
+2026-10-09 13:45:21,553 - INFO - Berhasil klik WAV.
+2026-10-09 13:45:21,554 - INFO - Menunggu file download...
+2026-10-09 13:45:27,904 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Four Wooden Blades.wav
+2026-10-09 13:45:31,925 - INFO -     --- Download (lagu 2/2): Four Wooden Blades ---
+2026-10-09 13:45:31,926 - INFO - 🎯 Download lagu UID 'Four Wooden Blades||Four Wooden Blades||y82' (lagu 2/2)...
+2026-10-09 13:45:31,938 - INFO - Mencari tombol titik 3 target...
+2026-10-09 13:45:33,067 - INFO - Berhasil klik titik 3.
+2026-10-09 13:45:34,067 - INFO - Membuka menu 'Download'...
+2026-10-09 13:45:35,569 - INFO - Submenu Download terbuka.
+2026-10-09 13:45:35,569 - INFO - Mengklik format 'WAV'...
+2026-10-09 13:45:37,647 - INFO - Berhasil klik WAV.
+2026-10-09 13:45:37,647 - INFO - Menunggu file download...
+2026-10-09 13:45:43,496 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Four Wooden Blades_1.wav
+2026-10-09 13:45:47,516 - INFO -     ✅ Port 9223: 2/2 lagu terdownload.
+2026-10-09 13:45:47,517 - INFO - 
+✅ BATCH #1 selesai.
+
+2026-10-09 13:45:50,519 - INFO - Prompt diambil: Create a completely original adobe-brick-making-su...
+2026-10-09 13:45:50,519 - INFO - 
+######################################################################
+2026-10-09 13:45:50,520 - INFO - 📦 BATCH #2: 1 prompt
+2026-10-09 13:45:50,520 - INFO - ######################################################################
+2026-10-09 13:45:50,520 - INFO - 
+▶️  FASE 1: Paste prompt ke 1 browser...
+2026-10-09 13:45:50,521 - INFO - 
+  [1/1] Port 9223
+2026-10-09 13:45:50,521 - INFO -     📝 Prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 13:45:50,526 - INFO - Mengisi prompt...
+2026-10-09 13:46:00,604 - INFO - Prompt berhasil diisi.
+2026-10-09 13:46:00,605 - INFO -    ⏎ Menekan Enter...
+2026-10-09 13:46:05,677 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 13:46:05,677 - INFO - 
+  📋 Port yang dapat prompt: [9223]
+2026-10-09 13:46:05,678 - INFO - 
+▶️  FASE 2: Tunggu semua generate, lalu download...
+2026-10-09 13:46:05,678 - INFO - 
+  [1/1] Port 9223
+2026-10-09 13:46:06,750 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-09 13:46:06,751 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:46:08,763 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:46:09,146 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:46:12,434 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:46:15,751 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 13:46:19,035 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:46:22,314 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:46:25,612 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 13:46:28,907 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 20s | loading
+2026-10-09 13:46:32,187 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | loading
+2026-10-09 13:46:35,498 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | loading
+2026-10-09 13:46:38,785 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 30s | loading
+2026-10-09 13:46:42,119 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-09 13:46:45,387 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 36s | loading
+2026-10-09 13:46:48,675 - INFO -    ⏳ [39s] Lagu baru: 0 | Stabil: 39s | loading
+2026-10-09 13:46:52,017 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 43s | idle
+2026-10-09 13:46:55,336 - INFO -    ⏳ [46s] Lagu baru: 0 | Stabil: 46s | idle
+2026-10-09 13:46:58,685 - INFO -    ⏳ [49s] Lagu baru: 0 | Stabil: 49s | idle
+2026-10-09 13:47:02,060 - INFO -    ⏳ [52s] Lagu baru: 0 | Stabil: 53s | idle
+2026-10-09 13:47:05,395 - INFO -    ⏳ [56s] Lagu baru: 0 | Stabil: 56s | idle
+2026-10-09 13:47:08,730 - INFO -    ⏳ [59s] Lagu baru: 0 | Stabil: 59s | idle
+2026-10-09 13:47:12,095 - INFO -    ⏳ [62s] Lagu baru: 0 | Stabil: 63s | idle
+2026-10-09 13:47:15,432 - INFO -    ⏳ [66s] Lagu baru: 0 | Stabil: 66s | idle
+2026-10-09 13:47:18,790 - INFO -    ⏳ [69s] Lagu baru: 0 | Stabil: 70s | idle
+2026-10-09 13:47:22,146 - INFO -    ⏳ [73s] Lagu baru: 0 | Stabil: 73s | idle
+2026-10-09 13:47:25,497 - INFO -    ⏳ [76s] Lagu baru: 0 | Stabil: 76s | idle
+2026-10-09 13:47:28,882 - INFO -    ⏳ [79s] Lagu baru: 0 | Stabil: 80s | idle
+2026-10-09 13:47:32,292 - INFO -    🔄 [83s] Lagu baru: 1
+2026-10-09 13:47:32,292 - INFO -       • The Green Pin||The Green Pin||y43
+2026-10-09 13:47:35,736 - INFO -    ⏳ [86s] Lagu baru: 1 | Stabil: 3s | idle
+2026-10-09 13:47:39,142 - INFO -    ⏳ [89s] Lagu baru: 1 | Stabil: 6s | idle
+2026-10-09 13:47:42,510 - INFO -    ⏳ [93s] Lagu baru: 1 | Stabil: 10s | idle
+2026-10-09 13:47:45,863 - INFO -    ⏳ [96s] Lagu baru: 1 | Stabil: 13s | idle
+2026-10-09 13:47:49,218 - INFO -    ⏳ [100s] Lagu baru: 1 | Stabil: 16s | idle
+2026-10-09 13:47:49,219 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-09 13:47:50,722 - INFO -     🎼 Port 9223: 1 lagu baru terdeteksi.
+2026-10-09 13:47:50,723 - INFO -     --- Download (lagu 1/1): The Green Pin ---
+2026-10-09 13:47:50,723 - INFO - 🎯 Download lagu UID 'The Green Pin||The Green Pin||y43' (lagu 1/1)...
+2026-10-09 13:47:50,735 - INFO - Mencari tombol titik 3 target...
+2026-10-09 13:47:51,847 - INFO - Berhasil klik titik 3.
+2026-10-09 13:47:52,848 - INFO - Membuka menu 'Download'...
+2026-10-09 13:47:54,337 - INFO - Submenu Download terbuka.
+2026-10-09 13:47:54,337 - INFO - Mengklik format 'WAV'...
+2026-10-09 13:47:56,396 - INFO - Berhasil klik WAV.
+2026-10-09 13:47:56,397 - INFO - Menunggu file download...
+2026-10-09 13:48:01,551 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/The Green Pin.wav
+2026-10-09 13:48:05,572 - INFO -     ✅ Port 9223: 1/1 lagu terdownload.
+2026-10-09 13:48:05,572 - INFO - 
+✅ BATCH #2 selesai.
+
+2026-10-09 13:48:08,573 - INFO - Prompt diambil: Create a completely original thatched-roof-maker's...
+2026-10-09 13:48:08,574 - INFO - 
+######################################################################
+2026-10-09 13:48:08,574 - INFO - 📦 BATCH #3: 1 prompt
+2026-10-09 13:48:08,574 - INFO - ######################################################################
+2026-10-09 13:48:08,575 - INFO - 
+▶️  FASE 1: Paste prompt ke 1 browser...
+2026-10-09 13:48:08,575 - INFO - 
+  [1/1] Port 9223
+2026-10-09 13:48:08,575 - INFO -     📝 Prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 13:48:08,579 - INFO - Mengisi prompt...
+2026-10-09 13:48:18,653 - INFO - Prompt berhasil diisi.
+2026-10-09 13:48:18,653 - INFO -    ⏎ Menekan Enter...
+2026-10-09 13:48:23,705 - INFO -     ✅ Paste & Enter berhasil.
+2026-10-09 13:48:23,706 - INFO - 
+  📋 Port yang dapat prompt: [9223]
+2026-10-09 13:48:23,707 - INFO - 
+▶️  FASE 2: Tunggu semua generate, lalu download...
+2026-10-09 13:48:23,707 - INFO - 
+  [1/1] Port 9223
+2026-10-09 13:48:24,802 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-09 13:48:24,803 - INFO - Menekan Enter untuk generate...
+2026-10-09 13:48:26,814 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 13:48:27,160 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 13:48:30,570 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 13:48:33,908 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-10-09 13:48:37,252 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 13:48:40,602 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 13:48:43,934 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 17s | idle
+2026-10-09 13:48:47,289 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 20s | idle
+2026-10-09 13:48:50,653 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | idle
+2026-10-09 13:48:53,998 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 27s | idle
+2026-10-09 13:48:57,330 - INFO -    ⏳ [30s] Lagu baru: 0 | Stabil: 30s | loading
+2026-10-09 13:49:00,655 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 33s | loading
+2026-10-09 13:49:04,006 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 37s | loading
+2026-10-09 13:49:07,356 - INFO -    ⏳ [40s] Lagu baru: 0 | Stabil: 40s | loading
+2026-10-09 13:49:10,691 - INFO -    ⏳ [43s] Lagu baru: 0 | Stabil: 43s | loading
+2026-10-09 13:49:14,026 - INFO -    ⏳ [46s] Lagu baru: 0 | Stabil: 47s | loading
+2026-10-09 13:49:17,372 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 50s | loading
+2026-10-09 13:49:20,803 - INFO -    🔄 [53s] Lagu baru: 1
+2026-10-09 13:49:20,804 - INFO -       • The Final Ridge||The Final Ridge||y82
+2026-10-09 13:49:23,898 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-09 13:49:24,356 - INFO -    ⏳ [56s] Lagu baru: 1 | Stabil: 3s | suggestion
+2026-10-09 13:49:24,357 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-09 13:49:25,860 - INFO -     🎼 Port 9223: 1 lagu baru terdeteksi.
+2026-10-09 13:49:25,860 - INFO -     --- Download (lagu 1/1): The Final Ridge ---
+2026-10-09 13:49:25,860 - INFO - 🎯 Download lagu UID 'The Final Ridge||The Final Ridge||y82' (lagu 1/1)...
+2026-10-09 13:49:25,875 - INFO - Mencari tombol titik 3 target...
+2026-10-09 13:49:27,148 - INFO - Berhasil klik titik 3.
+2026-10-09 13:49:28,149 - INFO - Membuka menu 'Download'...
+2026-10-09 13:49:29,676 - INFO - Submenu Download terbuka.
+2026-10-09 13:49:29,677 - INFO - Mengklik format 'WAV'...
+2026-10-09 13:49:31,785 - INFO - Berhasil klik WAV.
+2026-10-09 13:49:31,785 - INFO - Menunggu file download...
+2026-10-09 13:49:37,509 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/The Final Ridge.wav
+2026-10-09 13:49:41,522 - INFO -     ✅ Port 9223: 1/1 lagu terdownload.
+2026-10-09 13:49:41,522 - INFO - 
+✅ BATCH #3 selesai.
+
+2026-10-09 13:49:44,523 - INFO - Tidak ada prompt tersisa.
+2026-10-09 13:49:44,524 - INFO - ✅ Tidak ada prompt tersisa. Selesai!
+2026-10-09 13:49:44,524 - INFO - 
+======================================================================
+2026-10-09 13:49:44,524 - INFO - 🏁 BOT SELESAI - 3 prompt telah diproses!
+2026-10-09 13:49:44,525 - INFO - ======================================================================
+2026-10-09 13:49:44,597 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-09 13:58:56,433 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Threading)
+2026-10-09 13:58:56,434 - ERROR - ❌ Tidak ada prompt di file. Keluar.
+2026-10-09 13:59:06,068 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Threading)
+2026-10-09 13:59:06,068 - INFO - 📚 Total prompt di file: 3
+2026-10-09 13:59:06,069 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-09 13:59:06,835 - ERROR -    ❌ Port 9222 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9222
+connect ECONNREFUSED 127.0.0.1:9222
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+
+2026-10-09 13:59:06,915 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 13:59:06,947 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 13:59:06,955 - ERROR -    ❌ Port 9225 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9225
+connect ECONNREFUSED 127.0.0.1:9225
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9225
+
+2026-10-09 13:59:06,969 - ERROR -    ❌ Port 9226 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9226
+connect ECONNREFUSED 127.0.0.1:9226
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9226
+
+2026-10-09 13:59:06,969 - INFO - 📊 Total terhubung: 2/5 profile
+2026-10-09 13:59:06,970 - WARNING - ⚠️ Port gagal: [9222, 9225, 9226]
+2026-10-09 13:59:06,970 - INFO - 🎯 2 profile siap: [9223, 9224]
+2026-10-09 13:59:06,971 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 13:59:06,971 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 13:59:11,973 - INFO - [W1-P9223] 🟢 Worker port 9223 siap.
+2026-10-09 13:59:11,973 - INFO - 🧵 Thread W1-P9223 dijalankan.
+2026-10-09 13:59:11,975 - INFO - ✂️  Prompt diambil. Sisa: 2
+2026-10-09 13:59:11,975 - INFO - 
+======================================================================
+2026-10-09 13:59:11,976 - INFO - [W1-P9223] 📝 Ambil prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 13:59:11,976 - INFO - [W1-P9223] 📊 Sisa prompt di file: 2
+2026-10-09 13:59:11,976 - INFO - ======================================================================
+2026-10-09 13:59:11,981 - ERROR - [W1-P9223] ❌ Error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x73e44d7d7440 (otid=0x73e448001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x73e44d931f00 (otid=0x188fa260) suspended active started main>
+Traceback (most recent call last):
+  File "/datapentingbackup/bot/main.py", line 57, in worker
+    page.bring_to_front()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/sync_api/_generated.py", line 10526, in bring_to_front
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.bring_to_front()))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 113, in _sync
+    self._dispatcher_fiber.switch()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+greenlet.error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x73e44d7d7440 (otid=0x73e448001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x73e44d931f00 (otid=0x188fa260) suspended active started main>
+2026-10-09 13:59:11,986 - INFO - ✂️  Prompt diambil. Sisa: 1
+2026-10-09 13:59:11,987 - INFO - 
+======================================================================
+2026-10-09 13:59:11,987 - INFO - [W1-P9223] 📝 Ambil prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 13:59:11,987 - INFO - [W1-P9223] 📊 Sisa prompt di file: 1
+2026-10-09 13:59:11,988 - INFO - ======================================================================
+2026-10-09 13:59:11,988 - ERROR - [W1-P9223] ❌ Error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x73e44d7d7440 (otid=0x73e448001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x73e44d931f00 (otid=0x188fa260) suspended active started main>
+Traceback (most recent call last):
+  File "/datapentingbackup/bot/main.py", line 57, in worker
+    page.bring_to_front()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/sync_api/_generated.py", line 10526, in bring_to_front
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.bring_to_front()))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 113, in _sync
+    self._dispatcher_fiber.switch()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+greenlet.error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x73e44d7d7440 (otid=0x73e448001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x73e44d931f00 (otid=0x188fa260) suspended active started main>
+2026-10-09 13:59:11,992 - INFO - ✂️  Prompt diambil. Sisa: 0
+2026-10-09 13:59:11,992 - INFO - 
+======================================================================
+2026-10-09 13:59:11,992 - INFO - [W1-P9223] 📝 Ambil prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 13:59:11,993 - INFO - [W1-P9223] 📊 Sisa prompt di file: 0
+2026-10-09 13:59:11,993 - INFO - ======================================================================
+2026-10-09 13:59:11,994 - ERROR - [W1-P9223] ❌ Error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x73e44d7d7440 (otid=0x73e448001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x73e44d931f00 (otid=0x188fa260) suspended active started main>
+Traceback (most recent call last):
+  File "/datapentingbackup/bot/main.py", line 57, in worker
+    page.bring_to_front()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/sync_api/_generated.py", line 10526, in bring_to_front
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.bring_to_front()))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 113, in _sync
+    self._dispatcher_fiber.switch()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+greenlet.error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x73e44d7d7440 (otid=0x73e448001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x73e44d931f00 (otid=0x188fa260) suspended active started main>
+2026-10-09 13:59:11,996 - INFO - Tidak ada prompt tersisa.
+2026-10-09 13:59:11,996 - INFO - [W1-P9223] 🏁 File prompt habis. Worker selesai.
+2026-10-09 13:59:12,475 - INFO - [W2-P9224] 🟢 Worker port 9224 siap.
+2026-10-09 13:59:12,475 - INFO - 🧵 Thread W2-P9224 dijalankan.
+2026-10-09 13:59:12,476 - INFO - Tidak ada prompt tersisa.
+2026-10-09 13:59:12,476 - INFO - [W2-P9224] 🏁 File prompt habis. Worker selesai.
+2026-10-09 13:59:12,976 - INFO - 
+======================================================================
+2026-10-09 13:59:12,977 - INFO - 🏁 BOT SELESAI - Semua prompt diproses!
+2026-10-09 13:59:12,977 - INFO - ======================================================================
+2026-10-09 13:59:13,009 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 13:59:13,011 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 13:59:13,013 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 13:59:13,019 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 13:59:13,021 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 13:59:13,024 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 13:59:13,108 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-09 13:59:43,883 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Threading)
+2026-10-09 13:59:43,884 - ERROR - ❌ Tidak ada prompt di file. Keluar.
+2026-10-09 14:00:04,367 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL Mode (Threading)
+2026-10-09 14:00:04,368 - INFO - 📚 Total prompt di file: 3
+2026-10-09 14:00:04,368 - INFO - 🚀 Menghubungkan ke 5 profile browser...
+2026-10-09 14:00:05,131 - ERROR -    ❌ Port 9222 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9222
+connect ECONNREFUSED 127.0.0.1:9222
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+
+2026-10-09 14:00:05,194 - INFO -    ✅ Port 9223 terhubung.
+2026-10-09 14:00:05,233 - INFO -    ✅ Port 9224 terhubung.
+2026-10-09 14:00:05,243 - ERROR -    ❌ Port 9225 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9225
+connect ECONNREFUSED 127.0.0.1:9225
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9225
+
+2026-10-09 14:00:05,261 - ERROR -    ❌ Port 9226 GAGAL: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9226
+connect ECONNREFUSED 127.0.0.1:9226
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9226
+
+2026-10-09 14:00:05,262 - INFO - 📊 Total terhubung: 2/5 profile
+2026-10-09 14:00:05,262 - WARNING - ⚠️ Port gagal: [9222, 9225, 9226]
+2026-10-09 14:00:05,263 - INFO - 🎯 2 profile siap: [9223, 9224]
+2026-10-09 14:00:05,263 - INFO - 👋 Pastikan semua profile sudah login ke flowmusic.app.
+2026-10-09 14:00:05,263 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 14:00:10,264 - INFO - [W1-P9223] 🟢 Worker port 9223 siap.
+2026-10-09 14:00:10,265 - INFO - 🧵 Thread W1-P9223 dijalankan.
+2026-10-09 14:00:10,267 - INFO - ✂️  Prompt diambil. Sisa: 2
+2026-10-09 14:00:10,267 - INFO - 
+======================================================================
+2026-10-09 14:00:10,268 - INFO - [W1-P9223] 📝 Ambil prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 14:00:10,268 - INFO - [W1-P9223] 📊 Sisa prompt di file: 2
+2026-10-09 14:00:10,268 - INFO - ======================================================================
+2026-10-09 14:00:10,270 - ERROR - [W1-P9223] ❌ Error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x7089fe3bd940 (otid=0x7089f8001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x7089fe4649c0 (otid=0x1edb260) suspended active started main>
+Traceback (most recent call last):
+  File "/datapentingbackup/bot/main.py", line 57, in worker
+    page.bring_to_front()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/sync_api/_generated.py", line 10526, in bring_to_front
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.bring_to_front()))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 113, in _sync
+    self._dispatcher_fiber.switch()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+greenlet.error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x7089fe3bd940 (otid=0x7089f8001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x7089fe4649c0 (otid=0x1edb260) suspended active started main>
+2026-10-09 14:00:10,275 - INFO - ✂️  Prompt diambil. Sisa: 1
+2026-10-09 14:00:10,276 - INFO - 
+======================================================================
+2026-10-09 14:00:10,276 - INFO - [W1-P9223] 📝 Ambil prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 14:00:10,276 - INFO - [W1-P9223] 📊 Sisa prompt di file: 1
+2026-10-09 14:00:10,276 - INFO - ======================================================================
+2026-10-09 14:00:10,277 - ERROR - [W1-P9223] ❌ Error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x7089fe3bd940 (otid=0x7089f8001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x7089fe4649c0 (otid=0x1edb260) suspended active started main>
+Traceback (most recent call last):
+  File "/datapentingbackup/bot/main.py", line 57, in worker
+    page.bring_to_front()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/sync_api/_generated.py", line 10526, in bring_to_front
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.bring_to_front()))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 113, in _sync
+    self._dispatcher_fiber.switch()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+greenlet.error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x7089fe3bd940 (otid=0x7089f8001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x7089fe4649c0 (otid=0x1edb260) suspended active started main>
+2026-10-09 14:00:10,280 - INFO - ✂️  Prompt diambil. Sisa: 0
+2026-10-09 14:00:10,281 - INFO - 
+======================================================================
+2026-10-09 14:00:10,281 - INFO - [W1-P9223] 📝 Ambil prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 14:00:10,282 - INFO - [W1-P9223] 📊 Sisa prompt di file: 0
+2026-10-09 14:00:10,282 - INFO - ======================================================================
+2026-10-09 14:00:10,283 - ERROR - [W1-P9223] ❌ Error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x7089fe3bd940 (otid=0x7089f8001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x7089fe4649c0 (otid=0x1edb260) suspended active started main>
+Traceback (most recent call last):
+  File "/datapentingbackup/bot/main.py", line 57, in worker
+    page.bring_to_front()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/sync_api/_generated.py", line 10526, in bring_to_front
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.bring_to_front()))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 113, in _sync
+    self._dispatcher_fiber.switch()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+greenlet.error: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x7089fe3bd940 (otid=0x7089f8001d80) current active started main>
+	Expected: <greenlet.greenlet object at 0x7089fe4649c0 (otid=0x1edb260) suspended active started main>
+2026-10-09 14:00:10,287 - INFO - Tidak ada prompt tersisa.
+2026-10-09 14:00:10,287 - INFO - [W1-P9223] 🏁 File prompt habis. Worker selesai.
+2026-10-09 14:00:10,766 - INFO - [W2-P9224] 🟢 Worker port 9224 siap.
+2026-10-09 14:00:10,766 - INFO - 🧵 Thread W2-P9224 dijalankan.
+2026-10-09 14:00:10,767 - INFO - Tidak ada prompt tersisa.
+2026-10-09 14:00:10,768 - INFO - [W2-P9224] 🏁 File prompt habis. Worker selesai.
+2026-10-09 14:00:11,267 - INFO - 
+======================================================================
+2026-10-09 14:00:11,268 - INFO - 🏁 BOT SELESAI - Semua prompt diproses!
+2026-10-09 14:00:11,268 - INFO - ======================================================================
+2026-10-09 14:00:11,299 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 14:00:11,301 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 14:00:11,304 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 14:00:11,308 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 14:00:11,310 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 14:00:11,312 - ERROR - Exception in callback SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111
+handle: <Handle SyncBase._sync.<locals>.<lambda>() at /datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py:111>
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/asyncio/events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/datapentingbackup/bot/venv/lib/python3.14/site-packages/playwright/_impl/_sync_base.py", line 111, in <lambda>
+    task.add_done_callback(lambda _: g_self.switch())
+                                     ~~~~~~~~~~~~~^^
+greenlet.error: cannot switch to a different thread (which happens to have exited)
+2026-10-09 14:00:11,362 - INFO - 🔌 Semua koneksi Playwright ditutup.
+2026-10-09 14:02:03,058 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL (Per-Thread Playwright)
+2026-10-09 14:02:03,059 - INFO - 📚 Total prompt di file: 3
+2026-10-09 14:02:03,060 - INFO - 🎯 Akan connect ke 5 browser: [9222, 9223, 9224, 9225, 9226]
+2026-10-09 14:02:03,060 - INFO - 👋 Pastikan semua browser sudah terbuka & login ke flowmusic.app.
+2026-10-09 14:02:03,060 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-10-09 14:02:08,061 - INFO - [W1-P9222] 🟢 Worker port 9222 starting...
+2026-10-09 14:02:08,061 - INFO - 🧵 Thread W1-P9222 dijalankan.
+2026-10-09 14:02:08,364 - INFO - [W2-P9223] 🟢 Worker port 9223 starting...
+2026-10-09 14:02:08,364 - INFO - 🧵 Thread W2-P9223 dijalankan.
+2026-10-09 14:02:08,665 - INFO - [W3-P9224] 🟢 Worker port 9224 starting...
+2026-10-09 14:02:08,666 - INFO - 🧵 Thread W3-P9224 dijalankan.
+2026-10-09 14:02:08,789 - ERROR - [P9222] ❌ Gagal connect: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9222
+connect ECONNREFUSED 127.0.0.1:9222
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9222
+
+2026-10-09 14:02:08,790 - ERROR - [W1-P9222] ❌ Gagal connect. Worker berhenti.
+2026-10-09 14:02:08,967 - INFO - [W4-P9225] 🟢 Worker port 9225 starting...
+2026-10-09 14:02:08,968 - INFO - 🧵 Thread W4-P9225 dijalankan.
+2026-10-09 14:02:09,169 - INFO - [P9223] ✅ Terhubung.
+2026-10-09 14:02:09,269 - INFO - [W5-P9226] 🟢 Worker port 9226 starting...
+2026-10-09 14:02:09,269 - INFO - 🧵 Thread W5-P9226 dijalankan.
+2026-10-09 14:02:09,587 - INFO - [P9224] ✅ Terhubung.
+2026-10-09 14:02:09,957 - ERROR - [P9225] ❌ Gagal connect: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9225
+connect ECONNREFUSED 127.0.0.1:9225
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9225
+
+2026-10-09 14:02:09,957 - ERROR - [W4-P9225] ❌ Gagal connect. Worker berhenti.
+2026-10-09 14:02:10,217 - ERROR - [P9226] ❌ Gagal connect: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9226
+connect ECONNREFUSED 127.0.0.1:9226
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9226
+
+2026-10-09 14:02:10,217 - ERROR - [W5-P9226] ❌ Gagal connect. Worker berhenti.
+2026-10-09 14:02:12,171 - INFO - ✂️  Prompt diambil. Sisa: 2
+2026-10-09 14:02:12,172 - INFO - 
+======================================================================
+2026-10-09 14:02:12,172 - INFO - [W2-P9223] 📝 Prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 14:02:12,173 - INFO - [W2-P9223] 📊 Sisa prompt: 2
+2026-10-09 14:02:12,173 - INFO - ======================================================================
+2026-10-09 14:02:12,179 - INFO - Mengisi prompt...
+2026-10-09 14:02:12,589 - INFO - ✂️  Prompt diambil. Sisa: 1
+2026-10-09 14:02:12,590 - INFO - 
+======================================================================
+2026-10-09 14:02:12,590 - INFO - [W3-P9224] 📝 Prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 14:02:12,590 - INFO - [W3-P9224] 📊 Sisa prompt: 1
+2026-10-09 14:02:12,591 - INFO - ======================================================================
+2026-10-09 14:02:12,596 - INFO - Mengisi prompt...
+2026-10-09 14:02:22,329 - INFO - Prompt berhasil diisi.
+2026-10-09 14:02:22,736 - INFO - Prompt berhasil diisi.
+2026-10-09 14:02:23,283 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-09 14:02:23,283 - INFO - Menekan Enter untuk generate...
+2026-10-09 14:02:23,716 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-09 14:02:23,717 - INFO - Menekan Enter untuk generate...
+2026-10-09 14:02:25,382 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 14:02:25,582 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 14:02:25,829 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 14:02:26,083 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 14:02:28,787 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 14:02:29,283 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 14:02:31,989 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 14:02:32,476 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-10-09 14:02:35,175 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-09 14:02:35,681 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-10-09 14:02:38,367 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-10-09 14:02:38,883 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 13s | idle
+2026-10-09 14:02:41,598 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 14:02:42,078 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-10-09 14:02:44,786 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-09 14:02:45,319 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-10-09 14:02:47,966 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-09 14:02:48,514 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-10-09 14:02:51,157 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-09 14:02:51,745 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | idle
+2026-10-09 14:02:54,341 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | idle
+2026-10-09 14:02:54,906 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 29s | loading
+2026-10-09 14:02:57,521 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 32s | idle
+2026-10-09 14:02:58,062 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 32s | loading
+2026-10-09 14:03:00,706 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | idle
+2026-10-09 14:03:01,267 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | loading
+2026-10-09 14:03:03,872 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | loading
+2026-10-09 14:03:04,434 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | loading
+2026-10-09 14:03:07,084 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | loading
+2026-10-09 14:03:07,612 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | loading
+2026-10-09 14:03:10,251 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-10-09 14:03:10,798 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-10-09 14:03:13,453 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 48s | loading
+2026-10-09 14:03:13,967 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 48s | loading
+2026-10-09 14:03:16,605 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-09 14:03:17,183 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-09 14:03:19,767 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 54s | loading
+2026-10-09 14:03:20,486 - INFO -    🔄 [54s] Lagu baru: 1
+2026-10-09 14:03:20,486 - INFO -       • Paper Parks||Paper Parks||y82
+2026-10-09 14:03:22,933 - INFO -    ⏳ [57s] Lagu baru: 0 | Stabil: 57s | idle
+2026-10-09 14:03:23,603 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-09 14:03:23,847 - INFO -    ⏳ [57s] Lagu baru: 1 | Stabil: 3s | suggestion
+2026-10-09 14:03:23,848 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-09 14:03:25,351 - INFO - [W3-P9224] 🎼 1 lagu baru.
+2026-10-09 14:03:25,352 - INFO - [W3-P9224] --- Download (lagu 1/1): Paper Parks ---
+2026-10-09 14:03:25,352 - INFO - 🎯 Download lagu UID 'Paper Parks||Paper Parks||y82' (lagu 1/1)...
+2026-10-09 14:03:25,362 - INFO - Mencari tombol titik 3 target...
+2026-10-09 14:03:26,386 - INFO -    🔄 [60s] Lagu baru: 1
+2026-10-09 14:03:26,387 - INFO -       • Where You Stood||Where You Stood||y82
+2026-10-09 14:03:26,520 - INFO - Berhasil klik titik 3.
+2026-10-09 14:03:27,521 - INFO - Membuka menu 'Download'...
+2026-10-09 14:03:29,069 - INFO - Submenu Download terbuka.
+2026-10-09 14:03:29,070 - INFO - Mengklik format 'WAV'...
+2026-10-09 14:03:29,492 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-09 14:03:29,783 - INFO -    ⏳ [64s] Lagu baru: 1 | Stabil: 3s | suggestion
+2026-10-09 14:03:29,784 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-09 14:03:31,185 - INFO - Berhasil klik WAV.
+2026-10-09 14:03:31,185 - INFO - Menunggu file download...
+2026-10-09 14:03:31,288 - INFO - [W2-P9223] 🎼 1 lagu baru.
+2026-10-09 14:03:31,289 - INFO - [W2-P9223] --- Download (lagu 1/1): Where You Stood ---
+2026-10-09 14:03:31,290 - INFO - 🎯 Download lagu UID 'Where You Stood||Where You Stood||y82' (lagu 1/1)...
+2026-10-09 14:03:31,301 - INFO - Mencari tombol titik 3 target...
+2026-10-09 14:03:32,528 - INFO - Berhasil klik titik 3.
+2026-10-09 14:03:33,529 - INFO - Membuka menu 'Download'...
+2026-10-09 14:03:35,227 - INFO - Submenu Download terbuka.
+2026-10-09 14:03:35,227 - INFO - Mengklik format 'WAV'...
+2026-10-09 14:03:37,575 - INFO - Berhasil klik WAV.
+2026-10-09 14:03:37,578 - INFO - Menunggu file download...
+2026-10-09 14:03:38,099 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Paper Parks.wav
+2026-10-09 14:03:42,126 - INFO - [W3-P9224] ✅ Selesai: 1/1 lagu.
+
+2026-10-09 14:03:44,133 - INFO - ✂️  Prompt diambil. Sisa: 0
+2026-10-09 14:03:44,135 - INFO - 
+======================================================================
+2026-10-09 14:03:44,135 - INFO - [W3-P9224] 📝 Prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 14:03:44,135 - INFO - [W3-P9224] 📊 Sisa prompt: 0
+2026-10-09 14:03:44,135 - INFO - ======================================================================
+2026-10-09 14:03:44,147 - INFO - Mengisi prompt...
+2026-10-09 14:03:45,062 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Where You Stood.wav
+2026-10-09 14:03:49,096 - INFO - [W2-P9223] ✅ Selesai: 1/1 lagu.
+
+2026-10-09 14:03:51,098 - INFO - Tidak ada prompt tersisa.
+2026-10-09 14:03:51,098 - INFO - [W2-P9223] 🏁 File prompt habis. Worker selesai.
+2026-10-09 14:03:51,201 - INFO - [W2-P9223] 🔌 Koneksi Playwright ditutup.
+2026-10-09 14:03:54,235 - INFO - Prompt berhasil diisi.
+2026-10-09 14:03:55,368 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-10-09 14:03:55,368 - INFO - Menekan Enter untuk generate...
+2026-10-09 14:03:57,433 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-10-09 14:03:57,828 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-10-09 14:04:01,262 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-10-09 14:04:04,654 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-10-09 14:04:08,032 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | idle
+2026-10-09 14:04:11,502 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 14s | idle
+2026-10-09 14:04:14,914 - INFO -    ⏳ [17s] Lagu baru: 0 | Stabil: 17s | idle
+2026-10-09 14:04:18,364 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 20s | idle
+2026-10-09 14:04:21,751 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 24s | idle
+2026-10-09 14:04:25,616 - INFO -    ⏳ [27s] Lagu baru: 0 | Stabil: 28s | idle
+2026-10-09 14:04:28,987 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | loading
+2026-10-09 14:04:32,319 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | loading
+2026-10-09 14:04:35,676 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 38s | loading
+2026-10-09 14:04:39,051 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | loading
+2026-10-09 14:04:42,456 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 45s | loading
+2026-10-09 14:04:45,873 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 48s | loading
+2026-10-09 14:04:49,334 - INFO -    ⏳ [51s] Lagu baru: 0 | Stabil: 51s | loading
+2026-10-09 14:04:52,428 - INFO -    💬 Tombol saran AI terdeteksi — AI selesai generate.
+2026-10-09 14:04:52,790 - INFO -    ⏳ [54s] Lagu baru: 0 | Stabil: 55s | suggestion
+2026-10-09 14:04:56,273 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 58s | suggestion
+2026-10-09 14:04:59,676 - INFO -    ⏳ [61s] Lagu baru: 0 | Stabil: 62s | suggestion
+2026-10-09 14:05:03,073 - INFO -    ⏳ [65s] Lagu baru: 0 | Stabil: 65s | suggestion
+2026-10-09 14:05:06,481 - INFO -    ⏳ [68s] Lagu baru: 0 | Stabil: 69s | suggestion
+2026-10-09 14:05:09,926 - INFO -    ⏳ [72s] Lagu baru: 0 | Stabil: 72s | suggestion
+2026-10-09 14:05:13,385 - INFO -    ⏳ [75s] Lagu baru: 0 | Stabil: 75s | suggestion
+2026-10-09 14:05:16,811 - INFO -    ⏳ [78s] Lagu baru: 0 | Stabil: 79s | suggestion
+2026-10-09 14:05:20,219 - INFO -    ⏳ [82s] Lagu baru: 0 | Stabil: 82s | suggestion
+2026-10-09 14:05:23,615 - INFO -    ⏳ [85s] Lagu baru: 0 | Stabil: 86s | suggestion
+2026-10-09 14:05:27,005 - INFO -    ⏳ [89s] Lagu baru: 0 | Stabil: 89s | suggestion
+2026-10-09 14:05:30,448 - INFO -    ⏳ [92s] Lagu baru: 0 | Stabil: 93s | suggestion
+2026-10-09 14:05:33,862 - INFO -    ⏳ [96s] Lagu baru: 0 | Stabil: 96s | suggestion
+2026-10-09 14:05:37,313 - INFO -    ⏳ [99s] Lagu baru: 0 | Stabil: 99s | suggestion
+2026-10-09 14:05:40,714 - INFO -    ⏳ [102s] Lagu baru: 0 | Stabil: 103s | suggestion
+2026-10-09 14:05:44,122 - INFO -    ⏳ [106s] Lagu baru: 0 | Stabil: 106s | suggestion
+2026-10-09 14:05:47,488 - INFO -    ⏳ [109s] Lagu baru: 0 | Stabil: 110s | suggestion
+2026-10-09 14:05:50,913 - INFO -    ⏳ [113s] Lagu baru: 0 | Stabil: 113s | suggestion
+2026-10-09 14:05:54,474 - INFO -    ⏳ [116s] Lagu baru: 0 | Stabil: 117s | suggestion
+2026-10-09 14:05:57,978 - INFO -    🔄 [120s] Lagu baru: 1
+2026-10-09 14:05:57,979 - INFO -       • Home of Stone||Home of Stone||y40
+2026-10-09 14:05:57,979 - INFO - 🎵 Selesai! 1 lagu baru terdeteksi.
+2026-10-09 14:05:59,482 - INFO - [W3-P9224] 🎼 1 lagu baru.
+2026-10-09 14:05:59,483 - INFO - [W3-P9224] --- Download (lagu 1/1): Home of Stone ---
+2026-10-09 14:05:59,483 - INFO - 🎯 Download lagu UID 'Home of Stone||Home of Stone||y40' (lagu 1/1)...
+2026-10-09 14:05:59,493 - INFO - Mencari tombol titik 3 target...
+2026-10-09 14:06:00,791 - INFO - Berhasil klik titik 3.
+2026-10-09 14:06:01,792 - INFO - Membuka menu 'Download'...
+2026-10-09 14:06:03,329 - INFO - Submenu Download terbuka.
+2026-10-09 14:06:03,330 - INFO - Mengklik format 'WAV'...
+2026-10-09 14:06:05,437 - INFO - Berhasil klik WAV.
+2026-10-09 14:06:05,437 - INFO - Menunggu file download...
+2026-10-09 14:06:11,316 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Home of Stone.wav
+2026-10-09 14:06:15,333 - INFO - [W3-P9224] ✅ Selesai: 1/1 lagu.
+
+2026-10-09 14:06:17,334 - INFO - Tidak ada prompt tersisa.
+2026-10-09 14:06:17,334 - INFO - [W3-P9224] 🏁 File prompt habis. Worker selesai.
+2026-10-09 14:06:17,382 - INFO - [W3-P9224] 🔌 Koneksi Playwright ditutup.
+2026-10-09 14:06:17,383 - INFO - 
+======================================================================
+2026-10-09 14:06:17,384 - INFO - 🏁 BOT SELESAI - Semua prompt diproses!
+2026-10-09 14:06:17,384 - INFO - ======================================================================
+2026-10-09 14:13:59,112 - INFO - 🌐 Membuka 5 browser...
+2026-10-09 14:13:59,117 - INFO - ✅ Script launch_profiles.sh dijalankan.
+2026-10-09 14:14:59,625 - INFO - 🌐 Membuka 4 browser...
+2026-10-09 14:14:59,627 - INFO - ✅ Script launch_profiles.sh dijalankan.
+2026-10-09 14:15:57,410 - INFO - 📁 File prompt dipilih: /datapentingbackup/bot/prompts.txt
+2026-10-09 14:16:06,614 - INFO - ============================================================
+2026-10-09 14:16:06,615 - INFO - 🚀 BOT DIMULAI
+2026-10-09 14:16:06,615 - INFO - ============================================================
+2026-10-09 14:16:06,810 - INFO - 📚 Total prompt: 7
+2026-10-09 14:16:06,818 - INFO - 🎯 Browser: 4 port [9222, 9223, 9224, 9225]
+2026-10-09 14:16:06,822 - INFO - [W1-P9222] 🟢 Connect port 9222...
+2026-10-09 14:16:07,123 - INFO - [W2-P9223] 🟢 Connect port 9223...
+2026-10-09 14:16:07,424 - INFO - [W3-P9224] 🟢 Connect port 9224...
+2026-10-09 14:16:07,724 - INFO - [W4-P9225] 🟢 Connect port 9225...
+2026-10-09 14:16:08,074 - INFO - [W1-P9222] ✅ Terhubung.
+2026-10-09 14:16:08,116 - INFO - [W2-P9223] ✅ Terhubung.
+2026-10-09 14:16:08,641 - INFO - [W3-P9224] ✅ Terhubung.
+2026-10-09 14:16:09,017 - INFO - [W4-P9225] ✅ Terhubung.
+2026-10-09 14:16:10,079 - INFO - 
+============================================================
+2026-10-09 14:16:10,080 - INFO - [W1-P9222] 📝 Prompt: Create a completely original dry-stone-wall-builder's-patien...
+2026-10-09 14:16:10,081 - INFO - [W1-P9222] 📊 Sisa: 6
+2026-10-09 14:16:10,088 - INFO - ============================================================
+2026-10-09 14:16:10,120 - INFO - 
+============================================================
+2026-10-09 14:16:10,120 - INFO - [W2-P9223] 📝 Prompt: Create a completely original adobe-brick-making-sun folk son...
+2026-10-09 14:16:10,121 - INFO - [W2-P9223] 📊 Sisa: 5
+2026-10-09 14:16:10,122 - INFO - ============================================================
+2026-10-09 14:16:10,644 - INFO - 
+============================================================
+2026-10-09 14:16:10,644 - INFO - [W3-P9224] 📝 Prompt: Create a completely original thatched-roof-maker's-craft bal...
+2026-10-09 14:16:10,646 - INFO - [W3-P9224] 📊 Sisa: 4
+2026-10-09 14:16:10,648 - INFO - ============================================================
+2026-10-09 14:16:11,021 - INFO - 
+============================================================
+2026-10-09 14:16:11,022 - INFO - [W4-P9225] 📝 Prompt: Create a completely original log-cabin-builder's-first-notch...
+2026-10-09 14:16:11,023 - INFO - [W4-P9225] 📊 Sisa: 3
+2026-10-09 14:16:11,024 - INFO - ============================================================
+2026-10-09 14:16:35,693 - WARNING - ⏹️ User menekan STOP. Menghentikan...
+2026-10-09 14:16:43,606 - WARNING - ⏹️ User menekan STOP. Menghentikan...
+2026-10-09 14:16:44,279 - WARNING - ⏹️ User menekan STOP. Menghentikan...
+2026-10-09 14:16:44,558 - WARNING - ⏹️ User menekan STOP. Menghentikan...
+2026-10-09 14:17:20,187 - ERROR - [W1-P9222] ❌ Gagal input.
+2026-10-09 14:17:20,245 - ERROR - [W2-P9223] ❌ Gagal input.
+2026-10-09 14:17:20,730 - ERROR - [W3-P9224] ❌ Gagal input.
+2026-10-09 14:17:23,827 - INFO - [W4-P9225] 🎼 3 lagu.
+2026-10-09 14:26:39,510 - INFO - 🌐 Membuka 3 browser...
+2026-10-09 14:26:39,511 - INFO - ✅ launch_profiles.sh dijalankan dengan 3 browser.
+2026-10-09 14:27:39,044 - INFO - 🌐 Membuka 4 browser...
+2026-10-09 14:27:39,048 - INFO - ✅ launch_profiles.sh dijalankan dengan 4 browser.
+2026-10-09 14:28:27,946 - INFO - 📁 File prompt dipilih: /datapentingbackup/bot/prompts.txt
+2026-10-09 14:28:41,840 - INFO - ============================================================
+2026-10-09 14:28:41,841 - INFO - 🚀 BOT DIMULAI
+2026-10-09 14:28:41,841 - INFO - ============================================================
+2026-10-09 14:28:42,273 - INFO - 📚 Total prompt: 3
+2026-10-09 14:28:42,274 - INFO - 🎯 Browser: 4 port [9222, 9223, 9224, 9225]
+2026-10-09 14:28:42,277 - INFO - [W1-P9222] 🟢 Connect port 9222...
+2026-10-09 14:28:42,578 - INFO - [W2-P9223] 🟢 Connect port 9223...
+2026-10-09 14:28:42,880 - INFO - [W3-P9224] 🟢 Connect port 9224...
+2026-10-09 14:28:43,181 - INFO - [W4-P9225] 🟢 Connect port 9225...
+2026-10-09 14:28:43,536 - ERROR - [W2-P9223] ❌ Fatal: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9223
+connect ECONNREFUSED 127.0.0.1:9223
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9223
+
+2026-10-09 14:28:43,630 - INFO - [W1-P9222] ✅ Terhubung.
+2026-10-09 14:28:43,774 - ERROR - [W3-P9224] ❌ Fatal: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9224
+connect ECONNREFUSED 127.0.0.1:9224
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9224
+
+2026-10-09 14:28:44,186 - INFO - [W4-P9225] ✅ Terhubung.
+2026-10-09 14:28:45,633 - INFO - 
+============================================================
+2026-10-09 14:28:45,634 - INFO - [W1-P9222] 📝 Prompt: Create a completely original tiny-house-builder's-dream pop ...
+2026-10-09 14:28:45,635 - INFO - [W1-P9222] 📊 Sisa: 2
+2026-10-09 14:28:45,637 - INFO - ============================================================
+2026-10-09 14:28:46,189 - INFO - 
+============================================================
+2026-10-09 14:28:46,189 - INFO - [W4-P9225] 📝 Prompt: Create a completely original houseboat-builder's-hull folk s...
+2026-10-09 14:28:46,191 - INFO - [W4-P9225] 📊 Sisa: 1
+2026-10-09 14:28:46,193 - INFO - ============================================================
+2026-10-09 14:29:30,736 - ERROR - [W1-P9222] ❌ Gagal input.
+2026-10-09 14:29:30,741 - INFO - 
+============================================================
+2026-10-09 14:29:30,753 - INFO - [W1-P9222] 📝 Prompt: Create a completely original tiny-house-builder's-dream pop ...
+2026-10-09 14:29:30,756 - INFO - [W1-P9222] 📊 Sisa: 1
+2026-10-09 14:29:30,758 - INFO - ============================================================
+2026-10-09 14:30:05,103 - INFO - [W4-P9225] 🎼 3 lagu.
+2026-10-09 14:30:15,830 - ERROR - [W1-P9222] ❌ Gagal input.
+2026-10-09 14:30:15,835 - INFO - 
+============================================================
+2026-10-09 14:30:15,846 - INFO - [W1-P9222] 📝 Prompt: Create a completely original tiny-house-builder's-dream pop ...
+2026-10-09 14:30:15,849 - INFO - [W1-P9222] 📊 Sisa: 1
+2026-10-09 14:30:15,851 - INFO - ============================================================
+2026-10-09 14:30:52,926 - INFO - [W4-P9225] ✅ 2/3 lagu.
+
+2026-10-09 14:30:54,928 - INFO - 
+============================================================
+2026-10-09 14:30:54,929 - INFO - [W4-P9225] 📝 Prompt: Create a completely original barn-raising-Saturday Americana...
+2026-10-09 14:30:54,931 - INFO - [W4-P9225] 📊 Sisa: 0
+2026-10-09 14:30:54,934 - INFO - ============================================================
+2026-10-09 14:31:00,973 - ERROR - [W1-P9222] ❌ Gagal input.
+2026-10-09 14:31:00,978 - INFO - 
+============================================================
+2026-10-09 14:31:00,989 - INFO - [W1-P9222] 📝 Prompt: Create a completely original tiny-house-builder's-dream pop ...
+2026-10-09 14:31:00,992 - INFO - [W1-P9222] 📊 Sisa: 0
+2026-10-09 14:31:00,994 - INFO - ============================================================
+2026-10-09 14:31:22,604 - INFO - [W4-P9225] 🎼 1 lagu.
+2026-10-09 14:31:32,198 - INFO - [W4-P9225] ✅ 0/1 lagu.
+
+2026-10-09 14:31:34,200 - INFO - [W4-P9225] 🏁 Prompt habis.
+2026-10-09 14:31:46,093 - ERROR - [W1-P9222] ❌ Gagal input.
+2026-10-09 14:31:46,097 - INFO - 
+============================================================
+2026-10-09 14:31:46,104 - INFO - [W1-P9222] 📝 Prompt: Create a completely original tiny-house-builder's-dream pop ...
+2026-10-09 14:31:46,107 - INFO - [W1-P9222] 📊 Sisa: 0
+2026-10-09 14:31:46,109 - INFO - ============================================================
+2026-10-09 14:31:50,663 - WARNING - ⏹️ User menekan STOP. Menghentikan...

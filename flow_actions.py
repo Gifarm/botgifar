@@ -13,7 +13,6 @@ MORE_BTN_SELECTOR = "button[aria-label*='more' i], button[title*='more' i], butt
 STABLE_THRESHOLD_SECONDS = 15
 POLL_INTERVAL_SECONDS = 3
 
-# Tombol saran AI (tanda AI selesai generate & bertanya)
 SUGGESTION_BTN_SELECTOR = (
     "button:has-text('Take 1'), button:has-text('Take 2'), button:has-text('Take 3'), "
     "button:has-text('sounds warmer'), button:has-text('hear Take'), "
@@ -21,25 +20,77 @@ SUGGESTION_BTN_SELECTOR = (
     "button:has-text('Try a')"
 )
 
+# Selector untuk deteksi error (credits habis, limit, dll)
+ERROR_KEYWORD_SELECTOR = (
+    "text=/no credits/i, "
+    "text=/credit.*habis/i, "
+    "text=/out of credits/i, "
+    "text=/insufficient/i, "
+    "text=/limit reached/i, "
+    "text=/daily limit/i, "
+    "text=/try again later/i, "
+    "text=/rate limit/i"
+)
+
 
 # ==============================================================================
-# HELPER: DETEKSI LAGU (UID UNIK PER BARIS)
+# DETEKSI ERROR / CREDITS HABIS
+# ==============================================================================
+def check_credits_or_rate_limit(page) -> bool:
+    """
+    Cek apakah ada pesan error (credits habis, limit, dll).
+    Return True kalau ADA error (artinya harus stop pakai prompt ini).
+    """
+    try:
+        # Cek pesan error
+        if page.locator(ERROR_KEYWORD_SELECTOR).first.is_visible(timeout=1000):
+            logger.warning("🚫 Terdeteksi pesan error (credits/limit).")
+            return True
+    except:
+        pass
+    return False
+
+
+def check_generate_started(page, old_uids: set, timeout: int = 15) -> str:
+    """
+    Cek apakah generate benar-benar mulai setelah Enter.
+    Return:
+      - "started"    : generate mulai (ada loading / lagu baru)
+      - "no_credits" : credits habis / tidak ada reaksi
+      - "unknown"    : tidak jelas
+    """
+    start = time.time()
+    while time.time() - start < timeout:
+        # Cek error dulu
+        if check_credits_or_rate_limit(page):
+            return "no_credits"
+
+        # Cek apakah ada lagu baru
+        current_rows = _get_song_rows(page)
+        current_uids = set(r["uid"] for r in current_rows)
+        new_uids = current_uids - old_uids
+        if new_uids:
+            return "started"
+
+        # Cek apakah ada loading indicator
+        for sel in ["text=/generating/i", "text=/loading/i",
+                    "[class*='spinner']", "svg[class*='animate-spin']"]:
+            try:
+                if page.locator(sel).first.is_visible(timeout=300):
+                    return "started"
+            except:
+                continue
+
+        time.sleep(1)
+
+    return "unknown"
+
+
+# ==============================================================================
+# SISA FILE — TETAP SAMA SEPERTI SEBELUMNYA
 # ==============================================================================
 def _get_song_rows(page) -> list:
-    """
-    Return list of dict per baris lagu.
-
-    Setiap item: {
-        "uid": str,        # identifier unik (title + subtitle + Y)
-        "title": str,      # judul lagu
-        "subtitle": str,   # deskripsi singkat
-        "y": float,        # posisi Y (untuk sorting)
-        "button": Locator, # tombol titik 3
-    }
-
-    PENTING: UID unik pakai kombinasi title + subtitle + Y-bucket,
-    supaya lagu dengan judul sama tetap terdeteksi sebagai baris berbeda.
-    """
+    """Return list of dict per baris lagu."""
     results = []
     try:
         win = page.evaluate("({w: window.innerWidth, h: window.innerHeight})")
@@ -52,7 +103,7 @@ def _get_song_rows(page) -> list:
                 box = btn.bounding_box()
                 if not box:
                     continue
-                if box["x"] < win["w"] * 0.4:  # skip sidebar
+                if box["x"] < win["w"] * 0.4:
                     continue
                 if box["y"] < 0 or box["y"] > win["h"]:
                     continue
@@ -63,7 +114,6 @@ def _get_song_rows(page) -> list:
                 title = info.get("title") or f"__unknown_{int(box['y'])}"
                 subtitle = info.get("subtitle") or ""
 
-                # UID: gabungan title + subtitle + Y-bucket (10px granularity)
                 y_bucket = int(box["y"] / 10)
                 uid = f"{title}||{subtitle[:60]}||y{y_bucket}"
 
@@ -78,10 +128,7 @@ def _get_song_rows(page) -> list:
                 logger.debug(f"Skip tombol #{idx}: {e}")
                 continue
 
-        # Sort dari atas ke bawah
         results.sort(key=lambda r: r["y"])
-
-        # Dedup berdasarkan UID (yang benar-benar unik)
         seen = set()
         deduped = []
         for r in results:
@@ -89,7 +136,6 @@ def _get_song_rows(page) -> list:
                 continue
             seen.add(r["uid"])
             deduped.append(r)
-
         return deduped
     except Exception as e:
         logger.debug(f"Gagal ambil baris lagu: {e}")
@@ -97,10 +143,6 @@ def _get_song_rows(page) -> list:
 
 
 def _find_song_info_near_button(page, btn) -> dict:
-    """
-    Cari judul + subtitle dari container tombol titik 3.
-    Return: {"title": str, "subtitle": str}
-    """
     try:
         info = page.evaluate("""
         (btn) => {
@@ -131,13 +173,11 @@ def _find_song_info_near_button(page, btn) -> dict:
         }
         """, btn.element_handle())
         return info or {"title": None, "subtitle": ""}
-    except Exception as e:
-        logger.debug(f"Gagal cari info lagu: {e}")
+    except:
         return {"title": None, "subtitle": ""}
 
 
 def _has_suggestion_buttons(page) -> bool:
-    """Cek apakah Flow Music menampilkan tombol saran (AI bertanya)."""
     try:
         btns = page.locator(SUGGESTION_BTN_SELECTOR)
         count = btns.count()
@@ -152,9 +192,6 @@ def _has_suggestion_buttons(page) -> bool:
         return False
 
 
-# ==============================================================================
-# ALERT BROWSER
-# ==============================================================================
 def show_alert(page, message):
     try:
         page.evaluate(f'alert("{message}");')
@@ -162,9 +199,6 @@ def show_alert(page, message):
         logger.warning(f"Gagal menampilkan alert: {message}")
 
 
-# ==============================================================================
-# INPUT PROMPT
-# ==============================================================================
 def input_prompt(page, prompt: str) -> bool:
     logger.info("Mengisi prompt...")
     input_selectors = [
@@ -185,20 +219,15 @@ def input_prompt(page, prompt: str) -> bool:
     return False
 
 
-# ==============================================================================
-# GENERATE & TUNGGU SEMUA LAGU BARU
-# ==============================================================================
-def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
+def generate_and_wait_all_songs(page, max_wait_seconds: int = 300,
+                                 stop_event=None) -> list:
     """
-    Tekan Enter, tunggu SEMUA lagu baru muncul (berdasarkan UID unik).
+    Tekan Enter, tunggu SEMUA lagu baru muncul.
+    stop_event: threading.Event — kalau di-set, function langsung return [].
+    """
+    def _stopped():
+        return stop_event is not None and stop_event.is_set()
 
-    Strategi:
-    1. Snapshot UID lagu SEBELUM Enter.
-    2. Tekan Enter.
-    3. Polling: cari UID baru.
-    4. Kalau muncul tombol saran AI → anggap selesai.
-    5. Tunggu sampai stabil → return list lagu baru.
-    """
     try:
         page.evaluate("window.scrollTo({top: 0, behavior: 'smooth'})")
         page.wait_for_timeout(800)
@@ -213,31 +242,44 @@ def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
     page.keyboard.press("Enter")
     page.wait_for_timeout(2000)
 
+    # Cek apakah generate benar-benar mulai
+    status = check_generate_started(page, baseline_uids, timeout=15)
+    if status == "no_credits":
+        logger.error("🚫 Credits habis / rate limit. Prompt akan dikembalikan.")
+        return []  # akan ditangani di worker
+    elif status == "started":
+        logger.info("✅ Generate terdeteksi mulai.")
+    else:
+        logger.warning("⚠️ Generate tidak jelas. Lanjut tunggu...")
+
     start_time = time.time()
     last_change_time = time.time()
     last_new_uids = set()
-    attempt = 0
     suggestion_seen = False
 
     loading_selectors = [
-        "text=/generating/i",
-        "text=/loading/i",
-        "[class*='spinner']",
-        "[class*='loading']",
+        "text=/generating/i", "text=/loading/i",
+        "[class*='spinner']", "[class*='loading']",
         "svg[class*='animate-spin']",
     ]
 
     logger.info(f"⏳ Menunggu lagu baru (stabil {STABLE_THRESHOLD_SECONDS}s)...")
 
     while True:
-        elapsed = time.time() - start_time
-        attempt += 1
+        if _stopped():
+            logger.warning("⏹️ Stop event — keluar dari generate_and_wait_all_songs.")
+            return []
 
+        elapsed = time.time() - start_time
         if elapsed > max_wait_seconds:
             logger.error(f"❌ Timeout total setelah {max_wait_seconds}s.")
             break
 
-        # Cek loading
+        # Cek error credits di tengah jalan
+        if check_credits_or_rate_limit(page):
+            logger.error("🚫 Credits habis di tengah generate.")
+            return []
+
         still_loading = False
         for sel in loading_selectors:
             try:
@@ -247,18 +289,15 @@ def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
             except:
                 continue
 
-        # Cek suggestion buttons
         if _has_suggestion_buttons(page):
             if not suggestion_seen:
-                logger.info(f"   💬 Tombol saran AI terdeteksi — AI selesai generate.")
+                logger.info(f"   💬 Tombol saran AI terdeteksi.")
             suggestion_seen = True
 
-        # Ambil UID lagu sekarang
         current_rows = _get_song_rows(page)
         current_uids = set(r["uid"] for r in current_rows)
         new_uids = current_uids - baseline_uids
 
-        # Deteksi perubahan
         if new_uids != last_new_uids:
             logger.info(f"   🔄 [{int(elapsed)}s] Lagu baru: {len(new_uids)}")
             for uid in list(new_uids)[:5]:
@@ -267,14 +306,13 @@ def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
             last_new_uids = new_uids
         else:
             stable_duration = time.time() - last_change_time
-            status = "loading" if still_loading else ("suggestion" if suggestion_seen else "idle")
-            logger.info(f"   ⏳ [{int(elapsed)}s] Lagu baru: {len(new_uids)} | Stabil: {int(stable_duration)}s | {status}")
+            status2 = "loading" if still_loading else ("suggestion" if suggestion_seen else "idle")
+            logger.info(f"   ⏳ [{int(elapsed)}s] Lagu baru: {len(new_uids)} | Stabil: {int(stable_duration)}s | {status2}")
 
-        # === KONDISI SELESAI ===
         stable_duration = time.time() - last_change_time
         if len(new_uids) >= 1 and not still_loading:
             if suggestion_seen or stable_duration >= STABLE_THRESHOLD_SECONDS:
-                logger.info(f"🎵 Selesai! {len(new_uids)} lagu baru terdeteksi.")
+                logger.info(f"🎵 Selesai! {len(new_uids)} lagu baru.")
                 page.wait_for_timeout(1500)
                 result = [r for r in current_rows if r["uid"] in new_uids]
                 result.sort(key=lambda r: r["y"])
@@ -282,44 +320,42 @@ def generate_and_wait_all_songs(page, max_wait_seconds: int = 300) -> list:
 
         page.wait_for_timeout(POLL_INTERVAL_SECONDS * 1000)
 
-    # Timeout fallback
     final_rows = _get_song_rows(page)
     final_uids = set(r["uid"] for r in final_rows)
     new_uids = final_uids - baseline_uids
     if new_uids:
-        logger.warning(f"⚠️ Timeout tapi dapat {len(new_uids)} lagu. Lanjut download.")
+        logger.warning(f"⚠️ Timeout tapi dapat {len(new_uids)} lagu.")
         result = [r for r in final_rows if r["uid"] in new_uids]
         result.sort(key=lambda r: r["y"])
         return result
 
-    logger.error("❌ Tidak ada lagu baru yang muncul.")
+    logger.error("❌ Tidak ada lagu baru.")
     return []
 
 
-# ==============================================================================
-# DOWNLOAD BERDASARKAN UID
-# ==============================================================================
-def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_list: list, label: str = "") -> bool:
-    """
-    Download lagu berdasarkan UID unik (title + subtitle + Y-bucket).
-    Ini memastikan lagu dengan judul sama tetap ter-download semua.
-    """
+def download_song_by_uid(page, target_uid: str, download_dir: str,
+                          downloads_list: list, label: str = "",
+                          stop_event=None) -> bool:
+    """Download lagu berdasarkan UID."""
+    def _stopped():
+        return stop_event is not None and stop_event.is_set()
+
+    if _stopped():
+        return False
+
     logger.info(f"🎯 Download lagu UID '{target_uid[:70]}' {label}...")
 
-    # Handle popup AI
     try:
         ai_buttons = page.locator(
             "button:has-text('Continue'), button:has-text('Gunakan'), "
             "button:has-text('Accept'), button:has-text('Yes'), button:has-text('Lanjutkan')"
         )
         if ai_buttons.count() > 0:
-            logger.info("Popup AI terdeteksi. Menutup...")
             ai_buttons.first.click()
             time.sleep(1.5)
     except:
         pass
 
-    # === A. Cari tombol titik 3 berdasarkan UID ===
     logger.info("Mencari tombol titik 3 target...")
     try:
         rows = _get_song_rows(page)
@@ -328,11 +364,9 @@ def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_lis
             if r["uid"] == target_uid:
                 target_row = r
                 break
-
         if target_row is None:
-            logger.error(f"Lagu UID '{target_uid[:70]}' tidak ditemukan.")
+            logger.error(f"Lagu UID tidak ditemukan.")
             return False
-
         target = target_row["button"]
         target.scroll_into_view_if_needed(timeout=5000)
         target.hover(timeout=5000)
@@ -345,7 +379,9 @@ def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_lis
 
     time.sleep(1)
 
-    # === B. Buka Submenu Download ===
+    if _stopped():
+        return False
+
     logger.info("Membuka menu 'Download'...")
     try:
         wav_item = page.locator("[role='menuitem']:visible").filter(has_text=re.compile(r"^\s*WAV\s*$")).first
@@ -362,7 +398,6 @@ def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_lis
         time.sleep(0.9)
 
         if not wav_item.is_visible():
-            logger.info("Hover kurang, pakai keyboard (ArrowRight)...")
             dl_item.focus()
             page.keyboard.press("ArrowRight")
             time.sleep(0.9)
@@ -373,7 +408,6 @@ def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_lis
         logger.error(f"Gagal buka submenu Download: {e}")
         return False
 
-    # === C. Klik WAV ===
     logger.info("Mengklik format 'WAV'...")
     try:
         wav_item.wait_for(state="visible", timeout=4000)
@@ -395,31 +429,27 @@ def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_lis
         time.sleep(1)
 
         if wav_item.is_visible():
-            logger.info("Klik belum kena, fokus + Enter...")
             wav_item.focus()
             page.keyboard.press("Enter")
             time.sleep(1)
 
         if wav_item.is_visible():
             raise Exception("Menu WAV masih terbuka")
-
         logger.info("Berhasil klik WAV.")
     except Exception as e:
         logger.error(f"Gagal klik WAV: {e}")
         return False
 
-    # === D. Tunggu & Simpan ===
     logger.info("Menunggu file download...")
     waited = 0
     while not downloads_list and waited < 60000:
+        if _stopped():
+            return False
         page.wait_for_timeout(500)
         waited += 500
 
     if downloads_list:
         dl = downloads_list.pop(0)
-
-        # Nama file: prioritas suggested_filename dari server,
-        # fallback: title + subtitle + Y-bucket biar unik
         suggested = dl.suggested_filename
         if suggested and os.path.splitext(suggested)[1]:
             name = suggested
@@ -441,13 +471,10 @@ def download_song_by_uid(page, target_uid: str, download_dir: str, downloads_lis
         logger.info(f"✅ File tersimpan: {target_path}")
         return True
     else:
-        logger.warning("Tidak ada download terdeteksi dalam 60 detik.")
+        logger.warning("Tidak ada download terdeteksi.")
         return False
 
 
-# ==============================================================================
-# UTIL: TUTUP MENU
-# ==============================================================================
 def close_menus(page):
     try:
         page.keyboard.press("Escape")

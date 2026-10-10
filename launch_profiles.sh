@@ -1,19 +1,21 @@
 #!/bin/bash
-# Script untuk buka 5 profile Brave/Chromium sekaligus (Linux)
+# Script untuk buka N profile Brave/Chromium (default 5)
+# Usage: ./launch_profiles.sh [jumlah]
 
-BRAVE="/usr/bin/brave-browser"  # atau "chromium-browser" atau "google-chrome"
+N=${1:-5}
+
+BRAVE="/usr/bin/brave-browser"  # sesuaikan: chromium-browser, google-chrome, dll
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo "Membuka 5 profile browser..."
+echo "Membuka $N profile browser..."
 
-$BRAVE --remote-debugging-port=9222 --user-data-dir="$BASE_DIR/profiles/profile_1" &
-sleep 2
-$BRAVE --remote-debugging-port=9223 --user-data-dir="$BASE_DIR/profiles/profile_2" &
-sleep 2
-$BRAVE --remote-debugging-port=9224 --user-data-dir="$BASE_DIR/profiles/profile_3" &
-sleep 2
-$BRAVE --remote-debugging-port=9225 --user-data-dir="$BASE_DIR/profiles/profile_4" &
-sleep 2
-$BRAVE --remote-debugging-port=9226 --user-data-dir="$BASE_DIR/profiles/profile_5" &
+for i in $(seq 1 $N); do
+    PORT=$((9221 + i))
+    PROFILE_DIR="$BASE_DIR/profiles/profile_$i"
+    mkdir -p "$PROFILE_DIR"
+    echo "  → Profile $i (port $PORT)"
+    $BRAVE --remote-debugging-port=$PORT --user-data-dir="$PROFILE_DIR" &
+    sleep 2
+done
 
-echo "✅ 5 profile dibuka. Login manual, lalu jalankan: python main.py"
+echo "✅ $N profile dibuka. Login manual, lalu jalankan bot."
