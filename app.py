@@ -14,6 +14,7 @@ import logging
 import os
 import threading
 import tkinter as tk
+from collections import deque
 from tkinter import filedialog, messagebox
 
 import customtkinter as ctk
@@ -24,7 +25,10 @@ from prompts import PromptQueue, count_prompts
 from worker import BotRunner
 
 APP_TITLE = "Flow Music Bot"
-APP_VERSION = "3.0.1"
+APP_VERSION = "3.0.2"
+
+# Batas baris log yang disimpan di kotak log GUI.
+LOG_MAX_LINES = 2000
 
 # Warna status kartu (mode terang, mode gelap)
 STATE_COLORS = {
@@ -126,6 +130,26 @@ class BotApp(ctk.CTk):
         self.card_visible: dict[int, bool] = {}
         self.card_widgets: dict[int, dict] = {}
         self._last_stats: dict[str, int] = {}
+
+        # --- cache/optimasi UI (mencegah redraw & I/O berulang) --------------
+        # Log dikumpulkan di deque, lalu ditulis sekali per tick (bukan satu
+        # event Tk per baris log).
+        self._log_buffer: deque[str] = deque(maxlen=4000)
+        # Sidik jari tampilan tiap kartu; kalau sama, tidak di-configure ulang.
+        self._card_render_cache: dict[int, tuple] = {}
+        self._browser_label_cache: str | None = None
+        # Hasil cek browser hidup (diisi thread pemantau, bukan thread UI).
+        self._browser_alive: dict[int, bool] = {}
+        self._poll_busy = False
+        # Sidik jari file prompt supaya tidak dibaca ulang tiap event progres.
+        self._prompt_file_sig: tuple[str, int, int] | None = None
+        self._prompt_info_text = ""
+        self._progress_text = ""
+        self._active_hint: tuple[str, str] | None = None
+        self._run_btn_on: bool | None = None
+        # Opsi sembunyikan diambil saat start, supaya thread worker tidak
+        # menyentuh variabel Tk (Tk hanya boleh diakses dari thread UI).
+        self._run_hide_browsers = bool(self.hide_on_start.get())
 
         # ---------------- UI ----------------
         self._build_ui()
@@ -327,13 +351,14 @@ class BotApp(ctk.CTk):
     # LOG KE GUI
     # ==========================================================================
     def _attach_gui_log_handler(self) -> None:
-        app = self
+        buffer = self._log_buffer
 
         class GUIHandler(logging.Handler):
             def emit(self, record):
+                # Cukup masukkan ke antrean; penulisan ke widget dilakukan
+                # sekaligus oleh _drain_log (jauh lebih ringan untuk UI).
                 try:
-                    message = self.format(record)
-                    app.after(0, app._append_log, message)
+                    buffer.append(self.format(record))
                 except Exception:
                     pass
 
@@ -343,16 +368,43 @@ class BotApp(ctk.CTk):
         )
         handler.setLevel(logging.INFO)
         logging.getLogger().addHandler(handler)
+        self.after(200, self._drain_log)
+
+    def _drain_log(self) -> None:
+        """Tulis log yang terkumpul sekaligus, maksimal beberapa kali per detik."""
+        try:
+            if self._log_buffer:
+                lines = []
+                # Batasi per tick supaya Tk tidak kewalahan saat log membanjir.
+                for _ in range(min(len(self._log_buffer), 200)):
+                    try:
+                        lines.append(self._log_buffer.popleft())
+                    except IndexError:
+                        break
+                if lines:
+                    self._append_log("\n".join(lines))
+        except Exception:
+            pass
+        finally:
+            try:
+                self.after(200, self._drain_log)
+            except Exception:
+                pass
 
     def _append_log(self, message: str) -> None:
         try:
+            # Kalau user sedang scroll ke atas, jangan paksa lompat ke bawah.
+            at_bottom = self.log_box.yview()[1] >= 0.999
             self.log_box.configure(state="normal")
             self.log_box.insert("end", message + "\n")
-            # Batasi supaya tidak tumbuh tanpa batas.
-            if int(self.log_box.index("end-1c").split(".")[0]) > 5000:
-                self.log_box.delete("1.0", "500.0")
-            self.log_box.see("end")
+            # Batasi supaya tidak tumbuh tanpa batas (dipotong sekali saja).
+            total = int(self.log_box.index("end-1c").split(".")[0])
+            if total > LOG_MAX_LINES:
+                self.log_box.delete("1.0", f"{total - LOG_MAX_LINES + 1}.0")
+                total = LOG_MAX_LINES
             self.log_box.configure(state="disabled")
+            if at_bottom:
+                self.log_box.see("end")
         except Exception:
             pass
 
@@ -363,6 +415,7 @@ class BotApp(ctk.CTk):
         for widget in self.cards_frame.winfo_children():
             widget.destroy()
         self.card_widgets.clear()
+        self._card_render_cache.clear()
 
         count = self.manager.count
         columns = min(count, 5)
@@ -394,12 +447,8 @@ class BotApp(ctk.CTk):
         title.pack(anchor="w", padx=10, pady=(8, 0))
 
         port = profile.port if profile else config.base_port(index)
-        browser_label = self._current_browser_label()
-        subtitle_text = f"Port {port}"
-        if browser_label != "tidak ditemukan":
-            subtitle_text += f" • {browser_label}"
         subtitle = ctk.CTkLabel(
-            card, text=subtitle_text,
+            card, text=self._browser_subtitle(port),
             text_color="gray", font=ctk.CTkFont(size=11),
         )
         subtitle.pack(anchor="w", padx=10)
@@ -479,43 +528,58 @@ class BotApp(ctk.CTk):
         message = self.card_message.get(index, "")
         profile = self.manager.get(index)
 
-        widgets["status"].configure(
-            text=STATE_TEXT.get(state, state),
-            text_color=STATE_COLORS.get(state, "gray"),
-        )
-        widgets["detail"].configure(
-            text=(message[:42] + "…") if len(message) > 42 else message
-        )
-
-        running = self.is_running
         is_closed = state == "closed"
-        is_visible = self.card_visible.get(index, False)
-
-        widgets["btn_open"].configure(
-            text="Tampilkan" if not is_closed else "Buka",
-            state="disabled" if state in {"launching", "connecting"} else "normal",
-        )
-        # Tombol sembunyi selalu bisa dipakai selama browser hidup — tidak
-        # tergantung apakah jendela sedang terlihat atau sudah diminimalkan.
-        widgets["btn_hide"].configure(
-            state="normal" if not is_closed else "disabled"
-        )
+        open_text = "Buka" if is_closed else "Tampilkan"
+        open_state = "disabled" if state in {"launching", "connecting"} else "normal"
+        hide_state = "normal" if not is_closed else "disabled"
         # "Cek" hanya aktif bila bot sedang jalan dan worker browser ini
         # memang tertahan karena error/limit (bukan sedang bekerja).
         runner = self.runner
         can_check = bool(
-            running and runner is not None and runner.can_resume(index)
+            self.is_running and runner is not None and runner.can_resume(index)
         )
-        widgets["btn_check"].configure(
-            state="normal" if can_check else "disabled"
+        check_state = "normal" if can_check else "disabled"
+        detail_text = (message[:42] + "…") if len(message) > 42 else message
+        title_text = profile.name if profile else None
+        subtitle_text = self._browser_subtitle(profile.port) if profile else None
+
+        # Kalau tidak ada yang berubah, jangan sentuh widget sama sekali:
+        # configure() memicu redraw dan inilah sumber UI "berkedip".
+        signature = (
+            state, detail_text, open_text, open_state, hide_state,
+            check_state, title_text, subtitle_text,
         )
-        if profile:
-            widgets["title"].configure(text=profile.name)
-            browser_label = self._current_browser_label()
-            subtitle_text = f"Port {profile.port}"
-            if browser_label != "tidak ditemukan":
-                subtitle_text += f" • {browser_label}"
+        if self._card_render_cache.get(index) == signature:
+            return
+        self._card_render_cache[index] = signature
+
+        widgets["status"].configure(
+            text=STATE_TEXT.get(state, state),
+            text_color=STATE_COLORS.get(state, "gray"),
+        )
+        widgets["detail"].configure(text=detail_text)
+        widgets["btn_open"].configure(text=open_text, state=open_state)
+        # Tombol sembunyi selalu bisa dipakai selama browser hidup — tidak
+        # tergantung apakah jendela sedang terlihat atau sudah diminimalkan.
+        widgets["btn_hide"].configure(state=hide_state)
+        widgets["btn_check"].configure(state=check_state)
+        if title_text is not None:
+            widgets["title"].configure(text=title_text)
+        if subtitle_text is not None:
             widgets["subtitle"].configure(text=subtitle_text)
+
+    def _browser_label(self) -> str:
+        """Label browser (di-cache; berubah hanya saat menu Browser diganti)."""
+        if self._browser_label_cache is None:
+            self._browser_label_cache = self._current_browser_label()
+        return self._browser_label_cache
+
+    def _browser_subtitle(self, port: int) -> str:
+        text = f"Port {port}"
+        label = self._browser_label()
+        if label != "tidak ditemukan":
+            text += f" • {label}"
+        return text
 
     def _card_open(self, index: int) -> None:
         profile = self.manager.get(index)
@@ -622,34 +686,63 @@ class BotApp(ctk.CTk):
         self._ui(self._render_card, index)
 
     def _poll_browsers(self) -> None:
-        """Pantau browser yang ditutup manual."""
-        active = 0
+        """Pantau browser yang ditutup manual.
+
+        Pengecekan CDP (HTTP dengan timeout) dilakukan di thread terpisah —
+        kalau dijalankan di thread UI, 4–5 browser membuat aplikasi tersendat.
+        """
+        if not self._poll_busy:
+            self._poll_busy = True
+            threading.Thread(target=self._poll_probe, daemon=True).start()
+        # Saat bot berjalan cukup 5 detik sekali; pekerjaan utamanya sudah
+        # dilaporkan worker lewat callback status.
+        self.after(5000 if self.is_running else 3000, self._poll_browsers)
+
+    def _poll_probe(self) -> None:
+        """Cek semua browser di background thread, lalu kirim ke thread UI."""
+        results: dict[int, bool] = {}
         try:
             for index in range(1, self.manager.count + 1):
                 profile = self.manager.get(index)
                 if profile is None:
                     continue
+                try:
+                    results[index] = bool(profile.cdp_ready())
+                except Exception:
+                    results[index] = False
+        finally:
+            self._ui(self._apply_poll_results, results)
+
+    def _apply_poll_results(self, results: dict[int, bool]) -> None:
+        """Terapkan hasil cek browser di thread UI."""
+        self._poll_busy = False
+        try:
+            # Ganti seluruh isi cache supaya tidak ada index lama yang nyangkut
+            # (mis. setelah jumlah/browser diganti).
+            self._browser_alive = {
+                index: alive for index, alive in results.items()
+                if 1 <= index <= self.manager.count
+            }
+            active = sum(1 for alive in self._browser_alive.values() if alive)
+            for index, alive in self._browser_alive.items():
                 state = self.card_state.get(index, "closed")
-                alive = profile.cdp_ready()
-                if alive:
-                    active += 1
                 if state != "closed" and not alive and not self.is_running:
                     self._set_card(index, "closed", "Browser tertutup", False)
                 elif state == "closed" and alive:
                     self._set_card(index, "hidden", "Browser terdeteksi", False)
+            # Segarkan tombol "Cek" (aktif/nonaktif) selama bot berjalan.
+            if self.is_running:
+                for index in range(1, self.manager.count + 1):
+                    self._render_card(index)
+            self._update_active_hint(active)
         except Exception:
             pass
-        # Segarkan tombol "Cek" (aktif/nonaktif) selama bot berjalan.
-        if self.is_running:
-            for index in range(1, self.manager.count + 1):
-                self._render_card(index)
-        self._update_active_hint(active)
-        self.after(3000, self._poll_browsers)
 
     def _update_active_hint(self, active: int | None = None) -> None:
         """Tampilkan berapa browser yang siap dipakai."""
         if active is None:
-            active = sum(1 for p in self.manager.profiles if p.is_running())
+            # Pakai hasil pemantauan terakhir — jangan cek CDP dari thread UI.
+            active = sum(1 for alive in self._browser_alive.values() if alive)
         if self.is_running:
             text = f"Sedang berjalan dengan {active} browser."
             color = "#16A34A"
@@ -662,6 +755,9 @@ class BotApp(ctk.CTk):
         else:
             text = "Belum ada browser terbuka. Klik kartu Browser 1 untuk mulai."
             color = "#D97706"
+        if self._active_hint == (text, color):
+            return
+        self._active_hint = (text, color)
         try:
             self.lbl_active_hint.configure(text=text, text_color=color)
         except Exception:
@@ -677,12 +773,17 @@ class BotApp(ctk.CTk):
             return "tidak ditemukan"
 
     def _refresh_browser_header(self) -> None:
+        self._browser_label_cache = None
         try:
             self.lbl_browser_header.configure(
                 text=f"Browser: {self._current_browser_label()}"
             )
         except Exception:
             pass
+        # Label di kartu ikut berubah bila browser diganti.
+        for index in self.card_widgets:
+            self._card_render_cache.pop(index, None)
+            self._render_card(index)
 
     def _sync_browser_menu(self) -> None:
         """Tampilkan browser yang benar-benar dipakai di dropdown."""
@@ -732,6 +833,9 @@ class BotApp(ctk.CTk):
         # Folder profil/login mengikuti browser yang dipilih, jadi buat ulang
         # manager supaya kartu memakai folder yang benar sejak awal.
         self.manager = BrowserManager(self.manager.count)
+        self._browser_label_cache = None
+        self._browser_alive.clear()
+        self._active_hint = None
         self.card_state = {
             index: "closed" for index in range(1, self.manager.count + 1)
         }
@@ -813,20 +917,28 @@ class BotApp(ctk.CTk):
 
     def _refresh_start_button(self) -> None:
         # Jumlah prompt bisa berkurang selama bot berjalan (prompt yang sudah
-        # dipakai dipangkas dari file), jadi hitung ulang dari file.
+        # dipakai dipangkas dari file), jadi hitung ulang dari file —
+        # memakai cache supaya tidak membaca file tiap event progres.
         path = self.prompt_file.get()
-        if path and os.path.exists(path):
-            self.prompt_count = count_prompts(path)
+        exists = bool(path) and os.path.exists(path)
+        if exists:
+            self.prompt_count = self._count_prompts_cached(path)
+        elif path:
+            self.prompt_count = 0
         enabled = (
             not self.is_running
             and bool(path)
             and self.prompt_count > 0
-            and os.path.exists(path)
+            and exists
         )
+        if enabled == self._run_btn_on:
+            return
+        self._run_btn_on = enabled
         self.btn_run.configure(state="normal" if enabled else "disabled")
 
     def _set_run_controls_enabled(self, enabled: bool) -> None:
         """Kunci / buka kontrol yang tidak boleh diubah saat bot berjalan."""
+        self._run_btn_on = None  # paksa _refresh_start_button menulis ulang
         self.btn_run.configure(state="normal" if enabled else "disabled")
         self.btn_stop.configure(state="disabled" if enabled else "normal")
         self.option_browsers.configure(
@@ -863,7 +975,18 @@ class BotApp(ctk.CTk):
         # Hanya browser yang SUDAH DIBUKA oleh user yang dipakai. Browser yang
         # masih tertutup tidak ikut diluncurkan, supaya bot tidak tiba-tiba
         # membuka semua browser.
-        profiles = [p for p in self.manager.profiles if p.is_running()]
+        # Pakai hasil pemantauan terakhir bila ada, supaya klik JALANKAN tidak
+        # memblokir UI dengan probe CDP berulang.
+        profiles = []
+        for profile in self.manager.profiles:
+            if profile.proc is not None:
+                alive = profile.proc.poll() is None
+            else:
+                alive = self._browser_alive.get(profile.index)
+                if alive is None:
+                    alive = profile.cdp_ready()
+            if alive:
+                profiles.append(profile)
         if not profiles:
             messagebox.showwarning(
                 "Belum ada browser",
@@ -875,6 +998,8 @@ class BotApp(ctk.CTk):
             )
             return
 
+        # Dibaca sekali di thread UI; thread worker hanya memakai nilai ini.
+        self._run_hide_browsers = bool(self.hide_on_start.get())
         confirmed = messagebox.askyesno(
             "Mulai bot",
             f"File prompt  : {os.path.basename(prompt_file)}\n"
@@ -883,7 +1008,7 @@ class BotApp(ctk.CTk):
             f"(dari {self.manager.count} kartu)\n\n"
             "Hanya browser yang sudah kamu buka yang akan bekerja.\n"
             "Pastikan browser tersebut sudah login ke Flow Music.\n"
-            f"Browser akan {'disembunyikan' if self.hide_on_start.get() else 'ditampilkan'} "
+            f"Browser akan {'disembunyikan' if self._run_hide_browsers else 'ditampilkan'} "
             "saat bot berjalan.\n\n"
             "Mulai sekarang?",
         )
@@ -896,7 +1021,7 @@ class BotApp(ctk.CTk):
             profile.keep_hidden = self.card_state.get(profile.index) == "hidden"
 
         self.is_running = True
-        self._update_active_hint()
+        self._update_active_hint(len(profiles))
         self.stop_event = threading.Event()
         self._set_run_controls_enabled(False)
         self.lbl_progress.configure(text="Menyiapkan...")
@@ -929,7 +1054,7 @@ class BotApp(ctk.CTk):
             on_status=self._on_worker_status,
             on_progress=self._on_worker_progress,
             on_idle=self._on_worker_idle,
-            hide_browsers=self.hide_on_start.get(),
+            hide_browsers=self._run_hide_browsers,
         )
         self.runner = runner
         self.runner_thread = threading.Thread(
@@ -998,15 +1123,19 @@ class BotApp(ctk.CTk):
     def _on_worker_status(self, index: int, state: str, message: str) -> None:
         visible = None
         if state in {"launching", "connecting"}:
-            # Runner membuka browser tersembunyi (atau terlihat) sesuai checkbox.
-            visible = not self.hide_on_start.get()
+            # Runner membuka browser tersembunyi (atau terlihat) sesuai checkbox
+            # yang dibaca saat start — jangan sentuh variabel Tk dari thread ini.
+            visible = not self._run_hide_browsers
         elif state == "ready":
             visible = self.card_visible.get(index, False)
-        self._ui(self._set_card, index, state, message, visible)
-        # Segarkan label tombol buka (mis. "Tampilkan" saat browser hidup).
-        self._ui(self._render_card, index)
-        # Ringkasan "bekerja / idle" ikut berubah saat state kartu berubah.
-        self._ui(self._refresh_progress_text)
+        # _set_card sudah me-render kartu ini; ringkasan progres ikut disegarkan.
+        self._ui(self._apply_worker_status, index, state, message, visible)
+
+    def _apply_worker_status(self, index: int, state: str, message: str,
+                             visible: bool | None) -> None:
+        """Terapkan status worker di thread UI (satu event, bukan tiga)."""
+        self._set_card(index, state, message, visible)
+        self._refresh_progress_text()
 
     def _on_worker_progress(self, stats: dict) -> None:
         self._ui(self._update_progress, stats)
@@ -1014,24 +1143,38 @@ class BotApp(ctk.CTk):
     def _update_progress(self, stats: dict) -> None:
         if not stats:
             self.lbl_progress.configure(text="")
+            self._progress_text = ""
             return
         self._last_stats = stats
         self._refresh_progress_text()
         # Tampilkan sisa prompt yang masih ada di file sumber.
         path = self.prompt_file.get()
         if path and os.path.exists(path):
-            self.prompt_count = count_prompts(path)
+            self.prompt_count = self._count_prompts_cached(path)
             if self.prompt_count > 0:
-                self.lbl_prompt_info.configure(
-                    text=f"📝 Sisa {self.prompt_count} prompt di file.",
-                    text_color=("#15803D", "#4ADE80"),
-                )
+                text = f"📝 Sisa {self.prompt_count} prompt di file."
+                color = ("#15803D", "#4ADE80")
             else:
-                self.lbl_prompt_info.configure(
-                    text="📝 Semua prompt di file sudah dipakai.",
-                    text_color=("#6B7280", "#9CA3AF"),
-                )
+                text = "📝 Semua prompt di file sudah dipakai."
+                color = ("#6B7280", "#9CA3AF")
+            if text != self._prompt_info_text:
+                self._prompt_info_text = text
+                self.lbl_prompt_info.configure(text=text, text_color=color)
             self._refresh_start_button()
+
+    def _count_prompts_cached(self, path: str) -> int:
+        """Hitung prompt hanya bila file benar-benar berubah (mtime/ukuran)."""
+        try:
+            st = os.stat(path)
+        except OSError:
+            self._prompt_file_sig = None
+            self.prompt_count = 0
+            return 0
+        sig = (path, st.st_mtime_ns, st.st_size)
+        if sig != self._prompt_file_sig:
+            self._prompt_file_sig = sig
+            self.prompt_count = count_prompts(path)
+        return self.prompt_count
 
     def _refresh_progress_text(self) -> None:
         """Perbarui label progres termasuk jumlah browser bekerja / idle."""
@@ -1053,7 +1196,9 @@ class BotApp(ctk.CTk):
         held = stats.get("held", 0)
         if held:
             text += f" • Tertahan {held} (klik Cek)"
-        self.lbl_progress.configure(text=text)
+        if text != self._progress_text:
+            self._progress_text = text
+            self.lbl_progress.configure(text=text)
 
     # ==========================================================================
     # THREADING & CLOSE

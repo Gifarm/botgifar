@@ -80,6 +80,10 @@ class PromptQueue:
         ]
         self._lock = threading.Lock()
         self._run_dir = self._create_run_dir()
+        # Isi terakhir yang ditulis ke done.txt/failed.txt — supaya file itu
+        # hanya ditulis ulang kalau isinya memang berubah.
+        self._last_done_text: str | None = None
+        self._last_failed_text: str | None = None
         self._save()
 
     # --------------------------------------------------------------------------
@@ -104,18 +108,28 @@ class PromptQueue:
                 "created": time.strftime("%Y-%m-%d %H:%M:%S"),
                 "items": [item.__dict__ for item in self.items],
             }
+            # JSON ringkas (tanpa indent): file ini untuk state/diagnosa dan
+            # ditulis sangat sering, jadi dibuat secepat mungkin.
             self._run_dir.joinpath("queue.json").write_text(
-                json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+                json.dumps(payload, ensure_ascii=False), encoding="utf-8"
             )
-            # Arsip teks agar mudah dibaca manusia
-            done = [i.text for i in self.items if i.status == "done"]
-            failed = [i.text for i in self.items if i.status == "failed"]
-            self._run_dir.joinpath("done.txt").write_text(
-                "\n\n".join(done), encoding="utf-8"
+            # Arsip teks agar mudah dibaca manusia — hanya tulis bila berubah.
+            done_text = "\n\n".join(
+                i.text for i in self.items if i.status == "done"
             )
-            self._run_dir.joinpath("failed.txt").write_text(
-                "\n\n".join(failed), encoding="utf-8"
+            if done_text != self._last_done_text:
+                self._last_done_text = done_text
+                self._run_dir.joinpath("done.txt").write_text(
+                    done_text, encoding="utf-8"
+                )
+            failed_text = "\n\n".join(
+                i.text for i in self.items if i.status == "failed"
             )
+            if failed_text != self._last_failed_text:
+                self._last_failed_text = failed_text
+                self._run_dir.joinpath("failed.txt").write_text(
+                    failed_text, encoding="utf-8"
+                )
         except Exception as e:
             logger.warning(f"Gagal menyimpan state antrean: {e}")
 

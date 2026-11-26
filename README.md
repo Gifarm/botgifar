@@ -1,4 +1,4 @@
-# 🎵 Flow Music Bot v3.0.1
+# 🎵 Flow Music Bot v3.0.2
 
 Bot otomasi untuk membuat & mengunduh musik dari [Google Flow Music](https://www.flowmusic.app/)
 memakai beberapa browser (multi-akun) sekaligus — **Brave, Google Chrome,
@@ -255,6 +255,7 @@ menghentikan semuanya seperti biasa.
 | Muncul dialog Save saat download | Cek log `⚠️ Kemungkinan dialog Save muncul`; pastikan browser ditutup lalu dibuka ulang dari aplikasi supaya preferensi download diterapkan |
 | Tampilan Flow Music berubah | Selector ada di bagian atas `flow_actions.py` |
 | RAM penuh (5 browser) | Kurangi jumlah browser; tiap profil butuh ±300–500 MB |
+| UI terasa berat / berkedip saat 4–5 browser bekerja | Sejak v3.0.2 beban UI sudah dikurangi (log ditulis per batch, cek browser di thread terpisah, kartu tidak digambar ulang bila tidak berubah). Kalau masih berat: kurangi jumlah browser, tutup panel Log, atau kecilkan jendela aplikasi |
 
 Lokasi log: **`bot.log`** dan panel *Log Aktivitas* di aplikasi.
 
@@ -277,7 +278,7 @@ Lokasi log: **`bot.log`** dan panel *Log Aktivitas* di aplikasi.
 
 ## Catatan
 
-- Versi ini masih tahap pengembangan (v3.0.1), belum dibungkus jadi `.exe`.
+- Versi ini masih tahap pengembangan (v3.0.2), belum dibungkus jadi `.exe`.
 - Selector situs Flow Music bisa berubah kapan saja. Kalau ada tombol yang
   tidak terdeteksi, perbaiki selector di `flow_actions.py`.
 - Gunakan dengan bijak. Menjalankan banyak akun otomatis berisiko terkena
