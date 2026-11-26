@@ -3172,3 +3172,789 @@ Call log:
 2026-10-09 14:31:46,107 - INFO - [W1-P9222] 📊 Sisa: 0
 2026-10-09 14:31:46,109 - INFO - ============================================================
 2026-10-09 14:31:50,663 - WARNING - ⏹️ User menekan STOP. Menghentikan...
+2026-10-30 15:05:08,855 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL (Per-Thread Playwright)
+2026-10-30 15:05:08,856 - ERROR - ❌ FILE PROMPT KOSONG / TIDAK ADA PROMPT!
+2026-10-30 15:05:08,857 - ERROR -    Path: prompts.txt
+2026-10-30 15:05:08,857 - ERROR -    Isi dulu file prompts.txt, baru jalankan bot.
+2026-11-12 19:52:01,162 - INFO - 🚀 Memulai Bot - Multi-Profile PARALEL (Per-Thread Playwright)
+2026-11-12 19:52:01,163 - INFO - 📚 Total prompt di file: 3
+2026-11-12 19:52:01,163 - INFO - 🎯 Akan connect ke 3 browser: [9222, 9223, 9224]
+2026-11-12 19:52:01,163 - INFO - 👋 Pastikan semua browser sudah terbuka & login ke flowmusic.app.
+2026-11-12 19:52:01,164 - INFO - ⏳ Bot mulai dalam 5 detik...
+2026-11-12 19:52:06,165 - INFO - [W1-P9222] 🟢 Worker port 9222 starting...
+2026-11-12 19:52:06,165 - INFO - 🧵 Thread W1-P9222 dijalankan.
+2026-11-12 19:52:06,466 - INFO - [W2-P9223] 🟢 Worker port 9223 starting...
+2026-11-12 19:52:06,466 - INFO - 🧵 Thread W2-P9223 dijalankan.
+2026-11-12 19:52:07,020 - INFO - [W3-P9224] 🟢 Worker port 9224 starting...
+2026-11-12 19:52:07,020 - INFO - 🧵 Thread W3-P9224 dijalankan.
+2026-11-12 19:52:10,211 - ERROR - [P9223] ❌ Gagal connect: BrowserType.connect_over_cdp: connect ECONNREFUSED ::1:9223
+connect ECONNREFUSED 127.0.0.1:9223
+Call log:
+  - <ws preparing> retrieving websocket url from http://localhost:9223
+
+2026-11-12 19:52:10,211 - ERROR - [W2-P9223] ❌ Gagal connect. Worker berhenti.
+2026-11-12 19:52:10,412 - INFO - [P9224] ✅ Terhubung.
+2026-11-12 19:52:10,476 - INFO - [P9222] ✅ Terhubung.
+2026-11-12 19:52:13,505 - INFO - ✂️  Prompt diambil. Sisa: 2
+2026-11-12 19:52:13,506 - INFO - 
+======================================================================
+2026-11-12 19:52:13,506 - INFO - [W3-P9224] 📝 Prompt: Create a completely original tile-setter's-mosaic-floor ball...
+2026-11-12 19:52:13,507 - INFO - [W3-P9224] 📊 Sisa prompt: 2
+2026-11-12 19:52:13,507 - INFO - ======================================================================
+2026-11-12 19:52:13,507 - INFO - ✂️  Prompt diambil. Sisa: 1
+2026-11-12 19:52:13,508 - INFO - 
+======================================================================
+2026-11-12 19:52:13,779 - INFO - [W1-P9222] 📝 Prompt: Create a completely original carpenter's-pencil-behind-the-e...
+2026-11-12 19:52:13,780 - INFO - [W1-P9222] 📊 Sisa prompt: 1
+2026-11-12 19:52:13,781 - INFO - ======================================================================
+2026-11-12 19:52:13,852 - INFO - Mengisi prompt...
+2026-11-12 19:52:13,858 - INFO - Mengisi prompt...
+2026-11-12 19:52:29,842 - INFO - Prompt berhasil diisi.
+2026-11-12 19:52:29,845 - INFO - Prompt berhasil diisi.
+2026-11-12 19:52:34,465 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-11-12 19:52:34,465 - INFO - Menekan Enter untuk generate...
+2026-11-12 19:52:35,210 - INFO - 📸 Snapshot lagu sebelum generate: 0 lagu
+2026-11-12 19:52:35,210 - INFO - Menekan Enter untuk generate...
+2026-11-12 19:52:51,968 - WARNING - ⚠️ Generate tidak jelas. Lanjut tunggu...
+2026-11-12 19:52:51,969 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-11-12 19:52:52,203 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-12 19:52:52,333 - WARNING - ⚠️ Generate tidak jelas. Lanjut tunggu...
+2026-11-12 19:52:52,333 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-11-12 19:52:52,549 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-12 19:52:55,571 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-11-12 19:52:55,915 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-11-12 19:52:58,826 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-11-12 19:52:59,279 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-11-12 19:53:02,032 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | idle
+2026-11-12 19:53:02,479 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | idle
+2026-11-12 19:53:05,272 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-11-12 19:53:05,686 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | idle
+2026-11-12 19:53:08,440 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | loading
+2026-11-12 19:53:08,964 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | idle
+2026-11-12 19:53:11,706 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | loading
+2026-11-12 19:53:12,508 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 20s | idle
+2026-11-12 19:53:15,009 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 23s | loading
+2026-11-12 19:53:15,895 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 23s | loading
+2026-11-12 19:53:18,233 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | loading
+2026-11-12 19:53:19,073 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 26s | loading
+2026-11-12 19:53:21,386 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 29s | loading
+2026-11-12 19:53:22,320 - INFO -    ⏳ [29s] Lagu baru: 0 | Stabil: 29s | loading
+2026-11-12 19:53:24,633 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 32s | loading
+2026-11-12 19:53:25,528 - INFO -    ⏳ [32s] Lagu baru: 0 | Stabil: 33s | loading
+2026-11-12 19:53:27,844 - INFO -    ⏳ [35s] Lagu baru: 0 | Stabil: 35s | loading
+2026-11-12 19:53:28,813 - INFO -    ⏳ [36s] Lagu baru: 0 | Stabil: 36s | loading
+2026-11-12 19:53:31,051 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 39s | loading
+2026-11-12 19:53:32,081 - INFO -    ⏳ [39s] Lagu baru: 0 | Stabil: 39s | loading
+2026-11-12 19:53:34,255 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 42s | loading
+2026-11-12 19:53:35,286 - INFO -    ⏳ [42s] Lagu baru: 0 | Stabil: 42s | loading
+2026-11-12 19:53:37,897 - INFO -    🔄 [45s] Lagu baru: 1
+2026-11-12 19:53:37,900 - INFO -       • Worn Smooth||Worn Smooth||y55
+2026-11-12 19:53:38,715 - INFO -    ⏳ [45s] Lagu baru: 0 | Stabil: 46s | loading
+2026-11-12 19:53:41,678 - INFO -    ⏳ [48s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-12 19:53:42,484 - INFO -    🔄 [49s] Lagu baru: 1
+2026-11-12 19:53:42,485 - INFO -       • Sawdust Falls||Sawdust Falls||y48
+2026-11-12 19:53:45,147 - INFO -    🔄 [52s] Lagu baru: 1
+2026-11-12 19:53:45,149 - INFO -       • Worn Smooth||Worn Smooth||y54
+2026-11-12 19:53:45,933 - INFO -    ⏳ [53s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-12 19:53:48,677 - INFO -    ⏳ [56s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-12 19:53:49,372 - INFO -    ⏳ [56s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-12 19:53:52,069 - INFO -    ⏳ [59s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-12 19:53:52,769 - INFO -    ⏳ [60s] Lagu baru: 1 | Stabil: 10s | idle
+2026-11-12 19:53:55,447 - INFO -    ⏳ [63s] Lagu baru: 1 | Stabil: 10s | idle
+2026-11-12 19:53:56,164 - INFO -    ⏳ [63s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-12 19:53:58,823 - INFO -    ⏳ [66s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-12 19:53:59,633 - INFO -    ⏳ [66s] Lagu baru: 1 | Stabil: 17s | idle
+2026-11-12 19:53:59,634 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-12 19:54:01,144 - INFO - [W1-P9222] 🎼 1 lagu baru.
+2026-11-12 19:54:01,145 - INFO - [W1-P9222] --- Download (lagu 1/1): Sawdust Falls ---
+2026-11-12 19:54:01,146 - INFO - 🎯 Download lagu UID 'Sawdust Falls||Sawdust Falls||y48' (lagu 1/1)...
+2026-11-12 19:54:01,160 - INFO - Mencari tombol titik 3 target...
+2026-11-12 19:54:02,459 - INFO -    ⏳ [69s] Lagu baru: 1 | Stabil: 17s | idle
+2026-11-12 19:54:02,460 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-12 19:54:03,329 - INFO - Berhasil klik titik 3.
+2026-11-12 19:54:03,965 - INFO - [W3-P9224] 🎼 1 lagu baru.
+2026-11-12 19:54:03,966 - INFO - [W3-P9224] --- Download (lagu 1/1): Worn Smooth ---
+2026-11-12 19:54:03,967 - INFO - 🎯 Download lagu UID 'Worn Smooth||Worn Smooth||y54' (lagu 1/1)...
+2026-11-12 19:54:03,979 - INFO - Mencari tombol titik 3 target...
+2026-11-12 19:54:04,330 - INFO - Membuka menu 'Download'...
+2026-11-12 19:54:05,552 - INFO - Berhasil klik titik 3.
+2026-11-12 19:54:06,171 - INFO - Submenu Download terbuka.
+2026-11-12 19:54:06,172 - INFO - Mengklik format 'WAV'...
+2026-11-12 19:54:06,553 - INFO - Membuka menu 'Download'...
+2026-11-12 19:54:08,400 - INFO - Submenu Download terbuka.
+2026-11-12 19:54:08,403 - INFO - Mengklik format 'WAV'...
+2026-11-12 19:54:08,582 - INFO - Berhasil klik WAV.
+2026-11-12 19:54:08,583 - INFO - Menunggu file download...
+2026-11-12 19:54:10,785 - INFO - Berhasil klik WAV.
+2026-11-12 19:54:10,787 - INFO - Menunggu file download...
+2026-11-12 19:54:26,055 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Sawdust Falls.wav
+2026-11-12 19:54:28,308 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Worn Smooth.wav
+2026-11-12 19:54:30,127 - INFO - [W1-P9222] ✅ Selesai: 1/1 lagu.
+
+2026-11-12 19:54:32,138 - INFO - ✂️  Prompt diambil. Sisa: 0
+2026-11-12 19:54:32,144 - INFO - 
+======================================================================
+2026-11-12 19:54:32,145 - INFO - [W1-P9222] 📝 Prompt: Create a completely original demolition-crew's-last-wall bal...
+2026-11-12 19:54:32,146 - INFO - [W1-P9222] 📊 Sisa prompt: 0
+2026-11-12 19:54:32,147 - INFO - ======================================================================
+2026-11-12 19:54:32,155 - INFO - Mengisi prompt...
+2026-11-12 19:54:32,435 - INFO - [W3-P9224] ✅ Selesai: 1/1 lagu.
+
+2026-11-12 19:54:34,438 - INFO - Tidak ada prompt tersisa.
+2026-11-12 19:54:34,439 - INFO - [W3-P9224] 🏁 File prompt habis. Worker selesai.
+2026-11-12 19:54:34,707 - INFO - [W3-P9224] 🔌 Koneksi Playwright ditutup.
+2026-11-12 19:54:42,331 - INFO - Prompt berhasil diisi.
+2026-11-12 19:54:43,682 - INFO - 📸 Snapshot lagu sebelum generate: 1 lagu
+2026-11-12 19:54:43,683 - INFO - Menekan Enter untuk generate...
+2026-11-12 19:54:49,253 - INFO - ✅ Generate terdeteksi mulai.
+2026-11-12 19:54:49,254 - INFO - ⏳ Menunggu lagu baru (stabil 15s)...
+2026-11-12 19:54:49,734 - INFO -    🔄 [0s] Lagu baru: 1
+2026-11-12 19:54:49,734 - INFO -       • Sawdust Falls||Sawdust Falls||y26
+2026-11-12 19:54:53,590 - INFO -    ⏳ [3s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-12 19:54:57,286 - INFO -    ⏳ [7s] Lagu baru: 1 | Stabil: 7s | idle
+2026-11-12 19:55:01,129 - INFO -    ⏳ [11s] Lagu baru: 1 | Stabil: 11s | idle
+2026-11-12 19:55:04,645 - INFO -    ⏳ [14s] Lagu baru: 1 | Stabil: 14s | idle
+2026-11-12 19:55:08,121 - INFO -    ⏳ [18s] Lagu baru: 1 | Stabil: 18s | idle
+2026-11-12 19:55:08,124 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-12 19:55:09,630 - INFO - [W1-P9222] 🎼 1 lagu baru.
+2026-11-12 19:55:09,630 - INFO - [W1-P9222] --- Download (lagu 1/1): Sawdust Falls ---
+2026-11-12 19:55:09,631 - INFO - 🎯 Download lagu UID 'Sawdust Falls||Sawdust Falls||y26' (lagu 1/1)...
+2026-11-12 19:55:09,648 - INFO - Mencari tombol titik 3 target...
+2026-11-12 19:55:11,228 - INFO - Berhasil klik titik 3.
+2026-11-12 19:55:12,228 - INFO - Membuka menu 'Download'...
+2026-11-12 19:55:14,035 - INFO - Submenu Download terbuka.
+2026-11-12 19:55:14,036 - INFO - Mengklik format 'WAV'...
+2026-11-12 19:55:16,553 - INFO - Berhasil klik WAV.
+2026-11-12 19:55:16,554 - INFO - Menunggu file download...
+2026-11-12 19:55:25,065 - INFO - ✅ File tersimpan: /datapentingbackup/bot/downloads/Sawdust Falls_1.wav
+2026-11-12 19:55:29,135 - INFO - [W1-P9222] ✅ Selesai: 1/1 lagu.
+
+2026-11-12 19:55:30,733 - WARNING - 
+⚠️ Dihentikan oleh user (Ctrl+C).
+2026-11-12 19:55:30,734 - INFO - 
+======================================================================
+2026-11-12 19:55:30,735 - INFO - 🏁 BOT SELESAI - Semua prompt diproses!
+2026-11-12 19:55:30,735 - INFO - ======================================================================
+2026-11-12 19:55:31,224 - INFO - [W1-P9222] 🔌 Koneksi Playwright ditutup.
+2026-11-25 22:21:29,255 - INFO - Jumlah browser diatur ke 3.
+2026-11-25 22:27:24,808 - INFO - 📁 File prompt: /datapentingbackup/bot/promt_lagu/100_prompt_lagu_v30_bangunan.txt (73 prompt)
+2026-11-25 22:27:24,813 - INFO - 📁 File prompt: /datapentingbackup/bot/promt_lagu/100_prompt_lagu_v30_bangunan.txt (73 prompt)
+2026-11-25 22:27:24,815 - INFO - File prompt dimuat ulang.
+2026-11-25 22:27:25,178 - INFO - Jumlah browser diatur ke 7.
+2026-11-25 22:49:00,667 - INFO - [P9222] 🚀 Menjalankan brave-browser untuk Browser 1 (profile_1)
+2026-11-25 22:49:06,457 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 22:49:17,182 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 22:49:26,932 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 22:49:34,955 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 22:51:15,297 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-25 22:51:36,567 - INFO - ======================================================================
+2026-11-25 22:51:36,568 - INFO - 🚀 BOT DIMULAI — 5 browser, 3 prompt
+2026-11-25 22:51:36,569 - INFO - 📂 Hasil & state: /datapentingbackup/bot/state/run_20261125_225136
+2026-11-25 22:51:36,570 - INFO - ======================================================================
+2026-11-25 22:51:36,573 - INFO - ==================================================================
+2026-11-25 22:51:36,587 - INFO - 🚀 BOT DIMULAI
+2026-11-25 22:51:36,594 - INFO - ==================================================================
+2026-11-25 22:51:36,601 - INFO - [P9223] 🚀 Menjalankan brave-browser untuk Browser 2 (profile_2)
+2026-11-25 22:51:36,601 - INFO - [P9226] 🚀 Menjalankan brave-browser untuk Browser 5 (profile_5)
+2026-11-25 22:51:36,603 - INFO - [P9224] 🚀 Menjalankan brave-browser untuk Browser 3 (profile_3)
+2026-11-25 22:51:36,602 - INFO - [P9222] Browser sudah berjalan, menyambung...
+2026-11-25 22:51:36,604 - INFO - [P9225] 🚀 Menjalankan brave-browser untuk Browser 4 (profile_4)
+2026-11-25 22:51:38,740 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 22:51:46,119 - INFO - [P9225] 🙈 Browser disembunyikan.
+2026-11-25 22:51:48,856 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-25 22:51:48,999 - INFO - [P9226] 🙈 Browser disembunyikan.
+2026-11-25 22:51:51,807 - INFO - [P9224] 🙈 Browser disembunyikan.
+2026-11-25 22:51:52,044 - INFO - 🎯 5 browser siap bekerja.
+2026-11-25 22:52:00,610 - WARNING - ⏹️  Stop diminta. Menyelesaikan proses yang sedang berjalan...
+2026-11-25 22:52:01,024 - ERROR - [Browser 4] Perlu login: Bot dihentikan
+2026-11-25 22:52:03,955 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_5
+2026-11-25 22:52:04,929 - ERROR - [Browser 2] Perlu login: Bot dihentikan
+2026-11-25 22:52:06,729 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_3
+2026-11-25 22:52:07,772 - WARNING - [Browser 1] Connect gagal, mencoba ulang...
+2026-11-25 22:52:08,007 - INFO - ==================================================================
+2026-11-25 22:52:08,017 - INFO - 🏁 BOT SELESAI
+2026-11-25 22:52:08,022 - INFO - ==================================================================
+2026-11-25 22:52:08,825 - INFO - 🏁 Selesai — 0 sukses, 0 gagal, 3 sisa.
+2026-11-25 22:53:40,946 - INFO - [P9222] 🚀 Menjalankan brave-browser untuk Browser 1 (profile_1)
+2026-11-25 22:57:15,195 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-25 22:57:15,649 - INFO - ======================================================================
+2026-11-25 22:57:15,649 - INFO - 🚀 BOT DIMULAI — 1 browser, 2 prompt
+2026-11-25 22:57:15,650 - INFO - 📂 Hasil & state: /tmp/flow_ui_ghn60gft/state/run_20261125_225715
+2026-11-25 22:57:15,650 - INFO - ======================================================================
+2026-11-25 22:57:38,396 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-25 22:57:38,888 - INFO - ======================================================================
+2026-11-25 22:57:38,889 - INFO - 🚀 BOT DIMULAI — 1 browser, 2 prompt
+2026-11-25 22:57:38,890 - INFO - 📂 Hasil & state: /tmp/flow_ui_1burfmht/state/run_20261125_225738
+2026-11-25 22:57:38,890 - INFO - ======================================================================
+2026-11-25 23:05:34,953 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-25 23:05:37,883 - INFO - [P9222] 🚀 Menjalankan brave-browser untuk Browser 1 (profile_1)
+2026-11-25 23:05:45,414 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 23:06:00,282 - INFO - ======================================================================
+2026-11-25 23:06:00,283 - INFO - 🚀 BOT DIMULAI — 1 browser, 3 prompt
+2026-11-25 23:06:00,285 - INFO - 📂 Hasil & state: /datapentingbackup/bot/state/run_20261125_230600
+2026-11-25 23:06:00,286 - INFO - ======================================================================
+2026-11-25 23:06:00,289 - INFO - ==================================================================
+2026-11-25 23:06:00,298 - INFO - 🚀 BOT DIMULAI
+2026-11-25 23:06:00,311 - INFO - ==================================================================
+2026-11-25 23:06:00,369 - INFO - [P9222] Browser sudah berjalan, menyambung...
+2026-11-25 23:06:01,706 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 23:06:01,762 - INFO - 🎯 1 browser siap bekerja.
+2026-11-25 23:06:03,398 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_1
+2026-11-25 23:06:03,407 - INFO - ✂️  Prompt #1 diambil oleh Browser 1 (percobaan 1/3)
+2026-11-25 23:06:03,421 - INFO - 
+==================================================================
+[Browser 1] 📝 Prompt #1 (percobaan 1/3)
+==================================================================
+2026-11-25 23:06:03,431 - INFO - Mengisi prompt...
+2026-11-25 23:06:05,505 - INFO - ✅ Prompt berhasil diisi.
+2026-11-25 23:06:13,449 - INFO - 📸 Lagu sebelum generate: 0
+2026-11-25 23:06:13,451 - INFO - Menekan Enter untuk generate...
+2026-11-25 23:06:40,306 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-25 23:06:40,307 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-25 23:06:40,435 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | loading
+2026-11-25 23:06:43,565 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | loading
+2026-11-25 23:06:46,690 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | loading
+2026-11-25 23:06:49,805 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | loading
+2026-11-25 23:06:53,009 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | loading
+2026-11-25 23:06:56,291 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 15s | loading
+2026-11-25 23:06:59,425 - INFO -    ⏳ [18s] Lagu baru: 0 | Stabil: 19s | loading
+2026-11-25 23:07:02,620 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | loading
+2026-11-25 23:07:05,783 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | loading
+2026-11-25 23:07:08,984 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | loading
+2026-11-25 23:07:12,733 - INFO -    🔄 [31s] Lagu baru: 1
+2026-11-25 23:07:17,036 - INFO -    🔄 [35s] Lagu baru: 2
+2026-11-25 23:07:20,826 - INFO -    ⏳ [39s] Lagu baru: 2 | Stabil: 3s | idle
+2026-11-25 23:07:25,599 - INFO -    ⏳ [43s] Lagu baru: 2 | Stabil: 8s | idle
+2026-11-25 23:07:30,379 - INFO -    ⏳ [48s] Lagu baru: 2 | Stabil: 13s | idle
+2026-11-25 23:07:34,291 - INFO -    ⏳ [53s] Lagu baru: 2 | Stabil: 17s | idle
+2026-11-25 23:07:38,153 - INFO -    ⏳ [56s] Lagu baru: 2 | Stabil: 21s | idle
+2026-11-25 23:07:40,201 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-25 23:07:40,203 - INFO - [Browser 1] 🎼 1 lagu untuk diunduh.
+2026-11-25 23:07:40,225 - INFO - 🎯 Download 'Make a 15s Shorts video
+Strip the minimal percussion out
+Give the duet' - Make a 15s Shorts video
+Strip the minima
+2026-11-25 23:07:41,315 - INFO - Klik titik tiga berhasil.
+2026-11-25 23:07:47,235 - ERROR - Gagal membuka submenu Download: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("[role='menuitem']:visible").filter(has_text=re.compile(r"^\s*Download\s*$")).first to be visible
+
+2026-11-25 23:07:48,071 - WARNING - [Browser 1] Gagal download lagu 1/1
+2026-11-25 23:07:48,974 - WARNING - ↩️  Prompt #1 dikembalikan ke antrean: semua download gagal
+2026-11-25 23:07:51,009 - INFO - ✂️  Prompt #1 diambil oleh Browser 1 (percobaan 2/3)
+2026-11-25 23:07:51,015 - INFO - 
+==================================================================
+[Browser 1] 📝 Prompt #1 (percobaan 2/3)
+==================================================================
+2026-11-25 23:07:51,052 - INFO - Mengisi prompt...
+2026-11-25 23:07:51,777 - INFO - ✅ Prompt berhasil diisi.
+2026-11-25 23:07:53,040 - INFO - 📸 Lagu sebelum generate: 1
+2026-11-25 23:07:53,043 - INFO - Menekan Enter untuk generate...
+2026-11-25 23:07:55,028 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-25 23:07:55,680 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | loading
+2026-11-25 23:07:59,652 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 4s | loading
+2026-11-25 23:08:03,243 - INFO -    ⏳ [7s] Lagu baru: 0 | Stabil: 8s | loading
+2026-11-25 23:08:07,136 - INFO -    ⏳ [11s] Lagu baru: 0 | Stabil: 12s | loading
+2026-11-25 23:08:10,996 - INFO -    🔄 [15s] Lagu baru: 1
+2026-11-25 23:08:14,768 - INFO -    🔄 [18s] Lagu baru: 0
+2026-11-25 23:08:18,723 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 3s | loading
+2026-11-25 23:08:22,315 - INFO -    ⏳ [26s] Lagu baru: 0 | Stabil: 7s | loading
+2026-11-25 23:08:26,317 - INFO -    ⏳ [30s] Lagu baru: 0 | Stabil: 11s | loading
+2026-11-25 23:08:29,772 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 15s | loading
+2026-11-25 23:08:33,569 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 18s | loading
+2026-11-25 23:08:36,979 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 22s | loading
+2026-11-25 23:08:40,886 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 26s | loading
+2026-11-25 23:08:44,342 - INFO -    ⏳ [48s] Lagu baru: 0 | Stabil: 29s | loading
+2026-11-25 23:08:47,694 - INFO -    ⏳ [52s] Lagu baru: 0 | Stabil: 32s | loading
+2026-11-25 23:08:50,960 - INFO -    ⏳ [55s] Lagu baru: 0 | Stabil: 36s | loading
+2026-11-25 23:08:54,264 - INFO -    ⏳ [58s] Lagu baru: 0 | Stabil: 39s | loading
+2026-11-25 23:08:57,763 - INFO -    🔄 [62s] Lagu baru: 1
+2026-11-25 23:09:01,183 - INFO -    ⏳ [65s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-25 23:09:04,659 - INFO -    ⏳ [69s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-25 23:09:08,146 - INFO -    ⏳ [72s] Lagu baru: 1 | Stabil: 10s | idle
+2026-11-25 23:09:11,719 - INFO -    ⏳ [76s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-25 23:09:15,246 - INFO -    ⏳ [79s] Lagu baru: 1 | Stabil: 17s | idle
+2026-11-25 23:09:18,335 - INFO - 💬 Tombol saran AI terdeteksi.
+2026-11-25 23:09:18,695 - INFO -    ⏳ [83s] Lagu baru: 1 | Stabil: 20s | idle
+2026-11-25 23:09:20,529 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-25 23:09:20,530 - INFO - [Browser 1] 🎼 1 lagu untuk diunduh.
+2026-11-25 23:09:20,541 - INFO - 🎯 Download 'Worn Smooth||Worn Smooth (Interweaving Duet Cover)||y23' - Worn Smooth
+2026-11-25 23:09:21,492 - INFO - Klik titik tiga berhasil.
+2026-11-25 23:09:23,939 - INFO - Submenu Download terbuka.
+2026-11-25 23:09:25,318 - INFO - Klik WAV berhasil.
+2026-11-25 23:09:25,319 - INFO - Menunggu file ter-download...
+2026-11-25 23:10:12,943 - WARNING - ⏹️  Stop diminta. Menyelesaikan proses yang sedang berjalan...
+2026-11-25 23:10:14,217 - WARNING - ❌ Tidak ada file download terdeteksi.
+2026-11-25 23:10:14,218 - WARNING - [Browser 1] Gagal download lagu 1/1
+2026-11-25 23:10:15,044 - WARNING - ↩️  Prompt #1 dikembalikan ke antrean: bot dihentikan saat download
+2026-11-25 23:10:15,094 - INFO - ==================================================================
+2026-11-25 23:10:15,095 - INFO - 🏁 BOT SELESAI
+2026-11-25 23:10:15,097 - INFO - ==================================================================
+2026-11-25 23:10:15,122 - INFO - 🏁 Selesai — 0 sukses, 0 gagal, 3 sisa.
+2026-11-25 23:31:55,476 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-25 23:31:55,826 - INFO - ======================================================================
+2026-11-25 23:31:55,826 - INFO - 🚀 BOT DIMULAI — 1 browser, 2 prompt
+2026-11-25 23:31:55,827 - INFO - 📂 Hasil & state: /tmp/flow_ui_i2cqahjy/state/run_20261125_233155
+2026-11-25 23:31:55,827 - INFO - ======================================================================
+2026-11-25 23:39:27,504 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-25 23:39:30,224 - INFO - [P9222] 🚀 Menjalankan brave-browser untuk Browser 1 (profile_1)
+2026-11-25 23:39:36,065 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 23:39:47,686 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-25 23:40:01,167 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 23:40:04,205 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 23:40:06,324 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 23:40:16,495 - INFO - ======================================================================
+2026-11-25 23:40:16,496 - INFO - 🚀 BOT DIMULAI — 1 browser, 3 prompt
+2026-11-25 23:40:16,496 - INFO - 📂 Hasil & state: /datapentingbackup/bot/state/run_20261125_234016
+2026-11-25 23:40:16,497 - INFO - ======================================================================
+2026-11-25 23:40:16,498 - INFO - ==================================================================
+2026-11-25 23:40:16,502 - INFO - 🚀 BOT DIMULAI
+2026-11-25 23:40:16,507 - INFO - ==================================================================
+2026-11-25 23:40:16,522 - INFO - [P9222] Browser sudah berjalan, menyambung...
+2026-11-25 23:40:17,385 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 23:40:17,417 - INFO - 🎯 1 browser siap bekerja.
+2026-11-25 23:40:18,581 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_1
+2026-11-25 23:40:18,587 - INFO - ✂️  Prompt #1 diambil oleh Browser 1 (percobaan 1/3)
+2026-11-25 23:40:18,600 - INFO - 
+==================================================================
+[Browser 1] 📝 Prompt #1 (percobaan 1/3)
+==================================================================
+2026-11-25 23:40:18,617 - INFO - Mengisi prompt...
+2026-11-25 23:40:20,999 - INFO - ✅ Prompt berhasil diisi.
+2026-11-25 23:40:26,555 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 23:40:29,630 - INFO - 📸 Lagu sebelum generate: 28
+2026-11-25 23:40:29,631 - INFO - Menekan Enter untuk generate...
+2026-11-25 23:40:34,986 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 23:40:44,924 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 23:40:56,373 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-25 23:40:56,374 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-25 23:40:56,592 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-25 23:40:56,762 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 23:40:59,930 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-11-25 23:41:03,059 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-11-25 23:41:06,188 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-11-25 23:41:07,713 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-25 23:41:09,316 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | idle
+2026-11-25 23:41:12,442 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 16s | idle
+2026-11-25 23:41:15,597 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-11-25 23:41:18,698 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | loading
+2026-11-25 23:41:21,831 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | loading
+2026-11-25 23:41:24,959 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | loading
+2026-11-25 23:41:28,072 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | loading
+2026-11-25 23:41:31,191 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | loading
+2026-11-25 23:41:34,314 - INFO -    ⏳ [37s] Lagu baru: 0 | Stabil: 37s | loading
+2026-11-25 23:41:37,426 - INFO -    ⏳ [40s] Lagu baru: 0 | Stabil: 41s | loading
+2026-11-25 23:41:40,531 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-11-25 23:41:43,650 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | loading
+2026-11-25 23:41:44,175 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-25 23:41:47,576 - INFO -    🔄 [50s] Lagu baru: 1
+2026-11-25 23:41:51,520 - INFO -    ⏳ [54s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-25 23:41:55,008 - INFO -    ⏳ [58s] Lagu baru: 1 | Stabil: 7s | idle
+2026-11-25 23:41:58,583 - INFO -    🔄 [61s] Lagu baru: 2
+2026-11-25 23:42:02,077 - INFO -    ⏳ [65s] Lagu baru: 2 | Stabil: 3s | idle
+2026-11-25 23:42:05,829 - INFO -    ⏳ [68s] Lagu baru: 2 | Stabil: 7s | idle
+2026-11-25 23:42:09,565 - INFO -    ⏳ [72s] Lagu baru: 2 | Stabil: 10s | idle
+2026-11-25 23:42:13,083 - INFO -    ⏳ [76s] Lagu baru: 2 | Stabil: 14s | idle
+2026-11-25 23:42:16,678 - INFO -    ⏳ [79s] Lagu baru: 2 | Stabil: 18s | idle
+2026-11-25 23:42:20,357 - INFO -    ⏳ [83s] Lagu baru: 2 | Stabil: 21s | idle
+2026-11-25 23:42:22,729 - INFO - 🎵 Selesai! 2 lagu baru.
+2026-11-25 23:42:22,732 - INFO - [Browser 1] 🎼 2 lagu untuk diunduh.
+2026-11-25 23:42:22,745 - INFO - 🎯 Download 'Worn Smooth' - Worn Smooth
+2026-11-25 23:42:24,023 - INFO - Klik titik tiga berhasil.
+2026-11-25 23:42:39,918 - WARNING - Label menu yang terlihat: ['Account', 'Upgrade', 'Make a 15s Shorts video', 'Layer more analog synth warmth', 'Lyrics', 'Sound', 'Details', 'Generate', 'Remix', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-25 23:42:39,919 - ERROR - Gagal memilih Download → MP3: Pilihan MP3/WAV tidak ditemukan
+2026-11-25 23:42:40,908 - WARNING - [Browser 1] Gagal download 'Worn Smooth' (percobaan 1/3)
+2026-11-25 23:42:42,752 - INFO - 🎯 Download 'Producer is AI and can make mistakes.' - Producer is AI and can make mistakes.
+2026-11-25 23:42:43,679 - INFO - Klik titik tiga berhasil.
+2026-11-25 23:42:58,629 - WARNING - Label menu yang terlihat: ['Account', 'Upgrade', '0:00', '2:59', 'Lyrics', 'Sound', 'Details', 'Generate']
+2026-11-25 23:42:58,630 - ERROR - Gagal memilih Download → MP3: Item 'Download' tidak ditemukan
+2026-11-25 23:42:59,468 - WARNING - [Browser 1] Gagal download 'Producer is AI and can make mistakes.' (percobaan 1/3)
+2026-11-25 23:43:00,943 - WARNING - ⏹️  Stop diminta. Menyelesaikan proses yang sedang berjalan...
+2026-11-25 23:43:00,945 - WARNING - ↩️  Prompt #1 dikembalikan ke antrean: bot dihentikan saat download
+2026-11-25 23:43:01,009 - INFO - ==================================================================
+2026-11-25 23:43:01,010 - INFO - 🏁 BOT SELESAI
+2026-11-25 23:43:01,013 - INFO - ==================================================================
+2026-11-25 23:43:01,040 - INFO - 🏁 Selesai — 0 sukses, 0 gagal, 3 sisa.
+2026-11-26 00:04:14,523 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-26 00:04:17,850 - INFO - [P9223] 🚀 Menjalankan brave-browser untuk Browser 2 (profile_2)
+2026-11-26 00:04:22,663 - INFO - [P9223] 👀 Browser ditampilkan.
+2026-11-26 00:05:07,244 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-26 00:05:12,407 - INFO - ======================================================================
+2026-11-26 00:05:12,407 - INFO - 🚀 BOT DIMULAI — 1 browser, 3 prompt
+2026-11-26 00:05:12,407 - INFO - 📂 Hasil & state: /datapentingbackup/bot/state/run_20261126_000512
+2026-11-26 00:05:12,408 - INFO - ======================================================================
+2026-11-26 00:05:12,413 - INFO - ==================================================================
+2026-11-26 00:05:12,418 - INFO - 🚀 BOT DIMULAI
+2026-11-26 00:05:12,423 - INFO - ==================================================================
+2026-11-26 00:05:12,452 - INFO - [P9223] Browser sudah berjalan, menyambung...
+2026-11-26 00:05:13,510 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-26 00:05:13,566 - INFO - 🎯 1 browser siap bekerja.
+2026-11-26 00:05:14,786 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_2
+2026-11-26 00:05:14,794 - INFO - 🗑️  Prompt dipangkas dari prompts.txt — sisa 2 prompt.
+2026-11-26 00:05:14,799 - INFO - ✂️  Prompt #1 diambil oleh Browser 2 (percobaan 1/3)
+2026-11-26 00:05:14,806 - INFO - 
+==================================================================
+[Browser 2] 📝 Prompt #1 (percobaan 1/3)
+==================================================================
+2026-11-26 00:05:14,815 - INFO - Mengisi prompt...
+2026-11-26 00:05:17,122 - INFO - ✅ Prompt berhasil diisi.
+2026-11-26 00:05:30,415 - INFO - 📸 Lagu sebelum generate: 30
+2026-11-26 00:05:30,417 - INFO - Menekan Enter untuk generate...
+2026-11-26 00:05:39,890 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-26 00:05:49,193 - INFO - [P9223] 👀 Browser ditampilkan.
+2026-11-26 00:05:56,146 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-26 00:05:56,147 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-26 00:05:56,278 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-26 00:05:59,404 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-11-26 00:06:02,659 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | idle
+2026-11-26 00:06:05,878 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | idle
+2026-11-26 00:06:09,014 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | loading
+2026-11-26 00:06:12,200 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 16s | idle
+2026-11-26 00:06:15,379 - INFO -    ⏳ [19s] Lagu baru: 0 | Stabil: 19s | idle
+2026-11-26 00:06:18,558 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | idle
+2026-11-26 00:06:21,786 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | loading
+2026-11-26 00:06:24,959 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | loading
+2026-11-26 00:06:28,121 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | loading
+2026-11-26 00:06:31,304 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 35s | loading
+2026-11-26 00:06:34,477 - INFO -    ⏳ [38s] Lagu baru: 0 | Stabil: 38s | loading
+2026-11-26 00:06:37,652 - INFO -    ⏳ [41s] Lagu baru: 0 | Stabil: 41s | loading
+2026-11-26 00:06:40,864 - INFO -    ⏳ [44s] Lagu baru: 0 | Stabil: 44s | loading
+2026-11-26 00:06:44,041 - INFO -    ⏳ [47s] Lagu baru: 0 | Stabil: 47s | loading
+2026-11-26 00:06:47,220 - INFO -    ⏳ [50s] Lagu baru: 0 | Stabil: 51s | loading
+2026-11-26 00:06:50,592 - INFO -    🔄 [54s] Lagu baru: 1
+2026-11-26 00:06:53,778 - INFO -    ⏳ [57s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-26 00:06:56,977 - INFO -    ⏳ [60s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-26 00:07:00,047 - INFO - 💬 Tombol saran AI terdeteksi.
+2026-11-26 00:07:00,221 - INFO -    ⏳ [63s] Lagu baru: 1 | Stabil: 9s | idle
+2026-11-26 00:07:01,900 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-26 00:07:01,900 - INFO - [Browser 2] 🎼 1 lagu untuk diunduh.
+2026-11-26 00:07:01,908 - INFO - 🎯 Download 'Worn Smooth' - Worn Smooth
+2026-11-26 00:07:02,770 - INFO - Klik titik tiga berhasil.
+2026-11-26 00:07:04,087 - INFO - 🧾 Isi menu setelah titik tiga: ['Remix', 'Details', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-26 00:07:05,966 - INFO - ⚠️ Klik '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b' belum berefek, mencoba lagi...
+2026-11-26 00:07:08,060 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 00:07:09,644 - INFO - ⬇️  Browser mulai mengunduh: Worn Smooth.mp3
+2026-11-26 00:07:17,725 - INFO - ✅ Browser menyelesaikan unduhan.
+2026-11-26 00:08:57,265 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 00:09:00,737 - INFO - …menunggu item menu '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b'
+2026-11-26 00:09:03,987 - INFO - …menunggu item menu '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b'
+2026-11-26 00:09:05,340 - INFO - …menunggu item menu '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b'
+2026-11-26 00:09:08,474 - INFO - …menunggu item menu '\bwav\b'
+2026-11-26 00:09:11,522 - WARNING - 🧾 Isi menu terakhir: ['Account Upgrade', 'Account', 'Upgrade', 'Bridge Builder Folk Duet', 'Your Producer is here', 'Thoughts', 'Sound', 'Lyrics', 'Worn Smooth', 'Make a 15s Shorts video', 'Add more ambient synth pads', 'Tweak the duet lyric lines', 'Try a faster tempo', 'Producer is AI and can make mistakes.', 'Compose', 'Lyrics Instrumental', 'Instrumental', 'Sound Advanced', 'Advanced', 'Generate', 'Where You Stood 0:00 2:58', '0:00 2:58', '0:00', '2:58']
+2026-11-26 00:09:11,522 - ERROR - Gagal memilih Download → MP3: Pilihan MP3/WAV tidak ditemukan
+2026-11-26 00:09:12,341 - WARNING - [Browser 2] Gagal download 'Worn Smooth' (percobaan 1/3)
+2026-11-26 00:09:14,157 - WARNING - [Browser 2] 1 lagu belum terunduh; mencoba ulang setelah jeda.
+2026-11-26 00:09:19,168 - INFO - 🎯 Download 'Worn Smooth' - Worn Smooth
+2026-11-26 00:09:19,987 - INFO - Klik titik tiga berhasil.
+2026-11-26 00:09:21,303 - INFO - 🧾 Isi menu setelah titik tiga: ['Remix', 'Details', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-26 00:09:23,359 - INFO - ⚠️ Klik '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b' belum berefek, mencoba lagi...
+2026-11-26 00:09:25,431 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 00:09:27,055 - INFO - ⬇️  Browser mulai mengunduh: Worn Smooth.mp3
+2026-11-26 00:09:33,598 - WARNING - ⏹️  Stop diminta. Menyelesaikan proses yang sedang berjalan...
+2026-11-26 00:11:14,522 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 00:11:18,064 - INFO - …menunggu item menu '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b'
+2026-11-26 00:11:21,132 - INFO - …menunggu item menu '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b'
+2026-11-26 00:11:22,739 - INFO - …menunggu item menu '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b'
+2026-11-26 00:11:25,683 - INFO - …menunggu item menu '\bwav\b'
+2026-11-26 00:11:28,680 - WARNING - 🧾 Isi menu terakhir: ['Account Upgrade', 'Account', 'Upgrade', 'Bridge Builder Folk Duet', 'Your Producer is here', 'Thoughts', 'Sound', 'Lyrics', 'Worn Smooth', 'Make a 15s Shorts video', 'Add more ambient synth pads', 'Tweak the duet lyric lines', 'Try a faster tempo', 'Producer is AI and can make mistakes.', 'Compose', 'Lyrics Instrumental', 'Instrumental', 'Sound Advanced', 'Advanced', 'Generate', 'Where You Stood 0:00 2:58', '0:00 2:58', '0:00', '2:58']
+2026-11-26 00:11:28,681 - ERROR - Gagal memilih Download → MP3: Pilihan MP3/WAV tidak ditemukan
+2026-11-26 00:11:29,502 - WARNING - [Browser 2] Gagal download 'Worn Smooth' (percobaan 2/3)
+2026-11-26 00:11:30,321 - WARNING - ↩️  Prompt #1 dikembalikan ke antrean: bot dihentikan saat download
+2026-11-26 00:11:30,376 - INFO - ==================================================================
+2026-11-26 00:11:30,380 - INFO - 🏁 BOT SELESAI
+2026-11-26 00:11:30,382 - INFO - ==================================================================
+2026-11-26 00:11:30,406 - INFO - 🏁 Selesai — 0 sukses, 0 gagal, 3 sisa.
+2026-11-26 11:30:29,669 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (2 prompt)
+2026-11-26 11:30:33,368 - INFO - ⚙️  Preferensi download disiapkan: /datapentingbackup/bot/downloads/.browser_2
+2026-11-26 11:30:33,369 - INFO - [P9223] 🚀 Menjalankan brave-browser untuk Browser 2 (profile_2)
+2026-11-26 11:30:38,302 - INFO - [P9223] 👀 Browser ditampilkan.
+2026-11-26 11:30:57,748 - INFO - ======================================================================
+2026-11-26 11:30:57,748 - INFO - 🚀 BOT DIMULAI — 1 browser, 2 prompt
+2026-11-26 11:30:57,749 - INFO - 📂 Hasil & state: /datapentingbackup/bot/state/run_20261126_113057
+2026-11-26 11:30:57,750 - INFO - ======================================================================
+2026-11-26 11:30:57,760 - INFO - ==================================================================
+2026-11-26 11:30:57,763 - INFO - 🚀 BOT DIMULAI
+2026-11-26 11:30:57,770 - INFO - ==================================================================
+2026-11-26 11:30:57,780 - INFO - [P9223] Browser sudah berjalan, menyambung...
+2026-11-26 11:30:58,643 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-26 11:30:58,702 - INFO - 🎯 1 browser siap bekerja.
+2026-11-26 11:30:59,598 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_2
+2026-11-26 11:30:59,755 - INFO - 🗑️  Prompt dipangkas dari prompts.txt — sisa 1 prompt.
+2026-11-26 11:30:59,763 - INFO - ✂️  Prompt #1 diambil oleh Browser 2 (percobaan 1/3)
+2026-11-26 11:30:59,770 - INFO - 
+==================================================================
+[Browser 2] 📝 Prompt #1 (percobaan 1/3)
+==================================================================
+2026-11-26 11:31:00,616 - INFO - Mengisi prompt...
+2026-11-26 11:31:02,811 - INFO - ✅ Prompt berhasil diisi.
+2026-11-26 11:31:03,754 - INFO - 📸 Lagu sebelum generate: 0
+2026-11-26 11:31:03,755 - INFO - Menekan Enter untuk generate...
+2026-11-26 11:31:30,352 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-26 11:31:30,353 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-26 11:31:30,516 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-26 11:31:33,676 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-11-26 11:31:36,821 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | loading
+2026-11-26 11:31:39,960 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | loading
+2026-11-26 11:31:43,109 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | loading
+2026-11-26 11:31:46,246 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 15s | loading
+2026-11-26 11:31:49,380 - INFO -    ⏳ [18s] Lagu baru: 0 | Stabil: 19s | loading
+2026-11-26 11:31:52,527 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | loading
+2026-11-26 11:31:55,660 - INFO -    ⏳ [25s] Lagu baru: 0 | Stabil: 25s | loading
+2026-11-26 11:31:58,802 - INFO -    ⏳ [28s] Lagu baru: 0 | Stabil: 28s | loading
+2026-11-26 11:32:01,937 - INFO -    ⏳ [31s] Lagu baru: 0 | Stabil: 31s | loading
+2026-11-26 11:32:05,097 - INFO -    ⏳ [34s] Lagu baru: 0 | Stabil: 34s | idle
+2026-11-26 11:32:08,338 - INFO -    🔄 [37s] Lagu baru: 1
+2026-11-26 11:32:11,640 - INFO -    ⏳ [40s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-26 11:32:14,933 - INFO -    ⏳ [44s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-26 11:32:18,221 - INFO -    ⏳ [47s] Lagu baru: 1 | Stabil: 9s | idle
+2026-11-26 11:32:21,516 - INFO -    ⏳ [50s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-26 11:32:24,822 - INFO -    ⏳ [54s] Lagu baru: 1 | Stabil: 16s | idle
+2026-11-26 11:32:28,096 - INFO -    ⏳ [57s] Lagu baru: 1 | Stabil: 19s | idle
+2026-11-26 11:32:31,367 - INFO -    ⏳ [60s] Lagu baru: 1 | Stabil: 23s | idle
+2026-11-26 11:32:33,095 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-26 11:32:33,095 - INFO - [Browser 2] 🎼 1 lagu untuk diunduh.
+2026-11-26 11:32:33,107 - INFO - 🎯 Download 'Waking Glass' - Waking Glass
+2026-11-26 11:32:33,996 - INFO - Klik titik tiga berhasil.
+2026-11-26 11:32:35,315 - INFO - 🧾 Isi menu setelah titik tiga: ['Remix', 'Details', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-26 11:32:37,712 - INFO - ⚠️ Klik '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b' belum berefek, mencoba lagi...
+2026-11-26 11:32:39,914 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 11:32:41,900 - INFO - ⬇️  Browser mulai mengunduh: Waking Glass.mp3
+2026-11-26 11:32:42,019 - INFO - ✅ Browser menyelesaikan unduhan.
+2026-11-26 11:32:42,892 - INFO - 📥 Download langsung mulai setelah klik Download.
+2026-11-26 11:32:42,893 - INFO - Format MP3 dipilih.
+2026-11-26 11:32:43,708 - INFO - Menunggu file ter-download...
+2026-11-26 11:32:47,038 - INFO - ✅ File terunduh: Waking Glass.mp3 (3,151,024 bytes)
+2026-11-26 11:32:47,041 - INFO - 📁 Disimpan: /datapentingbackup/bot/downloads/Waking Glass.mp3
+2026-11-26 11:32:48,546 - INFO - ✅ Prompt #1 selesai.
+2026-11-26 11:32:50,561 - INFO - 🗑️  Prompt dipangkas dari prompts.txt — sisa 0 prompt.
+2026-11-26 11:32:50,564 - INFO - ✂️  Prompt #2 diambil oleh Browser 2 (percobaan 1/3)
+2026-11-26 11:32:50,570 - INFO - 
+==================================================================
+[Browser 2] 📝 Prompt #2 (percobaan 1/3)
+==================================================================
+2026-11-26 11:32:51,409 - INFO - Mengisi prompt...
+2026-11-26 11:32:51,623 - INFO - ✅ Prompt berhasil diisi.
+2026-11-26 11:32:52,620 - INFO - 📸 Lagu sebelum generate: 2
+2026-11-26 11:32:52,620 - INFO - Menekan Enter untuk generate...
+2026-11-26 11:33:18,718 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-26 11:33:18,719 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-26 11:33:19,094 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-26 11:33:22,445 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | idle
+2026-11-26 11:33:25,853 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 7s | idle
+2026-11-26 11:33:29,229 - INFO -    ⏳ [10s] Lagu baru: 0 | Stabil: 10s | loading
+2026-11-26 11:33:32,609 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | loading
+2026-11-26 11:33:35,987 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 17s | loading
+2026-11-26 11:33:39,366 - INFO -    ⏳ [20s] Lagu baru: 0 | Stabil: 20s | loading
+2026-11-26 11:33:42,735 - INFO -    ⏳ [23s] Lagu baru: 0 | Stabil: 24s | loading
+2026-11-26 11:33:46,119 - INFO -    ⏳ [27s] Lagu baru: 0 | Stabil: 27s | loading
+2026-11-26 11:33:49,527 - INFO -    ⏳ [30s] Lagu baru: 0 | Stabil: 30s | loading
+2026-11-26 11:33:52,903 - INFO -    ⏳ [33s] Lagu baru: 0 | Stabil: 34s | loading
+2026-11-26 11:33:56,430 - INFO -    🔄 [37s] Lagu baru: 1
+2026-11-26 11:33:59,998 - INFO -    ⏳ [40s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-26 11:34:03,450 - INFO -    ⏳ [44s] Lagu baru: 1 | Stabil: 7s | idle
+2026-11-26 11:34:06,928 - INFO -    ⏳ [47s] Lagu baru: 1 | Stabil: 10s | idle
+2026-11-26 11:34:10,390 - INFO -    ⏳ [51s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-26 11:34:13,852 - INFO -    ⏳ [54s] Lagu baru: 1 | Stabil: 17s | idle
+2026-11-26 11:34:17,333 - INFO -    ⏳ [58s] Lagu baru: 1 | Stabil: 20s | idle
+2026-11-26 11:34:19,202 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-26 11:34:19,203 - INFO - [Browser 2] 🎼 1 lagu untuk diunduh.
+2026-11-26 11:34:19,218 - INFO - 🎯 Download 'Chalk and Steel' - Chalk and Steel
+2026-11-26 11:34:19,984 - INFO - Klik titik tiga berhasil.
+2026-11-26 11:34:21,303 - INFO - 🧾 Isi menu setelah titik tiga: ['Remix', 'Details', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-26 11:34:23,485 - INFO - ⚠️ Klik '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b' belum berefek, mencoba lagi...
+2026-11-26 11:34:25,753 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 11:34:26,977 - INFO - ⬇️  Browser mulai mengunduh: Chalk and Steel.mp3
+2026-11-26 11:34:27,096 - INFO - ✅ Browser menyelesaikan unduhan.
+2026-11-26 11:34:30,689 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 11:34:30,945 - INFO - 📥 Download langsung mulai setelah klik Download.
+2026-11-26 11:34:30,945 - INFO - Format MP3 dipilih.
+2026-11-26 11:34:31,756 - INFO - Menunggu file ter-download...
+2026-11-26 11:34:35,090 - INFO - ✅ File terunduh: Chalk and Steel.mp3 (3,957,304 bytes)
+2026-11-26 11:34:35,092 - INFO - 📁 Disimpan: /datapentingbackup/bot/downloads/Chalk and Steel.mp3
+2026-11-26 11:34:36,601 - INFO - ✅ Prompt #2 selesai.
+2026-11-26 11:34:38,668 - INFO - ==================================================================
+2026-11-26 11:34:38,674 - INFO - 🏁 BOT SELESAI
+2026-11-26 11:34:38,675 - INFO - ==================================================================
+2026-11-26 11:34:38,697 - INFO - 🏁 Selesai — 2 sukses, 0 gagal, 0 sisa.
+2026-11-26 11:45:36,175 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-26 11:45:38,406 - INFO - ⚙️  Preferensi download disiapkan: /datapentingbackup/bot/downloads/.browser_1
+2026-11-26 11:45:38,408 - INFO - [P9222] 🚀 Menjalankan brave-browser untuk Browser 1 (profile_1)
+2026-11-26 11:45:43,571 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-26 11:46:04,219 - INFO - ======================================================================
+2026-11-26 11:46:04,221 - INFO - 🚀 BOT DIMULAI — 2 browser, 3 prompt
+2026-11-26 11:46:04,221 - INFO - 📂 Hasil & state: /datapentingbackup/bot/state/run_20261126_114604
+2026-11-26 11:46:04,222 - INFO - ======================================================================
+2026-11-26 11:46:04,226 - INFO - ==================================================================
+2026-11-26 11:46:04,228 - INFO - 🚀 BOT DIMULAI
+2026-11-26 11:46:04,236 - INFO - ==================================================================
+2026-11-26 11:46:04,263 - INFO - [P9222] Browser sudah berjalan, menyambung...
+2026-11-26 11:46:04,264 - INFO - [P9223] Browser sudah berjalan, menyambung...
+2026-11-26 11:46:05,186 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-26 11:46:05,204 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-26 11:46:05,290 - INFO - 🎯 2 browser siap bekerja.
+2026-11-26 11:46:06,141 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_1
+2026-11-26 11:46:06,316 - INFO - 🗑️  Prompt dipangkas dari prompts.txt — sisa 2 prompt.
+2026-11-26 11:46:06,327 - INFO - ✂️  Prompt #1 diambil oleh Browser 1 (percobaan 1/3)
+2026-11-26 11:46:06,344 - INFO - 
+==================================================================
+[Browser 1] 📝 Prompt #1 (percobaan 1/3)
+==================================================================
+2026-11-26 11:46:06,407 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_2
+2026-11-26 11:46:06,605 - ERROR - [Browser 2] Perlu login: Silakan login manual di browser ini
+2026-11-26 11:46:07,186 - INFO - Mengisi prompt...
+2026-11-26 11:46:07,608 - INFO - ✅ Prompt berhasil diisi.
+2026-11-26 11:46:08,491 - INFO - 📸 Lagu sebelum generate: 0
+2026-11-26 11:46:08,492 - INFO - Menekan Enter untuk generate...
+2026-11-26 11:46:26,210 - WARNING - ⏹️  Stop diminta. Menyelesaikan proses yang sedang berjalan...
+2026-11-26 11:46:26,253 - WARNING - ↩️  Prompt #1 dikembalikan ke antrean: bot dihentikan
+2026-11-26 11:46:26,317 - INFO - ==================================================================
+2026-11-26 11:46:26,320 - INFO - 🏁 BOT SELESAI
+2026-11-26 11:46:26,329 - INFO - ==================================================================
+2026-11-26 11:46:26,355 - INFO - 🏁 Selesai — 0 sukses, 0 gagal, 3 sisa.
+2026-11-26 11:46:50,526 - INFO - 📁 File prompt: /datapentingbackup/bot/prompts.txt (3 prompt)
+2026-11-26 11:46:55,912 - INFO - [P9223] 👀 Browser ditampilkan.
+2026-11-26 11:47:09,509 - INFO - [P9222] 👀 Browser ditampilkan.
+2026-11-26 11:47:19,177 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-26 11:47:20,406 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-26 11:47:25,658 - INFO - ======================================================================
+2026-11-26 11:47:25,662 - INFO - 🚀 BOT DIMULAI — 2 browser, 3 prompt
+2026-11-26 11:47:25,662 - INFO - 📂 Hasil & state: /datapentingbackup/bot/state/run_20261126_114725
+2026-11-26 11:47:25,663 - INFO - ======================================================================
+2026-11-26 11:47:25,667 - INFO - ==================================================================
+2026-11-26 11:47:25,671 - INFO - 🚀 BOT DIMULAI
+2026-11-26 11:47:25,677 - INFO - ==================================================================
+2026-11-26 11:47:25,701 - INFO - [P9223] Browser sudah berjalan, menyambung...
+2026-11-26 11:47:25,701 - INFO - [P9222] Browser sudah berjalan, menyambung...
+2026-11-26 11:47:26,595 - INFO - [P9222] 🙈 Browser disembunyikan.
+2026-11-26 11:47:26,631 - INFO - [P9223] 🙈 Browser disembunyikan.
+2026-11-26 11:47:26,680 - INFO - 🎯 2 browser siap bekerja.
+2026-11-26 11:47:27,529 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_1
+2026-11-26 11:47:27,664 - INFO - 🗑️  Prompt dipangkas dari prompts.txt — sisa 2 prompt.
+2026-11-26 11:47:27,671 - INFO - ✂️  Prompt #1 diambil oleh Browser 1 (percobaan 1/3)
+2026-11-26 11:47:27,673 - INFO - 
+==================================================================
+[Browser 1] 📝 Prompt #1 (percobaan 1/3)
+==================================================================
+2026-11-26 11:47:27,753 - INFO - 📥 Folder download: /datapentingbackup/bot/downloads/.browser_2
+2026-11-26 11:47:27,875 - INFO - 🗑️  Prompt dipangkas dari prompts.txt — sisa 1 prompt.
+2026-11-26 11:47:27,880 - INFO - ✂️  Prompt #2 diambil oleh Browser 2 (percobaan 1/3)
+2026-11-26 11:47:27,887 - INFO - 
+==================================================================
+[Browser 2] 📝 Prompt #2 (percobaan 1/3)
+==================================================================
+2026-11-26 11:47:28,509 - INFO - Mengisi prompt...
+2026-11-26 11:47:28,723 - INFO - Mengisi prompt...
+2026-11-26 11:47:29,738 - INFO - ✅ Prompt berhasil diisi.
+2026-11-26 11:47:30,637 - INFO - 📸 Lagu sebelum generate: 0
+2026-11-26 11:47:30,639 - INFO - Menekan Enter untuk generate...
+2026-11-26 11:47:30,727 - INFO - ✅ Prompt berhasil diisi.
+2026-11-26 11:47:31,579 - INFO - 📸 Lagu sebelum generate: 0
+2026-11-26 11:47:31,580 - INFO - Menekan Enter untuk generate...
+2026-11-26 11:47:57,004 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-26 11:47:57,005 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-26 11:47:57,182 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-26 11:47:58,089 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-26 11:47:58,090 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-26 11:47:58,300 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | idle
+2026-11-26 11:48:00,337 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | loading
+2026-11-26 11:48:01,439 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | loading
+2026-11-26 11:48:03,476 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | loading
+2026-11-26 11:48:04,606 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | loading
+2026-11-26 11:48:06,621 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | loading
+2026-11-26 11:48:07,746 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 9s | loading
+2026-11-26 11:48:09,770 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | loading
+2026-11-26 11:48:10,888 - INFO -    ⏳ [12s] Lagu baru: 0 | Stabil: 12s | loading
+2026-11-26 11:48:12,908 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 15s | loading
+2026-11-26 11:48:14,021 - INFO -    ⏳ [15s] Lagu baru: 0 | Stabil: 15s | loading
+2026-11-26 11:48:16,037 - INFO -    ⏳ [18s] Lagu baru: 0 | Stabil: 19s | loading
+2026-11-26 11:48:17,156 - INFO -    ⏳ [18s] Lagu baru: 0 | Stabil: 19s | loading
+2026-11-26 11:48:19,239 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | loading
+2026-11-26 11:48:20,293 - INFO -    ⏳ [22s] Lagu baru: 0 | Stabil: 22s | loading
+2026-11-26 11:48:22,506 - INFO -    🔄 [25s] Lagu baru: 1
+2026-11-26 11:48:23,754 - INFO -    🔄 [25s] Lagu baru: 1
+2026-11-26 11:48:25,918 - INFO -    ⏳ [28s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-26 11:48:27,112 - INFO -    ⏳ [28s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-26 11:48:29,257 - INFO -    ⏳ [31s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-26 11:48:30,438 - INFO -    ⏳ [32s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-26 11:48:32,560 - INFO -    ⏳ [35s] Lagu baru: 1 | Stabil: 10s | idle
+2026-11-26 11:48:33,751 - INFO -    ⏳ [35s] Lagu baru: 1 | Stabil: 9s | idle
+2026-11-26 11:48:36,091 - INFO -    ⏳ [38s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-26 11:48:37,054 - INFO -    ⏳ [38s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-26 11:48:39,389 - INFO -    ⏳ [42s] Lagu baru: 1 | Stabil: 16s | idle
+2026-11-26 11:48:40,338 - INFO -    ⏳ [41s] Lagu baru: 1 | Stabil: 16s | idle
+2026-11-26 11:48:42,662 - INFO -    ⏳ [45s] Lagu baru: 1 | Stabil: 20s | idle
+2026-11-26 11:48:43,616 - INFO -    ⏳ [45s] Lagu baru: 1 | Stabil: 19s | idle
+2026-11-26 11:48:44,393 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-26 11:48:44,395 - INFO - [Browser 2] 🎼 1 lagu untuk diunduh.
+2026-11-26 11:48:44,406 - INFO - 🎯 Download 'Blue to Violet' - Blue to Violet
+2026-11-26 11:48:45,426 - INFO - Klik titik tiga berhasil.
+2026-11-26 11:48:46,743 - INFO - 🧾 Isi menu setelah titik tiga: ['Remix', 'Details', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-26 11:48:46,953 - INFO -    ⏳ [48s] Lagu baru: 1 | Stabil: 23s | idle
+2026-11-26 11:48:48,729 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-26 11:48:48,730 - INFO - [Browser 1] 🎼 1 lagu untuk diunduh.
+2026-11-26 11:48:48,749 - INFO - 🎯 Download 'Orange Safety Lights' - Orange Safety Lights
+2026-11-26 11:48:48,929 - INFO - ⚠️ Klik '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b' belum berefek, mencoba lagi...
+2026-11-26 11:48:49,673 - INFO - Klik titik tiga berhasil.
+2026-11-26 11:48:51,000 - INFO - 🧾 Isi menu setelah titik tiga: ['Remix', 'Details', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-26 11:48:51,231 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 11:48:53,108 - INFO - ⬇️  Browser mulai mengunduh: Blue to Violet.mp3
+2026-11-26 11:48:53,280 - INFO - ✅ Browser menyelesaikan unduhan.
+2026-11-26 11:48:53,562 - INFO - ⚠️ Klik '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b' belum berefek, mencoba lagi...
+2026-11-26 11:48:54,240 - INFO - 📥 Download langsung mulai setelah klik Download.
+2026-11-26 11:48:54,241 - INFO - Format MP3 dipilih.
+2026-11-26 11:48:55,056 - INFO - Menunggu file ter-download...
+2026-11-26 11:48:55,786 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 11:48:57,228 - INFO - ⬇️  Browser mulai mengunduh: Orange Safety Lights.mp3
+2026-11-26 11:48:57,418 - INFO - ✅ Browser menyelesaikan unduhan.
+2026-11-26 11:48:58,392 - INFO - ✅ File terunduh: Blue to Violet.mp3 (3,668,692 bytes)
+2026-11-26 11:48:58,402 - INFO - 📁 Disimpan: /datapentingbackup/bot/downloads/Blue to Violet.mp3
+2026-11-26 11:48:58,810 - INFO - 📥 Download langsung mulai setelah klik Download.
+2026-11-26 11:48:58,812 - INFO - Format MP3 dipilih.
+2026-11-26 11:48:59,632 - INFO - Menunggu file ter-download...
+2026-11-26 11:48:59,914 - INFO - ✅ Prompt #2 selesai.
+2026-11-26 11:49:01,944 - INFO - 🗑️  Prompt dipangkas dari prompts.txt — sisa 0 prompt.
+2026-11-26 11:49:01,946 - INFO - ✂️  Prompt #3 diambil oleh Browser 2 (percobaan 1/3)
+2026-11-26 11:49:01,953 - INFO - 
+==================================================================
+[Browser 2] 📝 Prompt #3 (percobaan 1/3)
+==================================================================
+2026-11-26 11:49:02,793 - INFO - Mengisi prompt...
+2026-11-26 11:49:02,956 - INFO - ✅ File terunduh: Orange Safety Lights.mp3 (3,474,189 bytes)
+2026-11-26 11:49:02,961 - INFO - 📁 Disimpan: /datapentingbackup/bot/downloads/Orange Safety Lights.mp3
+2026-11-26 11:49:03,015 - INFO - ✅ Prompt berhasil diisi.
+2026-11-26 11:49:04,151 - INFO - 📸 Lagu sebelum generate: 2
+2026-11-26 11:49:04,152 - INFO - Menekan Enter untuk generate...
+2026-11-26 11:49:04,468 - INFO - ✅ Prompt #1 selesai.
+2026-11-26 11:49:30,354 - WARNING - ⚠️ Generate belum terlihat; tetap menunggu...
+2026-11-26 11:49:30,355 - INFO - ⏳ Menunggu lagu (stabil 20s)...
+2026-11-26 11:49:30,658 - INFO -    ⏳ [0s] Lagu baru: 0 | Stabil: 0s | loading
+2026-11-26 11:49:33,885 - INFO -    ⏳ [3s] Lagu baru: 0 | Stabil: 3s | loading
+2026-11-26 11:49:37,141 - INFO -    ⏳ [6s] Lagu baru: 0 | Stabil: 6s | loading
+2026-11-26 11:49:40,605 - INFO -    ⏳ [9s] Lagu baru: 0 | Stabil: 10s | loading
+2026-11-26 11:49:43,836 - INFO -    ⏳ [13s] Lagu baru: 0 | Stabil: 13s | loading
+2026-11-26 11:49:47,284 - INFO -    ⏳ [16s] Lagu baru: 0 | Stabil: 16s | loading
+2026-11-26 11:49:50,613 - INFO -    🔄 [19s] Lagu baru: 1
+2026-11-26 11:49:53,953 - INFO -    ⏳ [23s] Lagu baru: 1 | Stabil: 3s | idle
+2026-11-26 11:49:57,325 - INFO -    ⏳ [26s] Lagu baru: 1 | Stabil: 6s | idle
+2026-11-26 11:50:00,652 - INFO -    ⏳ [29s] Lagu baru: 1 | Stabil: 10s | idle
+2026-11-26 11:50:03,974 - INFO -    ⏳ [33s] Lagu baru: 1 | Stabil: 13s | idle
+2026-11-26 11:50:07,316 - INFO -    ⏳ [36s] Lagu baru: 1 | Stabil: 16s | idle
+2026-11-26 11:50:10,675 - INFO -    ⏳ [39s] Lagu baru: 1 | Stabil: 20s | idle
+2026-11-26 11:50:12,442 - INFO - 🎵 Selesai! 1 lagu baru.
+2026-11-26 11:50:12,443 - INFO - [Browser 2] 🎼 1 lagu untuk diunduh.
+2026-11-26 11:50:12,455 - INFO - 🎯 Download 'Forty Stories' - Forty Stories
+2026-11-26 11:50:19,280 - INFO - Klik titik tiga berhasil.
+2026-11-26 11:50:20,592 - INFO - 🧾 Isi menu setelah titik tiga: ['Remix', 'Details', 'Download', 'Share...', 'Create video', 'Add to...', 'Split stems', 'Report', 'Delete']
+2026-11-26 11:50:22,787 - INFO - ⚠️ Klik '\bmp3\b/\b320\s*kbps\b/\bhigh quality\b' belum berefek, mencoba lagi...
+2026-11-26 11:50:25,073 - INFO - …menunggu item menu '^download$/download/^unduh$/^save$/^simpan$/^export$'
+2026-11-26 11:50:29,289 - INFO - ⬇️  Browser mulai mengunduh: Forty Stories.mp3
+2026-11-26 11:50:29,319 - INFO - Format MP3 dipilih.
+2026-11-26 11:50:29,393 - INFO - ✅ Browser menyelesaikan unduhan.
+2026-11-26 11:50:30,128 - INFO - Menunggu file ter-download...
+2026-11-26 11:50:33,458 - INFO - ✅ File terunduh: Forty Stories.mp3 (3,878,196 bytes)
+2026-11-26 11:50:33,459 - INFO - 📁 Disimpan: /datapentingbackup/bot/downloads/Forty Stories.mp3
+2026-11-26 11:50:34,964 - INFO - ✅ Prompt #3 selesai.
+2026-11-26 11:50:37,028 - INFO - ==================================================================
+2026-11-26 11:50:37,033 - INFO - 🏁 BOT SELESAI
+2026-11-26 11:50:37,035 - INFO - ==================================================================
+2026-11-26 11:50:37,064 - INFO - 🏁 Selesai — 3 sukses, 0 gagal, 0 sisa.

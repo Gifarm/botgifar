@@ -1,8 +1,15 @@
 # Browser profile
 browser_profile/
 
-# File hasil download
+# Data hasil kerja
 downloads/
 profiles/
 promt_lagu/
+state/
+
+# Virtual environment
 venv/
+
+# Python
+__pycache__/
+*.pyc

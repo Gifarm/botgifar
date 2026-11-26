@@ -1,13 +1,32 @@
-# Tutup semua Chrome/Brave dulu
-brave-browser --remote-debugging-port=9228 --user-data-dir="$HOME/brave-bot-profile" https://www.flowmusic.app/
+# Cara menjalankan Flow Music Bot v2.0
 
+## Paling mudah
+```
+./run_app.sh
+```
+(atau klik dua kali run_app.bat di Windows)
 
+## Di dalam aplikasi
+1. Atur jumlah browser (default 5).
+2. Klik kartu "Browser 1" -> login manual di jendela yang terbuka.
+3. Klik tombol "Sembunyi" di kartu.
+4. Ulangi untuk browser lain.
+5. Pilih file .txt prompt (satu prompt = satu paragraf, dipisah baris kosong).
+6. Klik JALANKAN BOT.
 
+Hanya browser yang sudah dibuka yang dipakai. Browser lain yang masih
+tertutup tidak ikut dijalankan.
 
+Browser akan bekerja di belakang layar (diminimalkan lewat CDP),
+jadi tetap bisa dipakai Zoom atau aplikasi lain.
 
-linux 
-chmod +x launch_profiles.sh
-./launch_profiles.sh
-cd ~/bot
-source venv/bin/activate
-python3 main.py
+## Hasil
+- Musik: folder downloads/
+- Status prompt: folder state/run_<tanggal>/
+- Log: bot.log
+
+## Mode CLI (opsional)
+```
+./venv/bin/python main.py --login --browsers 5
+./venv/bin/python main.py --browsers 5 --prompt "promt_lagu/100_prompt_lagu_v30_bangunan.txt"
+```
