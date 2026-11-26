@@ -86,6 +86,7 @@ def cmd_run(count: int, prompt_file: str, visible: bool) -> None:
         on_status=on_status,
         on_progress=on_progress,
         hide_browsers=not visible,
+        allow_resume=False,
     )
     try:
         runner.run()
@@ -121,7 +122,35 @@ def main() -> None:
         "--login", action="store_true",
         help="Buka semua browser untuk login manual lalu keluar",
     )
+    parser.add_argument(
+        "--browser", default=None,
+        help="Pilih browser: brave, chrome, chromium, edge, atau path binary",
+    )
+    parser.add_argument(
+        "--list-browsers", action="store_true",
+        help="Tampilkan browser yang terdeteksi lalu keluar",
+    )
     args = parser.parse_args()
+
+    if args.list_browsers:
+        options = config.available_browsers()
+        if not options:
+            print("Tidak ada browser yang terdeteksi.")
+        else:
+            print("Browser yang terdeteksi:")
+            for option in options:
+                print(
+                    f"  {option['id']:<10} {option['label']:<16} "
+                    f"{option['path']}"
+                )
+        return
+
+    if args.browser:
+        try:
+            config.set_browser_choice(args.browser)
+        except ValueError as e:
+            parser.error(str(e))
+        logger.info(f"🌐 Browser dipilih: {config.get_browser_label()}")
 
     count = max(1, min(args.browsers, config.MAX_NUM_BROWSERS))
     if args.login:

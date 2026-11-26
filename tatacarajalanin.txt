@@ -1,4 +1,4 @@
-# Cara menjalankan Flow Music Bot v2.0
+# Cara menjalankan Flow Music Bot v3.0.0
 
 ## Paling mudah
 ```
@@ -19,6 +19,15 @@ tertutup tidak ikut dijalankan.
 
 Browser akan bekerja di belakang layar (diminimalkan lewat CDP),
 jadi tetap bisa dipakai Zoom atau aplikasi lain.
+
+## Kalau satu browser error / kena limit
+Kartu browser menampilkan merah, mis. "Macet — klik Cek (#12)" atau
+"Limit — klik Cek (#12)". Prompt terakhirnya DITAHAN, tidak hilang.
+1. Buka browser itu (klik kartu / tombol Buka).
+2. Perbaiki manual: login ulang, buat session baru, ganti akun, dsb.
+3. Klik tombol "Cek" di kartu browser itu.
+Bot mengecek lagi lalu mem-paste ulang prompt yang sama dan lanjut bekerja,
+tanpa menghentikan browser lain atau me-restart seluruh bot.
 
 ## Hasil
 - Musik: folder downloads/

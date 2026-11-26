@@ -24,7 +24,10 @@ from config import (
     DOWNLOAD_STALL_WARN_SECONDS,
     DOWNLOAD_TIMEOUT_SECONDS,
     GENERATE_STABLE_SECONDS,
+    GENERATE_STUCK_SECONDS,
+    NEW_SESSION_READY_TIMEOUT,
     POLL_INTERVAL_SECONDS,
+    WEBSITE_URL,
 )
 
 logger = logging.getLogger(__name__)
@@ -70,6 +73,34 @@ ERROR_KEYWORD_SELECTOR = (
     "text=/daily limit/i, "
     "text=/try again later/i, "
     "text=/rate limit/i"
+)
+
+# Pesan khas "sesi/percakapan ini sudah mentok" — beda dengan credits habis.
+# Dipisah supaya bot mencoba session baru dulu, bukan langsung berhenti.
+SESSION_LIMIT_SELECTOR = (
+    "text=/session\\s+(?:has\\s+)?(?:expired|ended)/i, "
+    "text=/session\\s+limit/i, "
+    "text=/new\\s+session\\s+to\\s+continue/i, "
+    "text=/conversation\\s+(?:has\\s+)?(?:expired|ended|limit)/i, "
+    "text=/chat\\s+(?:has\\s+)?(?:expired|ended|limit)/i, "
+    "text=/too many (?:messages|requests)/i, "
+    "text=/sesi (?:telah\\s+)?(?:berakhir|habis|penuh)/i"
+)
+
+# Kata-kata tombol untuk memulai session/percakapan baru di sidebar.
+# Urutan penting: pola paling spesifik di awal (skor lebih tinggi).
+NEW_SESSION_WORDS = (
+    r"\bstart\s+(?:a\s+)?new\s+(?:session|chat|conversation)\b",
+    r"\bnew\s+(?:session|chat|conversation)\b",
+    r"\bsession\s+baru\b",
+    r"\bsesi\s+baru\b",
+    r"\bobrolan\s+baru\b",
+    r"\bpercakapan\s+baru\b",
+    r"\bchat\s+baru\b",
+    r"\bnew\s+(?:project|workspace|thread)\b",
+    r"\bproyek\s+baru\b",
+    r"^\s*\+\s*new\b",
+    r"^\s*new\s*$",
 )
 
 LOADING_SELECTORS = [
@@ -207,14 +238,286 @@ def wait_for_login_state(
 # ==============================================================================
 # DETEKSI ERROR / CREDITS HABIS
 # ==============================================================================
+def session_limit_message(page) -> str:
+    """Pesan eksplisit yang menandakan sesi/percakapan perlu direset."""
+    try:
+        locator = page.locator(SESSION_LIMIT_SELECTOR)
+        count = min(locator.count(), 10)
+    except Exception:
+        return ""
+    if count == 0:
+        return ""
+
+    # Abaikan elemen yang seluruhnya berada di sidebar kiri: judul lagu/riwayat
+    # percakapan di sana bisa kebetulan mengandung kata "session limit".
+    # Banner selebar halaman tetap diterima karena sisi kanannya melewati batas.
+    try:
+        viewport_w = page.evaluate("window.innerWidth")
+        if not isinstance(viewport_w, (int, float)):
+            viewport_w = 0
+    except Exception:
+        viewport_w = 0
+
+    for index in range(count):
+        node = locator.nth(index)
+        try:
+            if not node.is_visible():
+                continue
+            box = node.bounding_box()
+            if (
+                box
+                and viewport_w
+                and (box["x"] + box["width"]) < viewport_w * 0.30
+            ):
+                continue
+            text = (node.inner_text(timeout=800) or "").strip()
+            return text[:160] or "pesan batas sesi"
+        except Exception:
+            continue
+    return ""
+
+
 def check_credits_or_rate_limit(page) -> bool:
     """True bila ada pesan credits habis / limit."""
+    # Pesan batas sesi lebih baik dicoba dipulihkan dengan session baru dulu.
+    if session_limit_message(page):
+        logger.warning("🚫 Terdeteksi pesan batas sesi (bukan credits).")
+        return False
     try:
         if page.locator(ERROR_KEYWORD_SELECTOR).first.is_visible(timeout=1_000):
             logger.warning("🚫 Terdeteksi pesan error (credits/limit).")
             return True
     except Exception:
         pass
+    return False
+
+
+# ==============================================================================
+# DETEKSI & PEMULIHAN SESI
+# ==============================================================================
+def prompt_is_pending(page, expected: str | None = None) -> bool:
+    """
+    True bila kolom prompt masih berisi teks.
+
+    Kalau `expected` diberikan, teks harus cocok dengan prompt yang tadi
+    dikirim. Dipakai untuk mendeteksi Enter yang tidak benar-benar mengirim.
+    """
+    box = find_prompt_box(page)
+    if box is None:
+        return False
+    try:
+        value = (box.input_value(timeout=2_000) or "").strip()
+    except Exception:
+        return False
+    if not value:
+        return False
+    if not expected or not expected.strip():
+        return True
+
+    value_norm = " ".join(value.split()).lower()
+    expected_norm = " ".join(expected.split()).lower()
+    if value_norm == expected_norm:
+        return True
+    probe = expected_norm[:80]
+    if probe and probe in value_norm:
+        return True
+    value_probe = value_norm[:80]
+    return bool(value_probe) and value_probe in expected_norm
+
+
+def detect_session_block(page) -> str:
+    """
+    Return alasan singkat bila sesi tampak macet, atau "" bila normal.
+
+    Ciri: pesan batas sesi, kolom prompt disabled/readonly, atau kolom prompt
+    sama sekali tidak bisa diedit.
+    """
+    message = session_limit_message(page)
+    if message:
+        return message
+
+    box = find_prompt_box(page)
+    if box is None:
+        # Kolom hilang saat generate itu normal, jadi jangan dianggap macet.
+        # Tapi kalau ada textarea yang disabled, itu tanda jelas.
+        try:
+            any_box = page.locator("textarea").first
+            if any_box.count() and not any_box.is_editable():
+                return "kolom prompt tidak bisa diedit"
+        except Exception:
+            pass
+        return ""
+
+    try:
+        if not box.is_editable():
+            return "kolom prompt tidak bisa diedit"
+    except Exception:
+        pass
+    for attribute in ("disabled", "readonly", "aria-disabled"):
+        try:
+            value = box.get_attribute(attribute)
+            if value is not None and value.lower() not in ("false", "0"):
+                return f"kolom prompt {attribute}"
+        except Exception:
+            continue
+    return ""
+
+
+def _wait_for_editable_prompt_box(page, timeout: float) -> bool:
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        box = find_prompt_box(page)
+        if box is not None:
+            try:
+                if box.is_editable():
+                    return True
+            except Exception:
+                pass
+        try:
+            page.wait_for_timeout(1_000)
+        except Exception:
+            return False
+    return False
+
+
+# Pindai elemen di sisi kiri layar (sidebar) yang labelnya cocok dengan
+# perintah "session baru". Elemen terbaik ditandai atribut data-flowbot-*.
+_SIDEBAR_SCAN_JS = r"""
+(words) => {
+  const patterns = words.map(w => new RegExp(w, 'i'));
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const maxX = vw * 0.38;
+  const nodes = Array.from(document.querySelectorAll(
+    'button, a, [role="button"], [role="link"], [role="menuitem"], [tabindex]'
+  ));
+  let best = null, bestScore = 0;
+  const candidates = [];
+  for (const el of nodes) {
+    let rect;
+    try { rect = el.getBoundingClientRect(); } catch (e) { continue; }
+    if (!rect || rect.width < 8 || rect.height < 8) continue;
+    if (rect.left < -2 || rect.right > vw + 2) continue;
+    if (rect.top < -2 || rect.bottom > vh + 2) continue;
+    if (rect.left > maxX) continue;
+    const style = window.getComputedStyle(el);
+    if (!style || style.display === 'none' || style.visibility === 'hidden') continue;
+    if (Number(style.opacity) < 0.05) continue;
+
+    const label = [
+      el.innerText || '',
+      el.getAttribute('aria-label') || '',
+      el.getAttribute('title') || '',
+      el.getAttribute('data-testid') || ''
+    ].join(' ').replace(/\s+/g, ' ').trim();
+    if (!label || label.length > 80) continue;
+
+    let score = 0;
+    for (let i = 0; i < patterns.length; i++) {
+      try {
+        if (patterns[i].test(label)) { score = patterns.length - i; break; }
+      } catch (e) {}
+    }
+    if (!score) continue;
+    candidates.push(label.slice(0, 60));
+    if (score > bestScore) { bestScore = score; best = el; }
+  }
+  if (best) {
+    document.querySelectorAll('[data-flowbot-newsession]').forEach(
+      node => node.removeAttribute('data-flowbot-newsession')
+    );
+    best.setAttribute('data-flowbot-newsession', '1');
+    const label = (best.innerText || best.getAttribute('aria-label') || '')
+      .replace(/\s+/g, ' ').trim().slice(0, 80);
+    return {found: true, label: label, candidates: candidates.slice(0, 8)};
+  }
+  return {found: false, candidates: candidates.slice(0, 8)};
+}
+"""
+
+
+def _scan_new_session_button(page) -> tuple[object | None, dict]:
+    """Cari tombol session baru di semua frame. Return (frame, hasil)."""
+    last: dict = {"found": False, "candidates": []}
+    for target in _all_frames(page):
+        try:
+            result = target.evaluate(_SIDEBAR_SCAN_JS, list(NEW_SESSION_WORDS))
+        except Exception:
+            continue
+        if isinstance(result, dict) and result.get("found"):
+            return target, result
+        if isinstance(result, dict) and result.get("candidates"):
+            last = result
+    return None, last
+
+
+def start_new_session(page, stop_event=None) -> bool:
+    """
+    Klik tombol session/percakapan baru di sidebar lalu pastikan kolom prompt
+    bisa dipakai lagi. Kalau tombol tidak ditemukan, muat ulang halaman.
+
+    Return True bila kolom prompt siap dipakai setelah pemulihan.
+    """
+    if _stopped(stop_event):
+        return False
+
+    logger.warning("🔁 Sesi terindikasi macet — mencari tombol session baru...")
+    frame, result = _scan_new_session_button(page)
+    if frame is not None:
+        label = str(result.get("label") or "session baru")
+        logger.info(f"🆕 Tombol ditemukan: '{label}' — mengklik...")
+        clicked = False
+        try:
+            locator = frame.locator("[data-flowbot-newsession]").first
+            locator.click(timeout=4_000)
+            clicked = True
+        except Exception:
+            pass
+        if not clicked:
+            try:
+                frame.locator("[data-flowbot-newsession]").first.evaluate(
+                    "el => el.click()"
+                )
+                clicked = True
+            except Exception as e:
+                logger.warning(f"Gagal mengklik tombol session baru: {e}")
+
+        if clicked:
+            try:
+                page.wait_for_timeout(1_500)
+            except Exception:
+                pass
+            if _wait_for_editable_prompt_box(page, NEW_SESSION_READY_TIMEOUT):
+                logger.info("✅ Session baru siap — kolom prompt bisa dipakai.")
+                return True
+            logger.warning(
+                "⚠️ Tombol diklik, tetapi kolom prompt belum bisa dipakai."
+            )
+    else:
+        candidates = result.get("candidates") or []
+        if candidates:
+            logger.warning(
+                "Tombol session baru tidak ditemukan. Kandidat di sidebar: "
+                + ", ".join(f"'{c}'" for c in candidates[:6])
+            )
+        else:
+            logger.warning("Tombol session baru tidak ditemukan di sidebar.")
+
+    if _stopped(stop_event):
+        return False
+
+    # Fallback terakhir: muat ulang situs (membuka session baru dari awal).
+    logger.warning("🔄 Memuat ulang halaman Flow Music...")
+    try:
+        page.goto(WEBSITE_URL, wait_until="domcontentloaded")
+        page.wait_for_timeout(2_500)
+    except Exception as e:
+        logger.error(f"Gagal memuat ulang halaman: {e}")
+        return False
+
+    if _wait_for_editable_prompt_box(page, NEW_SESSION_READY_TIMEOUT):
+        logger.info("✅ Halaman siap dipakai setelah dimuat ulang.")
+        return True
+    logger.error("❌ Kolom prompt masih tidak bisa dipakai setelah reload.")
     return False
 
 
@@ -469,11 +772,19 @@ def _try_click_generate(page) -> bool:
 # GENERATE & TUNGGU SEMUA LAGU
 # ==============================================================================
 def generate_and_wait_all_songs(
-    page, max_wait_seconds: int, stop_event=None
+    page,
+    max_wait_seconds: int,
+    stop_event=None,
+    prompt_text: str | None = None,
 ) -> list[dict]:
     """
     Tekan Enter untuk generate, lalu tunggu sampai SEMUA lagu baru selesai.
     Return daftar row lagu baru (bisa lebih dari satu).
+
+    `prompt_text` (opsional) dipakai untuk mendeteksi Enter yang tidak
+    benar-benar mengirim: kalau teks masih tertinggal di kolom input dan tidak
+    ada reaksi sampai GENERATE_STUCK_SECONDS, sesi dianggap macet dan fungsi
+    mengembalikan [] supaya worker bisa mencoba session baru.
     """
     try:
         page.evaluate("window.scrollTo({top: 0, behavior: 'smooth'})")
@@ -499,6 +810,9 @@ def generate_and_wait_all_songs(
     while time.time() - start < 20:
         if _stopped(stop_event):
             return []
+        if session_limit_message(page):
+            logger.error("🚫 Pesan batas sesi terdeteksi — generate dihentikan.")
+            return []
         if check_credits_or_rate_limit(page):
             logger.error("🚫 Credits habis / rate limit.")
             return []
@@ -514,6 +828,20 @@ def generate_and_wait_all_songs(
             started = True
         else:
             logger.warning("⚠️ Generate belum terlihat; tetap menunggu...")
+
+    # Diagnostik: apakah prompt masih tertinggal di kolom input?
+    still_pending = False
+    if prompt_text:
+        try:
+            still_pending = prompt_is_pending(page, prompt_text)
+        except Exception:
+            still_pending = False
+        if still_pending and not started:
+            logger.warning(
+                "⚠️ Prompt masih ada di kolom input — kemungkinan Enter tidak "
+                f"mengirim. Bot menunggu sampai {GENERATE_STUCK_SECONDS}s, "
+                "lalu mencoba session baru."
+            )
 
     logger.info(f"⏳ Menunggu lagu (stabil {GENERATE_STABLE_SECONDS}s)...")
     start_time = time.time()
@@ -547,6 +875,12 @@ def generate_and_wait_all_songs(
         current_rows = _get_song_rows(page)
         current_uids = {row["uid"] for row in current_rows}
         new_uids = current_uids - baseline_uids
+        if new_uids:
+            # Ada lagu baru = prompt pasti terkirim.
+            still_pending = False
+        elif session_limit_message(page):
+            logger.error("🚫 Pesan batas sesi muncul di tengah generate.")
+            return []
 
         if new_uids != last_new:
             logger.info(f"   🔄 [{int(elapsed)}s] Lagu baru: {len(new_uids)}")
@@ -558,6 +892,22 @@ def generate_and_wait_all_songs(
                 f"   ⏳ [{int(elapsed)}s] Lagu baru: {len(new_uids)} | "
                 f"Stabil: {int(stable)}s | {'loading' if loading else 'idle'}"
             )
+
+        # Deteksi prompt yang tidak terkirim: teks masih di kolom input,
+        # tidak ada loading, tidak ada lagu baru, dan sudah lama sekali.
+        if prompt_text and not new_uids and not loading:
+            if elapsed >= GENERATE_STUCK_SECONDS:
+                try:
+                    still_pending = prompt_is_pending(page, prompt_text)
+                except Exception:
+                    still_pending = False
+                if still_pending:
+                    logger.error(
+                        f"❌ Prompt masih tertinggal di kolom input setelah "
+                        f"{int(elapsed)}s dan tidak ada lagu baru — sesi "
+                        f"kemungkinan macet (limit)."
+                    )
+                    return []
 
         stable = time.time() - last_change
         if len(new_uids) >= 1 and not loading:

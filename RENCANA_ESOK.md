@@ -232,18 +232,109 @@ unduh semua lagu. Baru berhenti kalau tidak ada prompt tersisa.
 
 ---
 
+## 🛡️ Fitur baru — pemulihan sesi otomatis (26 Nov 2026)
+
+Permintaan user: kalau Google Flow membatasi sesi (gejala: **prompt tidak bisa
+di-paste** / **Enter tidak mengirim**), bot harus mendeteksi, memberi tahu user,
+lalu **klik tombol session baru di sidebar** dan lanjut bekerja sampai prompt
+habis.
+
+**Deteksi (`flow_actions.py`):**
+
+| Tanda | Fungsi |
+|---|---|
+| Prompt gagal diisi 2× | `input_prompt()` di worker |
+| Kolom prompt `disabled`/`readonly`/tidak editable | `detect_session_block()` |
+| Pesan batas sesi (session limit/expired, start a new session, sesi berakhir, dll.) | `session_limit_message()` + `SESSION_LIMIT_SELECTOR` |
+| Prompt masih tertinggal di kolom input & tidak ada lagu baru ≥150 dtk | `generate_and_wait_all_songs(prompt_text=...)` |
+
+> Ambang 150 detik dipilih dari log: lagu pertama normalnya muncul 25–90 detik
+> setelah Enter, sedangkan log “Generate belum terlihat” di detik ~26 masih
+> normal. Jadi bot **tidak** membatalkan hanya karena belum ada reaksi di 20 dtk.
+
+**Pemulihan:**
+
+1. Status kartu `recovering` (ungu, “Pulihkan sesi...”) + log
+   `🔁 Sesi macet (...) — mencoba session baru...`.
+2. `start_new_session()` memindai **sidebar kiri** (x < 38% viewport) untuk
+   label `New session / New chat / Start a new chat / Sesi baru / Obrolan baru`
+   lewat JS (`_SIDEBAR_SCAN_JS`), menandai elemen terbaik, lalu mengkliknya
+   (locator → JS click).
+3. Verifikasi kolom prompt kembali editable (`_wait_for_editable_prompt_box`).
+4. Fallback: muat ulang `WEBSITE_URL`, lalu verifikasi lagi.
+5. `BotRunner._recover_session()` mencoba **2×** dengan jeda 45 detik. Kalau
+   gagal, browser itu berhenti dengan status “Sesi macet — klik session baru
+   manual”; prompt dikembalikan ke antrean **tanpa mengurangi jatah percobaan**
+   (`PromptQueue.requeue(..., penalize=False)`) supaya tidak hangus, dan browser
+   lain tetap bekerja.
+6. Pengaman anti-loop: setelah **10× pemulihan berturut-turut tanpa satu lagu
+   berhasil**, browser itu berhenti (`SESSION_RECOVERY_MAX_STREAK`) agar tidak
+   berputar terus saat limit akun benar-benar panjang.
+
+**Berkas yang disentuh:** `flow_actions.py`, `worker.py`, `prompts.py`,
+`config.py`, `app.py`, `README.md`.
+
+**Uji:** 62 assertion lulus (fake page + DOM tiruan via Node): deteksi,
+pemilihan tombol sidebar, fallback reload, retry/cooldown, status UI, filter
+sidebar untuk pesan limit, dan `requeue(penalize=False)`. **Uji browser
+sungguhan belum dijalankan.**
+
+---
+
+## 🌐 Fitur baru — pilih Brave / Chrome (26 Nov 2026)
+
+Permintaan user: aplikasi harus bisa dijalankan dengan **Brave atau Google
+Chrome** — “jalanin di Brave pakai ini, di Chrome pakai itu”.
+
+**Desain:**
+
+1. `config.available_browsers()` mendeteksi family browser yang terpasang
+   (Brave, Google Chrome, Chromium, Microsoft Edge) untuk Linux/macOS/Windows.
+   Hanya binary yang ada yang dikembalikan; env `FLOW_BOT_BROWSER` tetap
+   didukung sebagai opsi kustom.
+2. Menu **Browser:** baru di bagian *1. Browser* (sebelah “Jumlah”). Pilihan
+   disimpan ke `state/settings.json` (`{"browser": "chrome"}`) dan dipakai lagi
+   saat aplikasi dibuka.
+3. Urutan prioritas: pilihan user → `FLOW_BOT_BROWSER` → browser otomatis
+   pertama. Urutan otomatis dipertahankan seperti versi lama (Linux:
+   Brave→Chrome→Chromium→Edge; macOS/Windows: Chrome→Brave→Edge→Chromium).
+4. **Folder profil tidak dicampur antar browser.** Profil lama
+   `profiles/profile_N` tetap dipakai browser pemiliknya (dideteksi dari
+   penanda `.flowbot_browser` atau `Local State` Brave). Browser lain memakai
+   `profiles/<browser_id>/profile_N`, jadi login Brave tidak merusak login
+   Chrome. Penanda ditulis saat launch.
+5. Ganti browser ditolak selama bot berjalan atau masih ada jendela browser
+   terbuka; user diminta menutup browser dulu. Setelah ganti, manager & kartu
+   dibuat ulang dengan folder profil yang benar.
+6. CLI: `python main.py --list-browsers` dan `--browser chrome` (id/path).
+
+**Uji:** 63 assertion lulus (deteksi 2 browser, urutan, label/slug, cache
+invalidasi, pilihan path kustom/relatif, penolakan browser tidak terpasang, id
+tidak peka huruf besar, `settings.json` merge/rusak, penerapan pilihan tersimpan,
+fallback saat browser tersimpan di-uninstall, folder khusus dipertahankan saat
+folder lama hilang, penanda pemilik profil, deteksi Local State, fallback tanpa
+browser). Smoke test GUI:
+dropdown terisi “Brave”, header & subjudul kartu menampilkan browser, ganti
+browser menulis settings dan memakai folder profil lama.
+**Uji launch browser sungguhan (Brave→Chrome) belum dijalankan.**
+
+---
+
 ## 🔧 Ringkasan perubahan kode (26 Nov 2026)
 
 | File | Perubahan |
 |---|---|
-| `browser_manager.py` | `_ensure_download_prefs()` — merge `Default/Preferences` (default_directory, prompt_for_download=false, bubble off, savefile) ditulis atomik **sebelum** `Popen`; dipanggil di `launch()` hanya saat browser belum jalan |
-| `worker.py` | `configure_downloads()` dipindah tepat setelah `connect_over_cdp`; state `idle` saat tidak ada prompt tapi browser lain masih bekerja; `done — prompt habis` setelah selesai semua; `idle — tanpa prompt` untuk browser yang tak pernah dapat bagian; `close_menus()` sebelum prompt baru |
-| `prompts.py` | `remaining_prompts()`, `has_work()`, `assignments()` |
-| `app.py` | state `idle` (warna + label), ringkasan progres `• Bekerja N • Idle K` |
-| `flow_actions.py` | bug `picked` tertimpa setelah download langsung mulai diperbaiki; deadline `_click_keyword` ditegakkan di dalam loop (tidak lagi berputar >100 dtk); peringatan stall 8 dtk sebelum timeout download |
-| `config.py` | `IDLE_POLL_SECONDS`, `DOWNLOAD_STALL_WARN_SECONDS` |
-| `README.md` | alur download tanpa dialog, tabel pembagian prompt, troubleshooting |
+| `browser_manager.py` | `_ensure_download_prefs()` — merge `Default/Preferences` (default_directory, prompt_for_download=false, bubble off, savefile) ditulis atomik **sebelum** `Popen`; dipanggil di `launch()` hanya saat browser belum jalan; **hitung ulang folder profil saat launch + tulis penanda browser**; `BrowserManager.any_running()` |
+| `flow_actions.py` | bug `picked` tertimpa setelah download langsung mulai diperbaiki; deadline `_click_keyword` ditegakkan di dalam loop (tidak lagi berputar >100 dtk); peringatan stall 8 dtk sebelum timeout download; **fitur pemulihan sesi**: `SESSION_LIMIT_SELECTOR`, `session_limit_message()`, `prompt_is_pending()`, `detect_session_block()`, `start_new_session()` + scan sidebar/reload; `generate_and_wait_all_songs(..., prompt_text=)` mendeteksi prompt tidak terkirim |
+| `worker.py` | `configure_downloads()` dipindah tepat setelah `connect_over_cdp`; state `idle` saat tidak ada prompt tapi browser lain masih bekerja; `done — prompt habis` setelah selesai semua; `idle — tanpa prompt` untuk browser yang tak pernah dapat bagian; `close_menus()` sebelum prompt baru; **`_recover_session()`** + retry 2×/jeda 45 dtk, status `recovering`, prompt di-requeue tanpa penalti |
+| `prompts.py` | `remaining_prompts()`, `has_work()`, `assignments()`; `requeue(..., penalize=False)` untuk kegagalan lingkungan (sesi/limit) |
+| `app.py` | state `idle` (warna + label), ringkasan progres `• Bekerja N • Idle K`; state `recovering` (ungu, “Pulihkan sesi...”); **dropdown Browser + header/kartu menampilkan browser aktif**, ganti browser membuat ulang manager, kontrol dikunci saat bot berjalan |
+| `config.py` | `IDLE_POLL_SECONDS`, `DOWNLOAD_STALL_WARN_SECONDS`, `GENERATE_STUCK_SECONDS`, `NEW_SESSION_READY_TIMEOUT`, `SESSION_RECOVERY_ATTEMPTS`, `SESSION_RECOVERY_COOLDOWN_SECONDS`, `SESSION_RECOVERY_MAX_STREAK`; **family Brave/Chrome/Chromium/Edge, `available_browsers()`, `set_browser_choice()`, `state/settings.json`, folder profil per browser + penanda `.flowbot_browser`** |
+| `main.py` | opsi CLI `--browser` (id/path) dan `--list-browsers` |
+| `README.md` | alur download tanpa dialog, tabel pembagian prompt, troubleshooting, bagian “Pemulihan sesi otomatis (anti-limit)”, bagian “Pilih browser (Brave/Chrome/Chromium/Edge)” |
 
 **Sisa yang perlu dilakukan:** uji end-to-end browser sungguhan (unduh MP3 →
-file di `downloads/`, tanpa dialog Save). Profil lama harus **ditutup lalu
-dibuka ulang** dari kartu agar preferensi download baru terpakai.
+file di `downloads/`, tanpa dialog Save) dan uji pemulihan sesi (paksa kolom
+prompt disabled / munculkan pesan limit, pastikan tombol session baru diklik dan
+prompt yang sama diulang). Profil lama harus **ditutup lalu dibuka ulang** dari
+kartu agar preferensi download baru terpakai.

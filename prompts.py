@@ -60,6 +60,9 @@ class PromptItem:
     browser: int | None = None
     reason: str = ""
     finished_at: str = ""
+    # True = browser-nya error dan prompt ini ditahan untuk browser itu,
+    # menunggu user memperbaiki browser lalu menekan tombol "Cek".
+    held: bool = False
 
 
 # ==============================================================================
@@ -186,16 +189,59 @@ class PromptQueue:
     def complete(self, item: PromptItem) -> None:
         with self._lock:
             item.status = "done"
+            item.held = False
             item.reason = ""
             item.finished_at = time.strftime("%Y-%m-%d %H:%M:%S")
             self._save()
             logger.info(f"✅ Prompt #{item.index + 1} selesai.")
 
-    def requeue(self, item: PromptItem, reason: str = "") -> None:
-        """Kembalikan prompt ke antrean, atau tandai gagal bila percobaan habis."""
+    # --------------------------------------------------------------------------
+    # Tahan / lanjutkan prompt (browser error, tombol "Cek")
+    # --------------------------------------------------------------------------
+    def hold(self, item: PromptItem, reason: str = "") -> None:
+        """
+        Tahan prompt untuk browser yang error.
+
+        Prompt TIDAK dikembalikan ke antrean umum: ia tetap tercatat milik
+        browser itu, supaya saat user menekan "Cek" prompt yang sama bisa
+        dipaste ulang (bukan prompt lain).
+        """
+        with self._lock:
+            item.status = "running"
+            item.held = True
+            item.reason = reason
+            self._save()
+            logger.warning(
+                f"⏸️  Prompt #{item.index + 1} ditahan untuk Browser "
+                f"{item.browser} — perbaiki browser lalu klik Cek."
+            )
+
+    def resume(self, item: PromptItem) -> None:
+        """Lanjutkan prompt yang tertahan (dipaste ulang setelah Cek)."""
+        with self._lock:
+            item.status = "running"
+            item.held = False
+            item.reason = ""
+            self._save()
+            logger.info(
+                f"▶️  Prompt #{item.index + 1} dilanjutkan — paste ulang."
+            )
+
+    def requeue(
+        self, item: PromptItem, reason: str = "", penalize: bool = True
+    ) -> None:
+        """
+        Kembalikan prompt ke antrean, atau tandai gagal bila percobaan habis.
+
+        `penalize=False` dipakai untuk kegagalan karena sesi/limit browser —
+        bukan salah prompt — supaya percobaan prompt tidak ikut terbakar.
+        """
         with self._lock:
             item.reason = reason
             item.browser = None
+            item.held = False
+            if not penalize:
+                item.attempts = max(item.attempts - 1, 0)
             if item.attempts >= self.max_attempts:
                 item.status = "failed"
                 item.finished_at = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -215,6 +261,7 @@ class PromptQueue:
             item.status = "failed"
             item.reason = reason
             item.browser = None
+            item.held = False
             item.finished_at = time.strftime("%Y-%m-%d %H:%M:%S")
             self._save()
             logger.error(f"❌ Prompt #{item.index + 1} gagal: {reason}")
@@ -227,10 +274,59 @@ class PromptQueue:
                 if item.status == "running":
                     item.status = "pending"
                     item.browser = None
+                    item.held = False
                     changed = True
             if changed:
                 self._save()
                 logger.info("↩️  Prompt yang sedang diproses dikembalikan ke antrean.")
+            # Prompt yang belum dikerjakan dikembalikan ke file .txt, supaya
+            # tidak hilang saat bot dijalankan ulang (JALANKAN BOT membuat
+            # antrean baru dari file itu).
+            self._restore_pending_to_source()
+
+    def _restore_pending_to_source(self) -> int:
+        """Tulis balik prompt pending yang sudah dipangkas dari file sumber.
+
+        Dipanggil saat lock antrean aktif (lihat release_running).
+        """
+        path = Path(self.source_file)
+        try:
+            raw = path.read_text(encoding="utf-8-sig") if path.exists() else ""
+        except Exception as e:
+            logger.warning(f"Tidak bisa membaca file prompt untuk restore: {e}")
+            return 0
+
+        existing = {
+            block.strip()
+            for block in raw.replace("\r\n", "\n").split("\n\n")
+            if block.strip()
+        }
+        missing = [
+            item.text.strip()
+            for item in self.items
+            if item.status == "pending"
+            and item.text.strip()
+            and item.text.strip() not in existing
+        ]
+        if not missing:
+            return 0
+
+        body = raw.replace("\r\n", "\n").rstrip()
+        extra = "\n\n".join(missing)
+        content = (body + "\n\n" + extra + "\n") if body else (extra + "\n")
+        try:
+            tmp_path = path.with_name(path.name + ".tmp")
+            tmp_path.write_text(content, encoding="utf-8")
+            os.replace(tmp_path, path)
+        except Exception as e:
+            logger.warning(f"Gagal mengembalikan prompt ke file sumber: {e}")
+            return 0
+
+        logger.info(
+            f"↩️  {len(missing)} prompt yang belum selesai dikembalikan ke "
+            f"{path.name} — tidak akan hilang saat bot dijalankan ulang."
+        )
+        return len(missing)
 
     # --------------------------------------------------------------------------
     # Statistik
@@ -240,7 +336,14 @@ class PromptQueue:
             return {
                 "total": len(self.items),
                 "pending": sum(1 for i in self.items if i.status == "pending"),
-                "running": sum(1 for i in self.items if i.status == "running"),
+                "running": sum(
+                    1 for i in self.items
+                    if i.status == "running" and not i.held
+                ),
+                "held": sum(
+                    1 for i in self.items
+                    if i.status == "running" and i.held
+                ),
                 "done": sum(1 for i in self.items if i.status == "done"),
                 "failed": sum(1 for i in self.items if i.status == "failed"),
             }
@@ -263,7 +366,11 @@ class PromptQueue:
         bukan langsung berhenti.
         """
         with self._lock:
-            return any(i.status in ("pending", "running") for i in self.items)
+            return any(
+                i.status == "pending"
+                or (i.status == "running" and not i.held)
+                for i in self.items
+            )
 
     def assignments(self) -> dict[int, list[int]]:
         """Peta Browser -> daftar nomor prompt (1-based) yang pernah dipegang."""

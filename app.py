@@ -13,7 +13,6 @@ from __future__ import annotations
 import logging
 import os
 import threading
-import time
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
@@ -25,7 +24,7 @@ from prompts import PromptQueue, count_prompts
 from worker import BotRunner
 
 APP_TITLE = "Flow Music Bot"
-APP_VERSION = "2.0"
+APP_VERSION = "3.0.0"
 
 # Warna status kartu (mode terang, mode gelap)
 STATE_COLORS = {
@@ -39,6 +38,7 @@ STATE_COLORS = {
     "generating": ("#0F766E", "#2DD4BF"),
     "downloading": ("#0F766E", "#2DD4BF"),
     "waiting": ("#B45309", "#FBBF24"),
+    "recovering": ("#7C3AED", "#C4B5FD"),
     "login_required": ("#C2410C", "#FB923C"),
     "credits": ("#B91C1C", "#F87171"),
     "error": ("#B91C1C", "#F87171"),
@@ -58,8 +58,9 @@ STATE_TEXT = {
     "generating": "Generate...",
     "downloading": "Download...",
     "waiting": "Menunggu",
+    "recovering": "Pulihkan sesi...",
     "login_required": "Perlu login",
-    "credits": "Credits habis",
+    "credits": "Limit tercapai",
     "error": "Error",
     "done": "Selesai",
     "idle": "Idle — tanpa prompt",
@@ -118,6 +119,7 @@ class BotApp(ctk.CTk):
         self.is_running = False
         self.stop_event = threading.Event()
         self.runner_thread: threading.Thread | None = None
+        self.runner: BotRunner | None = None
         self.queue: PromptQueue | None = None
         self.card_state: dict[int, str] = {}
         self.card_message: dict[int, str] = {}
@@ -151,14 +153,11 @@ class BotApp(ctk.CTk):
             font=ctk.CTkFont(size=13),
         ).pack(side="left", padx=(8, 0), pady=(8, 0))
 
-        try:
-            browser_label = config.get_browser_label()
-        except Exception:
-            browser_label = "browser tidak ditemukan"
-        ctk.CTkLabel(
-            header, text=f"Browser: {browser_label}",
+        self.lbl_browser_header = ctk.CTkLabel(
+            header, text=f"Browser: {self._current_browser_label()}",
             text_color="gray", font=ctk.CTkFont(size=12),
-        ).pack(side="right", pady=(8, 0))
+        )
+        self.lbl_browser_header.pack(side="right", pady=(8, 0))
 
         # ----- Browser -----
         browser_frame = ctk.CTkFrame(self)
@@ -174,6 +173,32 @@ class BotApp(ctk.CTk):
             top, text="Klik kartu untuk membuka browser & login manual.",
             text_color="gray", font=ctk.CTkFont(size=12),
         ).pack(side="left", padx=(10, 0))
+
+        # Pilih browser yang dipakai: Brave, Chrome, Chromium, atau Edge —
+        # hanya browser yang benar-benar terpasang yang muncul.
+        browser_options = config.available_browsers()
+        self._browser_label_to_option: dict[str, dict] = {}
+        labels: list[str] = []
+        for option in browser_options:
+            label = option["label"]
+            if label in self._browser_label_to_option:
+                label = f"{label} ({option['id']})"
+            self._browser_label_to_option[label] = option
+            labels.append(label)
+
+        self.option_browser = ctk.CTkOptionMenu(
+            top,
+            values=labels or ["Tidak ditemukan"],
+            width=150,
+            command=self._on_browser_change,
+            state="normal" if labels else "disabled",
+        )
+        self.option_browser.pack(side="right", padx=(0, 8))
+        self._sync_browser_menu()
+
+        ctk.CTkLabel(
+            top, text="Browser:", font=ctk.CTkFont(size=12)
+        ).pack(side="right", padx=(0, 6))
 
         self.option_browsers = ctk.CTkOptionMenu(
             top,
@@ -369,8 +394,12 @@ class BotApp(ctk.CTk):
         title.pack(anchor="w", padx=10, pady=(8, 0))
 
         port = profile.port if profile else config.base_port(index)
+        browser_label = self._current_browser_label()
+        subtitle_text = f"Port {port}"
+        if browser_label != "tidak ditemukan":
+            subtitle_text += f" • {browser_label}"
         subtitle = ctk.CTkLabel(
-            card, text=f"Port {port}",
+            card, text=subtitle_text,
             text_color="gray", font=ctk.CTkFont(size=11),
         )
         subtitle.pack(anchor="w", padx=10)
@@ -393,19 +422,29 @@ class BotApp(ctk.CTk):
         buttons.pack(fill="x", padx=8, pady=(6, 8))
 
         btn_open = ctk.CTkButton(
-            buttons, text="Buka", width=70, height=26,
+            buttons, text="Buka", width=1, height=26,
             font=ctk.CTkFont(size=11),
             command=lambda i=index: self._card_open(i),
         )
-        btn_open.pack(side="left", expand=True, fill="x", padx=(0, 4))
+        btn_open.pack(side="left", expand=True, fill="x", padx=(0, 3))
 
         btn_hide = ctk.CTkButton(
-            buttons, text="Sembunyi", width=80, height=26,
+            buttons, text="Sembunyi", width=1, height=26,
             font=ctk.CTkFont(size=11),
             fg_color=("#6B7280", "#4B5563"), hover_color=("#4B5563", "#374151"),
             command=lambda i=index: self._card_hide(i),
         )
-        btn_hide.pack(side="left", expand=True, fill="x")
+        btn_hide.pack(side="left", expand=True, fill="x", padx=(0, 3))
+
+        # "Cek" = cek ulang browser yang error/limit, lalu lanjutkan worker-nya
+        # (prompt yang tadi ditahan akan dipaste ulang).
+        btn_check = ctk.CTkButton(
+            buttons, text="Cek", width=1, height=26,
+            font=ctk.CTkFont(size=11),
+            fg_color=("#0284C7", "#0369A1"), hover_color=("#0369A1", "#075985"),
+            command=lambda i=index: self._card_check(i),
+        )
+        btn_check.pack(side="left", expand=True, fill="x")
 
         self.card_widgets[index] = {
             "card": card,
@@ -415,6 +454,7 @@ class BotApp(ctk.CTk):
             "detail": detail,
             "btn_open": btn_open,
             "btn_hide": btn_hide,
+            "btn_check": btn_check,
         }
 
         # Klik di mana saja pada kartu = buka / tampilkan browser.
@@ -460,9 +500,22 @@ class BotApp(ctk.CTk):
         widgets["btn_hide"].configure(
             state="normal" if not is_closed else "disabled"
         )
+        # "Cek" hanya aktif bila bot sedang jalan dan worker browser ini
+        # memang tertahan karena error/limit (bukan sedang bekerja).
+        runner = self.runner
+        can_check = bool(
+            running and runner is not None and runner.can_resume(index)
+        )
+        widgets["btn_check"].configure(
+            state="normal" if can_check else "disabled"
+        )
         if profile:
             widgets["title"].configure(text=profile.name)
-            widgets["subtitle"].configure(text=f"Port {profile.port}")
+            browser_label = self._current_browser_label()
+            subtitle_text = f"Port {profile.port}"
+            if browser_label != "tidak ditemukan":
+                subtitle_text += f" • {browser_label}"
+            widgets["subtitle"].configure(text=subtitle_text)
 
     def _card_open(self, index: int) -> None:
         profile = self.manager.get(index)
@@ -517,6 +570,57 @@ class BotApp(ctk.CTk):
             self._ui(self._set_card, profile.index, "hidden",
                      message or "Siap (tersembunyi)", False)
 
+    # --------------------------------------------------------------------------
+    # CEK ULANG BROWSER YANG ERROR
+    # --------------------------------------------------------------------------
+    def _card_check(self, index: int) -> None:
+        """Cek ulang browser yang error/limit, lalu lanjutkan dari prompt tadi."""
+        profile = self.manager.get(index)
+        if profile is None:
+            return
+        if not self.is_running or self.runner is None:
+            messagebox.showinfo(
+                "Bot belum berjalan",
+                "Tombol Cek dipakai saat bot berjalan dan ada browser yang "
+                "error.\n\nKalau bot sudah selesai, tekan ▶️ JALANKAN BOT lagi.",
+            )
+            return
+
+        self._set_card(index, "connecting", "Mengecek browser...")
+        self._run_async(lambda: self._do_check(profile))
+
+    def _do_check(self, profile) -> None:
+        try:
+            # Browser mungkin ditutup / crash: JANGAN langsung dianggap siap.
+            if not profile.cdp_ready():
+                self._ui(
+                    self._set_card, profile.index, "error",
+                    "Tidak terdeteksi — klik Buka dulu",
+                )
+                return
+
+            runner = self.runner
+            if runner is None or not runner.resume(profile):
+                if runner is not None and runner.is_active(profile.index):
+                    # Sudah dilanjutkan (mis. tombol terklik dua kali).
+                    self._ui(self._set_card, profile.index, "connecting",
+                             "Mengecek browser...")
+                else:
+                    self._ui(
+                        self._set_card, profile.index, "error",
+                        "Belum bisa dilanjutkan — coba lagi",
+                    )
+                return
+            # Status berikutnya (connecting → ready / login_required) dikirim
+            # oleh worker yang baru dijalankan.
+        except Exception as e:
+            logger.error(f"Gagal cek {profile.name}: {e}")
+            self._ui(self._set_card, profile.index, "error", str(e))
+
+    def _on_worker_idle(self, index: int) -> None:
+        """Worker browser ini berhenti: segarkan tombol (Cek jadi aktif)."""
+        self._ui(self._render_card, index)
+
     def _poll_browsers(self) -> None:
         """Pantau browser yang ditutup manual."""
         active = 0
@@ -535,6 +639,10 @@ class BotApp(ctk.CTk):
                     self._set_card(index, "hidden", "Browser terdeteksi", False)
         except Exception:
             pass
+        # Segarkan tombol "Cek" (aktif/nonaktif) selama bot berjalan.
+        if self.is_running:
+            for index in range(1, self.manager.count + 1):
+                self._render_card(index)
         self._update_active_hint(active)
         self.after(3000, self._poll_browsers)
 
@@ -558,6 +666,80 @@ class BotApp(ctk.CTk):
             self.lbl_active_hint.configure(text=text, text_color=color)
         except Exception:
             pass
+
+    # ==========================================================================
+    # PILIH BROWSER
+    # ==========================================================================
+    def _current_browser_label(self) -> str:
+        try:
+            return config.get_browser_label()
+        except Exception:
+            return "tidak ditemukan"
+
+    def _refresh_browser_header(self) -> None:
+        try:
+            self.lbl_browser_header.configure(
+                text=f"Browser: {self._current_browser_label()}"
+            )
+        except Exception:
+            pass
+
+    def _sync_browser_menu(self) -> None:
+        """Tampilkan browser yang benar-benar dipakai di dropdown."""
+        try:
+            current = os.path.realpath(config.get_browser_path())
+        except Exception:
+            current = ""
+        for label, option in self._browser_label_to_option.items():
+            if current and os.path.realpath(option["path"]) == current:
+                try:
+                    self.option_browser.set(label)
+                except Exception:
+                    pass
+                return
+
+    def _on_browser_change(self, label: str) -> None:
+        option = self._browser_label_to_option.get(label)
+        if not option:
+            return
+
+        if self.is_running:
+            messagebox.showwarning(
+                "Sedang berjalan",
+                "Browser tidak bisa diubah saat bot berjalan.",
+            )
+            self._sync_browser_menu()
+            return
+
+        if self.manager.any_running():
+            messagebox.showwarning(
+                "Tutup browser dulu",
+                "Masih ada browser yang terbuka.\n\n"
+                "Tutup semua jendela browser (atau tutup aplikasi lalu buka "
+                "lagi) sebelum mengganti browser, supaya profil & login tidak "
+                "tertukar.",
+            )
+            self._sync_browser_menu()
+            return
+
+        try:
+            config.set_browser_choice(option["id"])
+        except ValueError as e:
+            messagebox.showerror("Browser tidak ditemukan", str(e))
+            self._sync_browser_menu()
+            return
+
+        # Folder profil/login mengikuti browser yang dipilih, jadi buat ulang
+        # manager supaya kartu memakai folder yang benar sejak awal.
+        self.manager = BrowserManager(self.manager.count)
+        self.card_state = {
+            index: "closed" for index in range(1, self.manager.count + 1)
+        }
+        self.card_message.clear()
+        self.card_visible.clear()
+        self._rebuild_cards()
+        self._refresh_browser_header()
+        logger.info(f"🌐 Browser diatur ke {config.get_browser_label()}.")
 
     # ==========================================================================
     # JUMLAH BROWSER
@@ -643,6 +825,20 @@ class BotApp(ctk.CTk):
         )
         self.btn_run.configure(state="normal" if enabled else "disabled")
 
+    def _set_run_controls_enabled(self, enabled: bool) -> None:
+        """Kunci / buka kontrol yang tidak boleh diubah saat bot berjalan."""
+        self.btn_run.configure(state="normal" if enabled else "disabled")
+        self.btn_stop.configure(state="disabled" if enabled else "normal")
+        self.option_browsers.configure(
+            state="normal" if enabled else "disabled"
+        )
+        self.option_browser.configure(
+            state="normal"
+            if enabled and self._browser_label_to_option
+            else "disabled"
+        )
+        self.chk_hide.configure(state="normal" if enabled else "disabled")
+
     # ==========================================================================
     # JALANKAN / STOP
     # ==========================================================================
@@ -702,25 +898,20 @@ class BotApp(ctk.CTk):
         self.is_running = True
         self._update_active_hint()
         self.stop_event = threading.Event()
-        self.btn_run.configure(state="disabled")
-        self.btn_stop.configure(state="normal")
-        self.option_browsers.configure(state="disabled")
-        self.chk_hide.configure(state="disabled")
+        self._set_run_controls_enabled(False)
         self.lbl_progress.configure(text="Menyiapkan...")
 
         try:
             self.queue = PromptQueue(prompt_file, config.MAX_PROMPT_ATTEMPTS)
         except Exception as e:
             self.is_running = False
-            self.btn_run.configure(state="normal")
-            self.btn_stop.configure(state="disabled")
+            self._set_run_controls_enabled(True)
             messagebox.showerror("Error", f"Gagal membaca prompt: {e}")
             return
 
         if not self.queue.items:
             self.is_running = False
-            self.btn_run.configure(state="normal")
-            self.btn_stop.configure(state="disabled")
+            self._set_run_controls_enabled(True)
             messagebox.showerror("Error", "Antrean prompt kosong.")
             return
 
@@ -737,8 +928,10 @@ class BotApp(ctk.CTk):
             stop_event=self.stop_event,
             on_status=self._on_worker_status,
             on_progress=self._on_worker_progress,
+            on_idle=self._on_worker_idle,
             hide_browsers=self.hide_on_start.get(),
         )
+        self.runner = runner
         self.runner_thread = threading.Thread(
             target=self._run_bot, args=(runner,), daemon=True
         )
@@ -762,10 +955,10 @@ class BotApp(ctk.CTk):
 
     def _finish_run(self) -> None:
         self.is_running = False
-        self.btn_run.configure(state="normal")
-        self.btn_stop.configure(state="disabled")
-        self.option_browsers.configure(state="normal")
-        self.chk_hide.configure(state="normal")
+        self.runner = None
+        self._set_run_controls_enabled(True)
+        for index in range(1, self.manager.count + 1):
+            self._render_card(index)
 
         if self.queue is not None:
             self.queue.release_running()
@@ -833,7 +1026,7 @@ class BotApp(ctk.CTk):
         stats = self._last_stats
         if not stats:
             return
-        working_states = {"working", "generating", "downloading"}
+        working_states = {"working", "generating", "downloading", "recovering"}
         working = sum(1 for s in self.card_state.values() if s in working_states)
         idle = sum(1 for s in self.card_state.values() if s == "idle")
         text = (
@@ -845,6 +1038,9 @@ class BotApp(ctk.CTk):
         )
         if working or idle:
             text += f" • Bekerja {working} • Idle {idle}"
+        held = stats.get("held", 0)
+        if held:
+            text += f" • Tertahan {held} (klik Cek)"
         self.lbl_progress.configure(text=text)
 
     # ==========================================================================
@@ -868,7 +1064,18 @@ class BotApp(ctk.CTk):
             ):
                 return
             self.stop_event.set()
-            time.sleep(0.3)
+            # Beri worker waktu berhenti + membersihkan antrean (prompt yang
+            # tertahan/berjalan dikembalikan ke file .txt).
+            if self.runner_thread is not None:
+                try:
+                    self.runner_thread.join(timeout=5)
+                except Exception:
+                    pass
+        if self.queue is not None:
+            try:
+                self.queue.release_running()
+            except Exception as e:
+                logger.warning(f"Gagal mengembalikan prompt ke antrean: {e}")
 
         try:
             self.manager.close_all()

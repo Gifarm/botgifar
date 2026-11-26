@@ -34,8 +34,11 @@ from config import (
     WINDOW_SIZE,
     base_port,
     browser_download_dir,
+    get_browser_id,
+    get_browser_label,
     get_browser_path,
     launch_flags,
+    mark_profile_browser,
     profile_dir,
 )
 
@@ -385,18 +388,27 @@ class BrowserProfile:
 
         self._choose_port()
 
+        # Hitung ulang folder profil saat launch: kalau user baru berganti
+        # browser (Brave <-> Chrome), profil harus ikut browser yang dipilih.
+        self.profile_path = profile_dir(self.index)
+        self.download_dir = browser_download_dir(self.index)
+
         # Tulis preferensi download SEBELUM proses browser hidup.
         self.profile_path.mkdir(parents=True, exist_ok=True)
         self.download_dir.mkdir(parents=True, exist_ok=True)
         _ensure_download_prefs(self.profile_path, self.download_dir)
+
+        browser_id = get_browser_id()
+        mark_profile_browser(self.profile_path, browser_id)
 
         binary = get_browser_path()
         flags = launch_flags(self.index, self.port)
         flags.append(url)
 
         logger.info(
-            f"[P{self.port}] 🚀 Menjalankan {Path(binary).name} "
-            f"untuk {self.name} ({self.profile_path.name})"
+            f"[P{self.port}] 🚀 Menjalankan {get_browser_label()} "
+            f"({Path(binary).name}) untuk {self.name} "
+            f"({self.profile_path.parent.name}/{self.profile_path.name})"
         )
         creationflags = 0
         start_new_session = False
@@ -542,6 +554,16 @@ class BrowserManager:
             if profile.index == index:
                 return profile
         return None
+
+    def any_running(self) -> bool:
+        """True bila ada browser milik aplikasi yang masih hidup."""
+        for profile in self.profiles:
+            try:
+                if profile.is_running():
+                    return True
+            except Exception:
+                continue
+        return False
 
     def close_all(self) -> None:
         for profile in self.profiles:
