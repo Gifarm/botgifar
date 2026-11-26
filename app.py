@@ -24,7 +24,7 @@ from prompts import PromptQueue, count_prompts
 from worker import BotRunner
 
 APP_TITLE = "Flow Music Bot"
-APP_VERSION = "3.0.0"
+APP_VERSION = "3.0.1"
 
 # Warna status kartu (mode terang, mode gelap)
 STATE_COLORS = {
@@ -954,6 +954,7 @@ class BotApp(ctk.CTk):
         self.lbl_progress.configure(text="Menghentikan...")
 
     def _finish_run(self) -> None:
+        runner = self.runner
         self.is_running = False
         self.runner = None
         self._set_run_controls_enabled(True)
@@ -971,13 +972,24 @@ class BotApp(ctk.CTk):
             f"{stats.get('failed', 0)} gagal, {stats.get('pending', 0)} sisa."
         )
 
+        cleanup = runner.last_cleanup if runner is not None else None
         summary = (
             f"Selesai!\n\n"
             f"✅ Sukses : {stats.get('done', 0)}\n"
             f"❌ Gagal  : {stats.get('failed', 0)}\n"
-            f"⏳ Sisa   : {stats.get('pending', 0)}\n\n"
-            f"File musik ada di folder:\n{config.DOWNLOADS_DIR}"
+            f"⏳ Sisa   : {stats.get('pending', 0)}\n"
         )
+        if cleanup:
+            deleted = cleanup.get("deleted", 0)
+            freed = cleanup.get("freed", 0) / (1024 * 1024)
+            if deleted:
+                summary += (
+                    f"\n🧹 Salinan ganda dihapus: {deleted} file "
+                    f"({freed:.1f} MB)\n"
+                )
+            else:
+                summary += "\n🧹 Tidak ada salinan lagu ganda.\n"
+        summary += f"\nFile musik ada di folder:\n{config.DOWNLOADS_DIR}"
         messagebox.showinfo("Bot selesai", summary)
 
     # ==========================================================================

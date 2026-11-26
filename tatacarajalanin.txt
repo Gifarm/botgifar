@@ -1,4 +1,4 @@
-# Cara menjalankan Flow Music Bot v3.0.0
+# Cara menjalankan Flow Music Bot v3.0.1
 
 ## Paling mudah
 ```
@@ -33,6 +33,13 @@ tanpa menghentikan browser lain atau me-restart seluruh bot.
 - Musik: folder downloads/
 - Status prompt: folder state/run_<tanggal>/
 - Log: bot.log
+
+## Pemeriksaan file ganda (otomatis)
+Setelah semua prompt habis, bot memeriksa downloads/ dan menghapus salinan
+lagu yang sama, mis. "Judul (1).mp3" atau "Judul_1.mp3". Hanya file yang
+nama + isinya sama persis yang dihapus; file berbeda tetap disimpan.
+Ringkasannya muncul di log dan dialog "Bot selesai". Kalau bot di-STOP,
+pemeriksaan ini dilewati.
 
 ## Mode CLI (opsional)
 ```

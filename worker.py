@@ -11,6 +11,7 @@ import threading
 import time
 from typing import Callable
 
+from cleanup import remove_duplicate_downloads
 from config import (
     DOWNLOADS_DIR,
     GENERATE_MAX_WAIT_SECONDS,
@@ -93,6 +94,10 @@ class BotRunner:
         self._held: dict[int, PromptItem] = {}
         self._running = False
 
+        # Ringkasan pemeriksaan file ganda di folder downloads saat bot
+        # selesai (dipakai GUI untuk ringkasan akhir).
+        self.last_cleanup: dict[str, int] | None = None
+
     # --------------------------------------------------------------------------
     # Utilitas
     # --------------------------------------------------------------------------
@@ -111,6 +116,39 @@ class BotRunner:
     def _wait_or_stop(self, seconds: float) -> bool:
         """Tidur sambil memantau stop. Return True bila harus berhenti."""
         return self.stop_event.wait(timeout=seconds)
+
+    def _cleanup_duplicate_downloads(self) -> None:
+        """
+        Pemeriksaan akhir: buang salinan lagu yang terunduh dua kali.
+
+        Dijalankan setelah semua prompt habis dan bot selesai normal (bukan
+        saat di-STOP), karena saat STOP masih ada file yang mungkin sedang
+        ditulis. Lagu yang sama terunduh dua kali muncul sebagai
+        "Judul (1).mp3" (penamaan Chrome) atau "Judul_1.mp3" (penamaan bot).
+        """
+        logger.info("🧹 Memeriksa file lagu ganda di folder downloads...")
+        try:
+            result = remove_duplicate_downloads(DOWNLOADS_DIR)
+        except Exception as e:
+            logger.warning(f"Pemeriksaan file ganda gagal: {e}")
+            return
+
+        self.last_cleanup = result
+        deleted = result.get("deleted", 0)
+        freed = result.get("freed", 0)
+        if deleted:
+            logger.info(
+                f"🧹 {deleted} salinan lagu ganda dihapus "
+                f"({freed / (1024 * 1024):.1f} MB dibebaskan)."
+            )
+        else:
+            logger.info("🧹 Tidak ada salinan lagu ganda yang perlu dihapus.")
+        different = result.get("kept_different", 0)
+        if different:
+            logger.info(
+                f"🧹 {different} file mirip namanya tetapi isinya berbeda — "
+                "dibiarkan (bukan duplikat)."
+            )
 
     # --------------------------------------------------------------------------
     # Kendali worker per browser (tombol "Cek")
@@ -781,6 +819,8 @@ class BotRunner:
 
         if self.stop_event.is_set():
             self.queue.release_running()
+        else:
+            self._cleanup_duplicate_downloads()
 
         self._progress()
         logger.info("=" * 66)

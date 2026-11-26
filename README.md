@@ -1,4 +1,4 @@
-# 🎵 Flow Music Bot v3.0.0
+# 🎵 Flow Music Bot v3.0.1
 
 Bot otomasi untuk membuat & mengunduh musik dari [Google Flow Music](https://www.flowmusic.app/)
 memakai beberapa browser (multi-akun) sekaligus — **Brave, Google Chrome,
@@ -133,6 +133,35 @@ hangus.
 
 ---
 
+## Pemeriksaan file ganda (otomatis di akhir)
+
+Kadang satu lagu terunduh **dua kali** (mis. perintah Download terkirim
+ganda). Chrome menyimpan salinannya sebagai `Judul (1).mp3`, dan bot sendiri
+memberi akhiran `_1` kalau nama tujuan sudah dipakai.
+
+Setelah **semua prompt habis** dan bot selesai normal, bot memeriksa folder
+`downloads/` lalu menghapus salinan gandanya. Ringkasannya muncul di log dan
+di dialog "Bot selesai", mis.:
+
+```
+🧹 Salinan ganda dihapus: 2 file (8.4 MB)
+```
+
+Aturan penghapusan dibuat aman:
+
+- hanya file audio (mp3/wav/m4a/flac/ogg/opus) yang namanya sama setelah
+  akhiran ` (1)`, ` (2)`, `_1`, ... dibuang;
+- salinan **hanya** dihapus kalau ukuran dan isi file (SHA-1) **sama persis**
+  dengan file yang dipertahankan;
+- kalau namanya mirip tetapi isinya berbeda — bisa jadi dua lagu asli yang
+  kebetulan berjudul sama — keduanya **dibiarkan** dan dicatat di log;
+- folder sementara `.browser_N` dan file yang sedang diunduh tidak disentuh;
+- pemeriksaan dilewati kalau bot dihentikan dengan **STOP**, karena masih ada
+  file yang mungkin sedang ditulis. Jalankan lagi sampai antrean habis untuk
+  mendapat pemeriksaan akhir.
+
+---
+
 ## Pemulihan sesi otomatis (anti-limit)
 
 Google Flow bisa membatasi satu sesi/percakapan walau akun masih punya kuota.
@@ -240,6 +269,7 @@ Lokasi log: **`bot.log`** dan panel *Log Aktivitas* di aplikasi.
 | `browser_manager.py` | Launch, minimize/show, cek login |
 | `flow_actions.py` | Selector & aksi di halaman Flow Music |
 | `prompts.py` | Antrean prompt yang aman |
+| `cleanup.py` | Pemeriksaan & penghapusan file lagu ganda di `downloads/` |
 | `config.py` | Semua pengaturan |
 | `main.py` | Mode command-line (opsional) |
 
@@ -247,7 +277,7 @@ Lokasi log: **`bot.log`** dan panel *Log Aktivitas* di aplikasi.
 
 ## Catatan
 
-- Versi ini masih tahap pengembangan (v3.0.0), belum dibungkus jadi `.exe`.
+- Versi ini masih tahap pengembangan (v3.0.1), belum dibungkus jadi `.exe`.
 - Selector situs Flow Music bisa berubah kapan saja. Kalau ada tombol yang
   tidak terdeteksi, perbaiki selector di `flow_actions.py`.
 - Gunakan dengan bijak. Menjalankan banyak akun otomatis berisiko terkena
