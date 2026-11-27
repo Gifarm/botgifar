@@ -16,6 +16,7 @@ import logging
 import os
 import re
 import shutil
+import threading
 import time
 from pathlib import Path
 
@@ -31,6 +32,14 @@ from config import (
 )
 
 logger = logging.getLogger(__name__)
+
+# Semua worker browser menulis hasil akhir ke folder `downloads/` yang sama.
+# Kunci ini membuat pemilihan nama file + pemindahan berjalan atomik.
+_MOVE_LOCK = threading.Lock()
+
+# Semua browser mengunduh ke folder `downloads/` yang sama. Download
+# diantrekan supaya pendeteksian file baru tidak tertukar antar browser.
+_DOWNLOAD_LOCK = threading.Lock()
 
 # ==============================================================================
 # SELECTOR
@@ -1563,16 +1572,29 @@ def _unique_destination(directory: Path, filename: str) -> Path:
 
 def _move_finished_file(temp_file: Path, destination_dir: Path) -> Path:
     destination_dir.mkdir(parents=True, exist_ok=True)
-    destination = _unique_destination(destination_dir, temp_file.name)
+
+    # Kalau file sudah berada di folder tujuan (mis. download langsung ke
+    # `downloads/`), tidak perlu dipindah — jangan sampai malah diberi akhiran.
     try:
-        shutil.move(str(temp_file), str(destination))
+        if temp_file.parent.resolve() == destination_dir.resolve():
+            return temp_file
     except Exception:
-        # Kalau beda filesystem, copy lalu hapus.
-        shutil.copy2(str(temp_file), str(destination))
+        pass
+
+    # Semua worker browser memindahkan hasil ke SATU folder `downloads/`.
+    # Kunci ini mencegah dua worker memilih nama tujuan yang sama lalu saling
+    # menimpa file.
+    with _MOVE_LOCK:
+        destination = _unique_destination(destination_dir, temp_file.name)
         try:
-            temp_file.unlink()
+            shutil.move(str(temp_file), str(destination))
         except Exception:
-            pass
+            # Kalau beda filesystem, copy lalu hapus.
+            shutil.copy2(str(temp_file), str(destination))
+            try:
+                temp_file.unlink()
+            except Exception:
+                pass
     return destination
 
 
@@ -1808,13 +1830,28 @@ def download_song_by_uid(
 
 def download_song_row(page, row: dict, temp_dir, final_dir,
                       stop_event=None) -> bool:
-    """Helper: download satu row lagu ke folder tujuan akhir."""
-    return download_song_by_uid(
-        page,
-        row["uid"],
-        temp_dir,
-        label=f"- {row.get('title', '')[:40]}",
-        stop_event=stop_event,
-        final_dir=final_dir,
-        row=row,
-    )
+    """
+    Helper: download satu row lagu ke folder tujuan akhir.
+
+    Download diantrekan: semua browser memakai folder `downloads/` yang sama,
+    jadi hanya satu download yang berjalan pada satu waktu. Tanpa antrean,
+    dua browser bisa sama-sama melihat file baru milik browser lain atau
+    memilih nama tujuan yang sama.
+    """
+    # Tunggu giliran, tetapi tetap tanggap kalau user menekan STOP.
+    while not _DOWNLOAD_LOCK.acquire(timeout=0.5):
+        if _stopped(stop_event):
+            return False
+
+    try:
+        return download_song_by_uid(
+            page,
+            row["uid"],
+            temp_dir,
+            label=f"- {row.get('title', '')[:40]}",
+            stop_event=stop_event,
+            final_dir=final_dir,
+            row=row,
+        )
+    finally:
+        _DOWNLOAD_LOCK.release()

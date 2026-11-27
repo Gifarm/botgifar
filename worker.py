@@ -11,9 +11,10 @@ import threading
 import time
 from typing import Callable
 
-from cleanup import remove_duplicate_downloads
+from cleanup import consolidate_downloads, remove_duplicate_downloads
 from config import (
     DOWNLOADS_DIR,
+    DOWNLOAD_TEMP_DIR,
     GENERATE_MAX_WAIT_SECONDS,
     IDLE_POLL_SECONDS,
     PAUSE_AFTER_DOWNLOAD,
@@ -119,23 +120,41 @@ class BotRunner:
 
     def _cleanup_duplicate_downloads(self) -> None:
         """
-        Pemeriksaan akhir: buang salinan lagu yang terunduh dua kali.
+        Pemeriksaan akhir: satukan hasil lalu buang salinan lagu ganda.
 
         Dijalankan setelah semua prompt habis dan bot selesai normal (bukan
         saat di-STOP), karena saat STOP masih ada file yang mungkin sedang
-        ditulis. Lagu yang sama terunduh dua kali muncul sebagai
-        "Judul (1).mp3" (penamaan Chrome) atau "Judul_1.mp3" (penamaan bot).
+        ditulis. Pemeriksaan ini TIDAK membuka browser: semua browser memang
+        mengunduh ke satu folder `downloads/`; sisa file dari folder kerja
+        versi lama (kalau ada) diselamatkan dulu, lalu folder itu dibaca
+        menjadi satu daftar, duplikatnya disusun, dan dihapus. Sisanya adalah
+        lagu yang tidak duplikat.
+
+        Lagu yang sama terunduh dua kali muncul sebagai "Judul (1).mp3"
+        (penamaan Chrome) atau "Judul_1.mp3" (penamaan bot).
         """
-        logger.info("🧹 Memeriksa file lagu ganda di folder downloads...")
+        logger.info("🧹 Menyatukan hasil semua browser ke folder downloads...")
+        moved = 0
+        try:
+            moved = consolidate_downloads([DOWNLOAD_TEMP_DIR], DOWNLOADS_DIR)
+        except Exception as e:
+            logger.warning(f"Gagal menyatukan folder download sementara: {e}")
+        if moved:
+            logger.info(f"📦 {moved} lagu dipindahkan ke {DOWNLOADS_DIR}.")
+
+        logger.info("🧹 Memeriksa file lagu ganda (tanpa browser)...")
         try:
             result = remove_duplicate_downloads(DOWNLOADS_DIR)
         except Exception as e:
             logger.warning(f"Pemeriksaan file ganda gagal: {e}")
             return
 
+        result["moved"] = int(result.get("moved", 0)) + moved
         self.last_cleanup = result
+        scanned = result.get("scanned", 0)
         deleted = result.get("deleted", 0)
         freed = result.get("freed", 0)
+        logger.info(f"🧹 {scanned} file audio dipindai.")
         if deleted:
             logger.info(
                 f"🧹 {deleted} salinan lagu ganda dihapus "

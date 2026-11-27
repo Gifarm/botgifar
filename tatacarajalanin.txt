@@ -35,11 +35,14 @@ tanpa menghentikan browser lain atau me-restart seluruh bot.
 - Log: bot.log
 
 ## Pemeriksaan file ganda (otomatis)
-Setelah semua prompt habis, bot memeriksa downloads/ dan menghapus salinan
-lagu yang sama, mis. "Judul (1).mp3" atau "Judul_1.mp3". Hanya file yang
-nama + isinya sama persis yang dihapus; file berbeda tetap disimpan.
-Ringkasannya muncul di log dan dialog "Bot selesai". Kalau bot di-STOP,
-pemeriksaan ini dilewati.
+Semua browser mengunduh langsung ke SATU folder downloads/ (tanpa subfolder
+per browser). Proses download diantrekan supaya tidak saling menimpa file.
+Setelah semua prompt habis, bot memeriksa isi downloads/ tanpa membuka
+browser. Semua file audio dikumpulkan jadi satu daftar, duplikatnya disusun
+sebagai daftar, lalu dihapus sendiri oleh bot. Sisanya adalah lagu yang tidak
+duplikat. Hanya file yang nama + isinya sama persis yang dihapus; file
+berbeda tetap disimpan. Daftar file yang dihapus muncul di log dan dialog
+"Bot selesai". Kalau bot di-STOP, pemeriksaan ini dilewati.
 
 ## Mode CLI (opsional)
 ```

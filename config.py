@@ -19,6 +19,10 @@ APP_DIR = Path(__file__).resolve().parent
 PROFILES_DIR = APP_DIR / "profiles"
 DOWNLOADS_DIR = APP_DIR / "downloads"
 STATE_DIR = APP_DIR / "state"
+# Folder kerja lama (versi sebelumnya) — hanya dipakai untuk menyelamatkan
+# file yang mungkin tertinggal di sana. Versi sekarang mengunduh langsung ke
+# `downloads/` yang sama untuk semua browser.
+DOWNLOAD_TEMP_DIR = STATE_DIR / "download_tmp"
 LOG_FILE = APP_DIR / "bot.log"
 DEFAULT_PROMPT_FILE = APP_DIR / "prompts.txt"
 
@@ -549,10 +553,19 @@ def base_port(index: int) -> int:
 
 
 def browser_download_dir(index: int) -> Path:
-    """Folder download sementara per browser (biar tidak saling rebutan nama)."""
-    path = DOWNLOADS_DIR / f".browser_{index}"
-    path.mkdir(parents=True, exist_ok=True)
-    return path
+    """
+    Folder download untuk SEMUA browser — satu folder yang sama.
+
+    Semua browser (1–10) mengunduh langsung ke `downloads/`, jadi hasilnya
+    otomatis terkumpul di satu tempat tanpa subfolder per browser. Supaya
+    beberapa browser tidak saling menimpa file saat mengunduh bersamaan,
+    proses download diantrekan oleh bot (lihat `download_song_row`).
+
+    Parameter `index` tetap diterima agar pemanggil lama tidak perlu diubah.
+    """
+    del index  # semua browser memakai folder yang sama
+    DOWNLOADS_DIR.mkdir(parents=True, exist_ok=True)
+    return DOWNLOADS_DIR
 
 
 def launch_flags(index: int, port: int) -> list[str]:

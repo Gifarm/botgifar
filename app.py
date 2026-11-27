@@ -25,7 +25,7 @@ from prompts import PromptQueue, count_prompts
 from worker import BotRunner
 
 APP_TITLE = "Flow Music Bot"
-APP_VERSION = "3.0.2"
+APP_VERSION = "3.0.4"
 
 # Batas baris log yang disimpan di kotak log GUI.
 LOG_MAX_LINES = 2000
@@ -1107,13 +1107,28 @@ class BotApp(ctk.CTk):
         if cleanup:
             deleted = cleanup.get("deleted", 0)
             freed = cleanup.get("freed", 0) / (1024 * 1024)
+            scanned = cleanup.get("scanned", 0)
+            moved = cleanup.get("moved", 0)
+            if moved:
+                summary += (
+                    f"\n📦 {moved} lagu dari folder kerja disatukan ke "
+                    f"folder downloads.\n"
+                )
             if deleted:
                 summary += (
                     f"\n🧹 Salinan ganda dihapus: {deleted} file "
                     f"({freed:.1f} MB)\n"
                 )
+                names = cleanup.get("deleted_files") or []
+                for name in names[:10]:
+                    summary += f"   • {name}\n"
+                if len(names) > 10:
+                    summary += f"   … dan {len(names) - 10} file lain\n"
             else:
-                summary += "\n🧹 Tidak ada salinan lagu ganda.\n"
+                summary += (
+                    f"\n🧹 Tidak ada salinan lagu ganda "
+                    f"({scanned} file audio diperiksa).\n"
+                )
         summary += f"\nFile musik ada di folder:\n{config.DOWNLOADS_DIR}"
         messagebox.showinfo("Bot selesai", summary)
 

@@ -1,4 +1,4 @@
-# 🎵 Flow Music Bot v3.0.2
+# 🎵 Flow Music Bot v3.0.4
 
 Bot otomasi untuk membuat & mengunduh musik dari [Google Flow Music](https://www.flowmusic.app/)
 memakai beberapa browser (multi-akun) sekaligus — **Brave, Google Chrome,
@@ -120,15 +120,16 @@ hangus.
 
 ## Hasil
 
-- Semua file **MP3** masuk ke folder **`downloads/`** (kalau MP3 tidak ada di
-  menu, bot memakai WAV dan memberi peringatan di log).
+- Semua file **MP3** masuk ke **satu folder yang sama: `downloads/`** — semua
+  browser (1–10) mengunduh langsung ke situ, tanpa subfolder per browser
+  (kalau MP3 tidak ada di menu, bot memakai WAV dan memberi peringatan di log).
 - Tidak ada dialog **Save / file manager** yang perlu diklik: folder & opsi
-  download sudah diatur di profil browser sebelum browser dibuka, lalu
-  ditegaskan lewat CDP. File sementara dikumpulkan per browser di
-  `downloads/.browser_N/` agar dua browser tidak rebutan nama file, lalu
-  dipindahkan ke `downloads/`.
-- Kalau dua browser menghasilkan judul yang sama, file kedua otomatis
-  diberi akhiran `_1`, `_2`, dst.
+  download diatur di profil browser sebelum browser dibuka, lalu ditegaskan
+  lewat CDP. Supaya beberapa browser tidak saling menimpa file, proses
+  download diantrekan (satu download berjalan pada satu waktu), jadi semua
+  lagu tetap masuk ke folder yang sama.
+- Kalau judul lagu sama, file berikutnya otomatis diberi akhiran `_1`, `_2`,
+  dst. (atau ` (1)` dari browser).
 - Setiap prompt bisa menghasilkan 1–3 lagu, dan **semuanya** diunduh.
 
 ---
@@ -139,12 +140,17 @@ Kadang satu lagu terunduh **dua kali** (mis. perintah Download terkirim
 ganda). Chrome menyimpan salinannya sebagai `Judul (1).mp3`, dan bot sendiri
 memberi akhiran `_1` kalau nama tujuan sudah dipakai.
 
-Setelah **semua prompt habis** dan bot selesai normal, bot memeriksa folder
-`downloads/` lalu menghapus salinan gandanya. Ringkasannya muncul di log dan
-di dialog "Bot selesai", mis.:
+Setelah **semua prompt habis** dan bot selesai normal, bot memeriksa satu
+folder hasil **`downloads/`** itu. Pemeriksaan ini **tidak membuka atau
+menyentuh browser sama sekali**: bot hanya membaca file audio
+(mp3/wav/m4a/flac/ogg/opus/…), menyusun **daftar duplikat**, lalu menghapus
+duplikatnya sendiri. Sisanya adalah lagu yang tidak duplikat. Ringkasan +
+daftar file yang dihapus muncul di log dan dialog "Bot selesai", mis.:
 
 ```
 🧹 Salinan ganda dihapus: 2 file (8.4 MB)
+   • Judul Lagu (1).mp3
+   • Judul Lagu_1.mp3
 ```
 
 Aturan penghapusan dibuat aman:
@@ -153,9 +159,11 @@ Aturan penghapusan dibuat aman:
   akhiran ` (1)`, ` (2)`, `_1`, ... dibuang;
 - salinan **hanya** dihapus kalau ukuran dan isi file (SHA-1) **sama persis**
   dengan file yang dipertahankan;
+- file dengan nama asli (tanpa akhiran `(1)`/`_1`) dipertahankan lebih dulu;
 - kalau namanya mirip tetapi isinya berbeda — bisa jadi dua lagu asli yang
   kebetulan berjudul sama — keduanya **dibiarkan** dan dicatat di log;
-- folder sementara `.browser_N` dan file yang sedang diunduh tidak disentuh;
+- sisa unduhan yang tidak selesai (`.crdownload`) dibersihkan setelah semua
+  download selesai;
 - pemeriksaan dilewati kalau bot dihentikan dengan **STOP**, karena masih ada
   file yang mungkin sedang ditulis. Jalankan lagi sampai antrean habis untuk
   mendapat pemeriksaan akhir.
@@ -270,7 +278,7 @@ Lokasi log: **`bot.log`** dan panel *Log Aktivitas* di aplikasi.
 | `browser_manager.py` | Launch, minimize/show, cek login |
 | `flow_actions.py` | Selector & aksi di halaman Flow Music |
 | `prompts.py` | Antrean prompt yang aman |
-| `cleanup.py` | Pemeriksaan & penghapusan file lagu ganda di `downloads/` |
+| `cleanup.py` | Pemeriksaan daftar duplikat & penghapusan lagu ganda di `downloads/` |
 | `config.py` | Semua pengaturan |
 | `main.py` | Mode command-line (opsional) |
 
@@ -278,7 +286,7 @@ Lokasi log: **`bot.log`** dan panel *Log Aktivitas* di aplikasi.
 
 ## Catatan
 
-- Versi ini masih tahap pengembangan (v3.0.2), belum dibungkus jadi `.exe`.
+- Versi ini masih tahap pengembangan (v3.0.4), belum dibungkus jadi `.exe`.
 - Selector situs Flow Music bisa berubah kapan saja. Kalau ada tombol yang
   tidak terdeteksi, perbaiki selector di `flow_actions.py`.
 - Gunakan dengan bijak. Menjalankan banyak akun otomatis berisiko terkena
