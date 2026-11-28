@@ -21,11 +21,12 @@ import customtkinter as ctk
 
 import config
 from browser_manager import BrowserManager
+from cleanup import remove_duplicate_downloads
 from prompts import PromptQueue, count_prompts
 from worker import BotRunner
 
 APP_TITLE = "Flow Music Bot"
-APP_VERSION = "3.0.4"
+APP_VERSION = "3.1.0"
 
 # Batas baris log yang disimpan di kotak log GUI.
 LOG_MAX_LINES = 2000
@@ -147,6 +148,8 @@ class BotApp(ctk.CTk):
         self._progress_text = ""
         self._active_hint: tuple[str, str] | None = None
         self._run_btn_on: bool | None = None
+        # Pemeriksaan file ganda bisa dijalankan kapan saja dari tombol.
+        self._dup_busy = False
         # Opsi sembunyikan diambil saat start, supaya thread worker tidak
         # menyentuh variabel Tk (Tk hanya boleh diakses dari thread UI).
         self._run_hide_browsers = bool(self.hide_on_start.get())
@@ -316,6 +319,17 @@ class BotApp(ctk.CTk):
         )
         self.chk_hide.pack(side="left")
 
+        # Pemeriksaan lagu ganda bisa ditekan KAPAN SAJA — termasuk saat
+        # prompt masih dikerjakan atau semua browser sudah di-Stop.
+        self.btn_dup = ctk.CTkButton(
+            info_row, text="🧹 Cek Lagu Ganda", width=150, height=28,
+            font=ctk.CTkFont(size=12),
+            fg_color=("#7C3AED", "#6D28D9"),
+            hover_color=("#6D28D9", "#5B21B6"),
+            command=self._check_duplicates,
+        )
+        self.btn_dup.pack(side="left", padx=(14, 0))
+
         self.lbl_progress = ctk.CTkLabel(
             info_row, text="", text_color="gray",
             font=ctk.CTkFont(size=12),
@@ -467,15 +481,20 @@ class BotApp(ctk.CTk):
         )
         detail.pack(anchor="w", padx=10)
 
+        # 4 tombol per kartu, disusun 2×2 supaya kartu tetap rapi:
+        #   Buka / Sembunyi
+        #   Cek  / Stop
         buttons = ctk.CTkFrame(card, fg_color="transparent")
         buttons.pack(fill="x", padx=8, pady=(6, 8))
+        buttons.grid_columnconfigure(0, weight=1)
+        buttons.grid_columnconfigure(1, weight=1)
 
         btn_open = ctk.CTkButton(
             buttons, text="Buka", width=1, height=26,
             font=ctk.CTkFont(size=11),
             command=lambda i=index: self._card_open(i),
         )
-        btn_open.pack(side="left", expand=True, fill="x", padx=(0, 3))
+        btn_open.grid(row=0, column=0, sticky="ew", padx=(0, 3), pady=(0, 3))
 
         btn_hide = ctk.CTkButton(
             buttons, text="Sembunyi", width=1, height=26,
@@ -483,17 +502,26 @@ class BotApp(ctk.CTk):
             fg_color=("#6B7280", "#4B5563"), hover_color=("#4B5563", "#374151"),
             command=lambda i=index: self._card_hide(i),
         )
-        btn_hide.pack(side="left", expand=True, fill="x", padx=(0, 3))
+        btn_hide.grid(row=0, column=1, sticky="ew", padx=(3, 0), pady=(0, 3))
 
-        # "Cek" = cek ulang browser yang error/limit, lalu lanjutkan worker-nya
-        # (prompt yang tadi ditahan akan dipaste ulang).
+        # "Cek" = cek ulang/lanjutkan browser ini: setelah error/limit,
+        # setelah di-Stop, atau untuk browser yang baru dibuka di tengah run.
         btn_check = ctk.CTkButton(
             buttons, text="Cek", width=1, height=26,
             font=ctk.CTkFont(size=11),
             fg_color=("#0284C7", "#0369A1"), hover_color=("#0369A1", "#075985"),
             command=lambda i=index: self._card_check(i),
         )
-        btn_check.pack(side="left", expand=True, fill="x")
+        btn_check.grid(row=1, column=0, sticky="ew", padx=(0, 3), pady=(3, 0))
+
+        # "Stop" hanya menghentikan browser ini; browser lain tetap bekerja.
+        btn_stop = ctk.CTkButton(
+            buttons, text="Stop", width=1, height=26,
+            font=ctk.CTkFont(size=11),
+            fg_color=("#B91C1C", "#991B1B"), hover_color=("#991B1B", "#7F1D1D"),
+            command=lambda i=index: self._card_stop(i),
+        )
+        btn_stop.grid(row=1, column=1, sticky="ew", padx=(3, 0), pady=(3, 0))
 
         self.card_widgets[index] = {
             "card": card,
@@ -504,6 +532,7 @@ class BotApp(ctk.CTk):
             "btn_open": btn_open,
             "btn_hide": btn_hide,
             "btn_check": btn_check,
+            "btn_stop": btn_stop,
         }
 
         # Klik di mana saja pada kartu = buka / tampilkan browser.
@@ -532,13 +561,16 @@ class BotApp(ctk.CTk):
         open_text = "Buka" if is_closed else "Tampilkan"
         open_state = "disabled" if state in {"launching", "connecting"} else "normal"
         hide_state = "normal" if not is_closed else "disabled"
-        # "Cek" hanya aktif bila bot sedang jalan dan worker browser ini
-        # memang tertahan karena error/limit (bukan sedang bekerja).
+        # "Cek" aktif bila bot sedang jalan dan browser ini bisa dilanjutkan:
+        # tertahan karena error/limit, di-Stop, atau baru dibuka di tengah run.
+        # "Stop" hanya aktif bila worker browser ini memang sedang hidup.
         runner = self.runner
-        can_check = bool(
-            self.is_running and runner is not None and runner.can_resume(index)
-        )
+        running = bool(self.is_running and runner is not None)
+        can_check = bool(running and runner.can_check(index))
         check_state = "normal" if can_check else "disabled"
+        stop_state = (
+            "normal" if running and runner.is_active(index) else "disabled"
+        )
         detail_text = (message[:42] + "…") if len(message) > 42 else message
         title_text = profile.name if profile else None
         subtitle_text = self._browser_subtitle(profile.port) if profile else None
@@ -547,7 +579,7 @@ class BotApp(ctk.CTk):
         # configure() memicu redraw dan inilah sumber UI "berkedip".
         signature = (
             state, detail_text, open_text, open_state, hide_state,
-            check_state, title_text, subtitle_text,
+            check_state, stop_state, title_text, subtitle_text,
         )
         if self._card_render_cache.get(index) == signature:
             return
@@ -563,6 +595,7 @@ class BotApp(ctk.CTk):
         # tergantung apakah jendela sedang terlihat atau sudah diminimalkan.
         widgets["btn_hide"].configure(state=hide_state)
         widgets["btn_check"].configure(state=check_state)
+        widgets["btn_stop"].configure(state=stop_state)
         if title_text is not None:
             widgets["title"].configure(text=title_text)
         if subtitle_text is not None:
@@ -635,23 +668,50 @@ class BotApp(ctk.CTk):
                      message or "Siap (tersembunyi)", False)
 
     # --------------------------------------------------------------------------
-    # CEK ULANG BROWSER YANG ERROR
+    # CEK / STOP PER BROWSER
     # --------------------------------------------------------------------------
     def _card_check(self, index: int) -> None:
-        """Cek ulang browser yang error/limit, lalu lanjutkan dari prompt tadi."""
+        """
+        Cek & lanjutkan browser ini.
+
+        Bisa dipakai untuk browser yang error/limit, yang baru di-Stop, atau
+        yang baru dibuka di tengah bot berjalan — tanpa mengganggu browser lain.
+        """
         profile = self.manager.get(index)
         if profile is None:
             return
         if not self.is_running or self.runner is None:
             messagebox.showinfo(
                 "Bot belum berjalan",
-                "Tombol Cek dipakai saat bot berjalan dan ada browser yang "
-                "error.\n\nKalau bot sudah selesai, tekan ▶️ JALANKAN BOT lagi.",
+                "Tombol Cek dipakai saat bot berjalan — untuk melanjutkan "
+                "browser yang error/di-Stop, atau menjalankan browser yang "
+                "baru dibuka di tengah jalan.\n\n"
+                "Kalau bot sudah selesai, tekan ▶️ JALANKAN BOT lagi.",
             )
             return
 
         self._set_card(index, "connecting", "Mengecek browser...")
         self._run_async(lambda: self._do_check(profile))
+
+    def _card_stop(self, index: int) -> None:
+        """Stop HANYA browser ini. Prompt-nya ditahan dan bisa dilanjutkan Cek."""
+        runner = self.runner
+        if not self.is_running or runner is None:
+            return
+        if not runner.is_active(index):
+            messagebox.showinfo(
+                "Tidak sedang bekerja",
+                "Browser ini tidak sedang menjalankan pekerjaan.\n\n"
+                "Kalau ingin menambahkan browser di tengah run, buka "
+                "browsernya lalu klik Cek.",
+            )
+            return
+        if runner.request_stop(index):
+            self._set_card(index, "stopped", "Menghentikan browser...")
+            logger.warning(
+                f"⏹️ Browser {index} diminta berhenti (browser lain tetap "
+                f"bekerja)."
+            )
 
     def _do_check(self, profile) -> None:
         try:
@@ -681,9 +741,89 @@ class BotApp(ctk.CTk):
             logger.error(f"Gagal cek {profile.name}: {e}")
             self._ui(self._set_card, profile.index, "error", str(e))
 
+    # --------------------------------------------------------------------------
+    # PEMERIKSAAN FILE GANDA (tombol, bisa kapan saja)
+    # --------------------------------------------------------------------------
+    def _check_duplicates(self) -> None:
+        """
+        Periksa & hapus salinan lagu ganda di folder downloads/.
+
+        Berjalan di thread terpisah; bot TIDAK dihentikan dan prompt yang
+        sedang dikerjakan tetap lanjut. Aman ditekan saat semua browser
+        di-Stop, dan bisa ditekan berulang (tombol dinonaktifkan sesaat).
+        """
+        if self._dup_busy:
+            return
+        self._dup_busy = True
+        try:
+            self.btn_dup.configure(state="disabled", text="🧹 Memeriksa...")
+        except Exception:
+            pass
+        logger.info("🧹 Pemeriksaan file ganda diminta dari tombol.")
+        self._run_async(self._do_check_duplicates)
+
+    def _do_check_duplicates(self) -> None:
+        result = None
+        error = ""
+        try:
+            # safe=True: aman ditekan walau bot masih mengunduh (file
+            # `.crdownload` dan folder kerja tidak disentuh).
+            result = remove_duplicate_downloads(
+                config.DOWNLOADS_DIR, safe=True
+            )
+        except Exception as e:
+            error = str(e)
+            logger.error(f"Pemeriksaan file ganda gagal: {e}")
+        self._ui(self._finish_check_duplicates, result, error)
+
+    def _finish_check_duplicates(self, result, error: str = "") -> None:
+        self._dup_busy = False
+        try:
+            self.btn_dup.configure(state="normal", text="🧹 Cek Lagu Ganda")
+        except Exception:
+            pass
+
+        if error or result is None:
+            messagebox.showerror(
+                "Pemeriksaan gagal",
+                f"Tidak bisa memeriksa folder downloads:\n{error}",
+            )
+            return
+
+        scanned = int(result.get("scanned", 0))
+        deleted = int(result.get("deleted", 0))
+        freed = int(result.get("freed", 0)) / (1024 * 1024)
+        moved = int(result.get("moved", 0))
+        different = int(result.get("kept_different", 0))
+
+        summary = (
+            "Pemeriksaan selesai — bot TIDAK dihentikan.\n\n"
+            f"🔍 File audio diperiksa  : {scanned}\n"
+            f"🧹 Salinan ganda dihapus : {deleted} ({freed:.1f} MB)\n"
+        )
+        if moved:
+            summary += f"📦 Disatukan dari subfolder : {moved}\n"
+        if different:
+            summary += (
+                f"\nℹ️ {different} file namanya mirip tetapi isinya berbeda — "
+                "dibiarkan (bukan duplikat).\n"
+            )
+        if deleted:
+            names = result.get("deleted_files") or []
+            summary += "\nFile yang dihapus:\n"
+            for name in names[:12]:
+                summary += f"   • {name}\n"
+            if len(names) > 12:
+                summary += f"   … dan {len(names) - 12} file lain\n"
+        else:
+            summary += "\nTidak ada salinan lagu ganda yang perlu dihapus.\n"
+        summary += f"\nFolder: {config.DOWNLOADS_DIR}"
+        messagebox.showinfo("Cek Lagu Ganda", summary)
+
     def _on_worker_idle(self, index: int) -> None:
-        """Worker browser ini berhenti: segarkan tombol (Cek jadi aktif)."""
+        """Worker browser ini berhenti: segarkan tombol (Cek/Stop)."""
         self._ui(self._render_card, index)
+        self._ui(self._update_active_hint)
 
     def _poll_browsers(self) -> None:
         """Pantau browser yang ditutup manual.
@@ -745,6 +885,14 @@ class BotApp(ctk.CTk):
             active = sum(1 for alive in self._browser_alive.values() if alive)
         if self.is_running:
             text = f"Sedang berjalan dengan {active} browser."
+            stopped = sum(
+                1 for s in self.card_state.values() if s == "stopped"
+            )
+            if stopped:
+                text += (
+                    f" • {stopped} browser di-Stop — cek lagu ganda boleh, "
+                    f"lalu klik Cek untuk melanjutkan."
+                )
             color = "#16A34A"
         elif active:
             text = (
@@ -849,25 +997,38 @@ class BotApp(ctk.CTk):
     # JUMLAH BROWSER
     # ==========================================================================
     def _on_browser_count_change(self, value: str) -> None:
-        if self.is_running:
-            messagebox.showwarning(
-                "Sedang berjalan",
-                "Jumlah browser tidak bisa diubah saat bot berjalan.",
-            )
-            self.option_browsers.set(str(self.manager.count))
-            return
-
         try:
             count = int(value)
         except ValueError:
             return
+
+        # Saat bot berjalan, jumlah browser hanya boleh DITAMBAH (3 → 4).
+        # Menambah kartu tidak mengganggu worker yang sedang bekerja; browser
+        # barunya ikut bekerja setelah tombol Cek di kartunya ditekan.
+        if self.is_running and count < self.manager.count:
+            self.option_browsers.set(str(self.manager.count))
+            messagebox.showwarning(
+                "Hanya bisa ditambah",
+                "Saat bot berjalan, jumlah browser hanya bisa DITAMBAH.\n\n"
+                "Buka kartu browser baru, login, lalu klik Cek di kartunya.\n"
+                "Untuk mengurangi jumlah browser, tekan STOP dulu.",
+            )
+            return
+
+        adding_while_running = self.is_running and count > self.manager.count
 
         # Tutup browser tambahan (hanya yang diluncurkan aplikasi).
         self.manager.set_count(count)
         self.num_browsers.set(count)
         self.card_state = {i: s for i, s in self.card_state.items() if i <= count}
         self._rebuild_cards()
-        logger.info(f"Jumlah browser diatur ke {count}.")
+        if adding_while_running:
+            logger.info(
+                f"➕ Jumlah browser ditambah ke {count} saat bot berjalan — "
+                "buka browser baru, login, lalu klik Cek di kartunya."
+            )
+        else:
+            logger.info(f"Jumlah browser diatur ke {count}.")
 
     # ==========================================================================
     # FILE PROMPT
@@ -941,9 +1102,9 @@ class BotApp(ctk.CTk):
         self._run_btn_on = None  # paksa _refresh_start_button menulis ulang
         self.btn_run.configure(state="normal" if enabled else "disabled")
         self.btn_stop.configure(state="disabled" if enabled else "normal")
-        self.option_browsers.configure(
-            state="normal" if enabled else "disabled"
-        )
+        # Jumlah browser tetap bisa DITAMBAH saat bot berjalan (3 → 4);
+        # pengurangan ditolak di _on_browser_count_change.
+        self.option_browsers.configure(state="normal")
         self.option_browser.configure(
             state="normal"
             if enabled and self._browser_label_to_option
@@ -1151,6 +1312,7 @@ class BotApp(ctk.CTk):
         """Terapkan status worker di thread UI (satu event, bukan tiga)."""
         self._set_card(index, state, message, visible)
         self._refresh_progress_text()
+        self._update_active_hint()
 
     def _on_worker_progress(self, stats: dict) -> None:
         self._ui(self._update_progress, stats)

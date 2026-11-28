@@ -26,14 +26,32 @@ Aturan penghapusan sengaja konservatif, supaya lagu asli tidak ikut terhapus:
 """
 from __future__ import annotations
 
+import functools
 import hashlib
 import logging
 import os
 import re
 import shutil
+import threading
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
+
+# Pemeriksaan bisa dijalankan dari dua tempat sekaligus: tombol "Cek Lagu
+# Ganda" di GUI (kapan saja) dan pembersihan otomatis di akhir run. Keduanya
+# membaca/memindahkan/menghapus file yang sama, jadi diserialkan dengan satu
+# lock. RLock dipakai karena remove_duplicate_downloads memanggil
+# consolidate_downloads di dalamnya.
+_FILES_LOCK = threading.RLock()
+
+
+def _locked(func):
+    """Pastikan hanya satu proses pembersihan folder berjalan pada satu waktu."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        with _FILES_LOCK:
+            return func(*args, **kwargs)
+    return wrapper
 
 AUDIO_EXTENSIONS = {
     ".mp3", ".wav", ".m4a", ".flac", ".ogg", ".opus", ".aac", ".wma",
@@ -176,6 +194,7 @@ def _remove_partial_downloads(root: Path) -> None:
                 pass
 
 
+@_locked
 def consolidate_downloads(source_dirs, target_dir) -> int:
     """
     Pindahkan SEMUA file audio dari `source_dirs` ke satu folder hasil.
@@ -223,7 +242,10 @@ def consolidate_downloads(source_dirs, target_dir) -> int:
     return moved
 
 
-def remove_duplicate_downloads(directory) -> dict[str, object]:
+@_locked
+def remove_duplicate_downloads(
+    directory, *, safe: bool = False
+) -> dict[str, object]:
     """
     Periksa folder hasil lalu hapus salinan lagu ganda.
 
@@ -233,6 +255,12 @@ def remove_duplicate_downloads(directory) -> dict[str, object]:
     SEMUA musik dari semua browser ada di satu folder. Duplikat yang isinya
     sama persis disusun menjadi daftar hapus, lalu dihapus sendiri oleh fungsi
     ini (tanpa membuka browser).
+
+    `safe=True` dipakai tombol "Cek Lagu Ganda" yang boleh ditekan saat bot
+    masih mengunduh: langkah yang bisa mengganggu unduhan berjalan dilewati
+    (tidak memindahkan isi subfolder, tidak menghapus file `.crdownload`).
+    File sementara browser selalu berekstensi `.crdownload`, jadi tidak ikut
+    dipindai; file yang sedang ditulis tidak akan pernah ikut terhapus.
 
     Mengembalikan ringkasan:
         deleted         jumlah file salinan yang dihapus
@@ -256,23 +284,28 @@ def remove_duplicate_downloads(directory) -> dict[str, object]:
     if not directory.exists():
         return result
 
-    # 1. Satukan dulu file dari subfolder mana pun ke folder hasil. Ini juga
-    #    membersihkan sisa folder lama `downloads/.browser_N`.
-    subdirs = []
-    try:
-        subdirs = [
-            p for p in directory.iterdir()
-            if p.is_dir() and not p.is_symlink()
-        ]
-    except Exception as e:
-        logger.warning(f"Tidak bisa membaca folder {directory}: {e}")
-    if subdirs:
-        result["moved"] = consolidate_downloads(subdirs, directory)
+    if safe:
+        # Mode aman (dipakai saat bot masih mungkin mengunduh): baca saja
+        # folder hasil, tanpa memindahkan atau menghapus file sementara.
+        audio_files = _list_audio_files(directory)
+    else:
+        # 1. Satukan dulu file dari subfolder mana pun ke folder hasil. Ini
+        #    juga membersihkan sisa folder lama `downloads/.browser_N`.
+        subdirs = []
+        try:
+            subdirs = [
+                p for p in directory.iterdir()
+                if p.is_dir() and not p.is_symlink()
+            ]
+        except Exception as e:
+            logger.warning(f"Tidak bisa membaca folder {directory}: {e}")
+        if subdirs:
+            result["moved"] = consolidate_downloads(subdirs, directory)
 
-    # 2. Bersihkan sisa unduhan yang tidak selesai, lalu kumpulkan semua file
-    #    audio di folder hasil menjadi satu daftar.
-    _remove_partial_downloads(directory)
-    audio_files = _list_audio_files(directory)
+        # 2. Bersihkan sisa unduhan yang tidak selesai, lalu kumpulkan semua
+        #    file audio di folder hasil menjadi satu daftar.
+        _remove_partial_downloads(directory)
+        audio_files = _list_audio_files(directory)
     result["scanned"] = len(audio_files)
     if not audio_files:
         return result

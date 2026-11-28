@@ -55,6 +55,10 @@ PORT_READY_TIMEOUT = 30         # detik menunggu CDP siap setelah launch
 
 GENERATE_MAX_WAIT_SECONDS = 300 # batas total menunggu hasil generate
 GENERATE_STABLE_SECONDS = 20    # dianggap selesai bila tidak berubah selama ini
+# Tombol saran AI menandakan generate utama selesai, tetapi baris lagu ke-2/3
+# bisa telat muncul. Sebelum menyerah, tunggu daftar lagu baru tetap selama ini
+# supaya semua lagu ikut terunduh (bukan cuma lagu pertama).
+GENERATE_SUGGESTION_GRACE_SECONDS = 6
 POLL_INTERVAL_SECONDS = 3       # interval polling DOM
 
 DOWNLOAD_TIMEOUT_SECONDS = 120  # batas menunggu file hasil download

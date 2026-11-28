@@ -26,6 +26,7 @@ from config import (
     DOWNLOAD_TIMEOUT_SECONDS,
     GENERATE_STABLE_SECONDS,
     GENERATE_STUCK_SECONDS,
+    GENERATE_SUGGESTION_GRACE_SECONDS,
     NEW_SESSION_READY_TIMEOUT,
     POLL_INTERVAL_SECONDS,
     WEBSITE_URL,
@@ -920,10 +921,19 @@ def generate_and_wait_all_songs(
 
         stable = time.time() - last_change
         if len(new_uids) >= 1 and not loading:
-            if suggestion_seen or stable >= GENERATE_STABLE_SECONDS:
+            # Tombol saran AI bukan jaminan semua baris lagu sudah muncul —
+            # lagu ke-2/ke-3 kadang menyusul. Jadi tetap minta daftar lagu
+            # baru tidak berubah selama jeda pendek sebelum dianggap selesai.
+            required_stable = (
+                GENERATE_SUGGESTION_GRACE_SECONDS
+                if suggestion_seen
+                else GENERATE_STABLE_SECONDS
+            )
+            if stable >= required_stable:
                 page.wait_for_timeout(1_500)
                 # Ambil ulang supaya baris yang muncul belakangan ikut.
                 final_rows = _get_song_rows(page)
+                new_uids = {row["uid"] for row in final_rows} - baseline_uids
                 result = [row for row in final_rows if row["uid"] in new_uids]
                 result.sort(key=lambda row: row["y"])
                 logger.info(f"🎵 Selesai! {len(result)} lagu baru.")

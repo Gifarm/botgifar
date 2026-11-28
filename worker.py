@@ -44,6 +44,37 @@ StatusCallback = Callable[[int, str, str], None]
 ProgressCallback = Callable[[dict], None]
 
 
+class _OrStop:
+    """
+    Objek stop gabungan yang punya antarmuka sama dengan threading.Event.
+
+    Dipakai supaya satu worker bisa berhenti karena dua sebab:
+    - tombol STOP global (semua browser), atau
+    - tombol Stop pada kartu browser itu saja.
+
+    Semua fungsi di `flow_actions` hanya memanggil `.is_set()`, sedangkan
+    worker memakai `.wait()`, jadi keduanya disediakan di sini.
+    """
+
+    def __init__(self, *events):
+        self._events = [event for event in events if event is not None]
+
+    def is_set(self) -> bool:
+        return any(event.is_set() for event in self._events)
+
+    def wait(self, timeout: float | None = None) -> bool:
+        deadline = None if timeout is None else time.time() + timeout
+        while True:
+            if self.is_set():
+                return True
+            if deadline is not None and time.time() >= deadline:
+                return False
+            step = 0.1
+            if deadline is not None:
+                step = min(step, max(0.01, deadline - time.time()))
+            time.sleep(step)
+
+
 # ==============================================================================
 # HELPER
 # ==============================================================================
@@ -93,6 +124,12 @@ class BotRunner:
         self._active: dict[int, threading.Thread] = {}
         self._paused: set[int] = set()
         self._held: dict[int, PromptItem] = {}
+        # Event Stop per browser. Diisi oleh _start_worker() dan dibaca worker.
+        self._stop_requests: dict[int, threading.Event] = {}
+        # Lagu yang sudah digenerate tetapi belum terunduh, disimpan bersama
+        # prompt yang ditahan supaya "Cek" melanjutkan unduhan (bukan
+        # menggenerate ulang dan membuang credits).
+        self._held_songs: dict[int, list[dict]] = {}
         self._running = False
 
         # Ringkasan pemeriksaan file ganda di folder downloads saat bot
@@ -114,9 +151,9 @@ class BotRunner:
         except Exception:
             pass
 
-    def _wait_or_stop(self, seconds: float) -> bool:
+    def _wait_or_stop(self, seconds: float, stop=None) -> bool:
         """Tidur sambil memantau stop. Return True bila harus berhenti."""
-        return self.stop_event.wait(timeout=seconds)
+        return (stop or self.stop_event).wait(timeout=seconds)
 
     def _cleanup_duplicate_downloads(self) -> None:
         """
@@ -177,41 +214,100 @@ class BotRunner:
         with self._cv:
             return index in self._active
 
-    def can_resume(self, index: int) -> bool:
-        """Browser ini boleh dilanjutkan lewat tombol Cek?"""
-        with self._cv:
-            return (
-                self._running
-                and not self.stop_event.is_set()
-                and index not in self._active
-                and index in self._paused
-            )
-
-    def resume(self, profile) -> bool:
+    def can_check(self, index: int) -> bool:
         """
-        Lanjutkan worker satu browser setelah user memperbaikinya.
+        Tombol Cek boleh dipakai untuk browser ini?
 
-        Prompt yang tertahan (jika ada) ikut dipakai lagi, jadi bot akan
-        mem-paste ulang prompt yang sama seperti sebelum browser error.
+        Cek tidak lagi hanya untuk browser yang error. Bisa juga dipakai untuk:
+        - melanjutkan browser yang dihentikan dengan tombol Stop;
+        - menjalankan browser yang baru dibuka di tengah bot berjalan;
+        - menghidupkan lagi browser yang tadi selesai/idle padahal masih ada
+          prompt tersisa.
         """
         with self._cv:
             if not self._running or self.stop_event.is_set():
                 return False
-            if profile.index in self._active:
+            if index in self._active:
                 return False
-            if profile.index not in self._paused:
-                return False
-            item = self._held.pop(profile.index, None)
-            self._paused.discard(profile.index)
-            logger.info(f"[{profile.name}] 🔎 Cek diminta — melanjutkan browser.")
-            # Dijalankan di dalam lock supaya run() tidak sempat menyimpulkan
-            # "semua worker selesai" di antara discard() dan start worker.
-            self._start_worker(profile, item)
-            self._cv.notify_all()
-        return True
+            if index in self._paused:
+                return True
+            return self.queue.remaining_prompts() > 0
 
-    def _hold(self, profile, item: PromptItem | None) -> None:
-        """Tandai browser tertahan; prompt-nya disimpan untuk dipaste ulang."""
+    def request_stop(self, index: int) -> bool:
+        """
+        Minta worker satu browser berhenti; browser lain tetap bekerja.
+
+        Return False bila browser itu memang tidak sedang bekerja.
+        """
+        with self._cv:
+            if not self._running or self.stop_event.is_set():
+                return False
+            if index not in self._active:
+                return False
+            event = self._stop_requests.get(index)
+            if event is None:
+                event = threading.Event()
+                self._stop_requests[index] = event
+            if event.is_set():
+                return False
+            event.set()
+            return True
+
+    def resume(self, profile) -> bool:
+        """
+        Lanjutkan worker satu browser lewat tombol Cek.
+
+        - Browser yang tertahan (error / di-Stop) memakai lagi prompt yang
+          disimpan, termasuk daftar lagu yang belum sempat terunduh.
+        - Browser yang belum punya worker (mis. baru dibuka di tengah jalan)
+          ikut bekerja selama masih ada prompt tersisa.
+        """
+        with self._cv:
+            if not self._running or self.stop_event.is_set():
+                return False
+            index = profile.index
+            if index in self._active:
+                return False
+
+            if index in self._paused:
+                item = self._held.pop(index, None)
+                songs = self._held_songs.pop(index, None)
+                self._paused.discard(index)
+                self._stop_requests.pop(index, None)
+                if profile not in self.profiles:
+                    self.profiles.append(profile)
+                logger.info(
+                    f"[{profile.name}] 🔎 Cek diminta — melanjutkan browser."
+                )
+                # Dijalankan di dalam lock supaya run() tidak sempat
+                # menyimpulkan "semua worker selesai" di antara discard()
+                # dan start worker.
+                self._start_worker(profile, item, songs)
+                self._cv.notify_all()
+                return True
+
+            # Browser yang belum/tidak lagi punya worker.
+            if self.queue.remaining_prompts() > 0:
+                self._stop_requests.pop(index, None)
+                self._held_songs.pop(index, None)
+                if profile not in self.profiles:
+                    self.profiles.append(profile)
+                logger.info(
+                    f"[{profile.name}] 🔎 Cek diminta — menjalankan browser."
+                )
+                self._start_worker(profile)
+                self._cv.notify_all()
+                return True
+            return False
+
+    def _hold(
+        self,
+        profile,
+        item: PromptItem | None,
+        pending_songs: list[dict] | None = None,
+        reason: str = "",
+    ) -> None:
+        """Tandai browser tertahan; prompt-nya disimpan untuk dilanjutkan Cek."""
         if not self.allow_resume:
             # Tanpa GUI/Cek: jangan menggantung. Kembalikan prompt ke antrean
             # supaya browser lain bisa mengambilnya.
@@ -226,36 +322,68 @@ class BotRunner:
 
         if item is not None:
             try:
-                self.queue.hold(item, "browser tertahan — menunggu Cek")
+                self.queue.hold(item, reason or "browser tertahan — menunggu Cek")
             except Exception as e:
                 logger.warning(f"[{profile.name}] Gagal menahan prompt: {e}")
         with self._cv:
             self._paused.add(profile.index)
             if item is not None:
                 self._held[profile.index] = item
+                if pending_songs:
+                    self._held_songs[profile.index] = list(pending_songs)
+                else:
+                    self._held_songs.pop(profile.index, None)
             self._cv.notify_all()
 
-    def _start_worker(self, profile, item: PromptItem | None = None) -> None:
+    def _start_worker(
+        self,
+        profile,
+        item: PromptItem | None = None,
+        pending_songs: list[dict] | None = None,
+    ) -> None:
         thread = threading.Thread(
             target=self._worker_entry,
-            args=(profile, item),
+            args=(profile, item, pending_songs),
             name=f"worker-{profile.index}",
             daemon=True,
         )
         with self._cv:
+            # Event Stop baru untuk setiap worker. Kalau event lama masih
+            # terpasang, event itu sudah kita buang sebelum start.
+            self._stop_requests[profile.index] = threading.Event()
             self._active[profile.index] = thread
         thread.start()
 
-    def _worker_entry(self, profile, item: PromptItem | None = None) -> None:
+    def _worker_entry(
+        self,
+        profile,
+        item: PromptItem | None = None,
+        pending_songs: list[dict] | None = None,
+    ) -> None:
         try:
-            self._worker(profile, item)
+            self._worker(profile, item, pending_songs)
         except Exception as e:
             logger.error(f"[{profile.name}] Worker error: {e}")
-            self._status(profile, "error", "Error — klik Cek")
-            self._hold(profile, None)
+            with self._cv:
+                # Kalau user sudah menjalankan worker baru untuk index yang
+                # sama, jangan tandai browser ini tertahan: itu akan membuat
+                # run() menunggu Cek yang tidak diperlukan.
+                superseded = (
+                    self._active.get(profile.index) is not None
+                    and self._active.get(profile.index)
+                    is not threading.current_thread()
+                )
+            if not superseded:
+                self._status(profile, "error", "Error — klik Cek")
+                self._hold(profile, None)
         finally:
             with self._cv:
-                self._active.pop(profile.index, None)
+                # Hanya hapus catatan milik thread ini. Kalau user sudah
+                # menekan Cek cepat-cepat, worker BARU mungkin sudah terdaftar
+                # untuk index yang sama — jangan sampai catatannya terhapus.
+                if self._active.get(profile.index) is threading.current_thread():
+                    self._active.pop(profile.index, None)
+                    self._stop_requests.pop(profile.index, None)
                 self._cv.notify_all()
             if self.on_idle is not None:
                 try:
@@ -263,13 +391,14 @@ class BotRunner:
                 except Exception:
                     pass
 
-    def _recover_session(self, profile, page, reason: str) -> bool:
+    def _recover_session(self, profile, page, reason: str, stop=None) -> bool:
         """
         Sesi terindikasi limit/macet: beri tahu user lewat log + status kartu,
         lalu coba buat session baru (klik sidebar / reload). Berhenti hanya
         kalau semua percobaan gagal.
         """
-        if self.stop_event.is_set():
+        stop = stop or self.stop_event
+        if stop.is_set():
             return False
 
         logger.warning(
@@ -283,7 +412,7 @@ class BotRunner:
                 f"Sesi macet — session baru ({attempt}/{attempts})",
             )
             try:
-                ok = start_new_session(page, stop_event=self.stop_event)
+                ok = start_new_session(page, stop_event=stop)
             except Exception as e:
                 logger.error(f"[{profile.name}] Pemulihan sesi gagal: {e}")
                 ok = False
@@ -306,7 +435,7 @@ class BotRunner:
                     "waiting",
                     f"Session macet — coba lagi ({attempt}/{attempts})",
                 )
-                if self._wait_or_stop(SESSION_RECOVERY_COOLDOWN_SECONDS):
+                if self._wait_or_stop(SESSION_RECOVERY_COOLDOWN_SECONDS, stop):
                     return False
 
         logger.error(
@@ -356,7 +485,73 @@ class BotRunner:
     # --------------------------------------------------------------------------
     # Worker per browser
     # --------------------------------------------------------------------------
-    def _worker(self, profile, resume_item: PromptItem | None = None) -> None:
+    def _download_songs(self, profile, page, item, songs, stop) -> list[dict]:
+        """
+        Unduh semua lagu satu prompt (maks. 3 putaran).
+
+        Return daftar lagu yang MASIH gagal. Kalau user menekan Stop di
+        tengah proses, lagu yang belum sempat dicoba tetap ikut dikembalikan
+        supaya tidak hilang dan bisa dilanjutkan lewat Cek.
+        """
+        pending = list(songs)
+        success = 0
+        total = len(songs)
+
+        for round_no in range(1, 4):
+            if stop.is_set():
+                break
+            still_pending: list[dict] = []
+            stop_seen = False
+            for pos, song in enumerate(pending):
+                if stop.is_set():
+                    # Lagu ini dan sisanya belum dicoba — jangan hilang.
+                    still_pending.extend(pending[pos:])
+                    stop_seen = True
+                    break
+                self._status(
+                    profile,
+                    "downloading",
+                    f"Download {success + 1}/{total}"
+                    + ("" if round_no == 1 else f" (ulang {round_no - 1})"),
+                )
+                if download_song_row(
+                    page,
+                    song,
+                    profile.download_dir,
+                    DOWNLOADS_DIR,
+                    stop_event=stop,
+                ):
+                    success += 1
+                    self._wait_or_stop(PAUSE_AFTER_DOWNLOAD, stop)
+                else:
+                    logger.warning(
+                        f"[{profile.name}] Gagal download "
+                        f"'{song.get('title', '')[:40]}' "
+                        f"(percobaan {round_no}/3)"
+                    )
+                    still_pending.append(song)
+                    close_menus(page)
+                    self._wait_or_stop(1, stop)
+
+            pending = still_pending
+            if stop_seen or not pending:
+                break
+            if round_no < 3:
+                logger.warning(
+                    f"[{profile.name}] {len(pending)} lagu belum terunduh; "
+                    f"mencoba ulang setelah jeda."
+                )
+                if self._wait_or_stop(5, stop):
+                    break
+
+        return pending
+
+    def _worker(
+        self,
+        profile,
+        resume_item: PromptItem | None = None,
+        resume_songs: list[dict] | None = None,
+    ) -> None:
         from playwright.sync_api import sync_playwright
 
         pw = None
@@ -364,6 +559,39 @@ class BotRunner:
         # Prompt yang sedang dipegang worker ini (dipakai bila worker error
         # di luar loop, supaya prompt tidak hilang dan bisa dilanjutkan Cek).
         current_item: PromptItem | None = resume_item
+
+        # Stop per browser: event ini hanya milik worker ini. `stop` menggabung
+        # Stop kartu + STOP global, supaya tunggu login, generate, dan download
+        # langsung berhenti dari tombol mana pun yang ditekan.
+        with self._cv:
+            local_stop = self._stop_requests.get(profile.index)
+            if local_stop is None:
+                local_stop = threading.Event()
+                self._stop_requests[profile.index] = local_stop
+        stop = _OrStop(self.stop_event, local_stop)
+
+        def stopped_here() -> bool:
+            """User menekan Stop di kartu browser ini (bukan STOP global)."""
+            return local_stop.is_set() and not self.stop_event.is_set()
+
+        def hold_for_check(
+            item: PromptItem | None,
+            pending_songs: list[dict] | None = None,
+        ) -> None:
+            """Simpan prompt + lagu sisa supaya bisa dilanjutkan lewat Cek."""
+            if stopped_here():
+                logger.warning(
+                    f"[{profile.name}] ⏹️ Stop per browser — prompt "
+                    f"{('#' + str(item.index + 1)) if item else '(tidak ada)'} "
+                    f"ditahan; klik Cek untuk melanjutkan."
+                )
+            self._hold(
+                profile,
+                item,
+                pending_songs=pending_songs,
+                reason="dihentikan user",
+            )
+
         try:
             self._status(profile, "connecting", "Menghubungkan ke browser...")
             pw = sync_playwright().start()
@@ -371,7 +599,9 @@ class BotRunner:
             browser = None
             last_error = ""
             for attempt in range(20):
-                if self.stop_event.is_set():
+                if stop.is_set():
+                    if stopped_here():
+                        hold_for_check(current_item, resume_songs)
                     return
                 try:
                     browser = pw.chromium.connect_over_cdp(
@@ -384,7 +614,9 @@ class BotRunner:
                         logger.warning(
                             f"[{profile.name}] Connect gagal, mencoba ulang..."
                         )
-                    if self._wait_or_stop(1.0):
+                    if self._wait_or_stop(1.0, stop):
+                        if stopped_here():
+                            hold_for_check(current_item, resume_songs)
                         return
 
             if browser is None:
@@ -392,7 +624,7 @@ class BotRunner:
                     f"[{profile.name}] Tidak bisa connect: {last_error}"
                 )
                 self._status(profile, "error", "Tidak bisa connect — klik Cek")
-                self._hold(profile, current_item)
+                self._hold(profile, current_item, pending_songs=resume_songs)
                 return
 
             # Arahkan download ke folder khusus browser ini SEDINI MUNGKIN —
@@ -409,7 +641,7 @@ class BotRunner:
                 page = context.new_page() if context else None
             if page is None:
                 self._status(profile, "error", "Tidak ada tab — klik Cek")
-                self._hold(profile, current_item)
+                self._hold(profile, current_item, pending_songs=resume_songs)
                 return
 
             # Pastikan berada di Flow Music.
@@ -424,12 +656,15 @@ class BotRunner:
             # lebih baik prompt tetap di antrean daripada dipakai di halaman
             # marketing yang kebetulan punya kolom demo.
             logged_in, message = wait_for_login_state(
-                page, timeout=30, stop_event=self.stop_event
+                page, timeout=30, stop_event=stop
             )
+            if stopped_here():
+                hold_for_check(current_item, resume_songs)
+                return
             if logged_in is not True:
                 logger.error(f"[{profile.name}] Perlu login: {message}")
                 self._status(profile, "login_required", "Perlu login — klik Cek")
-                self._hold(profile, current_item)
+                self._hold(profile, current_item, pending_songs=resume_songs)
                 return
             self._status(profile, "ready", "Siap")
 
@@ -446,6 +681,10 @@ class BotRunner:
             # di-"resume" setelah login OK, supaya kalau login gagal prompt
             # tetap tertahan dan bisa dicoba lagi lewat Cek.
             pending_item = resume_item
+            # Lagu yang sudah selesai digenerate sebelum tombol Stop ditekan.
+            # Saat Cek, unduhannya dilanjutkan tanpa meminta generate ulang
+            # (credits tidak terbuang).
+            pending_songs = list(resume_songs) if resume_songs else None
 
             def recover(reason: str) -> bool:
                 """Pemulihan sesi + pengaman agar tidak berputar tanpa henti."""
@@ -459,13 +698,15 @@ class BotRunner:
                         f"(session baru / akun) lalu tekan Cek."
                     )
                     return False
-                return self._recover_session(profile, page, reason)
+                return self._recover_session(profile, page, reason, stop)
 
-            while not self.stop_event.is_set():
+            while not stop.is_set():
                 item: PromptItem | None = None
+                resume_downloads: list[dict] | None = None
                 if pending_item is not None:
                     if pending_item.status == "running":
                         item = pending_item
+                        resume_downloads = pending_songs
                         try:
                             self.queue.resume(item)
                             logger.info(
@@ -478,6 +719,7 @@ class BotRunner:
                                 f"dilanjutkan: {e}"
                             )
                     pending_item = None
+                    pending_songs = None
                 if item is None:
                     item = self.queue.take(profile.index)
                 if item is None:
@@ -489,7 +731,7 @@ class BotRunner:
                         self._status(
                             profile, "idle", "Tidak ada prompt — menunggu"
                         )
-                        if self._wait_or_stop(IDLE_POLL_SECONDS):
+                        if self._wait_or_stop(IDLE_POLL_SECONDS, stop):
                             break
                         continue
                     if worked_any:
@@ -516,13 +758,69 @@ class BotRunner:
                 )
 
                 try:
+                    if resume_downloads is not None:
+                        # Lagu sudah digenerate sebelum tombol Stop ditekan:
+                        # lanjutkan unduhannya tanpa generate ulang.
+                        logger.info(
+                            f"[{profile.name}] 🔁 Lanjut unduh "
+                            f"{len(resume_downloads)} lagu prompt "
+                            f"#{item.index + 1} — tanpa generate ulang."
+                        )
+                        self._status(
+                            profile,
+                            "downloading",
+                            f"Lanjut unduh {len(resume_downloads)} lagu "
+                            f"(#{item.index + 1})",
+                        )
+                        close_menus(page)
+                        remaining = self._download_songs(
+                            profile, page, item, resume_downloads, stop
+                        )
+                        if stop.is_set():
+                            if remaining:
+                                if stopped_here():
+                                    hold_for_check(item, remaining)
+                                else:
+                                    self.queue.requeue(
+                                        item, "bot dihentikan saat download"
+                                    )
+                            else:
+                                self.queue.complete(item)
+                            self._progress()
+                            break
+                        if remaining:
+                            logger.error(
+                                f"[{profile.name}] {len(remaining)} lagu gagal "
+                                f"diunduh. Prompt #{item.index + 1} ditahan."
+                            )
+                            hold_for_check(item, remaining)
+                            self._progress()
+                            final_state, final_message = (
+                                "error",
+                                f"Download gagal — klik Cek "
+                                f"({len(remaining)} lagu)",
+                            )
+                            break
+                        self.queue.complete(item)
+                        recovery_streak = 0
+                        error_streak = 0
+                        self._progress()
+                        self._status(
+                            profile,
+                            "ready",
+                            f"Selesai {len(resume_downloads)} lagu",
+                        )
+                        if self._wait_or_stop(PAUSE_BETWEEN_PROMPTS, stop):
+                            break
+                        continue
+
                     # Pastikan tidak ada sisa menu download/overlay yang
                     # menutupi kolom prompt sebelum prompt baru diisi.
                     close_menus(page)
                     paste_ok = input_prompt(page, item.text)
                     if not paste_ok:
                         # Satu kesempatan lagi: kadang halaman belum siap.
-                        self._wait_or_stop(1.5)
+                        self._wait_or_stop(1.5, stop)
                         paste_ok = input_prompt(page, item.text)
 
                     if not paste_ok:
@@ -536,6 +834,15 @@ class BotRunner:
                             paste_ok = input_prompt(page, item.text)
 
                     if not paste_ok:
+                        if stopped_here():
+                            # Stop ditekan saat pemulihan sesi/mengetik.
+                            hold_for_check(item)
+                            self._progress()
+                            final_state, final_message = (
+                                "stopped",
+                                f"Dihentikan — klik Cek (#{item.index + 1})",
+                            )
+                            break
                         # Kegagalan karena sesi/lingkungan, bukan salah prompt:
                         # prompt DITAHAN untuk browser ini (bukan dikembalikan
                         # ke antrean umum), supaya setelah user memperbaiki
@@ -561,12 +868,21 @@ class BotRunner:
                     songs = generate_and_wait_all_songs(
                         page,
                         max_wait_seconds=GENERATE_MAX_WAIT_SECONDS,
-                        stop_event=self.stop_event,
+                        stop_event=stop,
                         prompt_text=item.text,
                     )
 
-                    if self.stop_event.is_set():
-                        self.queue.requeue(item, "bot dihentikan")
+                    if stop.is_set():
+                        if stopped_here():
+                            # Lagu sudah jadi — simpan supaya Cek tinggal
+                            # mengunduhnya, bukan generate ulang.
+                            hold_for_check(item, songs)
+                            final_state, final_message = (
+                                "stopped",
+                                f"Dihentikan — klik Cek (#{item.index + 1})",
+                            )
+                        else:
+                            self.queue.requeue(item, "bot dihentikan")
                         self._progress()
                         break
 
@@ -600,9 +916,17 @@ class BotRunner:
                                     "waiting",
                                     "Session baru — ulangi prompt",
                                 )
-                                if self._wait_or_stop(3):
+                                if self._wait_or_stop(3, stop):
                                     break
                                 continue
+                            if stopped_here():
+                                hold_for_check(item)
+                                self._progress()
+                                final_state, final_message = (
+                                    "stopped",
+                                    f"Dihentikan — klik Cek (#{item.index + 1})",
+                                )
+                                break
                             self._hold(profile, item)
                             self._progress()
                             logger.error(
@@ -636,62 +960,23 @@ class BotRunner:
                         self.queue.requeue(item, "tidak ada lagu yang dihasilkan")
                         self._progress()
                         self._status(profile, "waiting", "Menunggu percobaan berikutnya")
-                        if self._wait_or_stop(5):
+                        if self._wait_or_stop(5, stop):
                             break
                         continue
 
                     logger.info(f"[{profile.name}] 🎼 {len(songs)} lagu untuk diunduh.")
-                    pending_downloads = list(songs)
-                    success = 0
+                    pending_downloads = self._download_songs(
+                        profile, page, item, songs, stop
+                    )
 
-                    # Semua lagu HARUS selesai diunduh sebelum prompt baru
-                    # diambil. Kalau gagal, ulangi dulu (bukan langsung
-                    # mengirim prompt berikutnya).
-                    for round_no in range(1, 4):
-                        if self.stop_event.is_set():
-                            break
-                        still_pending = []
-                        for song in pending_downloads:
-                            if self.stop_event.is_set():
-                                break
-                            self._status(
-                                profile,
-                                "downloading",
-                                f"Download {success + 1}/{len(songs)}"
-                                + ("" if round_no == 1 else f" (ulang {round_no - 1})"),
-                            )
-                            if download_song_row(
-                                page,
-                                song,
-                                profile.download_dir,
-                                DOWNLOADS_DIR,
-                                stop_event=self.stop_event,
-                            ):
-                                success += 1
-                                self._wait_or_stop(PAUSE_AFTER_DOWNLOAD)
+                    if stop.is_set():
+                        if stopped_here():
+                            if pending_downloads:
+                                hold_for_check(item, pending_downloads)
                             else:
-                                logger.warning(
-                                    f"[{profile.name}] Gagal download "
-                                    f"'{song.get('title', '')[:40]}' "
-                                    f"(percobaan {round_no}/3)"
-                                )
-                                still_pending.append(song)
-                                close_menus(page)
-                                self._wait_or_stop(1)
-
-                        pending_downloads = still_pending
-                        if not pending_downloads or self.stop_event.is_set():
-                            break
-                        if round_no < 3:
-                            logger.warning(
-                                f"[{profile.name}] {len(pending_downloads)} lagu "
-                                f"belum terunduh; mencoba ulang setelah jeda."
-                            )
-                            if self._wait_or_stop(5):
-                                break
-
-                    if self.stop_event.is_set():
-                        self.queue.requeue(item, "bot dihentikan saat download")
+                                self.queue.complete(item)
+                        else:
+                            self.queue.requeue(item, "bot dihentikan saat download")
                         self._progress()
                         break
 
@@ -702,27 +987,26 @@ class BotRunner:
                         self._status(
                             profile,
                             "ready",
-                            f"Selesai {success}/{len(songs)} lagu",
+                            f"Selesai {len(songs)} lagu",
                         )
                     else:
                         # Jangan lanjut ke prompt baru: lagu sudah terlanjur
-                        # dibuat dan belum tersimpan.
+                        # dibuat dan belum tersimpan. Prompt DITAHAN (bukan
+                        # ditandai gagal) supaya setelah browser diperbaiki
+                        # dan Cek ditekan, lagu yang sama tinggal diunduh —
+                        # tanpa generate ulang.
                         logger.error(
                             f"[{profile.name}] {len(pending_downloads)} lagu gagal "
-                            f"diunduh. Worker dihentikan agar tidak mengirim "
-                            f"prompt baru."
+                            f"diunduh. Prompt ditahan agar tidak mengirim "
+                            f"prompt baru dan tidak membuang credits."
                         )
-                        self.queue.fail(
-                            item,
-                            f"{len(pending_downloads)}/{len(songs)} lagu gagal diunduh",
-                        )
+                        hold_for_check(item, pending_downloads)
                         self._progress()
                         self._status(
                             profile,
                             "error",
                             f"Download gagal — klik Cek ({len(pending_downloads)} lagu)",
                         )
-                        self._hold(profile, None)
                         final_state, final_message = (
                             "error",
                             f"Download gagal — klik Cek ({len(pending_downloads)} lagu)",
@@ -730,10 +1014,20 @@ class BotRunner:
                         break
 
                     self._progress()
-                    if self._wait_or_stop(PAUSE_BETWEEN_PROMPTS):
+                    if self._wait_or_stop(PAUSE_BETWEEN_PROMPTS, stop):
                         break
 
                 except Exception as e:
+                    if stopped_here():
+                        # Stop per browser bisa membuat operasi panjang
+                        # melempar error; itu bukan kegagalan asli.
+                        hold_for_check(item)
+                        self._progress()
+                        final_state, final_message = (
+                            "stopped",
+                            f"Dihentikan — klik Cek (#{item.index + 1})",
+                        )
+                        break
                     logger.error(f"[{profile.name}] Error saat memproses prompt: {e}")
                     # Browser/tab ditutup user di tengah jalan? Jangan lanjut
                     # memakai koneksi yang sudah mati.
@@ -781,18 +1075,33 @@ class BotRunner:
                     self.queue.requeue(item, f"error: {e}")
                     self._progress()
                     self._status(profile, "waiting", f"Error: {e}")
-                    if self._wait_or_stop(3):
+                    if self._wait_or_stop(3, stop):
                         break
 
             if self.stop_event.is_set():
                 self._status(profile, "stopped", "Dihentikan")
+            elif stopped_here():
+                self._status(
+                    profile,
+                    "stopped",
+                    final_message
+                    if final_message.startswith("Dihentikan")
+                    else "Dihentikan — klik Cek",
+                )
             else:
                 self._status(profile, final_state, final_message)
 
         except Exception as e:
-            logger.error(f"[{profile.name}] Worker error: {e}")
-            self._status(profile, "error", "Error — klik Cek")
-            self._hold(profile, current_item)
+            if stopped_here():
+                # Lagu sisa hanya milik prompt yang tadi dilanjutkan; jangan
+                # dipasang ke prompt lain yang kebetulan sedang dipegang.
+                held_songs = resume_songs if current_item is resume_item else None
+                hold_for_check(current_item, held_songs)
+                self._status(profile, "stopped", "Dihentikan — klik Cek")
+            else:
+                logger.error(f"[{profile.name}] Worker error: {e}")
+                self._status(profile, "error", "Error — klik Cek")
+                self._hold(profile, current_item)
         finally:
             try:
                 if pw:
@@ -824,15 +1133,20 @@ class BotRunner:
             self._start_worker(profile)
             time.sleep(0.2)
 
-        # Tunggu sampai semua worker selesai. Browser yang error "tertahan"
-        # (menunggu tombol Cek) sengaja membuat bot tetap hidup, supaya user
-        # bisa memperbaiki browser itu lalu melanjutkannya tanpa restart bot.
+        # Tunggu sampai semua worker selesai. Bot sengaja tetap hidup bila:
+        # - ada browser tertahan (menunggu tombol Cek), atau
+        # - semua browser di-Stop padahal prompt masih tersisa (supaya Cek /
+        #   pemeriksaan file ganda bisa dipakai, lalu bot dilanjutkan lagi).
         with self._cv:
             while True:
-                if not self._active and (
-                    self.stop_event.is_set() or not self._paused
-                ):
-                    break
+                if not self._active:
+                    if self.stop_event.is_set():
+                        break
+                    if not self.allow_resume:
+                        # Mode CLI: tidak ada tombol Cek, jangan menggantung.
+                        break
+                    if not self._paused and not self.queue.remaining_prompts():
+                        break
                 self._cv.wait(timeout=0.5)
             self._running = False
 

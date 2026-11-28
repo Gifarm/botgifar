@@ -1,4 +1,4 @@
-# 🎵 Flow Music Bot v3.0.4
+# 🎵 Flow Music Bot v3.1.0
 
 Bot otomasi untuk membuat & mengunduh musik dari [Google Flow Music](https://www.flowmusic.app/)
 memakai beberapa browser (multi-akun) sekaligus — **Brave, Google Chrome,
@@ -39,9 +39,22 @@ Klik dua kali `run_app.bat`.
 7. Klik **▶️ JALANKAN BOT**. Bot **hanya memakai browser yang sudah kamu
    buka** — browser yang masih tertutup tidak ikut dijalankan. Kalau belum ada
    satu pun yang terbuka, aplikasi akan mengingatkan.
+8. **Menambah browser di tengah jalan** (mis. dari 3 menjadi 4): naikkan
+   *Jumlah* (boleh saat bot berjalan — mengurangi jumlah tetap harus STOP
+   dulu), buka kartu browser yang baru, login, sembunyikan, lalu klik **Cek**
+   di kartunya. Browser itu langsung ikut mengambil prompt yang tersisa.
 
 Kamu bebas membuka Zoom, browser lain, atau aplikasi apa pun. Bot tidak akan
 mencuri fokus jendela.
+
+Setiap kartu browser punya 4 tombol:
+
+| Tombol | Fungsi |
+|---|---|
+| **Buka** / **Tampilkan** | Membuka / memunculkan jendela browser |
+| **Sembunyi** | Menyembunyikan browser; bot tetap bekerja |
+| **Cek** | Menjalankan / melanjutkan browser ini (error, di-Stop, atau baru dibuka) |
+| **Stop** | Menghentikan **hanya browser ini**; browser lain tetap bekerja |
 
 ---
 
@@ -134,18 +147,25 @@ hangus.
 
 ---
 
-## Pemeriksaan file ganda (otomatis di akhir)
+## Pemeriksaan file ganda (otomatis di akhir + tombol kapan saja)
 
 Kadang satu lagu terunduh **dua kali** (mis. perintah Download terkirim
 ganda). Chrome menyimpan salinannya sebagai `Judul (1).mp3`, dan bot sendiri
 memberi akhiran `_1` kalau nama tujuan sudah dipakai.
 
-Setelah **semua prompt habis** dan bot selesai normal, bot memeriksa satu
-folder hasil **`downloads/`** itu. Pemeriksaan ini **tidak membuka atau
-menyentuh browser sama sekali**: bot hanya membaca file audio
-(mp3/wav/m4a/flac/ogg/opus/…), menyusun **daftar duplikat**, lalu menghapus
-duplikatnya sendiri. Sisanya adalah lagu yang tidak duplikat. Ringkasan +
-daftar file yang dihapus muncul di log dan dialog "Bot selesai", mis.:
+Pemeriksaan ini **tidak membuka atau menyentuh browser sama sekali**: bot
+hanya membaca file audio (mp3/wav/m4a/flac/ogg/opus/…), menyusun **daftar
+duplikat**, lalu menghapus duplikatnya sendiri. Ada dua cara menjalankannya:
+
+1. **Otomatis** — setelah semua prompt habis dan bot selesai normal. Ringkasan
+   + daftar file yang dihapus masuk ke dialog "Bot selesai".
+2. **Tombol 🧹 Cek Lagu Ganda** — **kapan saja**, termasuk saat prompt masih
+   dikerjakan atau **semua browser sudah di-Stop**. Bot tidak dihentikan dan
+   pekerjaan yang sedang berjalan tetap lanjut. Tombol ini memakai mode aman:
+   file sementara `.crdownload` dan folder kerja tidak disentuh, jadi unduhan
+   yang sedang berjalan tidak terganggu.
+
+Contoh ringkasan di log/dialog, mis.:
 
 ```
 🧹 Salinan ganda dihapus: 2 file (8.4 MB)
@@ -163,10 +183,10 @@ Aturan penghapusan dibuat aman:
 - kalau namanya mirip tetapi isinya berbeda — bisa jadi dua lagu asli yang
   kebetulan berjudul sama — keduanya **dibiarkan** dan dicatat di log;
 - sisa unduhan yang tidak selesai (`.crdownload`) dibersihkan setelah semua
-  download selesai;
-- pemeriksaan dilewati kalau bot dihentikan dengan **STOP**, karena masih ada
-  file yang mungkin sedang ditulis. Jalankan lagi sampai antrean habis untuk
-  mendapat pemeriksaan akhir.
+  download selesai (tidak dilakukan oleh tombol saat bot masih mengunduh);
+- pemeriksaan otomatis dilewati kalau bot dihentikan dengan **STOP** global,
+  karena masih ada file yang mungkin sedang ditulis. Tombol **Cek Lagu Ganda**
+  tetap bisa dipakai kapan pun untuk hasil yang sudah ada.
 
 ---
 
@@ -202,7 +222,33 @@ Kalau salah satu terdeteksi:
 
 ---
 
-## Tombol Cek — lanjutkan browser yang error
+## Stop per browser — hentikan satu browser saja
+
+Tombol **Stop** di kartu menghentikan **hanya browser itu**; browser lain
+tetap bekerja seperti biasa.
+
+- Prompt yang sedang dikerjakan browser itu **ditahan** (tidak hilang dan
+  tidak ditandai gagal).
+- Kalau lagunya sudah selesai digenerate tetapi belum sempat terunduh, daftar
+  lagunya ikut disimpan. Saat **Cek** ditekan, bot **melanjutkan unduhan**
+  tanpa generate ulang — credits tidak terbuang.
+- Kartu berubah menjadi `Dihentikan — klik Cek (#N)`.
+- **Semua browser boleh di-Stop.** Bot tetap “berjalan” selama masih ada
+  prompt, sehingga tombol **🧹 Cek Lagu Ganda** tetap bisa dipakai. Setelah
+  itu klik **Cek** pada browser mana pun untuk melanjutkan pekerjaan.
+- Kalau browser ditutup/dibuka ulang lalu di-Cek, bot mengecek login ulang
+  dan melanjutkan prompt yang tertahan.
+
+---
+
+## Tombol Cek — lanjutkan / jalankan browser
+
+Tombol **Cek** bukan hanya untuk kondisi error. Gunanya:
+
+- melanjutkan browser yang **error / kena limit**;
+- melanjutkan browser yang baru saja **di-Stop**;
+- **menjalankan browser yang baru dibuka di tengah run** (mis. dari 3 ke 4
+  browser) — selama masih ada prompt tersisa.
 
 Kalau satu browser bermasalah (mis. Tombol/step di halaman Flow kepencet
 sehingga alurnya ngaco, tab ditutup, koneksi putus, atau **limit/credits
@@ -225,9 +271,10 @@ Langkahnya:
    (nomor prompt tertera di kartu) dan lanjut bekerja — tanpa menghentikan
    browser lain maupun me-restart seluruh bot.
 
-Selama masih ada browser yang menunggu diperbaiki, bot tetap “berjalan”
-(label progres menampilkan `Tertahan N (klik Cek)`). Menekan **STOP** tetap
-menghentikan semuanya seperti biasa.
+Selama masih ada browser yang menunggu diperbaiki atau di-Stop, bot tetap
+“berjalan” (label progres menampilkan `Tertahan N (klik Cek)`, dan hint
+menampilkan berapa browser yang di-Stop). Menekan **STOP** merah besar tetap
+menghentikan **semuanya** seperti biasa.
 
 ---
 
@@ -258,6 +305,10 @@ menghentikan semuanya seperti biasa.
 | Prompt tidak bisa di-paste / Enter tidak mengirim | Bot otomatis mencari & mengklik session baru (lihat log `🔁 Sesi macet`). Kalau kartu menjadi **Macet — klik Cek (#N)**, buka browser itu, klik session baru manual, lalu tekan **Cek** |
 | Kartu merah "Macet / Error / Tertutup — klik Cek" | Perbaiki browser itu (login ulang, session baru, buka tab, dsb.), lalu tekan **Cek**. Prompt terakhirnya ditahan dan akan dipaste ulang |
 | Kartu ungu "Pulihkan sesi..." | Bot sedang membuat session baru; tunggu sampai kembali “Siap” / “Session baru — lanjut” |
+| Tombol **Stop** di kartu tidak bisa ditekan | Browser itu sedang tidak punya pekerjaan (sudah selesai/idle). Untuk menambah browser baru di tengah run, naikkan *Jumlah*, buka browsernya, lalu klik **Cek** |
+| *Jumlah* browser tidak bisa diturunkan saat bot berjalan | Memang dibatasi. Menambah boleh kapan saja; menurunkan perlu tekan STOP dulu supaya worker tidak kehilangan kartunya |
+| Semua browser di-Stop, tombol **JALANKAN** tidak aktif | Memang begitu: bot masih “berjalan” menunggu dilanjutkan. Klik **Cek** di kartu browser untuk melanjutkan, atau tekan **STOP** besar untuk mengakhiri sesi |
+| Ingin cek lagu ganda sebelum prompt habis | Klik **🧹 Cek Lagu Ganda** — aman, bot tidak dihentikan dan file `.crdownload` tidak disentuh |
 | Prompt gagal terus | Cek `state/run_*/failed.txt` dan `bot.log` |
 | File mp3 justru masuk `~/Downloads` | Tutup browser itu, lalu buka lagi dari kartu — preferensi folder download ditulis saat browser diluncurkan |
 | Muncul dialog Save saat download | Cek log `⚠️ Kemungkinan dialog Save muncul`; pastikan browser ditutup lalu dibuka ulang dari aplikasi supaya preferensi download diterapkan |
@@ -286,7 +337,7 @@ Lokasi log: **`bot.log`** dan panel *Log Aktivitas* di aplikasi.
 
 ## Catatan
 
-- Versi ini masih tahap pengembangan (v3.0.4), belum dibungkus jadi `.exe`.
+- Versi ini masih tahap pengembangan (v3.1.0), belum dibungkus jadi `.exe`.
 - Selector situs Flow Music bisa berubah kapan saja. Kalau ada tombol yang
   tidak terdeteksi, perbaiki selector di `flow_actions.py`.
 - Gunakan dengan bijak. Menjalankan banyak akun otomatis berisiko terkena
